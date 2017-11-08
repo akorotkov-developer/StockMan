@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Geo:400,400i');
+@font-face {
+    font-family: 'Calibri';
+    src: url($fontsPath + '/Calibri.eot');
+    src: url($fontsPath + '/Calibri.eot?#iefix') format('embedded-opentype'),
+        url($fontsPath + '/Calibri.woff') format('woff'),
+        url($fontsPath + '/Calibri.ttf') format('truetype'),
+        url($fontsPath + '/Calibri.svg#Calibri') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+$font-calibri:'Calibri',sans-serif;

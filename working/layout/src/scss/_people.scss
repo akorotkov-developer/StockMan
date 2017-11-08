@@ -1,0 +1,25 @@
+.people {
+  margin-left: rem-calc(15);
+  margin-top: rem-calc(17);
+  &__item {
+    display: inline-block;
+    margin-right: rem-calc(18);
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $secondary-color;
+    display: block;
+
+    border-bottom: rem-calc(2) solid transparent;
+
+    &:active,
+    &:focus,
+    &:hover,
+    &:visited,
+    &_active {
+      color: $insta;
+      border-color: $black;
+    }
+  }
+}
