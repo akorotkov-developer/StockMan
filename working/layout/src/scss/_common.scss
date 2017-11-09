@@ -9,3 +9,23 @@ a {
 table {
   margin-bottom: 6 * $global-margin;
 }
+
+[type='text'],
+[type='password'],
+[type='date'],
+[type='datetime'],
+[type='datetime-local'],
+[type='month'],
+[type='week'],
+[type='email'],
+[type='number'],
+[type='search'],
+[type='tel'],
+[type='time'],
+[type='url'],
+[type='color'],
+textarea {
+  height: rem-calc(38);
+  padding-left: rem-calc(12);
+  padding-right: rem-calc(12);
+}

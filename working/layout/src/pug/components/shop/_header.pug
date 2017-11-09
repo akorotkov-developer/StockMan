@@ -2,7 +2,7 @@ header.header
   .grid-x.grid-padding-x
     .cell.text-center.background-insta
       a(href="tel:88003011129").header__tel 8 (800) 301-11-29 (бесплатный, многоканальный)
-    .cell.large-4
+    .cell.large-4.medium-4.text-center.medium-text-left
       ul.people
         li.people__item
           a(href="#").people__link Женщинам
@@ -11,11 +11,53 @@ header.header
         li.people__item
           a(href="#").people__link Детям
           
-    .cell.text-center.large-4
+    .cell.text-center.large-4.medium-4
       a(href="#").header__logo
         img(src="./images/logo.png", alt="")
-    .cell.large-4.text-right
-      a(href="#") Войти
-      a(href="#").fa.fa-heart-o
-      a(href="#")
+    .cell.large-4.medium-text-right.padding-top-5.medium-4.text-left.small-8
+      a(href="#").header__enter Войти
+      a(href="#").header__enter
+        img(src="./images/heart.png", alt="")
+      a(href="#").header__enter
         img(src="./images/shop-bag.png", alt="")
+    .cell.show-for-small-only.small-4(data-responsive-toggle="responsive-menu" data-hide-for="medium").text-right
+      button.menu-icon.header__menu.dark(type='button', data-toggle='responsive-menu')
+      
+
+        
+          
+.grid-container#responsive-menu: .grid-x.grid-padding-x
+  .small-12.medium-9.large-9.cell#menu
+    ul.menu-base.text-center.medium-text-right
+      each title,index in ['новинки','Бренды','Одежда','обуВь','сумки','аксессуары','белье','sale','блог']
+        li.menu-base__item
+          a.menu-base__link(href='shop-catalog.html' data-toggle-hover-dd='menu_item_' + index)= title
+  
+  .small-12.large-3.cell.medium-3.text-center.medium-text-left
+    form.search-top.input-group(action='shop-search.html' method='get')
+      input.search-top__input.input-group-field(type='text', value='' placeholder='Поиск')
+      .input-group-button
+        button.search-top__button.fa.fa-search(type='submit')
+
+.dd.hide-for-small-only#menu_item_2(data-toggler-hover-dd='dd_show')
+  .dd__content.callout
+    .grid-container: .grid-x.grid-padding-x
+      .small-6.medium-4.large-3.cell
+        h5 Одежда
+        ul
+          each title in ['Все категории', 'Платья', 'Пальто', 'Пуховики', 'Куртки', 'Парки', 'Юбки', 'Брюки', 'Блузы и рубашки', 'Деним', 'Свитеры и трикотаж', 'Комбинезоны', 'Топы', 'Нижнее белье', 'Распродажа']
+            li
+              a(href='#' title='')= title
+      .small-6.medium-4.large-3.cell
+        h5 Актуально
+        ul
+          each title in ['Классика гардероба', 'Одежда для фитнеса', 'Новый сезон', 'Бизнес-класс', 'Выход в свет', 'Бестселлеры', 'Рукав-колокол', 'Миниатюрные сумки', 'Бархат', 'Вечерние образы', 'Пуховики']
+            li
+              a(href='#' title='')= title
+      .small-12.medium-4.large-offset-2.cell
+        .margin-bottom-6: img(src='./i/image.svg' alt='1')
+        span.label.success
+          i.fa.fa-star-o
+          | &nbsp;Акция
+        | &nbsp;
+        a(href='shop-product.html' title='') Торцовочная пила Ryobi EMS254L

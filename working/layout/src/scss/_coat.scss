@@ -1,0 +1,31 @@
+.coat {
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  padding-top: rem-calc(460);
+  text-decoration: none;
+margin-bottom: rem-calc(30);
+pb15
+  &__text {
+    letter-spacing: rem-calc(1);
+    font-style: italic;
+    text-transform: uppercase;
+    color: $insta;
+    font-family: "Geo",sans-serif;
+    font-size: rem-calc(22);
+  }
+
+  &__link {
+    text-transform: uppercase;
+    letter-spacing: rem-calc(.6);
+color: $insta;
+    &:after {
+      content: "";
+      margin-left: rem-calc(6);
+      display: inline-block;
+      width: rem-calc(8);
+      height: rem-calc(9);
+      background: url($imagesPath +"/arrow.svg")no-repeat center;
+    }
+  }
+}
