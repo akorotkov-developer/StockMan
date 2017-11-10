@@ -4,7 +4,7 @@
 $imagesPath: '../images' !default;
 $fontsPath: '../fonts' !default;
 
-$textSizes: (tiny: 0.7rem, xsmall: 0.8rem, small: 0.9rem, default: 1rem, large: 1.25rem, xlarge: 1.5rem, xxlarge: 2rem) !default;
+$textSizes: (tiny: 0.7rem, xsmall: 0.8rem, small: 0.878rem, default: 1rem, large: 1.12rem, xlarge: 1.5rem, xxlarge: 2rem) !default;
 
 $fa-font-path: $fontsPath;
 
@@ -46,3 +46,10 @@ $minify: false !default;
 @import "people";
 @import "map";
 @import "coat";
+@import "cat";
+@import "anchor";
+@import "dress";
+@import "podium";
+@import "girl";
+@import "footer";
+@import "bag";

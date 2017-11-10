@@ -160,7 +160,11 @@ gulp.task('js-lib', ['clean-js'], function () {
 var jsApp = function () {
     return gulp.src(path.src.js)
         .pipe(concat('app.js'))
-        .pipe(gulp.dest(path.dist.js));
+        .pipe(gulp.dest(path.dist.js))
+        .pipe(wait(100))
+        .pipe(browserSync.reload({
+         stream: true
+        }));
 };
 
 gulp.task('js-app-init', ['clean-js'], jsApp);

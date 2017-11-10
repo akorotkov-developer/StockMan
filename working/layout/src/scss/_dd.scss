@@ -17,8 +17,10 @@
 }
 
 .dd__content {
+  padding-top: rem-calc(50);
+  padding-bottom: rem-calc(90);
   position: absolute;
-  top: 0;
+  top: 0;background: $white;
   left: 0;
   width: 100%;
 }

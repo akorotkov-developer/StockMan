@@ -1,11 +1,13 @@
-.map {
+.girl {
   padding-left: rem-calc(170);
   padding-right: rem-calc(170);
+  background: $light-gray;
 
+padding-top: rem-calc(44);
+padding-bottom: rem-calc(44);
   img {
     display: inline-block;
   }
-
   &__slide {
     padding-left: rem-calc(15);
     padding-right: rem-calc(15);

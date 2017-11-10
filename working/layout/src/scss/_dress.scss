@@ -1,0 +1,13 @@
+.dress {
+  text-decoration: none;
+  display: block;
+  color: $insta;
+  margin-bottom: rem-calc(30);
+
+  &__title {
+    margin-bottom: rem-calc(4);
+    text-transform: uppercase;
+    font-size: rem-calc(20);
+    font-weight: 700;
+  }
+}

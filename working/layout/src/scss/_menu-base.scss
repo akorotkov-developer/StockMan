@@ -5,73 +5,73 @@
   text-transform: uppercase;
   position: relative;
   z-index: 100;
-}
 
-.menu-base__item {
-  @include disable-mouse-outline;
-  padding: rem-calc(5 0 5 46);
-  position: relative;
-  display: inline-block;
+  &__item {
+    @include disable-mouse-outline;
+    padding: rem-calc(5 0 5 46);
+    position: relative;
+    display: inline-block;
 
-  & .menu-base {
-    text-transform: none;
-    display: none;
-    position: absolute;
-    margin: rem-calc(-3 0 0) -1rem;
-    padding: 0.5rem 0;
-    top: 100%;
-    left: 0;
-    width: 15rem;
-    background: scale-color($primary-color, $lightness: 10%);
-    border-bottom: rem-calc(2) solid $white;
-  }
+    & .menu-base {
+      text-transform: none;
+      display: none;
+      position: absolute;
+      margin: rem-calc(-3 0 0) -1rem;
+      padding: 0.5rem 0;
+      top: 100%;
+      left: 0;
+      width: 15rem;
+      background: scale-color($primary-color, $lightness: 10%);
+      border-bottom: rem-calc(2) solid $white;
+    }
 
-  &:last-child .menu-base {
-    right: 0;
-    left: auto;
-  }
+    &:last-child .menu-base {
+      right: 0;
+      left: auto;
+    }
 
-  & .menu-base__item {
-    padding: 0;
-    width: 100%;
+    & .menu-base__item {
+      padding: 0;
+      width: 100%;
 
-    & .menu-base__link {
-      display: block;
-      padding: 0.5rem 1rem;
+      & .menu-base__link {
+        display: block;
+        padding: 0.5rem 1rem;
 
-      &:after {
-        display: none;
-      }
+        &:after {
+          display: none;
+        }
 
-      &:hover {
-        background: $primary-color;
+        &:hover {
+          background: $primary-color;
+        }
       }
     }
   }
-}
 
-.menu-base__link {
-  @include disable-mouse-outline;
-  display: block;
-  color: $insta;
-  position: relative;
-  text-decoration: none;
-
-  &:focus,
-  &:hover,
-  &_active {
-    color: $primary-color;
+  &__link {
+    @include disable-mouse-outline;
+    display: block;
+    color: $insta;
+    position: relative;
+    text-decoration: none;
+  border-bottom: rem-calc(2) solid transparent;
+    &:focus,
+    &:hover,
+    &_active {
+      
+    border-bottom-color: $insta;
+    }
   }
-}
-
-.menu-base {
   @include breakpoint(large down) {
     &__item {
       padding-left: rem-calc(20);
     }
   }
-    @include breakpoint(small only) { &__item {
+  @include breakpoint(small only) {
+    &__item {
       padding-left: rem-calc(10);
       padding-right: rem-calc(10);
-    } }
+    }
+  }
 }

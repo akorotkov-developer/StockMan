@@ -1,0 +1,12 @@
+.bag {
+  &__item {margin-bottom: rem-calc(15);}
+
+  &__link {
+    font-size: rem-calc(14);
+    text-transform: uppercase;
+    color: $secondary-color;
+    &:hover,&:focus,&:active {
+      color: $primary-color;
+    }
+  }
+}

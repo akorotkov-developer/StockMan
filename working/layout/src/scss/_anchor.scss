@@ -1,0 +1,25 @@
+.anchor {
+  text-transform: uppercase;
+  letter-spacing: rem-calc(.6);
+text-decoration: none;
+  &:after {
+    content: "";
+    margin-left: rem-calc(10);
+    display: inline-block;
+    left: rem-calc(0);
+    position: relative;
+    transition: 0.3s;
+    transform: scale(2, 1);
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid $black;
+  }
+
+  &_white {
+    &:after {
+      border-left-color: $white;
+    }
+  }
+}

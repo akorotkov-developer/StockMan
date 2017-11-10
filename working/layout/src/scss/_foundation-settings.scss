@@ -12,7 +12,7 @@ $foundation-palette: (
   success: #389188,
   warning: #ffae00,
   alert: #cc4b37,
-  light-gray: #e6e6e6,
+  light-gray: #f0f0f0,
   medium-gray: #aaa,
   dark-gray: #999,
   asphalt: #c3c3c3,
@@ -87,22 +87,22 @@ $header-font-family:'Geo', sans-serif;
 $header-font-weight: $global-weight-normal;
 $header-font-style: normal;
 $font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
-$header-color: inherit;
+$header-color:$insta;
 $header-lineheight: 1.4;
 $header-margin-bottom: 6 * $global-margin;
 $header-styles: (
   small: (
-    'h1': ('font-size': 32, 'margin-bottom': 0),
-    'h2': ('font-size': 28),
-    'h3': ('font-size': 20),
-    'h4': ('font-size': 18),
-    'h5': ('font-size': 16),
-    'h6': ('font-size': 14),
+    'h1': ('font-size': 23),
+    'h2': ('font-size': 20),
+    'h3': ('font-size': 18),
+    'h4': ('font-size': 16),
+    'h5': ('font-size': 14),
+    'h6': ('font-size': 12),
   ),
   medium: (
-    'h1': ('font-size': 35),
-    'h2': ('font-size': 30),
-    'h3': ('font-size': 20),
+    'h1': ('font-size': 28),
+    'h2': ('font-size': 26),
+    'h3': ('font-size': 22),
     'h4': ('font-size': 18),
     'h5': ('font-size': 16),
     'h6': ('font-size': 14),
