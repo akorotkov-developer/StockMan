@@ -1,0 +1,39 @@
+extends shop-regular
+
+block content
+
+  .content
+    include components/common/_breadcrumbs
+    .skirt
+      .grid-x.grid-padding-x
+        .cell.small-6
+          a(href="#").skirt__prev Back
+        .cell.text-right.small-6
+          a(href="#").skirt__next Next
+      .skirt__wrapper      
+        .skirt__slider.text-center
+          .skirt__slide
+            .skirt__inner
+              img(src="./i/sk1.png", alt="")
+          .skirt__slide
+            .skirt__inner
+              img(src="./i/sk2.png", alt="")
+          .skirt__slide
+            .skirt__inner
+              img(src="./i/sk1.png", alt="")
+          .skirt__slide
+            .skirt__inner
+              img(src="./i/sk2.png", alt="")
+          .skirt__slide
+            .skirt__inner
+              img(src="./i/sk1.png", alt="")
+          .skirt__slide
+            .skirt__inner
+              img(src="./i/sk2.png", alt="")
+        
+      .skirt__info
+    
+        h1 ПЛАТЬЕ ETRO
+        .text-uppercase.text-size-xsmall.margin-bottom-3 ID 318226
+        include components/shop/_product-base-info
+    

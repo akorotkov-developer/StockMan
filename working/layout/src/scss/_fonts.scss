@@ -1,4 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Geo:400,400i');
+@font-face {
+    font-family: 'Geo';
+    src: url($fontsPath+ '/Georgia.eot');
+    src: url($fontsPath+ '/Georgia.eot?#iefix') format('embedded-opentype'),
+        url($fontsPath+ '/Georgia.woff') format('woff'),
+        url($fontsPath+ '/Georgia.ttf') format('truetype'),
+        url($fontsPath+ '/Georgia.svg#Georgia') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @font-face {
     font-family: 'Calibri';
     src: url($fontsPath + '/Calibri.eot');
@@ -9,4 +19,6 @@
     font-weight: normal;
     font-style: normal;
 }
+
+$font-geo : "Geo",sans-serif;
 $font-calibri:'Calibri',sans-serif;

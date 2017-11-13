@@ -125,7 +125,7 @@ $anchor-color-hover: scale-color($anchor-color, $lightness: -30%);
 $anchor-text-decoration: underline;
 $anchor-text-decoration-hover: none;
 $hr-width: $global-width;
-$hr-border: 1px solid $light-gray;
+$hr-border: 1px solid $black;
 $hr-margin: 0 auto;
 $list-lineheight: $paragraph-lineheight;
 $list-margin-bottom: $paragraph-margin-bottom;
@@ -216,26 +216,26 @@ $badge-font-size: 0.8rem;
 // 10. Breadcrumbs
 // ---------------
 
-$breadcrumbs-margin: $global-margin * 12 0;
-$breadcrumbs-item-font-size: rem-calc(12);
-$breadcrumbs-item-color: $primary-color;
-$breadcrumbs-item-color-current: $black;
+$breadcrumbs-margin:  rem-calc(0 0 35 15);
+$breadcrumbs-item-font-size: rem-calc(11);
+$breadcrumbs-item-color: $asphalt;
+$breadcrumbs-item-color-current: $asphalt;
 $breadcrumbs-item-color-disabled: $medium-gray;
-$breadcrumbs-item-margin: 0.75rem;
+$breadcrumbs-item-margin: rem-calc(3);
 $breadcrumbs-item-uppercase: true;
 $breadcrumbs-item-separator: true;
 $breadcrumbs-item-separator-item: '/';
 $breadcrumbs-item-separator-item-rtl: '\\';
-$breadcrumbs-item-separator-color: $medium-gray;
+$breadcrumbs-item-separator-color: $asphalt;
 
 // 11. Button
 // ----------
 
 $button-font-family: inherit;
-$button-padding: 0.83rem;
+$button-padding: rem-calc(10 18);
 $button-margin: 0 0 6 * $global-margin 0;
 $button-fill: solid;
-$button-background: $primary-color;
+$button-background: $black;
 $button-background-hover: scale-color($button-background, $lightness: -15%);
 $button-color: $white;
 $button-color-alt: $black;

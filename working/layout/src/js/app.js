@@ -80,7 +80,45 @@ $(document).foundation();
         }
       }]
     });
+    //begin of .skirt__slider
 
+    $(".skirt__slider").slick({
+      infinite: true,
+      dots: false,
+      arrows: true,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      autoplayHoverPause: true,
+      fade: false,
+      swipeToSlide: true,
+      prevArrow: '<i class="slick-prev "> </i>',
+      nextArrow: '<i class="slick-next "> </i>',
+      responsive: [{
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4,
+        }
+      }, {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+        }
+      }, {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        }
+      }]
+    });
+$('.skirt__prev').click(function() {
+  $('.skirt__slider').slick('slickPrev');
+});
+$('.skirt__next').click(function() {
+  $('.skirt__slider').slick('slickNext');
+});
+ //end of .skirt__slider
     $(".x-carousel-services").slick({
       infinite: true,
       dots: true,

@@ -29,18 +29,33 @@ textarea {
   padding-left: rem-calc(12);
   padding-right: rem-calc(12);
 }
-h1,h2,h3,h4,h5,h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-transform: uppercase;
 }
+
+h1 {
+  font-weight: 700;
+  margin-bottom: rem-calc(0);
+}
+
 h5 {
   margin-bottom: rem-calc(6);
   font-weight: 700;
 }
+
 ul {
   margin-bottom: rem-calc(14);
-  list-style-type:none;
+  list-style-type: none;
   margin-left: rem-calc(0);
+
   a {
-    text-decoration: none;color: $insta;
+    text-decoration: none;
+    color: $insta;
   }
 }

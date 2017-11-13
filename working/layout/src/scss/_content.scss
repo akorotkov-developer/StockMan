@@ -1,8 +1,9 @@
 .content {
   background: center no-repeat;
   background-size: cover;
-  padding: 12 * $global-padding 0 6 * $global-padding;
+  padding: rem-calc(11) 0 6 * $global-padding;
   position: relative;
+  border-top: rem-calc(1) solid $asphalt;
 }
 
 .content__promo {

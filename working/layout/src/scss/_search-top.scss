@@ -3,7 +3,7 @@ $search-height: rem-calc(28);
 
 .search-top {
   max-width: 100%;
-  margin: 0;
+  margin: 0;  border: rem-calc(1) solid $asphalt;
   width: rem-calc(163);
 }
 

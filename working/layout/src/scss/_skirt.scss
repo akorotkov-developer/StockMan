@@ -1,0 +1,133 @@
+.skirt {
+  overflow: hidden;
+  position: relative;
+
+  img {
+    display: inline-block;
+  }
+
+  &__inner {
+    background: #f8f8f8;
+  }
+
+  &__grid {
+    margin-left: rem-calc(-15);
+    margin-right: rem-calc(-15);
+  }
+
+  &__bag,
+  &__heart {
+    padding-right: rem-calc(60);
+    position: relative;
+    width: 100%;
+    margin-bottom: rem-calc(40);
+
+    &:after {
+      content: "";
+      position: absolute;
+      right: rem-calc(17);
+      top: rem-calc(6);
+      width: rem-calc(20);
+      height: rem-calc(20);
+      background: url($imagesPath +"/bag-white.svg")no-repeat center;
+    }
+  }
+
+  &__heart {
+    background: #eee;
+    color: $black;
+    border: rem-calc(1) solid $asphalt;
+
+    &:after {
+      width: rem-calc(22);
+      background: url($imagesPath +"/heart.svg")no-repeat center;
+    }
+
+    &:active,
+    &:focus,
+    &:hover,
+    &:visited {
+      background: #eee;
+      color: $black;
+      border-color: $black;
+    }
+  }
+
+  &__slide {
+    padding-left: rem-calc(15);
+    padding-right: rem-calc(15);
+  }
+
+  .slick-prev {
+    left: 25%;
+  }
+
+  .slick-next {
+    right: 50%;
+  }
+
+  &__price {
+    text-transform: uppercase;
+    font-size: rem-calc(20);
+    margin-bottom: rem-calc(10);
+    font-weight: 700;
+  }
+
+  &__link {
+    text-transform: uppercase;
+    color: $medium-gray;
+    border-bottom: rem-calc(1) solid $asphalt;
+    text-decoration: none;
+
+    &_mini {
+      font-size: rem-calc(12);
+      text-transform: none;
+    }
+  }
+
+  &__info {
+    background: $white;
+    position: absolute;
+    width: rem-calc(640);
+    top: rem-calc(57);
+    right: rem-calc(150);
+    padding: rem-calc(37 43);
+  }
+
+  &__next,
+  &__prev {
+    color: $insta;
+    font-size: rem-calc(18);
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:before {
+      content: "";
+      width: rem-calc(8);
+      height: rem-calc(13);
+      display: inline-block;
+      margin-right: rem-calc(8);
+      background: url($imagesPath +"/arr.svg")no-repeat center;
+    }
+  }
+
+  &__next {
+    &:before {
+      display: none;
+    }
+
+    &:after {
+      content: "";
+      width: rem-calc(8);
+      height: rem-calc(13);
+      display: inline-block;
+      transform: rotate(180deg);
+      margin-left: rem-calc(8);
+      background: url($imagesPath +"/arr.svg")no-repeat center;
+    }
+  }
+
+  &__wrapper {
+    width: 113%;
+  }
+}

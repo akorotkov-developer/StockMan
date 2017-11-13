@@ -7,7 +7,8 @@ html.no-js(lang='ru')
     
     
     include components/shop/_header
-    include components/common/_content
+    block page 
+      include components/common/_content
     
     include components/shop/_add-to-favourites-auth-popup
 

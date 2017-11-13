@@ -1,0 +1,22 @@
+.fit {
+  display: inline-block;
+  width: rem-calc(60);
+  &__input {
+    display:none;
+    &:checked + .fit__label {
+      img {
+        border-bottom-color:$insta;
+      }
+    }
+  }
+  .fit__label {
+    margin-left: rem-calc(0);
+    margin-right: rem-calc(0);
+    img {
+      border-bottom: rem-calc(1) solid transparent;
+    }
+  }
+  &__text {
+    font-size: rem-calc(12);
+  }
+}
