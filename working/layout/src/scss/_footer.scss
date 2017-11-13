@@ -2,4 +2,19 @@
   padding-bottom: rem-calc(23);
   padding-top: rem-calc(95);
 
+  &__group {
+    border: rem-calc(0);
+    margin-bottom: rem-calc(21);
+  }
+
+  &__button {
+    border: rem-calc(0);
+    background: $black;
+    text-transform: uppercase;
+    padding-left: rem-calc(25);
+    padding-right: rem-calc(25);
+  }
+  @include breakpoint(medium down) {
+    padding-top: rem-calc(20);
+  }
 }

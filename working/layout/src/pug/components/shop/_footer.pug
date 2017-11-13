@@ -1,51 +1,60 @@
 footer.footer
-  .grid-x.grid-padding-x
-    .large-2.cell.large-offset-1
-      .text-uppercase.margin-bottom-3 Коллекции
+  .grid-x.grid-padding-x.text-center.medium-text-left
+    .large-2.cell.large-offset-1.medium-4
+      .text-uppercase.margin-bottom-3.text-insta Коллекции
       ul.bag
         each title in ['женская коллекция','мужская коллекция','сумки','аксессуары']
           li.bag__item
             a(href="#").bag__link= title
-    .large-2.cell
-      .text-uppercase.margin-bottom-3 Покупателю
+    .large-2.cell.medium-4
+      .text-uppercase.margin-bottom-3.text-insta Покупателю
       ul.bag
         each title in ['программа лояльности','как сделать заказ','конфиденциальность','где купить']
           li.bag__item
             a(href="#").bag__link= title
-    .large-2.cell
-      .text-uppercase.margin-bottom-3 условия работы
+    .large-2.cell.medium-4
+      .text-uppercase.margin-bottom-3.text-insta условия работы
       ul.bag
         each title in ['оплата','доставка','возврат']
           li.bag__item
             a(href="#").bag__link= title
-    .large-2.cell
-      .text-uppercase.margin-bottom-3 Связь с нами
+    .large-2.cell.medium-4
+      .text-uppercase.margin-bottom-3.text-insta Связь с нами
       .text-size-small.margin-bottom-4
         | Тел.:
         |
         a(href="tel:88003331257").text-decoration-none 8 (800) 333-12-57
-      .text-size-small.margin-bottom-7
+      .text-size-small.margin-bottom-11
         | E-mail:
         |
         a(href="mailto:mail@brendsalon.ru").text-decoration-none mail@brendsalon.ru
-      a(href='#', title='').fa-stack.fa-lg.text-vk.soc
+      a(href='#', title='').fa-stack.text-asphalt.soc
+          i.fa.fa-circle.fa-stack-2x
+          i.fa.fa-instagram.fa-stack-1x.fa-inverse  
+      a(href='#', title='').fa-stack.text-asphalt.soc
           i.fa.fa-circle.fa-stack-2x
           i.fa.fa-vk.fa-stack-1x.fa-inverse  
+      a(href='#', title='').fa-stack.text-asphalt.soc
+          i.fa.fa-circle.fa-stack-2x
+          i.fa.fa-facebook.fa-stack-1x.fa-inverse  
         
 
-    .small-12.medium-4.large-3.large-offset-1.cell
-      .margin-bottom-6: strong Принимаем к оплате
-      .margin-bottom-6
-        img(src='./images/shop/visa.svg', style='height: 24px', alt='visa')
-        img(src='./images/shop/mc.svg', style='height: 24px', alt='mc')
-        img(src='./images/shop/ms.svg', style='height: 24px', alt='sber')
-        img(src='./images/shop/qiwi.svg', style='height: 24px', alt='qiwi')
-        img(src='./images/shop/ym.svg', style='height: 24px', alt='ym')
-        img(src='./images/shop/pp.svg', style='height: 24px', alt='pp')
-
-      hr.margin-bottom-6
-      .margin-bottom-6
-        a.text-light-gray(href='http://cetera.ru/', title='') Создание сайта&nbsp;&mdash;&nbsp;
-        | Cetera Labs
-        br
-        a.text-light-gray(href='http://www.cetera.ru/support/default.php?project=CCD&lang=ru&page=http://wireframes.cetera.ru/boilerplate/', title='') Сообщить об ошибке
+    .small-12.medium-6.large-3.cell
+      .subscribe Подписаться на рассылку
+      form(action="#")
+        .input-group.footer__group
+          input.input-group-field(type='email',placeholder="Ваш e-mail")
+          .input-group-button
+            input.button.footer__button(type='submit', value='Отправить')
+        .check
+          input(type="radio",name="gender",id="a1",checked).check__input
+          label.check__label(for="a1") Женские      
+        .check
+          input(type="radio",name="gender",id="a2").check__input
+          label.check__label(for="a2") Мужские 
+      a(href="#").margin-right-4
+        img(src="./images/m1.png", alt="")  
+      a(href="#").margin-right-4
+        img(src="./images/m2.png", alt="")  
+      a(href="#")
+        img(src="./images/m3.png", alt="")  
