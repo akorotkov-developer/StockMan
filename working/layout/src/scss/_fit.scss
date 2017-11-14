@@ -1,6 +1,7 @@
 .fit {
   display: inline-block;
   width: rem-calc(60);
+  margin-bottom: rem-calc(20);
   &__input {
     display:none;
     &:checked + .fit__label {

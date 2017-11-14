@@ -4,6 +4,19 @@ $(document).foundation();
 (function($) {
   "use strict";
   $(function() {
+    //begin of .sort click function
+    $('.sort').click(function() {
+      if ($(this).hasClass('js-open')) {
+
+        $('.sort.js-open').removeClass('js-open');
+      } else {
+        $('.sort.js-open').removeClass('js-open');
+        $(this).addClass('js-open');
+
+      }
+
+    });
+    //end of .sort click function
 
     /**
      * Разные карусели
@@ -112,13 +125,13 @@ $(document).foundation();
         }
       }]
     });
-$('.skirt__prev').click(function() {
-  $('.skirt__slider').slick('slickPrev');
-});
-$('.skirt__next').click(function() {
-  $('.skirt__slider').slick('slickNext');
-});
- //end of .skirt__slider
+    $('.skirt__prev').click(function() {
+      $('.skirt__slider').slick('slickPrev');
+    });
+    $('.skirt__next').click(function() {
+      $('.skirt__slider').slick('slickNext');
+    });
+    //end of .skirt__slider
     $(".x-carousel-services").slick({
       infinite: true,
       dots: true,

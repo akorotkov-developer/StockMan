@@ -7,9 +7,9 @@ block content
     .skirt
       .grid-x.grid-padding-x
         .cell.small-6
-          a(href="#").skirt__prev Back
+          a.skirt__prev Back
         .cell.text-right.small-6
-          a(href="#").skirt__next Next
+          a.skirt__next Next
       .skirt__wrapper      
         .skirt__slider.text-center
           .skirt__slide
@@ -30,10 +30,35 @@ block content
           .skirt__slide
             .skirt__inner
               img(src="./i/sk2.png", alt="")
-        
+
       .skirt__info
-    
         h1 ПЛАТЬЕ ETRO
         .text-uppercase.text-size-xsmall.margin-bottom-3 ID 318226
         include components/shop/_product-base-info
-    
+    .grid-container.margin-bottom-20
+      .grid-x.grid-padding-x.align-center.text-center
+        .cell
+          h2.text-transform-none Подпишись на нашу рассылку, получи скидку 300&#160;р.    
+        .cell.large-6
+          input(type="email",value="укажите свой адрес электронной почты").mail.text-center
+    .background-light-gray.padding-top-15.padding-bottom-4
+      .grid-container
+        .grid-x.grid-padding-x.align-justify.text-dark-gray.text-size-xlarge.text-center.large-text-left
+          .cell.large-3.medium-4      
+            .grid-x.grid-padding-x
+              .large-3.cell.margin-bottom-3
+                img(src="./images/ruble.png", alt="")
+              .large-9.cell.padding-top-3 Доступные цены
+              .cell.text-size-xsmall.text-center.margin-bottom-8 Мы предлагаем самые выгодные цены и условия доставки
+          .cell.large-3.medium-4      
+            .grid-x.grid-padding-x
+              .large-3.cell.margin-bottom-3
+                img(src="./images/quality.svg", alt="")
+              .large-9.cell.padding-top-3 Качественный товар
+              .cell.text-size-xsmall.text-center.margin-bottom-8 Качество товара проверяется и соответствует самым высоким стандартам
+          .cell.large-3.medium-4      
+            .grid-x.grid-padding-x
+              .large-3.cell.margin-bottom-3
+                img(src="./images/fast.svg", alt="")
+              .large-9.cell.padding-top-3 Быстрая доставка
+              .cell.text-size-xsmall.text-center.margin-bottom-8 Мы предлагаем самые выгодные цены и услуги доставки

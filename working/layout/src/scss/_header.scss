@@ -8,9 +8,11 @@
     text-decoration: none;
 margin-left: rem-calc(30);
   }
-&__menu {
-  outline: none;
-}
+
+  &__menu {
+    outline: none;
+  }
+
   &__tel {
     color: $white;
     text-decoration: none;
@@ -30,15 +32,18 @@ margin-left: rem-calc(30);
   }
   @include breakpoint(small only) {
     padding-bottom: rem-calc(20);
+
     &__logo {
       margin-top: rem-calc(0);
     }
+
     &__menu {
       margin-top: rem-calc(28);
     }
+
     &__enter {
-      margin-left: rem-calc(15);
-      margin-right: rem-calc(15);
+      margin-left: rem-calc(0);
+      margin-right: rem-calc(30);
     }
   }
 }

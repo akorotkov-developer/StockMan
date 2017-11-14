@@ -1,71 +1,76 @@
 extends shop-regular
 
 block content
-    .grid-container: .grid-x.grid-padding-x: .cell
-        h1 Каталог
-    .content
-        .grid-container: .grid-x.grid-padding-x
-            .cell.small-12.medium-4.large-3
-                a.button.light-gray.expanded(href='shop-compare.html')
-                    i.fa.fa-lg.fa-balance-scale
-                    | &nbsp;Сравнить: 5
-            .cell.small-12.medium-6.large-7.text-center.medium-text-left
-                .margin-bottom-6
-                    span.button-group
-                        a.button.light-gray(href='#')
-                            | Цена&nbsp;
-                            i.fa.fa-sort-amount-desc
-                        a.button.light-gray(href='#')
-                            | Цена&nbsp;
-                            i.fa.fa-sort-amount-asc
-                        a.button.light-gray(href='#') Новинки
-                        a.button.light-gray(href='#') Популярные
-            .cell.small-12.medium-2.large-2.medium-text-right.text-center
-                .margin-bottom-6
-                    span.button-group
-                        a.button.light-gray(href='shop-catalog.html'): i.fa.fa-lg.fa-th
-                        a.button.light-gray(href='shop-catalog-lines.html'): i.fa.fa-lg.fa-th-list
+  
+  .content
+    .grid-x.grid-padding-x.margin-top-10: .cell.text-center
+      h1 Платья
+      .text-secondary 9438 товаров
+    .grid-x.grid-padding-x
+      .cell.small-12.medium-8.large-6
+        .sort
+          .sort__main Цвет
+          .sort__other
+            div Белый
+            div Красный
+        .sort
+          .sort__main Размер
+          .sort__other
+            div 12
+            div 123
+        .sort
+          .sort__main Бренд
+          .sort__other
+            div Rhino
+            div Clothes
+        .sort
+          .sort__main Сезон
+          .sort__other
+            div Зима
+            div Лето
+        .sort
+          .sort__main Цена
+          .sort__other
+            div По возрастанию
+            div По убыванию
+      .cell.small-12.medium-4.large-6.text-right
+        a(href="#").text-secondary.margin-right-12 На модели
+        .sort
+          .sort__main Сортировать
+          .sort__other.sort__other_right
+            div По рейтингу
+            div По качеству
 
-        .grid-container: .grid-x.grid-padding-x
-            .cell.small-12.medium-4.large-3
-                include components/shop/_sidebar
-            .cell.small-12.medium-8.large-9
-                block products
-                    .grid-x.grid-padding-x.small-up-1.medium-up-2.large-up-4.margin-bottom-12(data-equalizer data-equalize-by-row="true")
-                        +productTile('Комби-перфоратор Metabo KHE 2650', false)
-                        +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
-                        +productTile('Лобзик Metabo STEB 65 Quick', false)
-                        +productTile('Торцовочная пила Ryobi EMS254L', true)
-                        +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
-                        +productTile('Лобзик Metabo STEB 65 Quick', false)
-                        +productTile('Комби-перфоратор Metabo KHE 2650', false)
-                        +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
-                        +productTile('Лобзик Metabo STEB 65 Quick', false)
-                        +productTile('Торцовочная пила Ryobi EMS254L', true)
-                        +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
-                        +productTile('Лобзик Metabo STEB 65 Quick', false)
-                        +productTile('Комби-перфоратор Metabo KHE 2650', false)
-                        +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
-                        +productTile('Лобзик Metabo STEB 65 Quick', false)
-                        +productTile('Торцовочная пила Ryobi EMS254L', true)
-                        +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
-                        +productTile('Лобзик Metabo STEB 65 Quick', false)
-                        +productTile('Комби-перфоратор Metabo KHE 2650', false)
-                        +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
-                        +productTile('Лобзик Metabo STEB 65 Quick', false)
-                        +productTile('Торцовочная пила Ryobi EMS254L', true)
-                        +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
-                        +productTile('Лобзик Metabo STEB 65 Quick', false)
-                include components/common/_pagination
+        
 
-    .grid-container: .grid-x.grid-padding-x: .cell: hr
-    .content
-        .grid-container: .grid-x.grid-padding-x: .cell
-            h2 Вы смотрели
-        .grid-container: .grid-x.grid-padding-x.small-up-1.medium-up-3.large-up-6(data-equalizer data-equalize-by-row="true")
+    .grid-container: .grid-x.grid-padding-x
+      .cell.small-12.medium-4.large-3
+        include components/shop/_sidebar
+      .cell.small-12.medium-8.large-9
+        block products
+          .grid-x.grid-padding-x.small-up-1.medium-up-2.large-up-4.margin-bottom-12(data-equalizer data-equalize-by-row="true")
             +productTile('Комби-перфоратор Metabo KHE 2650', false)
             +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
             +productTile('Лобзик Metabo STEB 65 Quick', false)
             +productTile('Торцовочная пила Ryobi EMS254L', true)
             +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
             +productTile('Лобзик Metabo STEB 65 Quick', false)
+            +productTile('Комби-перфоратор Metabo KHE 2650', false)
+            +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
+            +productTile('Лобзик Metabo STEB 65 Quick', false)
+            +productTile('Торцовочная пила Ryobi EMS254L', true)
+            +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
+            +productTile('Лобзик Metabo STEB 65 Quick', false)
+            +productTile('Комби-перфоратор Metabo KHE 2650', false)
+            +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
+            +productTile('Лобзик Metabo STEB 65 Quick', false)
+            +productTile('Торцовочная пила Ryobi EMS254L', true)
+            +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
+            +productTile('Лобзик Metabo STEB 65 Quick', false)
+            +productTile('Комби-перфоратор Metabo KHE 2650', false)
+            +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
+            +productTile('Лобзик Metabo STEB 65 Quick', false)
+            +productTile('Торцовочная пила Ryobi EMS254L', true)
+            +productTile('Дрель-шуруповёрт RYOBI R18DDP-LL13G', false)
+            +productTile('Лобзик Metabo STEB 65 Quick', false)
+        include components/common/_pagination

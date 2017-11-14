@@ -107,7 +107,7 @@ var pugFunc = function(minify) {
             locals: {minify: minify}
         }))
         .pipe(gulp.dest(path.dist.html))
-        .pipe(wait(100))
+        .pipe(wait(200))
         .pipe(browserSync.reload({
          stream: true
         }));

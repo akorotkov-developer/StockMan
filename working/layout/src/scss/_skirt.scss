@@ -1,7 +1,7 @@
 .skirt {
   overflow: hidden;
   position: relative;
-
+margin-bottom: rem-calc(82);
   img {
     display: inline-block;
   }
@@ -45,8 +45,7 @@
 
     &:active,
     &:focus,
-    &:hover,
-    &:visited {
+    &:hover {
       background: #eee;
       color: $black;
       border-color: $black;
@@ -90,8 +89,9 @@
     position: absolute;
     width: rem-calc(640);
     top: rem-calc(57);
+    z-index: 5;
     right: rem-calc(150);
-    padding: rem-calc(37 43);
+    padding: rem-calc(37 43 45);
   }
 
   &__next,
@@ -130,4 +130,28 @@
   &__wrapper {
     width: 113%;
   }
+  @include breakpoint(large down) {
+    &__info {
+      width: 100%;
+    }
+    .slick-prev {
+      left: rem-calc(15);
+    }
+    .slick-next {
+      right: rem-calc(15);
+    }
+    &__info {
+      position: static;
+    }
+    &__wrapper {
+      width: 100%;
+    }
+  }
+    @include breakpoint(small only) {
+      &__bag,&__heart {
+        margin-bottom: rem-calc(15);
+      }
+    &__info {
+      padding: rem-calc(15);
+    } }
 }

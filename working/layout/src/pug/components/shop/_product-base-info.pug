@@ -1,7 +1,7 @@
 .skirt__price 72 000 &#8381;
 .grid-x
-  .small-12.large-2.cell Размер:
-  .cell.auto
+  .small-12.medium-2.large-2.cell Размер:
+  .cell.large-4.medium-4
     .checkbox-group
       input.checkbox-group__item(type='radio' id='size1' name='size')
       label.checkbox-group__label(for='size1') 44
@@ -12,22 +12,42 @@
     a(href="#").skirt__link RU
     div.margin-bottom-5
       a(href="#").skirt__link.skirt__link_mini Таблица размеров
-  .small-12.large-2.cell Цвет:
-  .cell.auto
+  .small-12.medium-2.large-2.cell Цвет:
+  .cell.large-4.medium-4
     .fit.text-center
       input.fit__input(type='radio' id='col1' name='col')
       label.fit__label(for='col1')
         img(src="./i/try1.png", alt="")
         .fit__text Хакки
-    .fit.text-center    
+    .fit.text-center
       input.fit__input(type='radio' id='col2' name='col')
       label.fit__label(for='col2')
         img(src="./i/try2.png", alt="")
         .fit__text Черный
 .grid-x.grid-padding-x.skirt__grid 
-  .cell.small-6
+  .cell.medium-6
     a(href="#").button.skirt__bag Добавить в Корзину  
-  .cell.small-6
+  .cell.medium-6
     a(href="#").button.skirt__heart Добавить в Избранное
-hr    
+   
+ul.accordion(data-accordion='')
+  li.accordion-item.is-active(data-accordion-item='')
+    a.accordion-title(href='#') Комментарий стилиста
+    .accordion-content(data-tab-content='')
+      div Несомненный цветовой тренд сезона - красный, стал акцентом летней коллекции ready-to-wear бренда Mother Of Pearl. Обратите внимание на это женственное платье, лиф которого выполнен из жаккардовой ткани, а юбка - из плиссированного материала. Акцентами стали черные бретели. Носите с голубой или белой обувью - на контрасте.
+  li.accordion-item(data-accordion-item='')
+    a.accordion-title(href='#') Детали
+    .accordion-content(data-tab-content='')
+      div Несомненный цветовой тренд сезона - красный, стал акцентом летней коллекции ready-to-wear бренда Mother Of Pearl. Обратите внимание на это женственное платье, лиф которого выполнен из жаккардовой ткани, а юбка - из плиссированного материала. Акцентами стали черные бретели. Носите с голубой или белой обувью - на контрасте.
+  li.accordion-item(data-accordion-item='')
+    a.accordion-title(href='#') доставка, оплата и возврат
+    .accordion-content(data-tab-content='')
+      div Несомненный цветовой тренд сезона - красный, стал акцентом летней коллекции ready-to-wear бренда Mother Of Pearl. Обратите внимание на это женственное платье, лиф которого выполнен из жаккардовой ткани, а юбка - из плиссированного материала. Акцентами стали черные бретели. Носите с голубой или белой обувью - на контрасте.
+.text-size-xsmall.text-right
+  | Поделиться
+  a(href="#").fa.fa-facebook.share
+  a(href="#").fa.fa-twitter.share
+  a(href="#").fa.fa-vk.share
+  a(href="#").fa.fa-pinterest.share
+
       

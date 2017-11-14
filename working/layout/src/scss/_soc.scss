@@ -2,6 +2,7 @@
   margin-right: rem-calc(24);
   margin-bottom: rem-calc(15);
   font-size: rem-calc(17);
-    @include breakpoint(large down) {
-    margin-right: rem-calc(10); }
+  @include breakpoint(large down) {
+    margin-right: rem-calc(10);
+  }
 }
