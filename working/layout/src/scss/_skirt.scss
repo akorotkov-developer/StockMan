@@ -1,13 +1,20 @@
 .skirt {
   overflow: hidden;
   position: relative;
-margin-bottom: rem-calc(82);
+  margin-bottom: rem-calc(82);
+
   img {
     display: inline-block;
   }
 
+
+
   &__inner {
     background: #f8f8f8;
+
+    &:hover {
+      overflow: visible !important;
+    }
   }
 
   &__grid {
@@ -134,24 +141,31 @@ margin-bottom: rem-calc(82);
     &__info {
       width: 100%;
     }
+
     .slick-prev {
       left: rem-calc(15);
     }
+
     .slick-next {
       right: rem-calc(15);
     }
+
     &__info {
       position: static;
     }
+
     &__wrapper {
       width: 100%;
     }
   }
-    @include breakpoint(small only) {
-      &__bag,&__heart {
-        margin-bottom: rem-calc(15);
-      }
+  @include breakpoint(small only) {
+    &__bag,
+    &__heart {
+      margin-bottom: rem-calc(15);
+    }
+
     &__info {
       padding: rem-calc(15);
-    } }
+    }
+  }
 }
