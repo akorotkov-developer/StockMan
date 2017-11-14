@@ -2,7 +2,27 @@
   text-decoration: none;
   display: block;
   color: $insta;
-  margin-bottom: rem-calc(30);
+  margin-bottom: rem-calc(10);
+  border: rem-calc(1) solid transparent;
+  padding-top: rem-calc(10);
+  padding-bottom: rem-calc(20);
+
+  &:hover {
+    border-color: $asphalt;
+    position: absolute;
+    background: $white;
+    width: 100%;
+    z-index: 3;
+    left: rem-calc(0);
+
+    .dress__size {
+      display: block;
+    }
+  }
+
+  &__size {
+    display: none;
+  }
 
   &__title {
     margin-bottom: rem-calc(4);

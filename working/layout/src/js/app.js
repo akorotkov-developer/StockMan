@@ -4,6 +4,7 @@ $(document).foundation();
 (function($) {
   "use strict";
   $(function() {
+
     //begin of .sort click function
     $('.sort').click(function() {
       if ($(this).hasClass('js-open')) {
@@ -156,6 +157,26 @@ $(document).foundation();
       autoplaySpeed: 7000,
       autoplayHoverPause: true
     });
+
+    //begin of jquery-zoom plugin
+    $(document).ready(function() {
+      $('.skirt__inner').each(function() {
+        var imgUrl = $(this).data('img');
+        $(this).zoom({
+          url: imgUrl
+        });
+      });
+
+    });
+    $('.skirt__slider').on('afterChange',function(slick,currentSlide) {
+      $('.skirt__inner').each(function() {
+        var imgUrl = $(this).data('img');
+        $(this).zoom({
+          url: imgUrl
+        });
+      });
+    });
+    //end of jquery-zoom plugin
     $('.x-carousel-news-link').on('click', function(e) {
 
       e.preventDefault();

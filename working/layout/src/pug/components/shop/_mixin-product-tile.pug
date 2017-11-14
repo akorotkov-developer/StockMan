@@ -1,37 +1,19 @@
 mixin productTile(title, discount)
-    .cell
-        .clearfix(data-equalizer-watch)
-            .margin-bottom-6
-                a(href='shop-product.html'): img(src='./i/image.svg' alt='товар' style='background:#e6e6e6;')
-            .margin-bottom-3
-                if discount
-                    span.label.success
-                        i.fa.fa-star-o
-                        | &nbsp;Акция
-                    | &nbsp;
-                a(href='shop-product.html')
-                    if title
-                        = title
-                    else
-                        | Название товара
-                br
-                a.text-dark-gray.text-size-small(href='shop-catalog.html') Шуроповерты
-        hr.margin-bottom-3
-        .margin-bottom-3
-            strong.text-size-large
-                | 1&nbsp;250&nbsp;
-                i.fa.fa-rub
-            if discount
-                | &nbsp;&nbsp;
-                del.text-dark-gray.text-size-small
-                    | 1&nbsp;750&nbsp;
-                    i.fa.fa-rub
-        .grid-x.margin-bottom-6
-            .small-5.cell
-                a(href='shop-cart.html').button.small.primary.hollow.expanded.margin-bottom-0 Купить
-            .small-7.cell.text-right.align-self-middle
-                a.text-dark-gray(title='Запомнить' data-open="add-to-favourites-auth-popup")
-                    i.fa.fa-heart-o.fa-lg
-                | &nbsp;&nbsp;&nbsp;
-                a.text-dark-gray(title="Добавить к сравнению" href='shop-compare.html')
-                    i.fa.fa-balance-scale.fa-lg
+  .cell.position-relative
+    .dress   
+      .margin-bottom-3(data-equalizer-watch)
+        a(href="#") 
+          img(src="./i/d"  + Math.floor(Math.random() * 3 + 1) + '.png', alt="")
+      .dress__title= title
+      .text-secondary Полосатое платье-рубашка
+      .text-size-large.margin-bottom-4 49 765. -  
+      .dress__size
+        span.margin-right-4 Размер
+        .checkbox-group
+          input.checkbox-group__item(type='radio' id='size1' name='size')
+          label.checkbox-group__label(for='size1') 44
+          input.checkbox-group__item(type='radio' id='size2' name='size')
+          label.checkbox-group__label(for='size2') 46
+          input.checkbox-group__item(type='radio' id='size3' name='size')
+          label.checkbox-group__label(for='size3') 48
+        a(href="#").skirt__link RU

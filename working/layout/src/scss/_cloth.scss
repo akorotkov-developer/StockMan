@@ -1,0 +1,26 @@
+.cloth {
+  &__item {
+    margin-bottom: rem-calc(7);
+  }
+
+  &__num {
+    color: $secondary-color;
+    font-size: rem-calc(12);
+    margin-left: rem-calc(13);font-weight: 400;
+  }
+
+  &__link {
+    color: $insta;
+    text-transform: uppercase;
+
+    &_more {
+      font-weight: 700;
+      display: block;
+      margin-bottom: rem-calc(7);
+    }
+
+    &_inside {
+      text-transform: none;
+    }
+  }
+}
