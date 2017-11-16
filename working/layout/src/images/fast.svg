@@ -1,1 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="62" height="65" viewBox="0 0 62 65"><defs><path id="e78da" d="M1129 1528c0-1.1.9-2 2-2h54a2 2 0 0 1 2 2v31a2 2 0 0 1-2 2h-54a2 2 0 0 1-2-2z"/><path id="e78db" d="M1343.5 1426a9.5 9.5 0 1 1 0 19 9.5 9.5 0 0 1 0-19z"/><path id="e78dc" d="M1348 1393a10 10 0 0 1 20 0"/><path id="e78dd" d="M1370.5 1426a9.5 9.5 0 1 1 0 19 9.5 9.5 0 0 1 0-19z"/><path id="e78dh" d="M1366 1392h2v20h-2z"/><path id="e78dj" d="M1348 1392h2v20h-2z"/><clipPath id="e78de"><use fill="#fff" xlink:href="#e78da"/></clipPath><clipPath id="e78df"><use fill="#fff" xlink:href="#e78db"/></clipPath><clipPath id="e78dg"><use fill="#fff" xlink:href="#e78dc"/></clipPath><clipPath id="e78di"><use fill="#fff" xlink:href="#e78dd"/></clipPath></defs><g><g transform="translate(-1325 -1381)"><use fill="#fff" fill-opacity="0" stroke="#000" stroke-miterlimit="50" stroke-width="4" clip-path="url(&quot;#e78de&quot;)" xlink:href="#e78da"/></g><g transform="translate(-1325 -1381)"><use fill="#efefef" xlink:href="#e78db"/><use fill="#fff" fill-opacity="0" stroke="#000" stroke-miterlimit="50" stroke-width="4" clip-path="url(&quot;#e78df&quot;)" xlink:href="#e78db"/></g><g transform="translate(-1325 -1381)"><use fill="#efefef" xlink:href="#e78dc"/><use fill="#fff" fill-opacity="0" stroke="#000" stroke-miterlimit="50" stroke-width="4" clip-path="url(&quot;#e78dg&quot;)" xlink:href="#e78dc"/></g><g transform="translate(-1325 -1381)"><use xlink:href="#e78dh"/></g><g transform="translate(-1325 -1381)"><use fill="#efefef" xlink:href="#e78dd"/><use fill="#fff" fill-opacity="0" stroke="#000" stroke-miterlimit="50" stroke-width="4" clip-path="url(&quot;#e78di&quot;)" xlink:href="#e78dd"/></g><g transform="translate(-1325 -1381)"><use xlink:href="#e78dj"/></g></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 57.5 61.3" style="enable-background:new 0 0 57.5 61.3;" xml:space="preserve" width="50" height="53">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:10;}
+</style>
+<circle class="st0" cx="14.8" cy="51.8" r="8.4"/>
+<circle class="st0" cx="42.8" cy="51.8" r="8.4"/>
+<path class="st0" d="M20.4,9.5c0-4.6,3.8-8.4,8.4-8.4s8.4,3.8,8.4,8.4"/>
+<line class="st0" x1="20.4" y1="9.5" x2="20.4" y2="28.4"/>
+<line class="st0" x1="37.2" y1="9.5" x2="37.2" y2="28.4"/>
+<path class="st0" d="M6.4,51.8h-4c-0.8,0-1.4-0.6-1.4-1.4V19c0-0.8,0.6-1.4,1.4-1.4h52.6c0.8,0,1.4,0.6,1.4,1.4v31.4
+	c0,0.8-0.6,1.4-1.4,1.4h-3.8"/>
+<line class="st0" x1="34.4" y1="51.8" x2="23.2" y2="51.8"/>
+</svg>
