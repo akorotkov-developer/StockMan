@@ -19,6 +19,12 @@
       display: block;
     }
   }
+  &_static {
+    &:hover {
+      position: static;
+      
+    }
+  }
 
   &__size {
     display: none;
