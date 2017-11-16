@@ -1,0 +1,20 @@
+.pagination {
+  display: inline-block;
+  .pagination__first {
+    border-radius: rem-calc(3 0 0 3);
+  }
+  li {
+    float: left;
+      border: rem-calc(1) solid $secondary-color;
+      border-left: rem-calc(0);
+  }
+  .ellipsis {
+    height: rem-calc(26);
+  }
+  a {
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
