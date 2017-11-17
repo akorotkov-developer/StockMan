@@ -1,0 +1,16 @@
+.fancybox {
+  &-wrap {
+    width: calc(100% - 20px) !important;
+    left: rem-calc(0) !important;
+  }
+  &-image {
+    width:auto;
+    height:auto;
+    display: inline-block;
+  }
+  &-inner {
+    text-align: center;
+    width: 100% !important;
+    height:auto !important;
+  }
+}

@@ -1,6 +1,7 @@
 .accordion {
   border-bottom: rem-calc(1) solid $black;
-margin-bottom: rem-calc(24);
+  margin-bottom: rem-calc(24);
+
   .is-active {
     .accordion-title {
       &:before {
@@ -16,6 +17,7 @@ margin-bottom: rem-calc(24);
 
   &-title {
     text-transform: uppercase;
+    padding-right: rem-calc(40);
 
     &:before {
       content: "";

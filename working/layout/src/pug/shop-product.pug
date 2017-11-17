@@ -13,22 +13,22 @@ block content
       .skirt__wrapper      
         .skirt__slider.text-center
           .skirt__slide
-            .skirt__inner(data-img="./i/sk3.jpg")
-              img(src="./i/sk1.png", alt="")
+            a.skirt__inner(href="./i/sk3.jpg",rel="gallery").fancybox
+              img(src="./i/sk3.jpg", alt="")
           .skirt__slide
-            .skirt__inner(data-img="./i/sk3.jpg")
+            a.skirt__inner(href="./i/sk2.png",rel="gallery").fancybox
               img(src="./i/sk2.png", alt="")
           .skirt__slide
-            .skirt__inner(data-img="./i/sk3.jpg")
+            a.skirt__inner(href="./i/sk1.png",rel="gallery").fancybox
               img(src="./i/sk1.png", alt="")
           .skirt__slide
-            .skirt__inner(data-img="./i/sk3.jpg")
+            a.skirt__inner(href="./i/sk3.jpg",rel="gallery").fancybox
               img(src="./i/sk2.png", alt="")
           .skirt__slide
-            .skirt__inner(data-img="./i/sk3.jpg")
+            a.skirt__inner(href="./i/sk2.png",rel="gallery").fancybox
               img(src="./i/sk1.png", alt="")
           .skirt__slide
-            .skirt__inner(data-img="./i/sk3.jpg")
+            a.skirt__inner(href="./i/sk1.png",rel="gallery").fancybox
               img(src="./i/sk2.png", alt="")
 
       .skirt__info
@@ -36,6 +36,25 @@ block content
         .text-uppercase.text-size-xsmall.margin-bottom-3 ID 318226
         include components/shop/_product-base-info
     .grid-container.margin-bottom-20
+      .grid-x.grid-padding-x
+        .cell
+          ul.accordion(data-accordion='' data-allow-all-closed="true")
+            li.accordion-item.is-active(data-accordion-item='')
+              a.text-center.accordion-title(href='#') На модели
+              .accordion-content(data-tab-content='')
+                .grid-x.text-center.grid-padding-x.small-up-1.medium-up-2.large-up-4(data-equalizer data-equalize-by-row="true").margin-bottom-8
+                  +productTile('ASHLEY WILLIAMS')
+                  +productTile('Proenza schouler')
+                  +productTile('ASHLEY WILLIAMS')
+                  +productTile('Proenza schouler')
+            li.accordion-item.is-active(data-accordion-item='')
+              a.text-center.accordion-title(href='#') Вам также может понравиться
+              .accordion-content(data-tab-content='')
+                .grid-x.text-center.grid-padding-x.small-up-1.medium-up-2.large-up-4(data-equalizer data-equalize-by-row="true").margin-bottom-8
+                  +productTile('ASHLEY WILLIAMS')
+                  +productTile('Proenza schouler')
+                  +productTile('ASHLEY WILLIAMS')
+                  +productTile('Proenza schouler')
       .grid-x.grid-padding-x.align-center.text-center
         .cell
           h2.text-transform-none Подпишись на нашу рассылку, получи скидку 300&#160;р.    

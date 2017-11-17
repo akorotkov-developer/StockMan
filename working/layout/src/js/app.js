@@ -18,6 +18,11 @@ $(document).foundation();
 
     });
     //end of .sort click function
+    //begin of jquery-fancybox
+    $(document).ready(function() {
+       $('.fancybox').fancybox();
+   });
+     //end of jquery-fancybox
 
     /**
      * Разные карусели
@@ -159,23 +164,23 @@ $(document).foundation();
     });
 
     //begin of jquery-zoom plugin
-    $(document).ready(function() {
-      $('.skirt__inner').each(function() {
-        var imgUrl = $(this).data('img');
-        $(this).zoom({
-          url: imgUrl
-        });
-      });
-
-    });
-    $('.skirt__slider').on('afterChange',function(slick,currentSlide) {
-      $('.skirt__inner').each(function() {
-        var imgUrl = $(this).data('img');
-        $(this).zoom({
-          url: imgUrl
-        });
-      });
-    });
+    // $(document).ready(function() {
+    //   $('.skirt__inner').each(function() {
+    //     var imgUrl = $(this).data('img');
+    //     $(this).zoom({
+    //       url: imgUrl
+    //     });
+    //   });
+    //
+    // });
+    // $('.skirt__slider').on('afterChange',function(slick,currentSlide) {
+    //   $('.skirt__inner').each(function() {
+    //     var imgUrl = $(this).data('img');
+    //     $(this).zoom({
+    //       url: imgUrl
+    //     });
+    //   });
+    // });
     //end of jquery-zoom plugin
     $('.x-carousel-news-link').on('click', function(e) {
 
