@@ -487,7 +487,7 @@ $orbit-control-zindex: 10;
 $pagination-font-size: rem-calc(16);
 $pagination-margin-bottom: 6 * $global-margin;
 $pagination-item-color: $secondary-color;
-$pagination-item-padding: rem-calc(0 8);
+$pagination-item-padding: rem-calc(2 8);
 $pagination-item-spacing: rem-calc(0);
 $pagination-radius: $global-radius;
 $pagination-item-background-hover: $secondary-color;
@@ -497,7 +497,7 @@ $pagination-item-color-disabled: $medium-gray;
 $pagination-ellipsis-color: $black;
 $pagination-mobile-items: false;
 $pagination-mobile-current-item: false;
-$pagination-arrows: true;
+$pagination-arrows: false;
 
 // 28. Progress Bar
 // ----------------

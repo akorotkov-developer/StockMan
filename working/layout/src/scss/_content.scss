@@ -4,8 +4,9 @@
   padding: rem-calc(11) 0 0;
   position: relative;
   border-top: rem-calc(1) solid $asphalt;
-}
-
-.content__promo {
-  height: rem-calc(400);
+  border-bottom: rem-calc(1) solid $asphalt;
+  padding-bottom: rem-calc(30);
+  &__promo {
+      height: rem-calc(400);
+  }
 }
