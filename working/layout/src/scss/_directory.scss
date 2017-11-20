@@ -1,0 +1,10 @@
+.directory {
+  @include breakpoint(small only) {
+    position: absolute;
+    left: rem-calc(15);
+    top: rem-calc(0);
+    border: rem-calc(2) solid $black;
+    width: 100%;
+    background: $white;
+    z-index: 5; }
+}

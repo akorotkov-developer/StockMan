@@ -6,11 +6,19 @@
 
   &__enter {
     text-decoration: none;
-margin-left: rem-calc(30);
+    margin-left: rem-calc(30);
   }
 
   &__menu {
     outline: none;
+  }
+
+  &__detective {
+    padding-top: rem-calc(9);
+  }
+
+  &__book {
+    padding-top: rem-calc(20);
   }
 
   &__tel {
@@ -31,19 +39,30 @@ margin-left: rem-calc(30);
     }
   }
   @include breakpoint(small only) {
-    padding-bottom: rem-calc(20);
+    padding-bottom: rem-calc(10);
+
+    &__book {
+      padding-top: rem-calc(10);
+    }
+
+    &__tel {
+      font-size: rem-calc(11);
+    }
 
     &__logo {
-      margin-top: rem-calc(0);
+      margin-top: rem-calc(10);
     }
 
     &__menu {
-      margin-top: rem-calc(28);
+      margin-top: rem-calc(13);
     }
 
     &__enter {
       margin-left: rem-calc(0);
-      margin-right: rem-calc(30);
+
+      &_right {
+        margin-left: rem-calc(20);
+      }
     }
   }
 }

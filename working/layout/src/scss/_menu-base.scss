@@ -55,12 +55,12 @@
     color: $insta;
     position: relative;
     text-decoration: none;
-  border-bottom: rem-calc(2) solid transparent;
+    border-bottom: rem-calc(2) solid transparent;
+
     &:focus,
     &:hover,
     &_active {
-      
-    border-bottom-color: $insta;
+      border-bottom-color: $insta;
     }
   }
   @include breakpoint(large down) {
@@ -69,7 +69,14 @@
     }
   }
   @include breakpoint(small only) {
+    &__link {
+      i {
+        margin-right: rem-calc(5);
+      }
+    }
+
     &__item {
+      display: block;
       padding-left: rem-calc(10);
       padding-right: rem-calc(10);
     }

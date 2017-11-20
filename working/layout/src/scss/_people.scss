@@ -24,6 +24,9 @@
   }
 
   @include breakpoint(small only) {
+    padding-bottom: rem-calc(10);
+    margin-bottom: rem-calc(10);
     margin-bottom: rem-calc(17);
+    border-bottom: rem-calc(2) solid $black;
   }
 }
