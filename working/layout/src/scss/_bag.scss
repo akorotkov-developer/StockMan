@@ -1,12 +1,26 @@
 .bag {
-  &__item {margin-bottom: rem-calc(15);}
+  transition: 0.3s;
+
+  &__item {
+    margin-bottom: rem-calc(15);
+  }
 
   &__link {
     font-size: rem-calc(14);
     text-transform: uppercase;
     color: $secondary-color;
-    &:hover,&:focus,&:active {
+
+    &:active,
+    &:focus,
+    &:hover {
       color: $primary-color;
+    }
+  }
+  @include breakpoint(small only) {
+    display: none;
+
+    &.js-open {
+      display: block;
     }
   }
 }

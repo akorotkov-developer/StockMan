@@ -1,42 +1,51 @@
 footer.footer
   .grid-x.grid-padding-x.text-center.medium-text-left
     .large-2.cell.large-offset-1.medium-4
-      .text-uppercase.margin-bottom-3.text-insta Коллекции
-      ul.bag
+      .footer__title(data-toggle="foot1 title1",data-toggler="js-show")#title1
+        | Коллекции
+        i.fa.fa-chevron-right.show-for-small-only
+      ul.bag(data-toggler="js-open")#foot1
         each title in ['женская коллекция','мужская коллекция','сумки','аксессуары']
           li.bag__item
             a(href="#").bag__link= title
     .large-2.cell.medium-4
-      .text-uppercase.margin-bottom-3.text-insta Покупателю
-      ul.bag
+      .footer__title(data-toggle="foot2 title2",data-toggler="js-show")#title2
+        | Покупателю
+        i.fa.fa-chevron-right.show-for-small-only
+      ul.bag(data-toggler="js-open")#foot2
         each title in ['программа лояльности','как сделать заказ','конфиденциальность','где купить']
           li.bag__item
             a(href="#").bag__link= title
     .large-2.cell.medium-4
-      .text-uppercase.margin-bottom-3.text-insta условия работы
-      ul.bag
+      .footer__title(data-toggle="foot3 title3",data-toggler="js-show")#title3
+        | Условия работы
+        i.fa.fa-chevron-right.show-for-small-only
+      ul.bag(data-toggler="js-open")#foot3
         each title in ['оплата','доставка','возврат']
           li.bag__item
             a(href="#").bag__link= title
     .large-2.cell.medium-4
-      .text-uppercase.margin-bottom-3.text-insta Связь с нами
-      .text-size-small.margin-bottom-4
-        | Тел.:
-        |
-        a(href="tel:88003331257").text-decoration-none 8 (800) 333-12-57
-      .text-size-small.margin-bottom-11
-        | E-mail:
-        |
-        a(href="mailto:mail@brendsalon.ru").text-decoration-none mail@brendsalon.ru
-      a(href='#', title='').fa-stack.text-asphalt.soc
-          i.fa.fa-circle.fa-stack-2x
-          i.fa.fa-instagram.fa-stack-1x.fa-inverse  
-      a(href='#', title='').fa-stack.text-asphalt.soc
-          i.fa.fa-circle.fa-stack-2x
-          i.fa.fa-vk.fa-stack-1x.fa-inverse  
-      a(href='#', title='').fa-stack.text-asphalt.soc
-          i.fa.fa-circle.fa-stack-2x
-          i.fa.fa-facebook.fa-stack-1x.fa-inverse  
+      .footer__title(data-toggle="foot4 title4",data-toggler="js-show")#title4
+        | Связь с нами
+        i.fa.fa-chevron-right.show-for-small-only
+      .footer__block(data-toggler="js-open")#foot4
+        .text-size-small.margin-bottom-4
+          | Тел.:
+          |
+          a(href="tel:88003331257").text-decoration-none 8 (800) 333-12-57
+        .text-size-small.margin-bottom-11
+          | E-mail:
+          |
+          a(href="mailto:mail@brendsalon.ru").text-decoration-none mail@brendsalon.ru
+        a(href='#', title='').fa-stack.text-asphalt.soc
+            i.fa.fa-circle.fa-stack-2x
+            i.fa.fa-instagram.fa-stack-1x.fa-inverse  
+        a(href='#', title='').fa-stack.text-asphalt.soc
+            i.fa.fa-circle.fa-stack-2x
+            i.fa.fa-vk.fa-stack-1x.fa-inverse  
+        a(href='#', title='').fa-stack.text-asphalt.soc
+            i.fa.fa-circle.fa-stack-2x
+            i.fa.fa-facebook.fa-stack-1x.fa-inverse  
         
 
     .small-12.medium-6.large-3.cell

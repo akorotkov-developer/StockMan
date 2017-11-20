@@ -69,9 +69,23 @@
     }
   }
   @include breakpoint(small only) {
+    z-index: 6;
+
     &__link {
       i {
         margin-right: rem-calc(5);
+      }
+      .fa-chevron-right {
+        position: absolute;
+        right: rem-calc(-22);
+        top: rem-calc(8);
+      }
+
+      &:active,
+      &:focus,
+      &:hover,
+      &:visited ,&_active{
+        border-bottom-color: transparent;
       }
     }
 

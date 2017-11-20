@@ -42,6 +42,7 @@ button.search-top__button {
 }
 @include breakpoint(small only) {
   .search-top {
+    padding-top: rem-calc(0);
     margin-bottom: rem-calc(20);
     margin-left: calc(50% - 82px);
   }

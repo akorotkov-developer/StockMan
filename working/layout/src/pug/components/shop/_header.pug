@@ -10,7 +10,7 @@ header.header
           a(href="#").people__link.people__link_active Мужчинам
         li.people__item
           a(href="#").people__link Детям
-    .cell.show-for-small-only.small-2(data-responsive-toggle="responsive-menu" data-hide-for="medium").text-right
+    .cell.show-for-small-only.small-2().text-right
       button.menu-icon.header__menu.dark(type='button', data-toggle='responsive-menu')
     .cell.show-for-small-only.small-2(data-responsive-toggle="search-menu" data-hide-for="medium").text-right.header__detective
       i.fa.fa-search.fa-lg( data-toggle='search-menu')
@@ -19,20 +19,38 @@ header.header
     .cell.text-center.large-4.medium-4.small-4
       a(href="#").header__logo
         img(src="./images/logo.svg", alt="")
-    
+
     .cell.large-4.text-right.header__book.medium-4.small-4
       a(href="#").header__enter.hide-for-small-only Войти
       a(href="#").header__enter
         img(src="./images/heart.svg", alt="")
       a(href="#").header__enter.header__enter_right
         img(src="./images/bag.svg", alt="")
-    
-      
 
-        
+
+
+
+
+.grid-container.position-relative: .grid-x.grid-padding-x#responsive-menu.directory(data-toggler="js-open")
+  .subheader(data-toggler="js-open")#subheader1
+    button.subheader__back(data-toggle="subheader1")
+      i.fa.fa-chevron-left
+      | Назад
+    ul.trousers
+      each title in ['Вся одежда','Водолазки','Водолазки','Водолазки','Водолазки','Водолазки','Водолазки','Джинсы']
+        li.trousers__item
+          a(href="#").trousers__link= title
           
-.grid-container.position-relative: .grid-x.grid-padding-x#responsive-menu.directory
-  button.close-button(aria-label='Close alert', type='button',data-responsive-toggle="responsive-menu")
+  .subheader(data-toggler="js-open")#subheader2
+    button.subheader__back(data-toggle="subheader2")
+      i.fa.fa-chevron-left
+      | Назад
+    ul.trousers
+      each title in ['Вся одежда','Шорты','Шорты','Шорты','Шорты','Шорты','Шорты','Джинсы']
+        li.trousers__item
+          a(href="#").trousers__link= title
+          
+  button.close-button.show-for-small-only(aria-label='Close alert', type='button')
     span(aria-hidden='true' data-toggle="responsive-menu") ×
 
   .cell.text-center.medium-text-left
@@ -44,30 +62,50 @@ header.header
       li.people__item
         a(href="#").people__link Детям
   .small-12.medium-9.large-9.cell#menu
+    
     ul.menu-base.text-left.medium-text-right
-      
+
       li.menu-base__item
-        
+
         a.menu-base__link(href='shop-catalog.html')
           i.show-for-small-only.fa.fa-star
           | Новинки
       li.menu-base__item
-        a.menu-base__link(href='shop-catalog.html') Бренды
+        a.menu-base__link(href='shop-catalog.html') 
+          i.show-for-small-only.fa.fa-star
+          | Бренды
       li.menu-base__item
-        a.menu-base__link(href='shop-catalog.html' data-toggle-hover-dd='menu_item_2') Одежда
+        a.menu-base__link(data-toggle-hover-dd='menu_item_2',data-toggle="subheader1")
+          i.show-for-small-only.fa.fa-star
+          | Одежда
+          i.fa.fa-chevron-right.show-for-small-only
+
       li.menu-base__item
-        a.menu-base__link(href='shop-catalog.html') Обувь
+        a.menu-base__link(data-toggle-hover-dd='menu_item_2',data-toggle="subheader2")
+          i.show-for-small-only.fa.fa-star
+          | Обувь
+          i.fa.fa-chevron-right.show-for-small-only
       li.menu-base__item
-        a.menu-base__link(href='shop-catalog.html') Сумки
+        a.menu-base__link(href='shop-catalog.html')
+          i.show-for-small-only.fa.fa-star
+          | Сумки
       li.menu-base__item
-        a.menu-base__link(href='shop-catalog.html') Аксессуары
+        a.menu-base__link(href='shop-catalog.html')
+          i.show-for-small-only.fa.fa-star
+          | Аксессуары
       li.menu-base__item
-        a.menu-base__link(href='shop-catalog.html') Белье
+        a.menu-base__link(href='shop-catalog.html')
+          i.show-for-small-only.fa.fa-star
+          | Белье
       li.menu-base__item
-        a.menu-base__link(href='shop-catalog.html') Sale
+        a.menu-base__link(href='shop-catalog.html')
+          i.show-for-small-only.fa.fa-star
+          | Sale
       li.menu-base__item
-        a.menu-base__link(href='shop-catalog.html') Блог
-  
+        a.menu-base__link(href='shop-catalog.html')
+          i.show-for-small-only.fa.fa-star
+          | Блог
+
   .hide-for-small-only.large-3.cell.medium-3.text-center.medium-text-left
     include _search
 
@@ -94,12 +132,10 @@ header.header
             li
               a(href='#' title='')= title
         a(href="#").font-bold.text-decoration-none Все дизайнеры
-    
+
       .small-6.medium-3.large-3.cell.text-center
         .margin-bottom-9
           a(href="#")
             img(src="./i/dress.png", alt="")
         h3.margin-bottom-0 Платья
         a(href="#").anchor смотреть все    
-    
-  

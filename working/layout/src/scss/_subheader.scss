@@ -1,0 +1,28 @@
+.subheader {
+  position: absolute;
+  left: rem-calc(-500);
+  top: rem-calc(0);
+  width: 100%;
+  transition: 0.3s;
+  background: $white;
+  z-index: 9;
+  height: calc(100% - 1px);
+  display: none;
+
+  &__back {
+    padding-left: rem-calc(10);
+    padding-top: rem-calc(8);
+    padding-bottom: rem-calc(8);
+
+    i {
+      margin-right: rem-calc(8);
+    }
+  }
+  @include breakpoint(small only) {
+    display: block;
+
+    &.js-open {
+      left: rem-calc(0);
+    }
+  }
+}

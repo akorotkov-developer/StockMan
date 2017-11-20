@@ -14,7 +14,40 @@
     padding-left: rem-calc(25);
     padding-right: rem-calc(25);
   }
+
+  &__title {
+    margin-bottom: rem-calc(12);
+    color: $insta;
+    text-transform: uppercase;
+  }
   @include breakpoint(medium down) {
     padding-top: rem-calc(20);
+  }
+  @include breakpoint(small only) {
+    &__block  {
+      display: none;
+
+      &.js-open {
+        display: block;
+      }
+    }
+    &__title {
+      position: relative;
+      padding-right: rem-calc(15);
+      padding-left: rem-calc(15);
+
+      i {
+        transition: 0.3s;
+        position: absolute;
+        right: rem-calc(0);
+        top: rem-calc(5);
+      }
+
+      &.js-show {
+        i {
+          transform: rotate(90deg);
+        }
+      }
+    }
   }
 }
