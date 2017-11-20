@@ -2,8 +2,8 @@
   @include breakpoint(small only) {
     transition: 0.3s;
     position: absolute;
-    left: rem-calc(-515);
-    box-shadow:rem-calc(0 0 10) rgba($black,.3);
+    left: rem-calc(-715);
+    box-shadow: rem-calc(0 0 10) rgba($black,.3);
     top: rem-calc(-74);
     border: rem-calc(0) solid $black;
     width: 90%;

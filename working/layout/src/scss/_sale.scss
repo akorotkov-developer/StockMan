@@ -1,0 +1,33 @@
+.sale {
+  &__slide {
+    background-size: cover;
+    height: rem-calc(590);
+    background-position: center top;
+  }
+
+  .slick-arrow {
+    transition: 0.3s;
+    opacity: 0;
+  }
+
+  &:hover {
+    .slick-arrow {
+      opacity: 1;
+    }
+  }
+  @include breakpoint(xlarge down) {
+    &__slide {
+      height: rem-calc(400);
+    }
+  }
+  @include breakpoint(medium down) {
+    &__slide {
+      height: rem-calc(300);
+    }
+  }
+  @include breakpoint(small only) {
+    &__slide {
+height: rem-calc(150);
+    }
+  }
+}

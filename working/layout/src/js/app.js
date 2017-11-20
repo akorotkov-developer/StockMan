@@ -29,8 +29,8 @@ $(document).foundation();
      */
     $(".sale").slick({
       infinite: true,
-      dots: false,
-      arrows: false,
+      dots: true,
+      arrows: true,
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
@@ -38,6 +38,8 @@ $(document).foundation();
       autoplayHoverPause: true,
       fade: false,
       swipeToSlide: true,
+      prevArrow: '<i class="slick-prev "> </i>',
+      nextArrow: '<i class="slick-next "> </i>',
     });
     $(".map").slick({
       infinite: true,
