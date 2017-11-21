@@ -103,12 +103,7 @@ $('.reveal_my .close-button').click(function() {
       }]
     });
     //begin of .skirt__slider
-    $(window).on(
-      'closeme.zf.reveal',
-      function() {
-        alert("'closeAll.zf.Reveal' fired.");
-      }
-    );
+
 
     var imgUrl = [];
     $('.skirt__inner').each(function(index) {
