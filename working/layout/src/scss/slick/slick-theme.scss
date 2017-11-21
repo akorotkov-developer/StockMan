@@ -87,11 +87,6 @@ height: rem-calc(30);
   }
 }
 
-@include breakpoint(small only) {
-  .slick-prev, .slick-next {
-    display: none !important;
-  }
-}
 
 /* Dots */
 

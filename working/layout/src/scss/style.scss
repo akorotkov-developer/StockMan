@@ -7,7 +7,6 @@ $fontsPath: '../fonts' !default;
 $textSizes: (tiny: 0.7rem, xsmall: 0.75rem, small: 0.878rem, default: 1rem, large: 1.123rem, xlarge: 1.25rem, xxlarge: 2rem) !default;
 
 $fa-font-path: $fontsPath;
-$image-path:'../images/fancybox/';//its for jquery.fancybox
 
 $minify: false !default;
 @if $minify {
@@ -27,8 +26,7 @@ $minify: false !default;
 
 @import "common";
 @import "slick/slick-theme";
-@import "jquery.fancybox";
-@import "fancybox";
+
 
 @import "carousel/carousel-main";
 @import "carousel/carousel-news";
@@ -76,3 +74,5 @@ $minify: false !default;
 @import "subheader";
 @import "trousers";
 @import "sale";
+@import "pants";
+@import "reveal";

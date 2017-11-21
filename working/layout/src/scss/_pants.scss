@@ -1,0 +1,40 @@
+.pants {
+  img {
+    display: inline-block;
+  }
+.slick-arrow {
+  left: rem-calc(20);
+  right:auto;
+  top:6%;
+  transform:rotate(-90deg);
+}
+.slick-next {
+  top:43%;  transform:rotate(90deg);
+}
+
+  .slick-dots {
+    left: rem-calc(10);
+    top: 10%;
+    width: rem-calc(43);
+
+
+    li {
+      display: block;
+      margin-bottom: rem-calc(10);
+      border: rem-calc(1) solid transparent;
+
+      button {
+        border-radius: 0;
+        margin: rem-calc(0);
+        width: rem-calc(40);
+        height: rem-calc(60);
+        background-size: cover;
+        background-position: center top;
+      }
+    }
+
+    .slick-active {
+      border-color: $black;
+    }
+  }
+}

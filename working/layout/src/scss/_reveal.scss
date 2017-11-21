@@ -1,0 +1,11 @@
+.reveal {
+  &_my {
+    transition: 0.3s;
+    display: block !important;
+    left: rem-calc(-2000) !important;
+
+    &[aria-hidden="false"] {
+      left: rem-calc(0) !important;
+    }
+  }
+}

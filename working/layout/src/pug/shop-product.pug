@@ -5,6 +5,12 @@ block content
   .content
     include components/common/_breadcrumbs
     .skirt
+      #exampleModal1.full.reveal.reveal_my(data-reveal='')
+        .pants.text-center
+          
+        button.close-button(data-close='', aria-label='Close modal', type='button')
+          span(aria-hidden='true') ×
+
       .grid-x.grid-padding-x
         .cell.small-6
           a.skirt__prev Back
@@ -13,23 +19,25 @@ block content
       .skirt__wrapper      
         .skirt__slider.text-center
           .skirt__slide
-            a.skirt__inner(href="./i/sk3.jpg",rel="gallery").fancybox
+            a.skirt__inner(data-open="exampleModal1")
               img(src="./i/sk3.jpg", alt="")
           .skirt__slide
-            a.skirt__inner(href="./i/sk2.png",rel="gallery").fancybox
+            a.skirt__inner(data-open="exampleModal1")
               img(src="./i/sk2.png", alt="")
           .skirt__slide
-            a.skirt__inner(href="./i/sk1.png",rel="gallery").fancybox
+            a.skirt__inner(data-open="exampleModal1")
               img(src="./i/sk1.png", alt="")
           .skirt__slide
-            a.skirt__inner(href="./i/sk3.jpg",rel="gallery").fancybox
+            a.skirt__inner(data-open="exampleModal1")
+              img(src="./i/sk3.jpg", alt="")
+          .skirt__slide
+            a.skirt__inner(data-open="exampleModal1")
               img(src="./i/sk2.png", alt="")
           .skirt__slide
-            a.skirt__inner(href="./i/sk2.png",rel="gallery").fancybox
+            a.skirt__inner(data-open="exampleModal1")
               img(src="./i/sk1.png", alt="")
-          .skirt__slide
-            a.skirt__inner(href="./i/sk1.png",rel="gallery").fancybox
-              img(src="./i/sk2.png", alt="")
+    
+    
 
       .skirt__info
         h1 ПЛАТЬЕ ETRO

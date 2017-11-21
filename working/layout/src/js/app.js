@@ -20,9 +20,9 @@ $(document).foundation();
     //end of .sort click function
     //begin of jquery-fancybox
     $(document).ready(function() {
-       $('.fancybox').fancybox();
-   });
-     //end of jquery-fancybox
+      $('.fancybox').fancybox();
+    });
+    //end of jquery-fancybox
 
     /**
      * Разные карусели
@@ -102,6 +102,53 @@ $(document).foundation();
       }]
     });
     //begin of .skirt__slider
+    var imgUrl = [];
+    $('.skirt__inner').each(function(index) {
+      imgUrl.push($(this).find('img').prop('src'));
+
+      $('.pants').append('<div><img src="' + imgUrl[index] + '" alt="" /></div>');
+
+    });
+    $('.pants').on('init', function(event, slick) {
+      $('.pants .slick-dots li').each(function(index) {
+
+        $(this).find('button').prop('style', 'background-image:url(' + imgUrl[index] + ');');
+
+      });
+      
+    });
+    $(".pants").slick({
+      infinite: true,
+      dots: true,
+      arrows:true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      autoplayHoverPause: true,
+      fade: true,
+      swipeToSlide: false,
+      prevArrow: '<i class="slick-prev "> </i>',
+      nextArrow: '<i class="slick-next "> </i>',
+      responsive: [{
+        breakpoint: 1200,
+        settings: {
+
+        }
+      }, {
+        breakpoint: 800,
+        settings: {
+
+        }
+      }, {
+        breakpoint: 480,
+        settings: {
+
+        }
+      }]
+    });
+
+
 
     $(".skirt__slider").slick({
       infinite: true,
@@ -177,10 +224,7 @@ $(document).foundation();
     // });
     // $('.skirt__slider').on('afterChange',function(slick,currentSlide) {
     //   $('.skirt__inner').each(function() {
-    //     var imgUrl = $(this).data('img');
-    //     $(this).zoom({
-    //       url: imgUrl
-    //     });
+    //      $('.fancybox').fancybox();
     //   });
     // });
     //end of jquery-zoom plugin

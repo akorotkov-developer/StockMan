@@ -1,14 +1,12 @@
 .trousers {
   border-top: rem-calc(1) solid $medium-gray;
+
   &__item {
-    padding-top: rem-calc(8);
-    padding-left: rem-calc(10);
-    padding-right: rem-calc(10);
-    padding-bottom: rem-calc(8);
+    padding: rem-calc(11) rem-calc(10);
     border-bottom: rem-calc(1) solid $medium-gray;
   }
-  &__link
-  {text-transform: uppercase;
 
+  &__link {
+    text-transform: uppercase;
   }
 }

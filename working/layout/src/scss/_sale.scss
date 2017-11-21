@@ -15,6 +15,9 @@
       opacity: 1;
     }
   }
+  &__mobile {
+    background: none;
+  }
   @include breakpoint(xlarge down) {
     &__slide {
       height: rem-calc(400);
@@ -27,7 +30,13 @@
   }
   @include breakpoint(small only) {
     &__slide {
-height: rem-calc(150);
+      background: none;
+    }
+
+    &__mobile {
+      height: rem-calc(320);
+      background-size: cover;
+      background-position: center top;
     }
   }
 }
