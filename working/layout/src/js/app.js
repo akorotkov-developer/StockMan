@@ -6,24 +6,39 @@ $(document).foundation();
   $(function() {
 
     //begin of .sort click function
-    $('.sort').click(function() {
-      if ($(this).hasClass('js-open')) {
+    $('.sort__main').click(function() {
+
+      if ($(this).closest('.sort').hasClass('js-open')) {
 
         $('.sort.js-open').removeClass('js-open');
+
       } else {
         $('.sort.js-open').removeClass('js-open');
-        $(this).addClass('js-open');
+        $(this).closest('.sort').addClass('js-open');
 
       }
 
     });
+    $('.js-apply').click(function() {
+      $(this).closest('.sort').removeClass('js-open');
+    });
+    $('.js-select-all').click(function() {
+      var $checkBoxes = $(this).closest('.sort').find('input');
+      $checkBoxes.prop('checked',!$checkBoxes.prop('checked'));
+    });
+    $(document).mouseup(function(e) {
+      var div = $(".sort.js-open");
+      if (!div.is(e.target) && div.has(e.target).length === 0) {
+        div.removeClass('js-open');
+      }
+    });
     //end of .sort click function
-//begin of fix .reveal_my close
-$('.reveal_my .close-button').click(function() {
+    //begin of fix .reveal_my close
+    $('.reveal_my .close-button').click(function() {
 
-  $('body,html').removeClass('is-reveal-open');
-});
- //end of fix .reveal_my close
+      $('body,html').removeClass('is-reveal-open');
+    });
+    //end of fix .reveal_my close
 
     /**
      * Разные карусели
