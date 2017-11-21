@@ -18,11 +18,12 @@ $(document).foundation();
 
     });
     //end of .sort click function
-    //begin of jquery-fancybox
-    $(document).ready(function() {
-      $('.fancybox').fancybox();
-    });
-    //end of jquery-fancybox
+//begin of fix .reveal_my close
+$('.reveal_my .close-button').click(function() {
+
+  $('body,html').removeClass('is-reveal-open');
+});
+ //end of fix .reveal_my close
 
     /**
      * Разные карусели
@@ -102,6 +103,13 @@ $(document).foundation();
       }]
     });
     //begin of .skirt__slider
+    $(window).on(
+      'closeme.zf.reveal',
+      function() {
+        alert("'closeAll.zf.Reveal' fired.");
+      }
+    );
+
     var imgUrl = [];
     $('.skirt__inner').each(function(index) {
       imgUrl.push($(this).find('img').prop('src'));
@@ -115,12 +123,13 @@ $(document).foundation();
         $(this).find('button').prop('style', 'background-image:url(' + imgUrl[index] + ');');
 
       });
-      
+      var heightDots = $('.pants .slick-dots').height();
+      $('.pants .slick-next').css('top', heightDots + 100);
     });
     $(".pants").slick({
       infinite: true,
       dots: true,
-      arrows:true,
+      arrows: true,
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,

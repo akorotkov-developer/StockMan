@@ -2,21 +2,24 @@
   img {
     display: inline-block;
   }
-.slick-arrow {
-  left: rem-calc(20);
-  right:auto;
-  top:6%;
-  transform:rotate(-90deg);
-}
-.slick-next {
-  top:43%;  transform:rotate(90deg);
-}
+
+  .slick-arrow {
+    left: rem-calc(20);
+    right: auto;
+  top: rem-calc(60);
+    transform: rotate(-90deg);
+  }
+
+  .slick-next {
+
+    transform: rotate(90deg);
+  }
 
   .slick-dots {
     left: rem-calc(10);
-    top: 10%;
+    bottom: auto;
+    top: rem-calc(100);
     width: rem-calc(43);
-
 
     li {
       display: block;
@@ -37,4 +40,5 @@
       border-color: $black;
     }
   }
+
 }

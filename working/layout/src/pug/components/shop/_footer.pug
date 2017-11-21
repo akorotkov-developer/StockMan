@@ -8,6 +8,7 @@ footer.footer
         each title in ['женская коллекция','мужская коллекция','сумки','аксессуары']
           li.bag__item
             a(href="#").bag__link= title
+      hr.show-for-small-only      
     .large-2.cell.medium-4
       .footer__title(data-toggle="foot2 title2",data-toggler="js-show")#title2
         | Покупателю
@@ -16,6 +17,7 @@ footer.footer
         each title in ['программа лояльности','как сделать заказ','конфиденциальность','где купить']
           li.bag__item
             a(href="#").bag__link= title
+      hr.show-for-small-only  
     .large-2.cell.medium-4
       .footer__title(data-toggle="foot3 title3",data-toggler="js-show")#title3
         | Условия работы
@@ -24,6 +26,7 @@ footer.footer
         each title in ['оплата','доставка','возврат']
           li.bag__item
             a(href="#").bag__link= title
+      hr.show-for-small-only  
     .large-2.cell.medium-4
       .footer__title(data-toggle="foot4 title4",data-toggler="js-show")#title4
         | Связь с нами
@@ -46,9 +49,10 @@ footer.footer
         a(href='#', title='').fa-stack.text-asphalt.soc
             i.fa.fa-circle.fa-stack-2x
             i.fa.fa-facebook.fa-stack-1x.fa-inverse  
-        
+      hr.show-for-small-only  
 
     .small-12.medium-6.large-3.cell
+      .margin-bottom-5.show-for-small-only
       .subscribe Подписаться на рассылку
       form(action="#")
         .input-group.footer__group

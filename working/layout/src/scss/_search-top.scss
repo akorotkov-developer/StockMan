@@ -5,6 +5,7 @@ $search-height: rem-calc(28);
   max-width: 100%;
   margin: 0;
   width: rem-calc(163);
+  margin-left: rem-calc(30);
   padding-top: rem-calc(3);
 }
 
@@ -25,7 +26,7 @@ $search-height: rem-calc(28);
   }
 }
 
-button.search-top__button {
+.search-top__button {
   border: rem-calc(1) solid $asphalt;
   border-left: rem-calc(0);
   margin: 0;
@@ -43,7 +44,15 @@ button.search-top__button {
 @include breakpoint(small only) {
   .search-top {
     padding-top: rem-calc(0);
-    margin-bottom: rem-calc(20);
-    margin-left: calc(50% - 82px);
+    margin-bottom: rem-calc(20);width: rem-calc(260);
+    margin-left: calc(50% - 130px);
+    &__button {
+      height: rem-calc(45);
+    }
+    &__input {
+      padding-left: rem-calc(10);
+
+      height: rem-calc(45);
+    }
   }
 }

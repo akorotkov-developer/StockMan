@@ -60,7 +60,7 @@ height: rem-calc(30);
 
   &:hover, &:focus {
     outline: none;
-    color: $slick-arrow-color-hover;
+  background: url($imagesPath +"/arr-next-dark.svg")no-repeat center;
 
   }
 

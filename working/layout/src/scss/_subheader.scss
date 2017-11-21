@@ -8,7 +8,7 @@
   z-index: 9;
   height: calc(100% - 1px);
   display: none;
-
+opacity: 0;
   &__back {
     padding-left: rem-calc(10);
     padding-top: rem-calc(8);
@@ -19,9 +19,10 @@
     }
   }
   @include breakpoint(small only) {
-    display: block;
+ display: block;
 
     &.js-open {
+      opacity: 1;
       left: rem-calc(0);
     }
   }
