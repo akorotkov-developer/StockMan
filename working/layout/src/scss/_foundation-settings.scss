@@ -266,8 +266,8 @@ $buttongroup-radius-on-each: true;
 // -----------
 
 $callout-background: $white;
-$callout-background-fade: 85%;
-$callout-border: 1px solid rgba($black, 0.25);
+$callout-background-fade: 0%;
+$callout-border: 1px solid $medium-gray;
 $callout-margin: 0 0 6 * $global-margin 0;
 $callout-padding: 6 * $global-padding;
 $callout-font-color: $body-font-color;

@@ -1,0 +1,11 @@
+.table-scroll {
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+  @include breakpoint(small only) {
+    &__item {
+      width: rem-calc(105);
+    }
+  }
+}

@@ -1,78 +1,75 @@
 extends shop-regular
 
 block content
+  
+  .content
     .grid-container: .grid-x.grid-padding-x: .cell
-        h1 Сравнить товары
-    .content
-        .grid-container: .grid-x.grid-padding-x: .cell
-            .margin-bottom-6
-                span.text-dark-gray Показать:
-                | &nbsp; &nbsp;
-                strong Только отличия
-                | &nbsp; &nbsp;
-                a(href='#' title='') Основные параметры
-                | &nbsp; &nbsp;
-                a(href='#' title='') Все параметры
+      h1 Сравнить товары
+      .margin-bottom-6
+        span.text-dark-gray.margin-right-3 Показать:
+        strong.margin-right-3 Только отличия
+        a(href='#' title='').margin-right-3 Основные параметры
+        a(href='#' title='') Все параметры
 
-            mixin productTileForCompare(instock, incart)
-                .margin-bottom-6
-                    a.text-dark-gray.no-wrap(href="#" title='')
-                        i.fa.fa-lg.fa-times-circle-o
-                        | &nbsp;Убрать
-                .margin-bottom-6: a(href="shop-product.html" title=''): img(src='./i/image.svg' alt='Товар' style='height: 80px')
-                .margin-bottom-3: a(href='shop-product.html' title='') Керамогранит Kerama Marazzi Сенегал, 50,2 х 50,2 см, бежевый
-                .margin-bottom-3: strong
-                    | 73&nbsp;250&nbsp;
-                    i.fa.fa-rub
-                .margin-bottom-3
-                    if instock
-                        if incart
-                            i.fa.fa-check &#160;
-                            | В корзине
-                        unless incart
-                            a(href='shop-cart.html' title='').button.hollow Купить
-                    unless instock
-                        span.text-dark-gray Нет в наличии
+      mixin productTileForCompare(instock, incart)
+        .margin-bottom-6
+          a.text-dark-gray.no-wrap.text-decoration-none(href="#" title='')
+            i.fa.fa-lg.fa-times-circle-o
+            | &nbsp;Убрать
+        .margin-bottom-6.text-center.rule: a(href="shop-product.html" title=''): img(src="./i/d"  + Math.floor(Math.random() * 3 + 1) + '.png' alt='Товар')
+        .margin-bottom-3: a(href='shop-product.html' title='') Юбка Kerama Marazzi Сенегал, 50,2 х 50,2 см, бежевый
+        .margin-bottom-3: strong
+          | 73&nbsp;250&nbsp;
+          i.fa.fa-rub
+        .margin-bottom-3
+          if instock
+            if incart
+              i.fa.fa-check &#160;
+              | В корзине
+            unless incart
+              a(href='shop-cart.html' title='').button.hollow Купить
+          unless instock
+            span.text-dark-gray Нет в наличии
 
-            .table-scroll
-                table
-                    tr(style="vertical-align:top;")
-                        td
-                        td
-                            +productTileForCompare('instock')
-                        td
-                            +productTileForCompare
-                        td
-                            +productTileForCompare('instock','incart')
-                        td
-                            +productTileForCompare
-                        td
-                            +productTileForCompare
-                    tr
-                        th.text-user-small Вес
-                        td 25кг
-                        td 35кг
-                        td 30кг
-                        td 31кг
-                        td 27,5кг
-                    tr
-                        th.text-user-small Мощность
-                        td 0,25-160
-                        td 0,30-180
-                        td 0,25-155
-                        td 0,30-180
-                        td 0,30-170
-                    tr
-                        th.text-user-small Передаточное отношение
-                        td 4,8:1
-                        td 4,7:1
-                        td 4,8:1
-                        td 4,6:1
-                        td 4,8:1
-                    tr
-                        th.text-user-small Количество подшипников
-                        td 1шт
-                        td 1+1шт
-                        td —
-                        td 1шт
-                        td —
+      .table-scroll
+        table
+          tr.vertical-top
+            td
+            td.table-scroll__item
+              +productTileForCompare('instock')
+            td.table-scroll__item
+              +productTileForCompare
+            td.table-scroll__item
+              +productTileForCompare('instock','incart')
+            td.table-scroll__item
+              +productTileForCompare
+            td.table-scroll__item
+              +productTileForCompare
+          tr
+            th.text-user-small Вес
+            td 25кг
+            td 35кг
+            td 30кг
+            td 31кг
+            td 27,5кг
+          tr
+            th.text-user-small Материал
+            td Шелк
+            td Шелк
+            td Шелк
+            td Шелк
+            td Шелк
+          tr
+            th.text-user-small Страна
+            td Франция
+            td Франция
+            td Франция
+            td Франция
+            td Франция
+          tr
+            th.text-user-small Рейтинг
+            td 5
+            td 10
+            td 5
+            td 5
+            td 5

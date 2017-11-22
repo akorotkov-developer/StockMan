@@ -1,0 +1,7 @@
+.rule {
+  @include breakpoint(small only) {
+    height: rem-calc(100);
+    img {
+      max-height: rem-calc(100);
+    } }
+}

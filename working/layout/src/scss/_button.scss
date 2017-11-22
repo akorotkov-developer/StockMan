@@ -1,4 +1,10 @@
 .button {
   text-decoration: none;
   border-radius: rem-calc(18);
+  &.hollow {
+    &:hover,&:focus,&:active {
+      color: $white;
+      background: $black;
+    }
+  }
 }
