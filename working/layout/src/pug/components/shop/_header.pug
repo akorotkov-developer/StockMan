@@ -10,10 +10,10 @@ header.header
           a(href="#").people__link.people__link_active Мужчинам
         li.people__item
           a(href="#").people__link Детям
-    .cell.show-for-small-only.small-2().text-right
+    .cell.show-for-small-only.small-2
       button.menu-icon.header__menu.dark(type='button', data-toggle='responsive-menu')
-    .cell.show-for-small-only.small-2(data-responsive-toggle="search-menu" data-hide-for="medium").text-right.header__detective
-      i.fa.fa-search.fa-lg( data-toggle='search-menu')
+    .cell.show-for-small-only.small-2(data-responsive-toggle="search-menu" data-hide-for="medium").header__detective
+      img(src="./images/search.svg", alt="")( data-toggle='search-menu')
       .detective#search-menu
         include _search
     .cell.text-center.large-4.medium-4.small-4

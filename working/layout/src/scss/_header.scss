@@ -51,6 +51,9 @@
 
     &__logo {
       margin-top: rem-calc(10);
+      img {
+        height: rem-calc(30);
+      }
     }
 
     &__menu {
