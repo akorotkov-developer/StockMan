@@ -38,7 +38,7 @@ $search-height: rem-calc(28);
 }
 @include breakpoint(medium only) {
   .search-top {
-    margin: 6 * $global-margin 0 0;
+    margin: 6 * $global-margin 0 0 30;
   }
 }
 @include breakpoint(small only) {
