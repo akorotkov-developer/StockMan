@@ -1,0 +1,5 @@
+.pay {
+  @include breakpoint(small only) {
+    top: 0 !important;
+  }
+}

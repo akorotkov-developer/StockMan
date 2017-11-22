@@ -2,12 +2,18 @@
   color: $insta;
   display: inline-block;
   margin-bottom: rem-calc(14);
+  &_pay {
+    display: block;
+  }
 
   &__input {
     display: none;
 
     &:checked + .check__label {
       background: url($imagesPath +"/check-active.svg")no-repeat left top;
+      &_callout {
+        background-position: rem-calc(20 20);
+      }
     }
   }
 
@@ -16,5 +22,18 @@
     margin-right: rem-calc(30);
     padding-left: rem-calc(32);
     background: url($imagesPath +"/check.svg")no-repeat left top;
+
+    &_callout {
+display: block;
+      margin: 0 0 1.5rem;
+      padding: rem-calc(20 50);line-height: 1.2;
+      border: rem-calc(1) solid $medium-gray;
+      border-radius: 0;
+      background-position: rem-calc(20 20);
+      img {
+        width: rem-calc(25);
+        max-height: rem-calc(25);
+      }
+    }
   }
 }
