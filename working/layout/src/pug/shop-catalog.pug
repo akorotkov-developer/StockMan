@@ -11,114 +11,120 @@ block content
         .sort
           .sort__main Цвет
           .sort__other
-            form(action="#")
-              input(type="text",placeholder="Найдите цвет")
-            div
-              | Выделить
-              |
-              a.js-select-all все    
-            div
-              +check('b1','Белый')
-            div
-              +check('b2','Красный')
-            div
-              +check('b3','Фиолетовый')
-            div
-              +check('b4','Красный')
-            div
-              +check('b5','Белый')
-            div
-              +check('b6','Красный')
-            div
+            .sort__over
+              form(action="#")
+                input(type="text",placeholder="Найдите цвет")
+              div
+                | Выделить
+                |
+                a.js-select-all все    
+              div
+                +check('b1','Белый')
+              div
+                +check('b2','Красный')
+              div
+                +check('b3','Фиолетовый')
+              div
+                +check('b4','Красный')
+              div
+                +check('b5','Белый')
+              div
+                +check('b6','Красный')
+            .sort__footer
               a(href="#").button.margin-bottom-0.js-apply Применить
         .sort
           .sort__main Размер
           .sort__other
-            .margin-bottom-3 Ваш российский размер
-            div
-              +check('c1','38')
-            div
-              +check('c2','40')
-            div
-              +check('c3','44')
-            div
-              +check('c4','45')
-            div
-              +check('c5','47')
-            div
-              +check('c6','50')
-            div
+            .sort__over
+              .margin-bottom-3 Ваш российский размер
+              div
+                +check('c1','38')
+              div
+                +check('c2','40')
+              div
+                +check('c3','44')
+              div
+                +check('c4','45')
+              div
+                +check('c5','47')
+              div
+                +check('c6','50')
+            .sort__footer
               a(href="#").button.margin-bottom-0.js-apply Применить
         .sort
           .sort__main Бренд
           .sort__other
-            form(action="#")
-              input(type="text",placeholder="Найдите бренд")
-            div
-              | Выделить
-              |
-              a.js-select-all все    
-            div
-              +check('d1','Аffari')
-            div
-              +check('d2','Аlcott')
-            div
-              +check('d3','Аffari')
-            div
-              +check('d4','Аffari')
-            div
-              +check('d5','Аffari')
-            div
-              +check('d6','Аffari')
-            div
-              +check('d7','Аffari')
-            div
-              +check('d8','Аffari')
-            div
-              +check('d9','Аffari')
-            div
+            .sort__over
+              form(action="#")
+                input(type="text",placeholder="Найдите бренд")
+              div
+                | Выделить
+                |
+                a.js-select-all все    
+              div
+                +check('d1','Аffari')
+              div
+                +check('d2','Аlcott')
+              div
+                +check('d3','Аffari')
+              div
+                +check('d4','Аffari')
+              div
+                +check('d5','Аffari')
+              div
+                +check('d6','Аffari')
+              div
+                +check('d7','Аffari')
+              div
+                +check('d8','Аffari')
+              div
+                +check('d9','Аffari')
+            .sort__footer
               a(href="#").button.margin-bottom-0.js-apply Применить
         .sort
           .sort__main Сезон
           .sort__other
-            div
-              +check('e1','демисезон')
-            div
-              +check('e2','зима')
-            div
-              +check('e3','лето')
-            div
-              +check('e4','мульти')
-            div
+            .sort__over
+              div
+                +check('e1','демисезон')
+              div
+                +check('e2','зима')
+              div
+                +check('e3','лето')
+              div
+                +check('e4','мульти')
+            .sort__footer
               a(href="#").button.margin-bottom-0.js-apply Применить
         .sort
           .sort__main Цена
           .sort__other
-            div
-              | От
-              input.sort__input(type="text",placeholder="399")
-              | До
-              input.sort__input(type="text",placeholder="6399")
-            div
-              +check('f4','только товары со скидкой')
-            div
+            .sort__over
+              div
+                | От
+                input.sort__input(type="text",placeholder="399")
+                | До
+                input.sort__input(type="text",placeholder="6399")
+              div
+                +check('f4','только товары со скидкой')
+            .sort__footer
               a(href="#").button.margin-bottom-0.js-apply Применить
       .cell.small-12.medium-4.large-6.text-right
         a(href="#").text-secondary.margin-right-7 На модели
         .sort.text-left
           .sort__main Сортировать
           .sort__other.sort__other_right
-            div
-              +check('j1','по популярности')
-            div
-              +check('j2','по возрастанию цены')
-            div
-              +check('j3','по убыванию цены')
-            div
-              +check('j4','по новинкам')
-            div
-              +check('j5','по скидкам')
-            div
+            .sort__over
+              div
+                +check('j1','по популярности')
+              div
+                +check('j2','по возрастанию цены')
+              div
+                +check('j3','по убыванию цены')
+              div
+                +check('j4','по новинкам')
+              div
+                +check('j5','по скидкам')
+            .sort__footer
               a(href="#").button.margin-bottom-0.js-apply Применить
 
         

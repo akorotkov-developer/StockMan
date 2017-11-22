@@ -6,6 +6,7 @@
   margin-right: rem-calc(9);
 
   &.js-open {
+    .sort__footer,
     .sort__other {
       display: block;
     }
@@ -17,13 +18,26 @@
     }
   }
 
+  &__over {
+    max-height: rem-calc(300);
+    overflow-y: auto;
+    padding: rem-calc(15 10 0);
+  }
+
+  &__footer {
+    position: absolute;
+padding: rem-calc(10);
+    left: rem-calc(0);
+    bottom: rem-calc(0);
+    display: none;
+    width: rem-calc(250);
+  }
+
   &__other {
-    padding: rem-calc(15 10);
+    padding-bottom: rem-calc(56);
     display: none;
     border-radius: rem-calc(0 0 5 5);
     left: rem-calc(0);
-    max-height: rem-calc(300);
-    overflow-y: auto;
     box-shadow: rem-calc(0 1 8) rgba(0,0,0,.25);
     width: rem-calc(250);
     background: $white;
@@ -68,6 +82,7 @@
   }
   @include breakpoint(small only) {
     position: static;
+
     &__other {
       top: rem-calc(0);
       left: rem-calc(0);
