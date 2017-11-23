@@ -4,6 +4,26 @@ $(document).foundation();
 (function($) {
   "use strict";
   $(function() {
+    //begin of .size visibility hidden/visible
+    function checkHeaderAndHideSizeBlock() {
+      if ($(window).scrollTop() > 0 && $(window).width() > 960) {
+        $('.size').addClass('invisible');
+      } else {
+        $('.size').removeClass('invisible');
+
+      }
+    }
+    $(document).on('scroll', function() {
+      checkHeaderAndHideSizeBlock();
+
+
+    });
+    $(window).on('load', function() {
+      checkHeaderAndHideSizeBlock();
+
+
+    });
+    //end of .size visibility hidden/visible
 
     //begin of .sort click function
     $('.sort__main').click(function() {
@@ -24,7 +44,7 @@ $(document).foundation();
     });
     $('.js-select-all').click(function() {
       var $checkBoxes = $(this).closest('.sort').find('input');
-      $checkBoxes.prop('checked',!$checkBoxes.prop('checked'));
+      $checkBoxes.prop('checked', !$checkBoxes.prop('checked'));
     });
     $(document).mouseup(function(e) {
       var div = $(".sort.js-open");

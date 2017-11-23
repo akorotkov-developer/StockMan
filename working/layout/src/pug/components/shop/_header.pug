@@ -1,31 +1,46 @@
-header.header
-  .grid-x.grid-padding-x
-    .cell.text-center.background-insta
-      a(href="tel:88003011129").header__tel 8 (800) 301-11-29 (бесплатный, многоканальный)
-    .cell.large-4.medium-4.text-center.medium-text-left.hide-for-small-only
-      ul.people
-        li.people__item
-          a(href="#").people__link Женщинам
-        li.people__item
-          a(href="#").people__link.people__link_active Мужчинам
-        li.people__item
-          a(href="#").people__link Детям
-    .cell.show-for-small-only.small-2
-      button.menu-icon.header__menu.dark(type='button', data-toggle='responsive-menu')
-    .cell.show-for-small-only.small-2(data-responsive-toggle="search-menu" data-hide-for="medium").header__detective
-      img(src="./images/search.svg", alt="",  data-toggle='search-menu')
-      .detective#search-menu
-        include _search
-    .cell.text-center.large-4.medium-4.small-4
-      a(href="#").header__logo
-        img(src="./images/logo.svg", alt="")
+div(data-sticky-container)
+  header.header(data-sticky data-margin-top="0" data-sticky-on="large").sticky
+    .header__sort   
+      include ../common/_sort
+    .grid-x.grid-padding-x
+      .cell.text-center.background-insta.header__hat
+        a(href="tel:88003011129").header__tel 8 (800) 301-11-29 (бесплатный, многоканальный)
+      .cell.large-4.medium-4.text-center.medium-text-left.header__gender
+        .sort
+          .sort__main Женщинам
+          .sort__other
+            .sort__over
+              div 
+                a(href="#") Женщинам
+              div 
+                a(href="#") Мужчинам
+              div 
+                a(href="#") Детям
+        
+      .cell.large-4.medium-4.text-center.medium-text-left.hide-for-small-only.header__people
+        ul.people
+          li.people__item
+            a(href="#").people__link Женщинам
+          li.people__item
+            a(href="#").people__link.people__link_active Мужчинам
+          li.people__item
+            a(href="#").people__link Детям
+      .cell.show-for-small-only.small-2
+        button.menu-icon.header__menu.dark(type='button', data-toggle='responsive-menu')
+      .cell.show-for-small-only.small-2(data-responsive-toggle="search-menu" data-hide-for="medium").header__detective
+        img(src="./images/search.svg", alt="",  data-toggle='search-menu')
+        .detective#search-menu
+          include _search
+      .cell.text-center.large-4.medium-4.small-4
+        a(href="#").header__logo
+          img(src="./images/logo.svg", alt="")
 
-    .cell.large-4.text-right.header__book.medium-4.small-4
-      a(href="#").header__enter.hide-for-small-only Войти
-      a(href="#").header__enter
-        img(src="./images/heart.svg", alt="")
-      a(href="#").header__enter.header__enter_right
-        img(src="./images/bag.svg", alt="")
+      .cell.large-4.header__book.medium-4.small-4
+        a(href="#").header__enter.header__enter_right.text-center 2
+        a(href="#").header__enter
+          img(src="./images/heart.svg", alt="")
+        
+        a(href="#").header__enter.hide-for-small-only Войти
 
 
 

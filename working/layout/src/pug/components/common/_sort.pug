@@ -1,0 +1,100 @@
+.sort
+  .sort__main Цвет
+  .sort__other
+    .sort__over
+      form(action="#")
+        input(type="text",placeholder="Найдите цвет")
+      div
+        | Выделить
+        |
+        a.js-select-all все    
+      div
+        +check('b1','Белый')
+      div
+        +check('b2','Красный')
+      div
+        +check('b3','Фиолетовый')
+      div
+        +check('b4','Красный')
+      div
+        +check('b5','Белый')
+      div
+        +check('b6','Красный')
+    .sort__footer
+      a(href="#").button.margin-bottom-0.js-apply Применить
+.sort
+  .sort__main Размер
+  .sort__other
+    .sort__over
+      .margin-bottom-3 Ваш российский размер
+      div
+        +check('c1','38')
+      div
+        +check('c2','40')
+      div
+        +check('c3','44')
+      div
+        +check('c4','45')
+      div
+        +check('c5','47')
+      div
+        +check('c6','50')
+    .sort__footer
+      a(href="#").button.margin-bottom-0.js-apply Применить
+.sort
+  .sort__main Бренд
+  .sort__other
+    .sort__over
+      form(action="#")
+        input(type="text",placeholder="Найдите бренд")
+      div
+        | Выделить
+        |
+        a.js-select-all все    
+      div
+        +check('d1','Аffari')
+      div
+        +check('d2','Аlcott')
+      div
+        +check('d3','Аffari')
+      div
+        +check('d4','Аffari')
+      div
+        +check('d5','Аffari')
+      div
+        +check('d6','Аffari')
+      div
+        +check('d7','Аffari')
+      div
+        +check('d8','Аffari')
+      div
+        +check('d9','Аffari')
+    .sort__footer
+      a(href="#").button.margin-bottom-0.js-apply Применить
+.sort
+  .sort__main Сезон
+  .sort__other
+    .sort__over
+      div
+        +check('e1','демисезон')
+      div
+        +check('e2','зима')
+      div
+        +check('e3','лето')
+      div
+        +check('e4','мульти')
+    .sort__footer
+      a(href="#").button.margin-bottom-0.js-apply Применить
+.sort
+  .sort__main Цена
+  .sort__other
+    .sort__over
+      div
+        | От
+        input.sort__input(type="text",placeholder="399")
+        | До
+        input.sort__input(type="text",placeholder="6399")
+      div
+        +check('f4','только товары со скидкой')
+    .sort__footer
+      a(href="#").button.margin-bottom-0.js-apply Применить

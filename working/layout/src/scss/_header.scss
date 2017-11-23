@@ -1,12 +1,62 @@
 .header {
+  &.is-stuck {
+    padding-top: rem-calc(10);
+    background: $white;
+    border-bottom: rem-calc(1) solid $medium-gray;
+    z-index: 200;
+
+    .header__gender,
+    .header__sort {
+      display: block;
+    }
+
+    .header__hat,
+    .header__people {
+      display: none;
+    }
+
+    .header__book {
+      padding-top: rem-calc(0);
+    }
+
+    .header__logo {
+      margin-top: rem-calc(0);
+      margin-bottom: rem-calc(8);
+      height: auto;
+
+      img {
+        height: rem-calc(30);
+      }
+    }
+  }
+
   &__logo {
     margin-top: rem-calc(16);
     display: block;
+    height: rem-calc(73);
+
+    img {
+      transition: 0.3s;
+      height: rem-calc(73);
+    }
+  }
+
+  &__gender {
+    display: none;
   }
 
   &__enter {
     text-decoration: none;
     margin-left: rem-calc(30);
+    float: right;
+
+    &_right {
+      padding-top: rem-calc(3);
+      width: rem-calc(20);
+      height: rem-calc(24);
+      background: url($imagesPath +"/bag.svg")no-repeat center;
+      font-size: rem-calc(14);
+    }
   }
 
   &__menu {
@@ -19,6 +69,12 @@
 
   &__book {
     padding-top: rem-calc(20);
+  }
+
+  &__sort {
+    position: absolute;
+    display: none;
+    left: rem-calc(150);
   }
 
   &__tel {
@@ -38,6 +94,14 @@
       color: $white;
     }
   }
+  @media (max-width: 1300px)
+  {
+    &.is-stuck {
+      .header__sort {
+        display:none;
+      }
+    }
+  }
   @include breakpoint(small only) {
     padding-bottom: rem-calc(10);
 
@@ -51,6 +115,7 @@
 
     &__logo {
       margin-top: rem-calc(10);
+
       img {
         height: rem-calc(30);
       }
