@@ -94,12 +94,16 @@
       color: $white;
     }
   }
-  @media (max-width: 1300px)
-  {
+  @media (max-width: 1300px) {
     &.is-stuck {
       .header__sort {
-        display:none;
+        display: none;
       }
+    }
+  }
+  @include breakpoint(large down) {
+    &__logo {
+      height: auto;
     }
   }
   @include breakpoint(small only) {

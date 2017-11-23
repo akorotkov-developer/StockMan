@@ -6,8 +6,8 @@ html.no-js(lang='ru')
     include components/shop/_mixin-product-line
     include components/mixins/_mixin-check
     
-    
-    include components/shop/_header
+    block header
+      include components/shop/_header-without-sort
     block page 
       include components/common/_content
     
