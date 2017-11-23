@@ -15,14 +15,37 @@
     z-index: 3;
     left: rem-calc(0);
 
+    .dress__img {
+      img {
+        &:nth-child(2) {
+          display: block;
+        }
+
+        &:nth-child(1) {
+          display: none;
+        }
+      }
+    }
+
     .dress__size {
       display: block;
     }
   }
+
   &_static {
     &:hover {
       position: static;
-      
+    }
+  }
+
+  &__img {
+    img {
+      max-height: 100%;
+      transition: 0.3s;
+
+      &:nth-child(2) {
+        display: none;
+      }
     }
   }
 

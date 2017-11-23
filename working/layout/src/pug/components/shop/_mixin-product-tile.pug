@@ -1,9 +1,10 @@
 mixin productTile(title, discount)
   .cell.position-relative
     .dress   
-      .margin-bottom-3(data-equalizer-watch)
+      .dress__img(data-equalizer-watch)
         a(href="#") 
           img(src="./i/d"  + Math.floor(Math.random() * 3 + 1) + '.png', alt="")
+          img(src="./i/d1-1.png", alt="")
       .dress__title= title
       .text-secondary Полосатое платье-рубашка
       .text-size-large.margin-bottom-4 49 765. -  
