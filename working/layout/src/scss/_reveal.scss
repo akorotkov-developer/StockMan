@@ -9,8 +9,15 @@
       left: rem-calc(0) !important;
     }
   }
-    @include breakpoint(small only) {
+  &__enter {
+    display: inline-block;
+    margin-right: rem-calc(12);
+    top: rem-calc(-4);
+    position: relative;
+  }
+  @include breakpoint(small only) {
     &_my {
       padding: rem-calc(17);
-    } }
+    }
+  }
 }

@@ -1,6 +1,7 @@
 div(data-sticky-container)
   header.header(data-sticky data-margin-top="0" data-sticky-on="large").sticky
-    
+    block hat-sort
+      
     .grid-x.grid-padding-x
       .cell.text-center.background-insta.header__hat
         a(href="tel:88003011129").header__tel 8 (800) 301-11-29 (бесплатный, многоканальный)
@@ -39,7 +40,7 @@ div(data-sticky-container)
         a(href="#").header__enter
           img(src="./images/heart.svg", alt="")
         
-        a(href="#").header__enter.hide-for-small-only Войти
+        a(data-open="enter-popup").header__enter.hide-for-small-only Войти
 
 
 

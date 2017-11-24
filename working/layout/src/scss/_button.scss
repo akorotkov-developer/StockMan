@@ -1,8 +1,15 @@
 .button {
   text-decoration: none;
   border-radius: rem-calc(18);
+  &.expanded {
+    padding-left: rem-calc(5);
+    padding-right: rem-calc(5);
+  }
+
   &.hollow {
-    &:hover,&:focus,&:active {
+    &:active,
+    &:focus,
+    &:hover {
       color: $white;
       background: $black;
     }
