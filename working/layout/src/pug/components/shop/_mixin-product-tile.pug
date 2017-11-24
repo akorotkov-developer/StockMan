@@ -1,6 +1,8 @@
-mixin productTile(title, discount)
+mixin productTile(title, wish)
   .cell.position-relative
     .dress   
+      if wish
+        a(href="#").dress__close.close-button &times;
       .dress__img(data-equalizer-watch)
         a(href="#") 
           img(src="./i/d"  + Math.floor(Math.random() * 3 + 1) + '.png', alt="")
@@ -8,6 +10,8 @@ mixin productTile(title, discount)
       .dress__title= title
       .text-secondary Полосатое платье-рубашка
       .text-size-large.margin-bottom-4 49 765. -  
+      if wish
+        a(href="#").button.skirt__bag Добавить в Корзину  
       .dress__size
         span.margin-right-4 Размер
         .checkbox-group

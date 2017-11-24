@@ -7,11 +7,11 @@
   padding-top: rem-calc(10);
   padding-bottom: rem-calc(20);
 
-
-
   &:hover {
     border-color: $asphalt;
     position: absolute;
+    padding-left: rem-calc(15);
+    padding-right: rem-calc(15);
     background: $white;
     width: 100%;
     z-index: 3;
@@ -21,7 +21,7 @@
     .dress__img {
       img {
         &:nth-child(2) {
-          display: block;
+          display: inline-block;
         }
 
         &:nth-child(1) {
@@ -40,18 +40,24 @@
       position: static;
     }
   }
+
   &_table {
     position: relative;
+
     &:hover {
       padding-left: rem-calc(10);
       padding-right: rem-calc(10);
     }
   }
-&__close {
-  text-decoration: none;
-  z-index: 10;
-}
+
+  &__close {
+    text-decoration: none;
+    z-index: 10;
+    right: rem-calc(20);
+  }
+
   &__img {
+    margin-bottom: rem-calc(10);
     img {
       max-height: 100%;
       transition: 0.3s;
