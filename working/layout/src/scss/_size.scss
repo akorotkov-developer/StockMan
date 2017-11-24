@@ -1,3 +1,14 @@
 .size {
-  
+  &.js-invisible {
+    visibility: hidden;
+  }
+
+  @media (max-width: 1300px)
+  {
+
+
+    &.js-invisible {
+      visibility: visible;
+    }
+  }
 }

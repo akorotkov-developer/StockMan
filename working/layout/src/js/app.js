@@ -6,10 +6,10 @@ $(document).foundation();
   $(function() {
     //begin of .size visibility hidden/visible
     function checkHeaderAndHideSizeBlock() {
-      if ($(window).scrollTop() > 0 && $(window).width() > 960) {
-        $('.size').addClass('invisible');
+      if ($(window).scrollTop() > 0 ) {
+        $('.size').addClass('js-invisible');
       } else {
-        $('.size').removeClass('invisible');
+        $('.size').removeClass('js-invisible');
 
       }
     }
