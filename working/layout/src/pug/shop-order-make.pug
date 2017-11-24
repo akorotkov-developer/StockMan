@@ -10,50 +10,64 @@ block content
         .callout
           h2 Товары в заказе
           .grid-x.grid-padding-x
-            .cell.small-3.medium-2.large-1
+            .cell.small-3.medium-2.large-2
               img.margin-bottom-6(src='./i/d1.png' alt='товар')
-            .cell.small-9.medium-5.large-6
-              h5: a.text-insta.text-decoration-none(href='shop-product.html') Кофта SuperFine (SF-CN048AE) 951XL Magenta
+            .cell.small-9.medium-5.large-5
+              h5: a.text-insta.text-decoration-none.text-size-xlarge(href='shop-product.html') Ashley Williams
+              .text-secondary.margin-bottom-3 Полосатое платье-рубашка
+              .grid-x.grid-padding-x
+                .large-3.medium-12.small-5.cell Размер
+                .large-9.medium-12.small-7.cell 44
+                .large-3.medium-12.small-5.cell Цвет
+                .large-9.medium-12.small-7.cell Красный
             .cell.small-12.medium-5.large-5
               .grid-x.grid-padding-x
                 .cell.small-6.medium-7.large-4
                   .margin-bottom-6
-                    strong
-                      | 25 280&nbsp;
-                      i.fa.fa-rub
+                    
+                    | 25 280&nbsp;
+                    | -
                     div
                       del.text-dark-gray
                         | 27 150 &nbsp;
-                        i.fa.fa-rub
+                        | -
                 .cell.small-6.medium-5.large-3 1 шт
-                .cell.small-12.large-5
+                .cell.small-12.large-5.text-center.medium-text-left
                   .margin-bottom-6
-                    span.stat
-                      | 25 280&nbsp;
-                      i.fa.fa-rub
+                    
+                    | 25 280&nbsp;
+                    | -
           hr.margin-bottom-6
           .grid-x.grid-padding-x
-            .cell.small-3.medium-2.large-1
-              img.margin-bottom-6(src='./i/d2.png' alt='товар')
-            .cell.small-9.medium-5.large-6
-              h5: a.text-insta.text-decoration-none(href='shop-product.html') Картридж совместимый SuperFine (SF-CN048AE) 951XL Magenta
+            .cell.small-3.medium-2.large-2
+              img.margin-bottom-6(src='./i/d1.png' alt='товар')
+            .cell.small-9.medium-5.large-5
+              h5: a.text-insta.text-decoration-none.text-size-xlarge(href='shop-product.html') Ashley Williams
+              .text-secondary.margin-bottom-3 Полосатое платье-рубашка
+              .grid-x.grid-padding-x
+                .large-3.medium-12.small-5.cell Размер
+                .large-9.medium-12.small-7.cell 44
+                .large-3.medium-12.small-5.cell Цвет
+                .large-9.medium-12.small-7.cell Красный
             .cell.small-12.medium-5.large-5
               .grid-x.grid-padding-x
                 .cell.small-6.medium-7.large-4
                   .margin-bottom-6
-                    strong
-                      | 25 280&nbsp;
-                      i.fa.fa-rub
+                    
+                    | 25 280&nbsp;
+                    | -
                     div
                       del.text-dark-gray
                         | 27 150 &nbsp;
-                        i.fa.fa-rub
+                        | -
                 .cell.small-6.medium-5.large-3 1 шт
-                .cell.small-12.large-5
+                .cell.small-12.large-5.text-center.medium-text-left
                   .margin-bottom-6
-                    span.stat
-                      | 25 280&nbsp;
-                      i.fa.fa-rub
+                    
+                    | 25 280&nbsp;
+                    | -
+
+        
         .callout
           h2 Регион доставки
           fieldset
@@ -84,7 +98,7 @@ block content
                   span.label
                     | 0
                     = ' '
-                    i.fa.fa-rub
+                    | -
                   br
                   | Самовывоз
             .cell
@@ -96,7 +110,7 @@ block content
                   span.label
                     | 500
                     = ' '
-                    i.fa.fa-rub
+                    | -
                   br
                   | Доставка курьером
             
@@ -187,20 +201,20 @@ block content
             textarea
       .cell.small-12.medium-4.large-3.margin-bottom-5
         div(data-sticky-container)
-          .sticky.callout.pay(data-sticky data-anchor="order-container" data-sticky-on="medium")
+          .sticky.callout.pay(data-sticky data-anchor="order-container" data-sticky-on="medium" )
             .grid-x.grid-padding-x
               .cell.small-5: strong Товаров на
-              .cell.small-7.text-right: strong
+              .cell.small-7.text-right
                 | 500
                 = ' '
-                i.fa.fa-rub
+                | -
             hr.margin-vertical-6
             .grid-x.grid-padding-x
               .cell.small-5 НДС
               .cell.small-7.text-right
                 | 90
                 = ' '
-                i.fa.fa-rub
+                | -
               .cell.small-12: small: em 18%, включен в цену
             hr.margin-vertical-6
             .grid-x.grid-padding-x
@@ -208,14 +222,14 @@ block content
               .cell.small-7.text-right
                 | 500
                 = ' '
-                i.fa.fa-rub
+                | -
             hr.margin-vertical-6
             .grid-x.grid-padding-x
               .cell.small-5: strong Итого
-              .cell.small-7.text-right.stat
-                | 1000
+              .cell.small-7.text-right
+                | 49&#160;000
                 = ' '
-                i.fa.fa-rub
+                | -
       .cell.small-12.medium-8.large-9.end.text-right
         a.button(href='shop-order-confirmation.html')
           i.fa.fa-credit-card

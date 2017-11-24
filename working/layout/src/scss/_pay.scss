@@ -1,4 +1,11 @@
 .pay {
+
+  &.is-stuck {
+    margin-top: rem-calc(60)!important;
+  }
+  &.is-at-bottom {
+    margin-top: rem-calc(-23) !important;
+  }
   @include breakpoint(small only) {
     top: 0 !important;
   }
