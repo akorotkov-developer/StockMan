@@ -3,84 +3,54 @@ extends shop-regular
 block content
   
   .content
-    .grid-container: .grid-x.grid-padding-x: .cell
-      h1 Сравнить товары
-      .margin-bottom-6
-        span.text-dark-gray.margin-right-3 Показать:
-        strong.margin-right-3 Только отличия
-        a(href='#' title='').margin-right-3 Основные параметры
-        a(href='#' title='') Все параметры
-
-      mixin productTileForCompare(instock, incart)
-        
-        .dress.dress_table   
-          .dress__close.close-button &times;
-          .dress__img(data-equalizer-watch)
-            a(href="#") 
-              img(src="./i/d"  + Math.floor(Math.random() * 3 + 1) + '.png', alt="")
-              img(src="./i/d1-1.png", alt="")
-          .dress__title ASHLEY WILLIAMS
-          .text-secondary Полосатое платье-рубашка
-          .text-size-large.margin-bottom-4 49 765. -  
-          .margin-bottom-3
-            if instock
-              if incart
-                i.fa.fa-check &#160;
-                | В корзине
-              unless incart
-            unless instock
-              span.text-dark-gray Нет в наличии
-          .dress__size
-            span.margin-right-4 Размер
-            .checkbox-group
-              input.checkbox-group__item(type='radio' id='size1' name='size')
-              label.checkbox-group__label(for='size1') 44
-              input.checkbox-group__item(type='radio' id='size2' name='size')
-              label.checkbox-group__label(for='size2') 46
-              input.checkbox-group__item(type='radio' id='size3' name='size')
-              label.checkbox-group__label(for='size3') 48
-            a(href="#").skirt__link RU
-        
-
-      .table-scroll
-        table
-          tr.vertical-top(data-equalizer,data-equalize-by-row="true")
-            td
-            td.table-scroll__item.text-center
-              +productTileForCompare('instock')
-            td.table-scroll__item.text-center
-              +productTileForCompare
-            td.table-scroll__item.text-center
-              +productTileForCompare('instock','incart')
-            td.table-scroll__item.text-center
-              +productTileForCompare
-            td.table-scroll__item.text-center
-              +productTileForCompare
-          tr
-            th.text-user-small Вес
-            td 25кг
-            td 35кг
-            td 30кг
-            td 31кг
-            td 27,5кг
-          tr
-            th.text-user-small Материал
-            td Шелк
-            td Шелк
-            td Шелк
-            td Шелк
-            td Шелк
-          tr
-            th.text-user-small Страна
-            td Франция
-            td Франция
-            td Франция
-            td Франция
-            td Франция
-          tr
-            th.text-user-small Рейтинг
-            td 5
-            td 10
-            td 5
-            td 5
-            td 5
+    .grid-container: .grid-x.grid-padding-x
+      .cell.text-center
+        h1 Сравнить товары
+        .margin-bottom-6
+          span.text-dark-gray.margin-right-3 Показать:
+          strong.margin-right-3 Только отличия
+          a(href='#' title='').margin-right-3 Основные параметры
+          a(href='#' title='') Все параметры
+      .cell
+        .table-scroll
+          table
+            tr.vertical-top(data-equalizer,data-equalize-by-row="true")
+              td
+              td.table-scroll__item.text-center
+                +productTileForCompare('instock')
+              td.table-scroll__item.text-center
+                +productTileForCompare
+              td.table-scroll__item.text-center
+                +productTileForCompare('instock','incart')
+              td.table-scroll__item.text-center
+                +productTileForCompare
+              td.table-scroll__item.text-center
+                +productTileForCompare
+            tr
+              th.text-user-small Вес
+              td 25кг
+              td 35кг
+              td 30кг
+              td 31кг
+              td 27,5кг
+            tr
+              th.text-user-small Материал
+              td Шелк
+              td Шелк
+              td Шелк
+              td Шелк
+              td Шелк
+            tr
+              th.text-user-small Страна
+              td Франция
+              td Франция
+              td Франция
+              td Франция
+              td Франция
+            tr
+              th.text-user-small Рейтинг
+              td 5
+              td 10
+              td 5
+              td 5
+              td 5

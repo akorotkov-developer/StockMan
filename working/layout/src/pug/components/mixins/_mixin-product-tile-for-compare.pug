@@ -1,0 +1,29 @@
+mixin productTileForCompare(instock, incart)
+  
+  .dress.dress_table   
+    .dress__close.close-button &times;
+    .dress__img(data-equalizer-watch)
+      a(href="#") 
+        img(src="./i/d"  + Math.floor(Math.random() * 3 + 1) + '.png', alt="")
+        img(src="./i/d1-1.png", alt="")
+    .dress__title ASHLEY WILLIAMS
+    .text-secondary Полосатое платье-рубашка
+    .text-size-large.margin-bottom-4 49 765. -  
+    .margin-bottom-3
+      if instock
+        if incart
+          i.fa.fa-check &#160;
+          | В корзине
+        unless incart
+      unless instock
+        span.text-dark-gray Нет в наличии
+    .dress__size
+      span.margin-right-4 Размер
+      .checkbox-group
+        input.checkbox-group__item(type='radio' id='size1' name='size')
+        label.checkbox-group__label(for='size1') 44
+        input.checkbox-group__item(type='radio' id='size2' name='size')
+        label.checkbox-group__label(for='size2') 46
+        input.checkbox-group__item(type='radio' id='size3' name='size')
+        label.checkbox-group__label(for='size3') 48
+      a(href="#").skirt__link RU
