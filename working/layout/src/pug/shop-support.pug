@@ -1,13 +1,12 @@
 extends shop-regular
 
-mixin _faq-answer
-  p Да, возможна, но регистрация  упростит совершение покупок в дальнейшем.
 
 block content
-  .grid-container: .grid-x.grid-padding-x: .cell
-    h1 Ваши вопросы
+
   .content
     .grid-container: .grid-x.grid-padding-x
+      .cell
+        h1 Ваши вопросы
       aside.small-12.medium-4.large-3.cell
         .margin-bottom-6.show-for-small-only(data-responsive-toggle='menu-left', data-hide-for='medium'): span.button.expanded(data-toggle)
           i.fa.fa-lg.fa-bars
@@ -23,12 +22,12 @@ block content
             li
               a(href='#') Условия возврата
 
-      .small-12.medium-8.large-9.cell
+      .small-12.medium-8.large-9.cell.margin-bottom-7
         ul.accordion(data-accordion data-multi-expand="true" data-allow-all-closed="true")
           li.accordion-item(data-accordion-item)
             a.accordion-title(href="#") Возможна ли покупка без регистрации?
             div.accordion-content(data-tab-content)
-              +_faq-answer
+              p Да, возможна, но регистрация  упростит совершение покупок в дальнейшем.
           li.accordion-item(data-accordion-item)
             a.accordion-title(href="#") Что делать, если я не могу вспомнить пароль от личного кабинета?
             div.accordion-content(data-tab-content)
@@ -40,18 +39,18 @@ block content
           li.accordion-item(data-accordion-item)
             a.accordion-title(href="#") Возможна ли покупка без регистрации?
             div.accordion-content(data-tab-content)
-              +_faq-answer
+              p Да, возможна, но регистрация  упростит совершение покупок в дальнейшем.
           li.accordion-item(data-accordion-item)
             a.accordion-title(href="#") Возможна ли покупка без регистрации?
             div.accordion-content(data-tab-content)
-              +_faq-answer
+              p Да, возможна, но регистрация  упростит совершение покупок в дальнейшем.
           li.accordion-item(data-accordion-item)
             a.accordion-title(href="#") Возможна ли покупка без регистрации?
             div.accordion-content(data-tab-content)
-              +_faq-answer
+              p Да, возможна, но регистрация  упростит совершение покупок в дальнейшем.
         
 
-  .content
+
     .grid-container: .grid-x.grid-padding-x: .cell
       h2.text-center
         | Нет нужного ответа?
