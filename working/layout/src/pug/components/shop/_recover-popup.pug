@@ -1,0 +1,22 @@
+#recover-popup.reveal(data-reveal data-deep-link="true")
+    .grid-x.grid-padding-x
+        .cell.text-center
+          h2.reveal__title Забыли пароль
+        
+        .cell        
+          form(action='shop-user-account.html')
+            div Если вы забыли пароль, введите логин или E-Mail.
+            input(type="text",placeholder="")  
+            p  
+              | Контрольная строка для смены пароля, а также ваши регистрационные данные, будут высланы вам по E-Mail.
+            .grid-x.align-center
+              .cell.large-7
+                button.button.expanded
+                  | Восстановить &nbsp;
+                  i.fa.fa-envelope-o.fa-lg
+          
+          p.text-center
+            a(href="#") Войти
+
+    button.close-button(data-close aria-label="Закрыть")
+        span(aria-hidden="true") &times;
