@@ -3,131 +3,132 @@ extends shop-regular
 block content
   
   .content
-    .grid-container: .grid-x.grid-padding-x: .cell
-      h1.text-center Корзина
-      .margin-bottom-6
-        a.button(href='#') Готовые к заказу
-        = ' '
-        a.button.light-gray(href='#') Отложенные
-
-      
-      .grid-x.grid-padding-x
-        .cell.small-4.medium-2.large-2
-          img(src='./i/d3.png' alt='Товар').margin-bottom-6
-        .cell.small-8.medium-4.large-4
-          a.text-insta.text-uppercase.text-decoration-none.text-size-xlarge(href='shop-product.html') Ashley Williams
-          .text-secondary.margin-bottom-3 Полосатое платье-рубашка
-          ul.hide-for-small-only.hide-for-medium-only
-    
-            li Цвет: Красный
-            li Страна: Китай
-
-        .cell.small-12.medium-4.large-4
-          .grid-x.grid-padding-x
-            .cell.small-6.medium-6.large-3
-              .margin-bottom-6
-                
-                | 25 280. - 
-                div
-                  del.text-dark-gray
-                    | 27 150. - 
-            .cell.small-6.medium-6.large-4 1 шт
-            .cell.small-12.large-5
-              .margin-bottom-6
-                
-                | 25 280. - 
-        .cell.small-12.medium-2.large-2.medium-text-right.text-center
-          .margin-bottom-6
-            div
-              a(href='#') Удалить
-            div
-              a(href='#') Отложить
-      hr.margin-bottom-6
-      .grid-x.grid-padding-x
-        .cell.small-4.medium-2.large-2
-          img(src='./i/d3.png' alt='Товар').margin-bottom-6
-        .cell.small-8.medium-4.large-4
-          a.text-insta.text-uppercase.text-decoration-none.text-size-xlarge(href='shop-product.html') Ashley Williams
-          .text-secondary.margin-bottom-3 Полосатое платье-рубашка
-          ul.hide-for-small-only.hide-for-medium-only
-    
-            li Цвет: Красный
-            li Страна: Китай
-
-        .cell.small-12.medium-4.large-4
-          .grid-x.grid-padding-x
-            .cell.small-6.medium-6.large-3
-              .margin-bottom-6
-                
-                | 25 280. - 
-                div
-                  del.text-dark-gray
-                    | 27 150. - 
-            .cell.small-6.medium-6.large-4 1 шт
-            .cell.small-12.large-5
-              .margin-bottom-6
-                
-                | 25 280. - 
-        .cell.small-12.medium-2.large-2.medium-text-right.text-center
-          .margin-bottom-6
-            div
-              a(href='#') Удалить
-            div
-              a(href='#') Отложить
-      hr.margin-bottom-6
-      .grid-x.grid-padding-x
-        .cell.small-4.medium-2.large-2
-          img(src='./i/d1.png' alt='Товар').margin-bottom-6
-        .cell.small-8.medium-4.large-4
-          a.text-insta.text-uppercase.text-decoration-none.text-size-xlarge(href='shop-product.html') Ashley Williams
-          .text-secondary.margin-bottom-3 Полосатое платье-рубашка
-          ul.hide-for-small-only.hide-for-medium-only
-    
-            li Цвет: Красный
-            li Страна: Китай
-
-        .cell.small-12.medium-4.large-4
-          .grid-x.grid-padding-x
-            .cell.small-6.medium-6.large-3
-              .margin-bottom-6
-                
-                | 25 280. - 
-                div
-                  del.text-dark-gray
-                    | 27 150. - 
-            .cell.small-6.medium-6.large-4 1 шт
-            .cell.small-12.large-5
-              .margin-bottom-6
-                
-                | 25 280. - 
-        .cell.small-12.medium-2.large-2.medium-text-right.text-center
-          .margin-bottom-6
-            div
-              a(href='#') Удалить
-            div
-              a(href='#') Отложить
-      hr.margin-bottom-6
-    
-
-      .grid-x.grid-padding-x
-        .cell.small-12.medium-6.large-4
-          .input-group
-            input.input-group-field(type='text' placeholder='№ купона на скидку')
-            .input-group-button
-              button.button(type='button')
-                i.fa.fa-calculator
-                = ' '
-                | Пересчитать
-        .cell.small-12.medium-6.large-8.medium-text-right
-          .margin-bottom-6
-            | Товаров на: 398.31. - 
-            br
-            | НДС: 71.69. - 
-            br
-            strong Итого: 470. - 
-      hr.margin-bottom-6
-      .margin-bottom-6.text-right
-        a.button(href='shop-order-make.html')
-          i.fa.fa-credit-card
+    .grid-container: .grid-x.grid-padding-x
+      .cell
+        h1.text-center Корзина
+        .margin-bottom-6
+          a.button(href='#') Готовые к заказу
           = ' '
-          | Оформить заказ
+          a.button.light-gray(href='#') Отложенные
+        
+      .cell.small-12.medium-8.large-9
+        .grid-x.grid-padding-x
+          .cell.small-4.medium-2.large-2
+            img(src='./i/d1.png' alt='Товар').margin-bottom-6
+          .cell.small-8.medium-4.large-4
+            a.text-insta.text-uppercase.text-decoration-none.text-size-xlarge(href='shop-product.html') Ashley Williams
+            .text-secondary.margin-bottom-3 Полосатое платье-рубашка
+            ul.hide-for-small-only.hide-for-medium-only
+      
+              li Цвет: Красный
+              li Страна: Китай
+
+          .cell.small-12.medium-4.large-4
+            .grid-x.grid-padding-x
+              .cell.small-6.medium-6.large-3
+                .margin-bottom-6
+                  
+                  | 25 280. - 
+                  div
+                    del.text-dark-gray
+                      | 27 150. - 
+              .cell.small-6.medium-6.large-4 1 шт
+              .cell.small-12.large-5
+                .margin-bottom-6
+                  
+                  | 25 280. - 
+          .cell.small-12.medium-2.large-2.medium-text-right.text-center
+            .margin-bottom-6
+              div
+                a(href='#') Удалить
+              div
+                a(href='#') Отложить
+        hr.margin-bottom-6
+        .grid-x.grid-padding-x
+          .cell.small-4.medium-2.large-2
+            img(src='./i/d1.png' alt='Товар').margin-bottom-6
+          .cell.small-8.medium-4.large-4
+            a.text-insta.text-uppercase.text-decoration-none.text-size-xlarge(href='shop-product.html') Ashley Williams
+            .text-secondary.margin-bottom-3 Полосатое платье-рубашка
+            ul.hide-for-small-only.hide-for-medium-only
+      
+              li Цвет: Красный
+              li Страна: Китай
+
+          .cell.small-12.medium-4.large-4
+            .grid-x.grid-padding-x
+              .cell.small-6.medium-6.large-3
+                .margin-bottom-6
+                  
+                  | 25 280. - 
+                  div
+                    del.text-dark-gray
+                      | 27 150. - 
+              .cell.small-6.medium-6.large-4 1 шт
+              .cell.small-12.large-5
+                .margin-bottom-6
+                  
+                  | 25 280. - 
+          .cell.small-12.medium-2.large-2.medium-text-right.text-center
+            .margin-bottom-6
+              div
+                a(href='#') Удалить
+              div
+                a(href='#') Отложить
+        hr.margin-bottom-6
+        .grid-x.grid-padding-x
+          .cell.small-4.medium-2.large-2
+            img(src='./i/d1.png' alt='Товар').margin-bottom-6
+          .cell.small-8.medium-4.large-4
+            a.text-insta.text-uppercase.text-decoration-none.text-size-xlarge(href='shop-product.html') Ashley Williams
+            .text-secondary.margin-bottom-3 Полосатое платье-рубашка
+            ul.hide-for-small-only.hide-for-medium-only
+      
+              li Цвет: Красный
+              li Страна: Китай
+
+          .cell.small-12.medium-4.large-4
+            .grid-x.grid-padding-x
+              .cell.small-6.medium-6.large-3
+                .margin-bottom-6
+                  
+                  | 25 280. - 
+                  div
+                    del.text-dark-gray
+                      | 27 150. - 
+              .cell.small-6.medium-6.large-4 1 шт
+              .cell.small-12.large-5
+                .margin-bottom-6
+                  
+                  | 25 280. - 
+          .cell.small-12.medium-2.large-2.medium-text-right.text-center
+            .margin-bottom-6
+              div
+                a(href='#') Удалить
+              div
+                a(href='#') Отложить
+        hr.margin-bottom-6
+      
+
+        .grid-x.grid-padding-x
+          .cell.small-12.medium-6.large-4
+            .input-group
+              input.input-group-field(type='text' placeholder='№ купона на скидку')
+              .input-group-button
+                button.button(type='button')
+                  i.fa.fa-calculator
+                  = ' '
+                  | Пересчитать
+          .cell.small-12.medium-6.large-8.medium-text-right
+            .margin-bottom-6
+              | Товаров на: 398.31. - 
+              br
+              | НДС: 71.69. - 
+              br
+              strong Итого: 470. - 
+        hr.margin-bottom-6
+        .margin-bottom-6.text-right
+          a.button(href='shop-order-make.html')
+            i.fa.fa-credit-card
+            = ' '
+            | Оформить заказ
