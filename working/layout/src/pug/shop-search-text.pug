@@ -1,12 +1,22 @@
-extends shop-index
+extends shop-catalog
 
-block page
-  
-  block content
+block title-info
 
-    .content
-      .grid-container
-        include components/common/_breadcrumbs 
-        .grid-x.grid-padding-x: .cell
-          h1 Поиск
-          include components/common/_search
+block top-info
+  .content.content_medium-gray
+    
+    .grid-container
+      include components/common/_breadcrumbs
+      .grid-x.grid-padding-x
+        .cell.text-center
+          h1.margin-bottom-0 Поиск
+          .text-secondary.margin-bottom-13 Результаты поиска 1-5 из 200
+      .grid-x.grid-padding-x.align-center
+        .cell.large-6
+          .grid-x.grid-padding-x  
+            .small-8.cell
+              input(type="text",placeholder="Введите строку для поиска")
+            .small-4.cell
+              button(type="submit").button.expanded Искать
+
+          
