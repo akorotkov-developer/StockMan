@@ -1,4 +1,8 @@
 .reveal {
+  outline: none;
+  &-overlay {
+    right: rem-calc(17);
+  }
   &_my {
     transition: 0.3s;
     padding: rem-calc(34);

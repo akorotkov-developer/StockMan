@@ -59,3 +59,8 @@ ul {
     color: $insta;
   }
 }
+body {
+  &.is-reveal-open {
+  width:calc(100% - 17px);
+  }
+}
