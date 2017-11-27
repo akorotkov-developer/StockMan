@@ -5,11 +5,12 @@ block hat-sort
     include components/common/_sort
   
 block content
-  
+  block top-info
   .content
-    .grid-x.grid-padding-x: .cell.text-center
-      h1.margin-bottom-0 Платья
-      .text-secondary.margin-bottom-1 9438 товаров
+    block title-info
+      .grid-x.grid-padding-x: .cell.text-center
+        h1.margin-bottom-0 Платья
+        .text-secondary.margin-bottom-1 9438 товаров
     .grid-x.grid-padding-x.margin-bottom-12
       .cell.small-12.medium-8.large-6.size
         include components/common/_sort

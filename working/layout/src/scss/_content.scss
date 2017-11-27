@@ -6,6 +6,10 @@
   border-top: rem-calc(1) solid $asphalt;
 
   padding-bottom: rem-calc(30);
+  &_medium-gray {
+    padding-bottom: rem-calc(60);
+    background: #eee;
+  }
   &__promo {
       height: rem-calc(400);
   }
