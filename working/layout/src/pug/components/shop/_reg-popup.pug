@@ -1,0 +1,47 @@
+#reg-popup.reveal(data-reveal data-deep-link="true")
+    .grid-x.grid-padding-x
+        .cell.text-center
+          h2.reveal__title Регистрация
+        
+        .cell        
+          form(action='shop-user-account.html')
+            label
+              input(type='text',placeholder="Имя")
+            label
+              input(type='text',placeholder="Фамилия")
+      
+            .check
+              input(type="radio",name="gend",id="a11",checked).check__input
+              label.check__label(for="a11") Женские      
+            .check
+              input(type="radio",name="gend",id="a21").check__input
+              label.check__label(for="a21") Мужские 
+            
+            .grid-x.grid-padding-x
+              .cell.medium-9
+        
+                label
+                  input(type='tel',placeholder="Телефон")
+                label
+                  input(type='text',placeholder="Дата рождения")
+                label
+                  input(type='password',placeholder="Пароль*")
+                p.help-text Пароль должен быть не менее 6 символов
+              .cell
+                .check
+                  input(type="checkbox",id='y1').check__input
+                  label.check__label(for='y1')
+                    | Я ознакомлен и принимаю условия &nbsp;
+                    a(href='shop-regular.html' title='') Соглашения об использовании сайта
+                    |, в том числе в части обработки и использования моих персональных данных
+            .grid-x.align-center
+              .cell.large-7
+                button.button.expanded
+                  | Регистрация &nbsp;
+                  i.fa.fa-sign-in.fa-lg
+          
+          p.text-center
+            a(href='shop-index.html#enter-popup', title='') Войти
+
+    button.close-button(data-close aria-label="Закрыть")
+        span(aria-hidden="true") &times;

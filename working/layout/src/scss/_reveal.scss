@@ -24,6 +24,9 @@
   @include breakpoint(small only) {
     padding-left: rem-calc(15);
     padding-right: rem-calc(15);
+    &__title {
+      font-size: rem-calc(25);
+    }
     &_my {
       padding: rem-calc(17);
     }
