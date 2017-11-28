@@ -72,8 +72,9 @@
     z-index: 6;
 
     &__link {
-      i {
-        margin-right: rem-calc(5);
+
+      i,img {
+        margin-right: rem-calc(7);
       }
 
       .fa-chevron-right {
