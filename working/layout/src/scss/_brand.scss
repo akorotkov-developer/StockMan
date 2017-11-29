@@ -1,0 +1,22 @@
+.brand {
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: rem-calc(0 7);
+  font-size: rem-calc(24);
+  display: inline-block;
+
+  &_none {
+    text-transform: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  
+    white-space: nowrap;
+
+
+  }
+
+  &_grey {
+    color: $asphalt;
+  }
+}
