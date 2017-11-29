@@ -4,7 +4,7 @@
 $imagesPath: '../images' !default;
 $fontsPath: '../fonts' !default;
 
-$textSizes: (tiny: 0.7rem, xsmall: 0.75rem, small: 0.878rem, default: 1rem, large: 1.123rem, xlarge: 1.25rem, xxlarge: 2rem) !default;
+$textSizes: (tiny: 0.7rem, xsmall: 0.75rem, small: 0.878rem, default: 1rem, large: 1.123rem, xlarge: 1.25rem, xxlarge: 2rem,xxxlarge: 2.6rem) !default;
 
 $fa-font-path: $fontsPath;
 
@@ -85,3 +85,6 @@ $minify: false !default;
 @import "size";
 @import "heart";
 @import "fault";
+@import "aligner";
+@import "hr";
+@import "kind";

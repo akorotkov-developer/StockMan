@@ -1,0 +1,7 @@
+.kind {
+  font-style: italic;
+  
+  font-size: rem-calc(42);text-decoration: none;
+    @include breakpoint(medium down) {
+    font-size: rem-calc(30); }
+}
