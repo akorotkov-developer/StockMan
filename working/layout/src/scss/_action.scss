@@ -1,0 +1,26 @@
+.action {
+  display: block;
+  position: relative;
+  margin-bottom: rem-calc(40);
+&:hover {
+  .action__text {
+    width: rem-calc(170);
+    left:calc(50% - 85px);
+    padding:rem-calc(5 10);
+  }
+}
+  &__text {
+    position: absolute;
+    transition: .3s;
+    background: $white;
+    padding: rem-calc(0 10);
+    color: $primary-color;
+    text-transform: uppercase;
+    width: rem-calc(150);
+    left:calc(50% - 75px);
+    font-size: rem-calc(30);
+    display: inline-block;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

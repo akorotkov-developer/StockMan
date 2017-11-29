@@ -65,7 +65,8 @@
   }
   @include breakpoint(large down) {
     &__item {
-      padding-left: rem-calc(20);
+      padding-left: rem-calc(10);
+      padding-right: rem-calc(10);
     }
   }
   @include breakpoint(small only) {

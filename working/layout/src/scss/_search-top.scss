@@ -36,24 +36,26 @@ $search-height: rem-calc(28);
   width: $search-height;
   color: $medium-gray;
 }
-@include breakpoint(medium only) {
+  @include breakpoint(medium down) {
   .search-top {
-    margin: 6 * $global-margin 0 0 30;
-  }
-}
+  width:calc(100% - 20px);
+  } }
 @include breakpoint(small only) {
   .search-top {
     padding-top: rem-calc(0);
-    margin-bottom: rem-calc(20);width: rem-calc(260);
+    margin-bottom: rem-calc(20);
+    width: rem-calc(260);
     margin-left: calc(50% - 130px);
+
     &__button {
       height: rem-calc(45);
       padding-right: rem-calc(10);
       padding-left: rem-calc(10);
+      width: rem-calc(40);
     }
+
     &__input {
       padding-left: rem-calc(10);
-
       height: rem-calc(45);
     }
   }
