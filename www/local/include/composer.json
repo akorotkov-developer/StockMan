@@ -1,0 +1,27 @@
+{
+    "name": "stockman",
+    "description": "StockMan composer file",
+    "authors": [
+        {
+            "name": "Cetera Labs"
+        }
+    ],
+    "require": {
+      "pimple/pimple": "~3.0",
+      "tecnickcom/tcpdf": "~6.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "CUserTypeBool": "lib/",
+            "Cetera\\": "lib/"
+        },
+        "psr-4": {
+            "StockMan\\": "app/"
+        },
+        "files": [
+            "app/common.php",
+            "app/handlers.php",
+            "app/functions.php"
+        ]
+    }
+}
