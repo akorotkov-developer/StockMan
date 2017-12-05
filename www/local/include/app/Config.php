@@ -5,7 +5,7 @@ namespace StockMan;
 
 class Config
 {
-  const STOCKMAN_TEMPLATE_PATH = '/local/templates/StockMan_common';
+  const STOCKMAN_TEMPLATE_PATH = '/local/templates/podiummarket';
 
   /*
    * Инфоблоки

@@ -14,4 +14,5 @@ working/*
 www/*
 !www/.gitignore
 !www/local
+!www/index.php
 !www/robots.txt
