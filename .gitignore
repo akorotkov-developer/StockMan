@@ -11,7 +11,8 @@ working/*
 !working/layout
 
 # site
-www/*
+www/bitrix
+www/test.php
 !www/.gitignore
 !www/local
 !www/index.php

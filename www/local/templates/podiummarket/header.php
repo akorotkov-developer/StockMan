@@ -176,8 +176,11 @@ use Bitrix\Main\Page\AssetLocation;
         </div>
     </div>
 </div>
+
+<?if ($APPLICATION->GetCurPage() != "/") {?>
 <div class="content">
     <div class="grid-container">
         <div class="grid-x grid-padding-x">
             <div class="cell text-center">
-                <h1>Страница не найдена</h1>
+                <h1><?$APPLICATION->ShowTitle(false)?></h1>
+<?}?>
