@@ -6,7 +6,7 @@
 //AddEventHandler("iblock", "OnAfterIBlockSectionAdd", Array("StockManHandler", "OnAfterIBlockSectionUpdateHandler"));
 
 
-AddEventHandler("catalog", "OnGetOptimalPrice", Array("StockManHandler", "OnGetOptimalPriceHandler"));
+//AddEventHandler("catalog", "OnGetOptimalPrice", Array("StockManHandler", "OnGetOptimalPriceHandler"));
 AddEventHandler("main", "OnEpilog", Array("StockManHandler", "ShowError404"));
 
 class StockManHandler

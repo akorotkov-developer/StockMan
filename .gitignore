@@ -13,6 +13,7 @@ working/*
 # site
 www/bitrix
 www/test.php
+www/test2.php
 !www/.gitignore
 !www/local
 !www/index.php
