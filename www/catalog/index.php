@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 ?>
 <?$APPLICATION->IncludeComponent("bitrix:catalog", "", array(
 	"IBLOCK_TYPE" => "catalog",
-	"IBLOCK_ID" => 2,
+	"IBLOCK_ID" => StockMan\Config::CATALOG_ID,
 	"TEMPLATE_THEME" => "site",
 	"HIDE_NOT_AVAILABLE" => "N",
 	"BASKET_URL" => "/personal/cart/",

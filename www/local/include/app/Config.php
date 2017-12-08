@@ -26,4 +26,9 @@ class Config
 
     //ID High-load блока с брендами
     const BRAND_REF_BLOCK_ID = 2;
+
+    public static $arCatalogProperties = array(
+        self::BREND,
+        self::NEW_PRODUCT,
+    );
 }
