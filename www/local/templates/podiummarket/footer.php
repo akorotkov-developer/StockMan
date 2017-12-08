@@ -116,29 +116,63 @@ IncludeTemplateLangFile(__FILE__);
         <div class="large-2 cell large-offset-1 medium-4">
             <div class="footer__title" data-toggle="foot1 title1" data-toggler="js-show" id="title1">Коллекции<i class="fa fa-chevron-right show-for-small-only"></i></div>
             <ul class="bag" data-toggler="js-open" id="foot1">
-                <li class="bag__item"><a class="bag__link" href="#">женская коллекция</a></li>
-                <li class="bag__item"><a class="bag__link" href="#">мужская коллекция</a></li>
-                <li class="bag__item"><a class="bag__link" href="#">сумки</a></li>
-                <li class="bag__item"><a class="bag__link" href="#">аксессуары</a></li>
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:menu",
+                    "bottommenu",
+                    Array(
+                        "ALLOW_MULTI_SELECT" => "Y",
+                        "DELAY" => "N",
+                        "MAX_LEVEL" => "1",
+                        "MENU_CACHE_GET_VARS" => "",
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_TYPE" => "N",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "ROOT_MENU_TYPE" => "collection",
+                        "USE_EXT" => "Y"
+                    )
+                );?>
             </ul>
             <hr class="show-for-small-only">
         </div>
         <div class="large-2 cell medium-4">
             <div class="footer__title" data-toggle="foot2 title2" data-toggler="js-show" id="title2">Покупателю<i class="fa fa-chevron-right show-for-small-only"></i></div>
             <ul class="bag" data-toggler="js-open" id="foot2">
-                <li class="bag__item"><a class="bag__link" href="#">программа лояльности</a></li>
-                <li class="bag__item"><a class="bag__link" href="#">как сделать заказ</a></li>
-                <li class="bag__item"><a class="bag__link" href="#">конфиденциальность</a></li>
-                <li class="bag__item"><a class="bag__link" href="#">где купить</a></li>
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:menu",
+                    "bottommenu",
+                    Array(
+                        "ALLOW_MULTI_SELECT" => "Y",
+                        "DELAY" => "N",
+                        "MAX_LEVEL" => "1",
+                        "MENU_CACHE_GET_VARS" => "",
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_TYPE" => "N",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "ROOT_MENU_TYPE" => "buyer",
+                        "USE_EXT" => "Y"
+                    )
+                );?>
             </ul>
             <hr class="show-for-small-only">
         </div>
         <div class="large-2 cell medium-4">
             <div class="footer__title" data-toggle="foot3 title3" data-toggler="js-show" id="title3">Условия работы<i class="fa fa-chevron-right show-for-small-only"></i></div>
             <ul class="bag" data-toggler="js-open" id="foot3">
-                <li class="bag__item"><a class="bag__link" href="#">оплата</a></li>
-                <li class="bag__item"><a class="bag__link" href="#">доставка</a></li>
-                <li class="bag__item"><a class="bag__link" href="#">возврат</a></li>
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:menu",
+                    "bottommenu",
+                    Array(
+                        "ALLOW_MULTI_SELECT" => "Y",
+                        "DELAY" => "N",
+                        "MAX_LEVEL" => "1",
+                        "MENU_CACHE_GET_VARS" => "",
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_TYPE" => "N",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "ROOT_MENU_TYPE" => "conditions",
+                        "USE_EXT" => "Y"
+                    )
+                );?>
             </ul>
             <hr class="show-for-small-only">
         </div>
@@ -159,22 +193,15 @@ IncludeTemplateLangFile(__FILE__);
         <div class="small-12 medium-6 large-3 cell">
             <div class="margin-bottom-5 show-for-small-only"></div>
             <div class="subscribe">Подписаться на рассылку</div>
-            <form action="#">
-                <div class="input-group footer__group">
-                    <input class="input-group-field" type="email" placeholder="Ваш e-mail">
-                    <div class="input-group-button">
-                        <input class="button footer__button" type="submit" value="Отправить">
-                    </div>
-                </div>
-                <div class="check">
-                    <input class="check__input" type="radio" name="gender" id="a1" checked>
-                    <label class="check__label" for="a1">Женские      </label>
-                </div>
-                <div class="check">
-                    <input class="check__input" type="radio" name="gender" id="a2">
-                    <label class="check__label" for="a2">Мужские </label>
-                </div>
-            </form><a class="margin-right-4" href="#"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/visa-bordered.svg" alt=""></a><a class="margin-right-4" href="#"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/mastercard-bordered.svg" alt=""></a><a href="#"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/mir-bordered.svg" alt=""></a>
+            <?$APPLICATION->IncludeComponent("bitrix:subscribe.form","subscribe",Array(
+                    "USE_PERSONALIZATION" => "Y",
+                    "PAGE" => "#SITE_DIR#personal/subscribe/subscr_edit.php",
+                    "SHOW_HIDDEN" => "Y",
+                    "CACHE_TYPE" => "A",
+                    "CACHE_TIME" => "3600"
+                )
+            );?>
+            <a class="margin-right-4" href="#"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/visa-bordered.svg" alt=""></a><a class="margin-right-4" href="#"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/mastercard-bordered.svg" alt=""></a><a href="#"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/mir-bordered.svg" alt=""></a>
         </div>
     </div>
 </footer>

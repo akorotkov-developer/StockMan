@@ -61,7 +61,7 @@
         <?/*Поиск*/?>
         <?$APPLICATION->IncludeComponent("bitrix:search.form","search_small",Array(
                 "USE_SUGGEST" => "N",
-                "PAGE" => "/search/index.php"
+                "PAGE" => "/catalog/index.php"
             )
         );?>
         <?/*Конец поиска*/?>
