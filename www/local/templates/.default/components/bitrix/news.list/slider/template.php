@@ -22,7 +22,7 @@ $this->setFrameMode(true);
 
         <?$arFile = CFile::GetFileArray($arItem["PROPERTIES"]["MOBILE_PICTURE"]["VALUE"]);?>
 
-        <a id="<?=$this->GetEditAreaId($arItem['ID']);?>" class="sale__slide" href="<?=$arItem["PROPERTIES"]["URL"]["VALUE"]?>"  style="background-image:url(<?=$arItem["DETAIL_PICTURE"]["SRC"]?>);" >
+        <a id="<?=$this->GetEditAreaId($arItem['ID']);?>" class="sale__slide" href="<?=$arItem["PROPERTIES"]["URL"]["VALUE"]?>"  style="background-image:url(<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>);" >
             <div class="sale__mobile" style="background-image:url(<?=$arFile["SRC"]?>);"></div>
         </a>
 

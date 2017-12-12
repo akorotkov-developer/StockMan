@@ -66,35 +66,46 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
 
     <div class="grid-container margin-bottom-17">
         <div class="grid-x grid-padding-x text-center">
-            <div class="cell large-3 medium-6 medium-order-2 large-order-1"><a class="coat" href="#" style="background-image:url(<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/i/coat1.png);">
-                    <div class="coat__info">
-                        <div class="coat__text">Роскошные пальто</div>
-                        <div class="anchor">смотреть все</div>
-                    </div></a></div>
-            <div class="cell large-6 large-order-2 medium-order-1"><a class="coat" href="#" style="background-image:url(<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/i/coat2.png);">
-                    <div class="coat__info">
-                        <div class="coat__best">Самые желанные</div>
-                        <div class="coat__bag">сумки</div>
-                        <div class="anchor">смотреть все</div>
-                    </div></a></div>
-            <div class="cell large-3 medium-6 medium-order-3"><a class="coat" href="#" style="background-image:url(<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/i/coat3.png);">
-                    <div class="coat__info">
-                        <div class="anchor">смотреть товары<br>по лучшим ценам</div>
-                    </div></a></div>
-            <div class="cell large-6 medium-6 medium-order-4"><a class="coat coat_high" href="#" style="background-image:url(<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/i/coat4.png);">
-                    <div class="coat__info">
-                        <div class="coat__brand">бренд</div>
-                        <div class="coat__title">Emilio Pucci: эффектный принт</div>
-                        <div class="margin-bottom-6">Неожиданная интерпритация знакомых принтов</div>
-                        <div class="anchor">Коллекция</div>
-                    </div></a></div>
-            <div class="cell large-6 medium-6 medium-order-5"><a class="coat coat_high" href="#" style="background-image:url(<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/i/coat5.png);">
-                    <div class="coat__info text-white">
-                        <div class="coat__brand coat__brand_white">бренд</div>
-                        <div class="coat__title">Коллекция пуховиков</div>
-                        <div class="margin-bottom-6">Главные модели сезона - Etro, lenki lenki и Marques Almedia</div>
-                        <div class="anchor anchor_white">выбрать</div>
-                    </div></a></div>
+            <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerdress",Array(
+                    "TYPE" => "BANNER_MAIN_PAGE_DRESS",
+                    "CACHE_TYPE" => "A",
+                    "NOINDEX" => "Y",
+                    "CACHE_TIME" => "3600"
+                )
+            );?>
+
+            <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerbag",Array(
+                    "TYPE" => "BANNER_MAIN_PAGE_BAGS",
+                    "CACHE_TYPE" => "A",
+                    "NOINDEX" => "Y",
+                    "CACHE_TIME" => "3600"
+                )
+            );?>
+
+            <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerprices",Array(
+                    "TYPE" => "BANNER_MAIN_PAGE_OURPRICES",
+                    "CACHE_TYPE" => "A",
+                    "NOINDEX" => "Y",
+                    "CACHE_TIME" => "3600"
+                )
+            );?>
+
+            <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerprint",Array(
+                    "TYPE" => "BANNER_MAIN_PAGE_PRINT",
+                    "CACHE_TYPE" => "A",
+                    "NOINDEX" => "Y",
+                    "CACHE_TIME" => "3600"
+                )
+            );?>
+
+            <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannercollectionjacket",Array(
+                    "TYPE" => "BANNER_MAIN_PAGE_COLLECTION_JACKET",
+                    "CACHE_TYPE" => "A",
+                    "NOINDEX" => "Y",
+                    "CACHE_TIME" => "3600"
+                )
+            );?>
+
         </div>
     </div>
     <div class="grid-x grid-padding-x text-center">
