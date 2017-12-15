@@ -32,7 +32,9 @@
       }
     }
     &__title {
-      margin-top: rem-calc(12);
+      padding-top: rem-calc(12);
+      margin-bottom: rem-calc(0);
+      padding-bottom: rem-calc(12);
       position: relative;
       padding-right: rem-calc(15);
       padding-left: rem-calc(15);
@@ -41,7 +43,7 @@
         transition: 0.3s;
         position: absolute;
         right: rem-calc(0);
-        top: rem-calc(5);
+        top: rem-calc(17);
       }
 
       &.js-show {

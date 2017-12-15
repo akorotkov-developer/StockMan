@@ -29,6 +29,14 @@
     }
   }
   @include breakpoint(small only) {
+    padding-left: rem-calc(15);
+    padding-right: rem-calc(15);
+    .slick-dots {
+      left: rem-calc(0);
+    }
+    .slick-arrow{
+      opacity:1;
+    }
     &__slide {
       background: none;
     }
