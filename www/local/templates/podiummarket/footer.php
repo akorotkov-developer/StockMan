@@ -2,11 +2,15 @@
 IncludeTemplateLangFile(__FILE__);
 ?>
 <?if ($APPLICATION->GetCurPage() != "/") {?>
+</div>
+<?}?>
+
+<?/*if ($APPLICATION->GetCurPage() != "/") {?>
             </div>
         </div>
     </div>
 </div>
-<?}?>
+<?}*/?>
 
 <div class="reveal" id="enter-popup" data-reveal data-deep-link="true">
     <div class="grid-x grid-padding-x">
