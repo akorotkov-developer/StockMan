@@ -68,7 +68,6 @@ block content
           fieldset
             legend: strong Тип плательщика
             +check('zz1','Физическое лицо')
-            +check('zz2','Юридическое лицо')
       
           label
             strong
@@ -76,11 +75,7 @@ block content
               | Местоположение
             input(type='text')
           p.help-text Выберите свой город в списке. Если вы не нашли свой город, выберите "другое местоположение", а город впишите в поле "Город"
-          label
-            strong
-              span.text-primary *&nbsp;
-              | Индекс
-            input(type='text')
+        
         .callout
           h2 Доставка
           .grid-x.grid-padding-x.small-up-1.medium-up-2.large-up-4(data-equalizer data-equalize-by-row="true")

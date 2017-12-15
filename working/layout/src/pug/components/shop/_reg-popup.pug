@@ -6,9 +6,11 @@
         .cell        
           form(action='shop-user-account.html')
             label
-              input(type='text',placeholder="Имя")
+              input(type='text',placeholder="Имя*")
             label
               input(type='text',placeholder="Фамилия")
+            label
+              input(type='text',placeholder="Отчество")
       
             .check
               input(type="radio",name="gend",id="a11",checked).check__input
@@ -21,12 +23,13 @@
               .cell.medium-9
         
                 label
-                  input(type='tel',placeholder="Телефон")
+                  input(type='tel',placeholder="Телефон*")
                 label
                   input(type='text',placeholder="Дата рождения")
                 label
                   input(type='password',placeholder="Пароль*")
                 p.help-text Пароль должен быть не менее 6 символов
+                p.help-text * - обязательные поля
               .cell
                 .check
                   input(type="checkbox",id='y1').check__input
@@ -34,6 +37,9 @@
                     | Я ознакомлен и принимаю условия &nbsp;
                     a(href='shop-regular.html' title='') Соглашения об использовании сайта
                     |, в том числе в части обработки и использования моих персональных данных
+                .check
+                  input(type="checkbox",id='y2').check__input
+                  label.check__label(for='y2') Я хочу получать информацию об акция и скидках
             .grid-x.align-center
               .cell.large-7
                 button.button.expanded

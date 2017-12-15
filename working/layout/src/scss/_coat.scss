@@ -93,13 +93,14 @@
     font-family: "Geo",sans-serif;
     line-height: 1.1;
   }
-
-
   @include breakpoint(large down) {
     height: rem-calc(430);
   }
-    @include breakpoint(medium down) {
+  @include breakpoint(medium down) {
+    height: rem-calc(76);
+    
     &__info {
       background: rgba($white,.5);
-    } }
+    }
+  }
 }
