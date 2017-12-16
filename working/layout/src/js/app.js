@@ -30,7 +30,10 @@ setupAsync({"server":{"url":"//api-maps.yandex.ru/2.1.56","path":"build/release"
         searchControlProvider: 'yandex#search'
       });
 
-myMap.behaviors.disable('scrollZoom')
+myMap.behaviors.disable('scrollZoom');
+setTimeout(function() {
+  disableDragOnMobile();
+},200);
 
     }
 
@@ -46,9 +49,7 @@ myMap.behaviors.disable('scrollZoom')
     disableDragOnMobile();
     });
     $(window).on('load',function() {
-      setTimeout(function() {
-        disableDragOnMobile();
-      },3000);
+
 
     });
     //end of yandex map shop-address.html
