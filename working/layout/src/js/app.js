@@ -2147,6 +2147,7 @@ $(document).foundation();
     //   var heightDots = $('.pants .slick-dots').height();
     //   $('.pants .slick-next').css('top', heightDots + 100);
     // });
+    console.log('fix');
     $(".pants").slick({
       infinite: true,
       dots: true,
