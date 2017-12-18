@@ -2140,11 +2140,9 @@ $(document).foundation();
     });
     $('.pants').on('init', function(event, slick) {
       $('.pants .slick-dots li').each(function(index) {
-var thisItem = $(this);
-setTimeout(function() {
-  thisItem.find('button').css('background-image', 'url(' + imgUrl[index] + ');');
 
-},300);
+
+         $(this).find('button').attr('style', 'background-image:url(' + imgUrl[index] + ');');
 
       });
       var heightDots = $('.pants .slick-dots').height();
