@@ -2142,7 +2142,7 @@ $(document).foundation();
       $('.pants .slick-dots li').each(function(index) {
 var thisItem = $(this);
 setTimeout(function() {
-  thisItem.find('button').css('style', 'background-image:url(' + imgUrl[index] + ');');
+  thisItem.find('button').css('background-image', 'url(' + imgUrl[index] + ');');
 
 },300);
 
