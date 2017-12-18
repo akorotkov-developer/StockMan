@@ -2131,22 +2131,22 @@ $(document).foundation();
     //begin of .skirt__slider
 
 
-    var imgUrl = [];
-    $('.skirt__inner').each(function(index) {
-      imgUrl.push($(this).find('img').prop('src'));
-
-      $('.pants').append('<div><img src="' + imgUrl[index] + '" alt="" /></div>');
-
-    });
-    $('.pants').on('init', function(event, slick) {
-      $('.pants .slick-dots li').each(function(index) {
-
-        $(this).find('button').prop('style', 'background-image:url(' + imgUrl[index] + ');');
-
-      });
-      var heightDots = $('.pants .slick-dots').height();
-      $('.pants .slick-next').css('top', heightDots + 100);
-    });
+    // var imgUrl = [];
+    // $('.skirt__inner').each(function(index) {
+    //   imgUrl.push($(this).find('img').prop('src'));
+    //
+    //   $('.pants').append('<div><img src="' + imgUrl[index] + '" alt="" /></div>');
+    //
+    // });
+    // $('.pants').on('init', function(event, slick) {
+    //   $('.pants .slick-dots li').each(function(index) {
+    //
+    //     $(this).find('button').prop('style', 'background-image:url(' + imgUrl[index] + ');');
+    //
+    //   });
+    //   var heightDots = $('.pants .slick-dots').height();
+    //   $('.pants .slick-next').css('top', heightDots + 100);
+    // });
     $(".pants").slick({
       infinite: true,
       dots: true,
