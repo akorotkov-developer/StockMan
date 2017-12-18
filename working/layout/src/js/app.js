@@ -15,7 +15,10 @@ setupAsync({"server":{"url":"//api-maps.yandex.ru/2.1.56","path":"build/release"
     var myMap;
 
     // Дождёмся загрузки API и готовности DOM.
-    ymaps.ready(init);
+    if($('#map').length) {
+          ymaps.ready(init);
+    }
+
 
     function init() {
 
