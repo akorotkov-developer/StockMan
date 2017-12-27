@@ -32,8 +32,267 @@ else
 
 <?
 if ($isFilter || $isSidebar): ?>
-    <div class="col-md-3 col-sm-4 col-sm-push-8 col-md-push-9<?=(isset($arParams['FILTER_HIDE_ON_MOBILE']) && $arParams['FILTER_HIDE_ON_MOBILE'] === 'Y' ? ' hidden-xs' : '')?>">
+
         <? if ($isFilter): ?>
+            <div class="grid-x grid-padding-x margin-bottom-12">
+                <div class="cell small-12 medium-8 large-6 size">
+                    <div class="sort">
+                        <div class="sort__main">Цвет</div>
+                        <div class="sort__other">
+                            <div class="sort__over">
+                                <form action="#">
+                                    <input type="text" placeholder="Найдите цвет">
+                                </form>
+                                <div>
+                                    Выделить
+                                    <a class="js-select-all">все    </a>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="b1">
+                                        <label class="check__label" for="b1">Белый</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="b2">
+                                        <label class="check__label" for="b2">Красный</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="b3">
+                                        <label class="check__label" for="b3">Фиолетовый</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="b4">
+                                        <label class="check__label" for="b4">Красный</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="b5">
+                                        <label class="check__label" for="b5">Белый</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="b6">
+                                        <label class="check__label" for="b6">Красный</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
+                        </div>
+                    </div>
+                    <div class="sort">
+                        <div class="sort__main">Размер</div>
+                        <div class="sort__other">
+                            <div class="sort__over">
+                                <div class="margin-bottom-3">Ваш российский размер</div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="c1">
+                                        <label class="check__label" for="c1">38</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="c2">
+                                        <label class="check__label" for="c2">40</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="c3">
+                                        <label class="check__label" for="c3">44</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="c4">
+                                        <label class="check__label" for="c4">45</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="c5">
+                                        <label class="check__label" for="c5">47</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="c6">
+                                        <label class="check__label" for="c6">50</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
+                        </div>
+                    </div>
+                    <div class="sort">
+                        <div class="sort__main">Бренд</div>
+                        <div class="sort__other">
+                            <div class="sort__over">
+                                <form action="#">
+                                    <input type="text" placeholder="Найдите бренд">
+                                </form>
+                                <div>
+                                    Выделить
+                                    <a class="js-select-all">все    </a>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="d1">
+                                        <label class="check__label" for="d1">Аffari</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="d2">
+                                        <label class="check__label" for="d2">Аlcott</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="d3">
+                                        <label class="check__label" for="d3">Аffari</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="d4">
+                                        <label class="check__label" for="d4">Аffari</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="d5">
+                                        <label class="check__label" for="d5">Аffari</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="d6">
+                                        <label class="check__label" for="d6">Аffari</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="d7">
+                                        <label class="check__label" for="d7">Аffari</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="d8">
+                                        <label class="check__label" for="d8">Аffari</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="d9">
+                                        <label class="check__label" for="d9">Аffari</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
+                        </div>
+                    </div>
+                    <div class="sort">
+                        <div class="sort__main">Сезон</div>
+                        <div class="sort__other">
+                            <div class="sort__over">
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="e1">
+                                        <label class="check__label" for="e1">демисезон</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="e2">
+                                        <label class="check__label" for="e2">зима</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="e3">
+                                        <label class="check__label" for="e3">лето</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="e4">
+                                        <label class="check__label" for="e4">мульти</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
+                        </div>
+                    </div>
+                    <div class="sort">
+                        <div class="sort__main">Цена</div>
+                        <div class="sort__other">
+                            <div class="sort__over">
+                                <div>От
+                                    <input class="sort__input" type="text" placeholder="399">До
+                                    <input class="sort__input" type="text" placeholder="6399">
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="f4">
+                                        <label class="check__label" for="f4">только товары со скидкой</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell small-12 medium-4 large-6 text-center medium-text-right"><a class="text-secondary margin-right-7" href="#">На модели</a>
+                    <div class="sort text-left">
+                        <div class="sort__main">Сортировать</div>
+                        <div class="sort__other sort__other_right">
+                            <div class="sort__over">
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="j1">
+                                        <label class="check__label" for="j1">по популярности</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="j2">
+                                        <label class="check__label" for="j2">по возрастанию цены</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="j3">
+                                        <label class="check__label" for="j3">по убыванию цены</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="j4">
+                                        <label class="check__label" for="j4">по новинкам</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="check">
+                                        <input class="check__input" type="checkbox" id="j5">
+                                        <label class="check__label" for="j5">по скидкам</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="bx-sidebar-block">
                 <?
                 $APPLICATION->IncludeComponent(
@@ -85,7 +344,7 @@ if ($isFilter || $isSidebar): ?>
             );
             ?>
         <?endif?>
-    </div>
+
 <?endif?>
 <div class="<?=(($isFilter || $isSidebar) ? "col-md-9 col-sm-8 col-sm-pull-4 col-md-pull-3" : "col-xs-12")?>">
     <div class="row">
