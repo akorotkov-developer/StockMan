@@ -32,7 +32,8 @@ else
 
 <?
 if ($isFilter || $isSidebar): ?>
-
+    <div class="grid-x grid-padding-x margin-bottom-12">
+        <?/*Фильтр*/?>
         <? if ($isFilter): ?>
                 <?
                 $APPLICATION->IncludeComponent(
@@ -84,10 +85,76 @@ if ($isFilter || $isSidebar): ?>
             ?>
         <?endif?>
 
+        <?/*Сортировка*/?>
+        <div class="cell small-12 medium-4 large-6 text-center medium-text-right">
+            <a class="text-secondary margin-right-7" href="#">На модели</a>
+            <div class="sort text-left">
+                <div class="sort__main">Сортировать</div>
+                <div class="sort__other sort__other_right">
+                    <div class="sort__over">
+                        <div>
+                            <div class="check">
+                                <input class="check__input" type="checkbox" id="j1">
+                                <label class="check__label" for="j1">по популярности</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="check">
+                                <input class="check__input" type="checkbox" id="j2">
+                                <label class="check__label" for="j2">по возрастанию цены</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="check">
+                                <input class="check__input" type="checkbox" id="j3">
+                                <label class="check__label" for="j3">по убыванию цены</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="check">
+                                <input class="check__input" type="checkbox" id="j4">
+                                <label class="check__label" for="j4">по новинкам</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="check">
+                                <input class="check__input" type="checkbox" id="j5">
+                                <label class="check__label" for="j5">по скидкам</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
+                </div>
+            </div>
+        </div>
+        <?/*Конец сортировки*/?>
+    </div>
+
 <?endif?>
-<div class="<?=(($isFilter || $isSidebar) ? "col-md-9 col-sm-8 col-sm-pull-4 col-md-pull-3" : "col-xs-12")?>">
-    <div class="row">
-        <div class="col-xs-12">
+
+
+    <div class="grid-x grid-padding-x">
+        <?/*Левое меню*/?>
+            <?$APPLICATION->IncludeComponent(
+                "bitrix:menu",
+                "leftcatalogmenu",
+                array(
+                    "COMPONENT_TEMPLATE" => "leftcatalogmenu",
+                    "ROOT_MENU_TYPE" => "left",
+                    "MENU_CACHE_TYPE" => "N",
+                    "MENU_CACHE_TIME" => "3600",
+                    "MENU_CACHE_USE_GROUPS" => "Y",
+                    "MENU_CACHE_GET_VARS" => array(
+                    ),
+                    "MAX_LEVEL" => "2",
+                    "CHILD_MENU_TYPE" => "left",
+                    "USE_EXT" => "Y",
+                    "DELAY" => "N",
+                    "ALLOW_MULTI_SELECT" => "N"
+                ),
+                false
+            );?>
+
             <?
             if (ModuleManager::isModuleInstalled("sale"))
             {
@@ -107,108 +174,10 @@ if ($isFilter || $isSidebar): ?>
                     }
                     $obCache->EndDataCache($arRecomData);
                 }
-
-                if (!empty($arRecomData) && $arParams['USE_GIFTS_SECTION'] === 'Y')
-                {
-                    ?>
-                    <div data-entity="parent-container">
-                    <?
-                    if (!isset($arParams['GIFTS_SECTION_LIST_HIDE_BLOCK_TITLE']) || $arParams['GIFTS_SECTION_LIST_HIDE_BLOCK_TITLE'] !== 'Y')
-                    {
-                        ?>
-                        <div class="catalog-block-header" data-entity="header" data-showed="false" style="display: none; opacity: 0;">
-                            <?=($arParams['GIFTS_SECTION_LIST_BLOCK_TITLE'] ?: \Bitrix\Main\Localization\Loc::getMessage('CT_GIFTS_SECTION_LIST_BLOCK_TITLE_DEFAULT'))?>
-                        </div>
-                        <?
-                    }
-
-                    CBitrixComponent::includeComponentClass('bitrix:sale.products.gift.section');
-                    $APPLICATION->IncludeComponent(
-                        'bitrix:sale.products.gift.section',
-                        'giftsection',
-                        array(
-                            'IBLOCK_TYPE' => $arParams['IBLOCK_TYPE'],
-                            'IBLOCK_ID' => $arParams['IBLOCK_ID'],
-
-                            'SECTION_ID' => $arResult['VARIABLES']['SECTION_ID'],
-                            'SECTION_CODE' => $arResult['VARIABLES']['SECTION_CODE'],
-                            'SECTION_ID_VARIABLE' => $arParams['SECTION_ID_VARIABLE'],
-
-                            'PRODUCT_ID_VARIABLE' => $arParams['PRODUCT_ID_VARIABLE'],
-                            'ACTION_VARIABLE' => (!empty($arParams['ACTION_VARIABLE']) ? $arParams['ACTION_VARIABLE'] : 'action').'_spgs',
-
-                            'PRODUCT_ROW_VARIANTS' => \Bitrix\Main\Web\Json::encode(
-                                SaleProductsGiftSectionComponent::predictRowVariants(
-                                    $arParams['GIFTS_SECTION_LIST_PAGE_ELEMENT_COUNT'],
-                                    $arParams['GIFTS_SECTION_LIST_PAGE_ELEMENT_COUNT']
-                                )
-                            ),
-                            'PAGE_ELEMENT_COUNT' => $arParams['GIFTS_SECTION_LIST_PAGE_ELEMENT_COUNT'],
-                            'DEFERRED_PRODUCT_ROW_VARIANTS' => '',
-                            'DEFERRED_PAGE_ELEMENT_COUNT' => 0,
-
-                            'SHOW_DISCOUNT_PERCENT' => $arParams['GIFTS_SHOW_DISCOUNT_PERCENT'],
-                            'DISCOUNT_PERCENT_POSITION' => $arParams['DISCOUNT_PERCENT_POSITION'],
-                            'SHOW_OLD_PRICE' => $arParams['GIFTS_SHOW_OLD_PRICE'],
-                            'PRODUCT_DISPLAY_MODE' => 'Y',
-                            'PRODUCT_BLOCKS_ORDER' => $arParams['LIST_PRODUCT_BLOCKS_ORDER'],
-                            'SHOW_SLIDER' => $arParams['LIST_SHOW_SLIDER'],
-                            'SLIDER_INTERVAL' => isset($arParams['LIST_SLIDER_INTERVAL']) ? $arParams['LIST_SLIDER_INTERVAL'] : '',
-                            'SLIDER_PROGRESS' => isset($arParams['LIST_SLIDER_PROGRESS']) ? $arParams['LIST_SLIDER_PROGRESS'] : '',
-
-                            'TEXT_LABEL_GIFT' => $arParams['GIFTS_DETAIL_TEXT_LABEL_GIFT'],
-
-                            'LABEL_PROP_'.$arParams['IBLOCK_ID'] => array(),
-                            'LABEL_PROP_MOBILE_'.$arParams['IBLOCK_ID'] => array(),
-                            'LABEL_PROP_POSITION' => $arParams['LABEL_PROP_POSITION'],
-
-                            'ADD_TO_BASKET_ACTION' => $basketAction,
-                            'MESS_BTN_BUY' => $arParams['~GIFTS_MESS_BTN_BUY'],
-                            'MESS_BTN_ADD_TO_BASKET' => $arParams['~GIFTS_MESS_BTN_BUY'],
-                            'MESS_BTN_DETAIL' => $arParams['~MESS_BTN_DETAIL'],
-                            'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
-
-                            'PROPERTY_CODE' => $arParams['LIST_PROPERTY_CODE'],
-                            'PROPERTY_CODE_MOBILE' => $arParams['LIST_PROPERTY_CODE_MOBILE'],
-                            'ADD_PICT_PROP' => $arParams['ADD_PICT_PROP'],
-
-                            'OFFERS_FIELD_CODE' => $arParams['LIST_OFFERS_FIELD_CODE'],
-                            'OFFERS_PROPERTY_CODE' => $arParams['LIST_OFFERS_PROPERTY_CODE'],
-                            'OFFER_TREE_PROPS' => $arParams['OFFER_TREE_PROPS'],
-                            'OFFERS_CART_PROPERTIES' => $arParams['OFFERS_CART_PROPERTIES'],
-                            'OFFER_ADD_PICT_PROP' => $arParams['OFFER_ADD_PICT_PROP'],
-
-                            'HIDE_NOT_AVAILABLE' => 'Y',
-                            'HIDE_NOT_AVAILABLE_OFFERS' => 'Y',
-                            'PRODUCT_SUBSCRIPTION' => $arParams['PRODUCT_SUBSCRIPTION'],
-                            'TEMPLATE_THEME' => $arParams['TEMPLATE_THEME'],
-                            'PRICE_CODE' => $arParams['PRICE_CODE'],
-                            'SHOW_PRICE_COUNT' => $arParams['SHOW_PRICE_COUNT'],
-                            'PRICE_VAT_INCLUDE' => $arParams['PRICE_VAT_INCLUDE'],
-                            'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
-                            'BASKET_URL' => $arParams['BASKET_URL'],
-                            'ADD_PROPERTIES_TO_BASKET' => $arParams['ADD_PROPERTIES_TO_BASKET'],
-                            'PRODUCT_PROPS_VARIABLE' => $arParams['PRODUCT_PROPS_VARIABLE'],
-                            'PARTIAL_PRODUCT_PROPERTIES' => $arParams['PARTIAL_PRODUCT_PROPERTIES'],
-                            'USE_PRODUCT_QUANTITY' => 'N',
-                            'PRODUCT_QUANTITY_VARIABLE' => $arParams['PRODUCT_QUANTITY_VARIABLE'],
-                            'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
-
-                            'USE_ENHANCED_ECOMMERCE' => (isset($arParams['USE_ENHANCED_ECOMMERCE']) ? $arParams['USE_ENHANCED_ECOMMERCE'] : ''),
-                            'DATA_LAYER_NAME' => (isset($arParams['DATA_LAYER_NAME']) ? $arParams['DATA_LAYER_NAME'] : ''),
-                            'BRAND_PROPERTY' => (isset($arParams['BRAND_PROPERTY']) ? $arParams['BRAND_PROPERTY'] : ''),
-                        ),
-                        $component,
-                        array("HIDE_ICONS" => "Y")
-                    );
-                }
-                ?>
-                </div>
-                <?
             }
             ?>
-        </div>
-        <div class="col-xs-12">
+
+
             <?
             $intSectionID = $APPLICATION->IncludeComponent(
                 "bitrix:catalog.section",
@@ -338,7 +307,7 @@ if ($isFilter || $isSidebar): ?>
                 $component
             );
             ?>
-        </div>
+
         <?
         $GLOBALS['CATALOG_CURRENT_SECTION_ID'] = $intSectionID;
 
@@ -349,7 +318,7 @@ if ($isFilter || $isSidebar): ?>
                 if (!isset($arParams['USE_BIG_DATA']) || $arParams['USE_BIG_DATA'] != 'N')
                 {
                     ?>
-                    <div class="col-xs-12" data-entity="parent-container">
+
                         <div class="catalog-block-header" data-entity="header" data-showed="false" style="display: none; opacity: 0;">
                             <?=GetMessage('CATALOG_PERSONAL_RECOM')?>
                         </div>
@@ -467,11 +436,10 @@ if ($isFilter || $isSidebar): ?>
                             $component
                         );
                         ?>
-                    </div>
+
                     <?
                 }
             }
         }
         ?>
     </div>
-</div>

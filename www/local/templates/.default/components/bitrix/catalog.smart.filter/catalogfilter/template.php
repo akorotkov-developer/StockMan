@@ -24,7 +24,7 @@ if (isset($templateData['TEMPLATE_THEME']))
 
 ?>
 
-<div class="grid-x grid-padding-x margin-bottom-12">
+
     <div class="cell small-12 medium-8 large-6 size">
 
         <form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="<?echo $arResult["FORM_ACTION"]?>" method="get" class="smartfilter">
@@ -580,7 +580,7 @@ if (isset($templateData['TEMPLATE_THEME']))
 
         </form>
     </div>
-</div>
+
 
 
 <script type="text/javascript">
