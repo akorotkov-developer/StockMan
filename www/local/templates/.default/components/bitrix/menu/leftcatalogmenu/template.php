@@ -3,7 +3,7 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
 ?>
 
 <?if (!empty($arResult)):?>
-<div class="cell small-12 medium-4 large-3 xlarge-2 text-center medium-text-left">
+
     <div class="hide-for-small-only" id="menu-left">
         <div class="margin-bottom-2"><a class="text-uppercase text-decoration-none" href="#">Вся одежда</a></div>
         <ul class="cloth">
@@ -56,6 +56,6 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
             <?endif?>
         </ul>
     </div>
-</div>
+
 
 <?endif?>

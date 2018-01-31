@@ -82,7 +82,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 	"SECTION_TOP_DEPTH" => "1",
 	"SECTIONS_VIEW_MODE" => "TILE",
 	"SECTIONS_SHOW_PARENT_NAME" => "N",
-	"PAGE_ELEMENT_COUNT" => "15",
+	"PAGE_ELEMENT_COUNT" => "4",
 	"LINE_ELEMENT_COUNT" => "3",
 	"ELEMENT_SORT_FIELD" => "desc",
 	"ELEMENT_SORT_ORDER" => "asc",
@@ -163,7 +163,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 	"OFFER_TREE_PROPS" => array(
 		0 => "SIZES_SHOES",
 		1 => "SIZES_CLOTHES",
-		2 => "COLOR_REF",
+		//2 => "COLOR_REF",
 		3 => "",
 	),
 	"SHOW_DISCOUNT_PERCENT" => "Y",
