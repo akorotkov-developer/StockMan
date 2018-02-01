@@ -3,7 +3,21 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
 ?>
 
 <?if (!empty($arResult)):?>
+    <?
+    /*echo "<pre>";
+    var_dump($arResult);
+    echo "</pre>";*/
 
+    /*$arMenu = array();
+    $i=0;
+    foreach ($arResult as $arItem) {
+        $depthlevel = $arItem["DEPTH_LEVEL"];
+        if ($arItem["IS_PARENT"]) {
+            $depthlevel = $arItem["DEPTH_LEVEL"];
+            $arMenu[] =
+        }
+    }*/
+    ?>
     <div class="hide-for-small-only" id="menu-left">
         <div class="margin-bottom-2"><a class="text-uppercase text-decoration-none" href="#">Вся одежда</a></div>
         <ul class="cloth">
@@ -11,18 +25,27 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
             $previousLevel = 0;
             foreach($arResult as $arItem):?>
 
-                <?if ($previousLevel && $arItem["DEPTH_LEVEL"] < $previousLevel):?>
+                <?if ($previousLevel && $arItem["DEPTH_LEVEL"] < $previousLevel && !$selected){?>
+                    <?=str_repeat("</li>", ($previousLevel - $arItem["DEPTH_LEVEL"]));?>
+                <?} elseif ($previousLevel && $arItem["DEPTH_LEVEL"] < $previousLevel) {?>
                     <?=str_repeat("</ul></li>", ($previousLevel - $arItem["DEPTH_LEVEL"]));?>
-                <?endif?>
+                <?}?>
 
                 <?if ($arItem["IS_PARENT"]):?>
 
                     <?if ($arItem["DEPTH_LEVEL"] == 1):?>
-                        <li class="cloth__item"><a class="cloth__link cloth__link_more" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a>
-                        <ul class="cloth">
+                        <li class="cloth__item"><a class="cloth__link <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?>" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a>
+                        <?if ($arItem["SELECTED"]) {?>
+                            <?$selected = true;?>
+                            <ul class="cloth">
+                        <?} else {?>
+                            <?$selected = false;?>
+                        <?}?>
                     <?else:?>
-                        <li class="cloth__item"><a class="cloth__link cloth__link_more" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a>
-                        <ul class="cloth">
+                        <?if ($arItem["SELECTED"] || $selected) {?>
+                            <li class="cloth__item"><a class="cloth__link <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?> cloth__link_inside" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a>
+                            <ul class="cloth">
+                        <?}?>
                     <?endif?>
 
                 <?else:?>
@@ -30,17 +53,11 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
                     <?if ($arItem["PERMISSION"] > "D"):?>
 
                         <?if ($arItem["DEPTH_LEVEL"] == 1):?>
-                            <li class="cloth__item"><a class="cloth__link" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a></li>
+                            <li class="cloth__item"><a class="cloth__link <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?>" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a></li>
                         <?else:?>
-                            <li class="cloth__item"><a class="cloth__link" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a></li>
-                        <?endif?>
-
-                    <?else:?>
-
-                        <?if ($arItem["DEPTH_LEVEL"] == 1):?>
-                            <li class="cloth__item"><a class="cloth__link" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a></li>
-                        <?else:?>
-                            <li class="cloth__item"><a class="cloth__link" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a></li>
+                            <?if ($selected) {?>
+                                <li class="cloth__item"><a class="cloth__link cloth__link_inside <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?>" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a></li>
+                            <?}?>
                         <?endif?>
 
                     <?endif?>
@@ -51,9 +68,11 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
 
             <?endforeach?>
 
-            <?if ($previousLevel > 1)://close last item tags?>
+            <?if ($previousLevel > 1 && !$selected){//close last item tags?>
+                <?=str_repeat("</li>", ($previousLevel-1) );?>
+            <?} elseif ($previousLevel > 1){ ?>
                 <?=str_repeat("</ul></li>", ($previousLevel-1) );?>
-            <?endif?>
+            <?}?>
         </ul>
     </div>
 

@@ -568,7 +568,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                     </div>
                                                 </div>
                                             <?endforeach;?>
-                                            <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                                            <div class="sort__footer"><input type="submit" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                                         </div>
 
 
