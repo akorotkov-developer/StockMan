@@ -133,7 +133,7 @@ if ($isFilter || $isSidebar): ?>
 <?endif?>
 
 
-    <div class="grid-x grid-padding-x">
+    <div class="grid-x grid-padding-x ffff">
         <?/*Левое меню*/?>
         <div class="cell small-12 medium-4 large-3 xlarge-2 text-center medium-text-left">
             <?$APPLICATION->IncludeComponent(
@@ -179,7 +179,7 @@ if ($isFilter || $isSidebar): ?>
             }
             ?>
 
-        <div class="cell small-12 medium-8 xlarge-10 large-9">
+
             <?
             $intSectionID = $APPLICATION->IncludeComponent(
                 "bitrix:catalog.section",
@@ -309,7 +309,7 @@ if ($isFilter || $isSidebar): ?>
                 $component
             );
             ?>
-        </div>
+
 
         <?
         $GLOBALS['CATALOG_CURRENT_SECTION_ID'] = $intSectionID;
