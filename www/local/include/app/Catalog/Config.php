@@ -11,4 +11,9 @@ class Config
 
     const ELEMENT_SORT_FIELD2 = \StockMan\Config::SORT_CATALOG_PRICE_ID;
     const ELEMENT_SORT_ORDER2 = "desc";
+
+    const MORE_PHOTO = "MORE_PHOTO";
+    const DETAILS = "DETAILS";
+    const DELEVIRY_PAYS_BACKS = "DELEVIRY_PAYS_BACKS";
+    const STILIST_COMMENTS = "STILIST_COMMENTS";
 }

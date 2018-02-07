@@ -104,7 +104,7 @@ use Bitrix\Main\Page\AssetLocation;
 );?>
 
 <?if ($APPLICATION->GetCurPage() != "/") {?>
-<div class="content">
+    <div class="content <?$APPLICATION->ShowViewContent('catalog_element');?>">
 <?}?>
 
 <?/*if ($APPLICATION->GetCurPage() != "/") {?>

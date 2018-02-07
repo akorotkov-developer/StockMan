@@ -132,7 +132,10 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		2 => "SIZES_CLOTHES",
 		3 => "COLOR_REF",
 		4 => "MORE_PHOTO",
-		5 => "",
+		5 => StockMan\Catalog\Config::STILIST_COMMENTS,
+		6 => StockMan\Catalog\Config::DETAILS,
+		7 => StockMan\Catalog\Config::DELEVIRY_PAYS_BACKS,
+		8 => "",
 	),
 	"DETAIL_BACKGROUND_IMAGE" => "BACKGROUND_IMAGE",
 	"LINK_IBLOCK_TYPE" => "",
@@ -167,7 +170,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		3 => "",
 	),
 	"SHOW_DISCOUNT_PERCENT" => "Y",
-	"SHOW_OLD_PRICE" => "Y",
+	"SHOW_OLD_PRICE" => "N",
 	"MESS_BTN_BUY" => "Купить",
 	"MESS_BTN_ADD_TO_BASKET" => "В корзину",
 	"MESS_BTN_COMPARE" => "Сравнение",
@@ -200,7 +203,8 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"section" => "#SECTION_CODE#/",
 		"element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
 		"compare" => "compare/",
-	)
+	),
+	"CATALOG_ELEMENT_TEMPLATE" => "podiummarket_element"
 	),
 	false
 );?>
