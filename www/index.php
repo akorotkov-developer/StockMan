@@ -199,7 +199,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
             "PAGE_ELEMENT_COUNT" => "18",
             "PARTIAL_PRODUCT_PROPERTIES" => "N",
             "PRICE_CODE" => array(
-                0 => "BASE",
+                0 => StockMan\Config::CATALOG_PRICE,
             ),
             "PRICE_VAT_INCLUDE" => "Y",
             "PRODUCT_BLOCKS_ORDER" => "price,props,sku,quantityLimit,quantity,buttons,compare",

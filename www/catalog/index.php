@@ -40,7 +40,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		1 => "",
 	),
 	"FILTER_PRICE_CODE" => array(
-		0 => "BASE",
+        0 => StockMan\Config::CATALOG_PRICE,
 	),
 	"FILTER_OFFERS_FIELD_CODE" => array(
 		0 => "PREVIEW_PICTURE",
@@ -61,7 +61,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 	"SHOW_LINK_TO_FORUM" => "Y",
 	"USE_COMPARE" => "N",
 	"PRICE_CODE" => array(
-		0 => "BASE",
+        0 => StockMan\Config::CATALOG_PRICE,
 	),
 	"USE_PRICE_COUNT" => "N",
 	"SHOW_PRICE_COUNT" => "1",

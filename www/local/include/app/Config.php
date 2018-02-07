@@ -16,8 +16,10 @@ class Config
     const SLIDER_TYPE = "news";
 
     //ID Каталога
-    const CATALOG_ID = 6;
-    const CATALOG_TYPE = "catalog";
+    const CATALOG_ID = 10;
+    const CATALOG_TYPE = "1c_catalog";
+
+    const CATALOG_PRICE = "Розничная";
 
     /*----------Меню--------*/
     const INDEX_CATALOG_SECTION_ID_1 = 0;
