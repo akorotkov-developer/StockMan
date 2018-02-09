@@ -7,7 +7,7 @@ $aMenuLinksExt = array();
 if(CModule::IncludeModule('iblock'))
 {
 	$arFilter = array(
-		"TYPE" => "catalog",
+		"TYPE" => StockMan\Config::CATALOG_TYPE,
 		"SITE_ID" => SITE_ID,
 	);
 
@@ -27,7 +27,7 @@ if(CModule::IncludeModule('iblock'))
 				"SECTION_PAGE_URL" => $arIBlock['SECTION_PAGE_URL'],
 				"DETAIL_PAGE_URL" => $arIBlock['DETAIL_PAGE_URL'],
 				"IBLOCK_TYPE" => $arIBlock['IBLOCK_TYPE_ID'],
-				"IBLOCK_ID" => $arIBlock['ID'],
+				"IBLOCK_ID" => StockMan\Config::CATALOG_ID,
 				"DEPTH_LEVEL" => "3",
 				"CACHE_TYPE" => "N",
 			), false, Array('HIDE_ICONS' => 'Y'));

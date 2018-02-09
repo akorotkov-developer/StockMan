@@ -2,6 +2,7 @@
 IncludeTemplateLangFile(__FILE__);
 ?>
 <?if ($APPLICATION->GetCurPage() != "/") {?>
+    </div>
 </div>
 <?}?>
 

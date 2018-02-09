@@ -19,7 +19,7 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
     }*/
     ?>
     <div class="hide-for-small-only" id="menu-left">
-        <div class="margin-bottom-2"><a class="text-uppercase text-decoration-none" href="#">Вся одежда</a></div>
+        <div class="margin-bottom-2"><a class="text-uppercase text-decoration-none" href="/catalog/">Вся одежда</a></div>
         <ul class="cloth">
             <?
             $previousLevel = 0;

@@ -7,7 +7,3 @@
 
 $component = $this->getComponent();
 $arParams = $component->applyTemplateModifications();
-
-$this->SetViewTarget('catalog_element');
-echo "padding-top-5";
-$this->EndViewTarget();
