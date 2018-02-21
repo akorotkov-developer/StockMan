@@ -2,7 +2,15 @@
 IncludeTemplateLangFile(__FILE__);
 ?>
 <?if ($APPLICATION->GetCurPage() != "/") {?>
-    </div>
+
+
+    <?$APPLICATION->ShowViewContent('commentbegin');?>
+                </div>
+            </div>
+        </div>
+    <?$APPLICATION->ShowViewContent('commentend');?>
+
+
 </div>
 <?}?>
 

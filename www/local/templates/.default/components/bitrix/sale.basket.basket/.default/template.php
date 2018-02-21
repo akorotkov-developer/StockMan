@@ -137,14 +137,14 @@ if (strlen($arResult["ERROR_MESSAGE"]) <= 0)
                         <a href="javascript:void(0)" id="basket_toolbar_button_not_available" onclick="showBasketItemsList(4)" <?=$naHidden?>><?=GetMessage("SALE_BASKET_ITEMS_NOT_AVAILABLE")?><div id="not_available_count" class="flat">&nbsp;(<?=$naCount?>)</div></a>
                     </div>
 
-                    <div class="bx_ordercart <?=$templateData['TEMPLATE_CLASS']; ?>">
+
                         <?
                         include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items.php");
                         include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_delayed.php");
                         include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_subscribed.php");
                         include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_not_available.php");
                         ?>
-                    </div>
+
 
                 <input type="hidden" name="BasketOrder" value="BasketOrder" />
                 <!-- <input type="hidden" name="ajax_post" id="ajax_post" value="Y"> -->

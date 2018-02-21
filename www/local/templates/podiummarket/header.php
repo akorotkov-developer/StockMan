@@ -105,6 +105,51 @@ use Bitrix\Main\Page\AssetLocation;
 
 <?if ($APPLICATION->GetCurPage() != "/") {?>
     <div class="content <?$APPLICATION->ShowViewContent('catalog_element');?>">
+
+    <?$APPLICATION->IncludeComponent("bitrix:breadcrumb","",
+        Array(
+            "START_FROM" => "0",
+            "PATH" => "",
+            "SITE_ID" => StockMan\Config::SITE_ID
+        )
+    );?>
+
+    <div class="grid-container" <?$APPLICATION->ShowViewContent('page_catalog');?>>
+        <div class="grid-x grid-padding-x">
+            <div class="cell">
+                <h1><?$APPLICATION->ShowTitle();?></h1>
+            </div>
+        </div>
+    </div>
+
+    <?$APPLICATION->ShowViewContent('commentbegin');?>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+    <?$APPLICATION->ShowViewContent('commentend');?>
+
+
+        <div class="cell small-12 medium-5 large-3"<?$APPLICATION->ShowViewContent('page_catalog');?>>
+            <div class="margin-bottom-6 show-for-small-only" data-responsive-toggle="menu-left" data-hide-for="medium"><span class="button expanded" data-toggle><i class="fa fa-lg fa-bars"></i>&nbsp;Навигация</span></div>
+            <div class="callout" id="menu-left">
+                <?$APPLICATION->IncludeComponent("bitrix:menu","leftmenu",Array(
+                        "ROOT_MENU_TYPE" => "leftregular",
+                        "MAX_LEVEL" => "1",
+                        "CHILD_MENU_TYPE" => "leftregular",
+                        "USE_EXT" => "Y",
+                        "DELAY" => "N",
+                        "ALLOW_MULTI_SELECT" => "Y",
+                        "MENU_CACHE_TYPE" => "N",
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "MENU_CACHE_GET_VARS" => ""
+                    )
+                );?>
+            </div>
+        </div>
+
+    <?$APPLICATION->ShowViewContent('commentbegin');?>
+        <div class="cell small-12 medium-7 large-9">
+    <?$APPLICATION->ShowViewContent('commentend');?>
 <?}?>
 
 <?/*if ($APPLICATION->GetCurPage() != "/") {?>

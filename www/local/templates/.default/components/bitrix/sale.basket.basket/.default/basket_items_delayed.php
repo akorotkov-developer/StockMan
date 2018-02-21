@@ -10,7 +10,189 @@ $bDeleteColumn = false;
 $bWeightColumn = false;
 $bPropsColumn  = false;
 ?>
-<div id="basket_items_delayed" class="bx_ordercart_order_table_container" style="display:none">
+
+
+
+<?
+foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader):
+    if (in_array($arHeader["id"], array("TYPE"))) // some header columns are shown differently
+    {
+        $bPriceType = true;
+        continue;
+    }
+    elseif ($arHeader["id"] == "PROPS")
+    {
+        $bPropsColumn = true;
+        continue;
+    }
+    elseif ($arHeader["id"] == "DELAY")
+    {
+        continue;
+    }
+    elseif ($arHeader["id"] == "DELETE")
+    {
+        $bDeleteColumn = true;
+        continue;
+    }
+    elseif ($arHeader["id"] == "WEIGHT")
+    {
+        $bWeightColumn = true;
+    }
+
+endforeach;
+?>
+
+<div id="basket_items_delayed" style="display:none">
+    <div id="delayed_items">
+
+        <?
+        $skipHeaders = array('PROPS', 'DELAY', 'DELETE', 'TYPE');
+
+        foreach ($arResult["GRID"]["ROWS"] as $k => $arItem){
+
+            if ($arItem["DELAY"] == "Y" && $arItem["CAN_BUY"] == "Y"){?>
+                <div class="grid-x grid-padding-x" id="<?=$arItem["ID"]?>">
+                    <?
+                    foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader){
+
+                        if (in_array($arHeader["id"], $skipHeaders)) // some values are not shown in columns in this template
+                            continue;
+
+                        if ($arHeader["id"] == "NAME"){?>
+
+
+
+                            <?
+                            if (strlen($arItem["PREVIEW_PICTURE_SRC"]) > 0):
+                                $url = $arItem["PREVIEW_PICTURE_SRC"];
+                            elseif (strlen($arItem["DETAIL_PICTURE_SRC"]) > 0):
+                                $url = $arItem["DETAIL_PICTURE_SRC"];
+                            else:
+                                $url = $templateFolder."/images/no_photo.png";
+                            endif;
+                            ?>
+                            <div class="cell small-12 medium-8 large-5">
+                                <div class="grid-x grid-padding-x">
+                                    <div class="cell medium-4"><img class="margin-bottom-6" src="<?=$url;?>" alt="Товар"></div>
+                                    <div class="cell medium-8"><a class="text-insta text-uppercase text-decoration-none text-size-xlarge font-bold" href="shop-product.html">Ashley Williams</a>
+                                        <div class="text-secondary margin-bottom-3"><?=$arItem["NAME"];?></div>
+                                        <ul class="hide-for-small-only hide-for-medium-only">
+                                            <li>Цвет: Красный</li>
+                                            <li>Страна: Китай</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?}?>
+                    <?}?>
+
+                    <?/*Цена*/?>
+                    <? foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader) {?>
+                        <? if (in_array($arHeader["id"], $skipHeaders)) // some values are not shown in the columns in this template
+                            continue;
+
+                        if ($arHeader["name"] == '')
+                            $arHeader["name"] = GetMessage("SALE_" . $arHeader["id"]); ?>
+
+                        <? if ($arHeader["id"] == "PRICE") {?>
+                            <div class="cell small-12 medium-4 large-5">
+                                <div class="grid-x grid-padding-x">
+                                    <div class="cell small-6 medium-6 large-3">
+                                        <div class="margin-bottom-6"
+                                             id="current_price_<?= $arItem["ID"] ?>"><?= $arItem["PRICE_FORMATED"] ?>
+                                            <? if (floatval($arItem["DISCOUNT_PRICE_PERCENT"]) > 0):?>
+                                                <?= $arItem["FULL_PRICE_FORMATED"] ?>
+                                                <div id="old_price_<?= $arItem["ID"] ?>">
+                                                    <del class="text-dark-gray"><?= $arItem["FULL_PRICE_FORMATED"] ?></del>
+                                                </div>
+                                            <?endif; ?>
+                                        </div>
+                                    </div>
+
+                        <?}?>
+                    <?}?>
+
+                    <?/*Количество*/?>
+                    <? foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader) {?>
+                        <? if (in_array($arHeader["id"], $skipHeaders)) // some values are not shown in the columns in this template
+                            continue;
+
+                        if ($arHeader["name"] == '')
+                            $arHeader["name"] = GetMessage("SALE_" . $arHeader["id"]); ?>
+
+                        <?if ($arHeader["id"] == "QUANTITY") {?>
+                            <div class="cell small-6 medium-6 large-3">
+                                <input
+                                        type="number"
+                                        size="3"
+                                        id="QUANTITY_INPUT_<?= $arItem["ID"] ?>"
+                                        name="QUANTITY_INPUT_<?= $arItem["ID"] ?>"
+                                        maxlength="18"
+                                        style="max-width: 50px"
+                                        value="<?= $arItem["QUANTITY"] ?>"
+                                        onchange="updateQuantity('QUANTITY_INPUT_<?= $arItem["ID"] ?>', '<?= $arItem["ID"] ?>', <?= $ratio ?>, <?= $useFloatQuantityJS ?>)"
+                                >
+
+                                <input type="hidden" id="QUANTITY_<?= $arItem['ID'] ?>"
+                                       name="QUANTITY_<?= $arItem['ID'] ?>" value="<?= $arItem["QUANTITY"] ?>"/>
+                            </div>
+                        <?}?>
+                    <?}?>
+
+                    <?/*Общая цена*/?>
+                    <?foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader) {?>
+                        <? if (in_array($arHeader["id"], $skipHeaders)) // some values are not shown in the columns in this template
+                            continue;
+
+                        if ($arHeader["name"] == '')
+                            $arHeader["name"] = GetMessage("SALE_" . $arHeader["id"]); ?>
+
+                        <? if ($arHeader["id"] == "SUM") {
+                        ?>
+                                    <div class="cell small-12 large-3 large-offset-2">
+                                        <div class="margin-bottom-6"
+                                             id="sum_<?= $arItem["ID"] ?>"><?= $arItem[$arHeader["id"]]; ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?}?>
+                    <?}?>
+
+
+                    <?/*Удалить Отложить*/?>
+                    <?if ($bDelayColumn || $bDeleteColumn) {?>
+                        <div class="cell small-12 medium-2 large-2 medium-text-right text-center">
+                            <div class="margin-bottom-6">
+                                <div>
+                                    <a href="<?=str_replace("#ID#", $arItem["ID"], $arUrls["add"])?>"><?=GetMessage("SALE_ADD_TO_BASKET")?></a>
+                                </div>
+                                <div>
+                                    <?if ($bDeleteColumn) {?>
+                                        <a href="<?= str_replace("#ID#", $arItem["ID"], $arUrls["delete"]) ?>"
+                                           onclick="return deleteProductRow(this)">
+                                            <?= GetMessage("SALE_DELETE") ?>
+                                        </a>
+                                        <br/>
+                                        <?
+                                    };?>
+                                </div>
+                            </div>
+                        </div>
+                    <?}?>
+
+                </div>
+                <hr class="margin-bottom-6">
+
+            </div>
+        <?}?>
+    <?}?>
+
+
+    </div>
+</div>
+
+<?/*<div id="basket_items_delayed" class="bx_ordercart_order_table_container" style="display:none">
 	<table id="delayed_items">
 		<thead>
 			<tr>
@@ -77,7 +259,7 @@ $bPropsColumn  = false;
 			foreach ($arResult["GRID"]["ROWS"] as $k => $arItem):
 
 				if ($arItem["DELAY"] == "Y" && $arItem["CAN_BUY"] == "Y"):
-			?>
+			 ?>
 				<tr id="<?=$arItem["ID"]?>">
 					<td class="margin"></td>
 					<?
@@ -325,4 +507,4 @@ $bPropsColumn  = false;
 		</tbody>
 
 	</table>
-</div>
+</div>*/?>

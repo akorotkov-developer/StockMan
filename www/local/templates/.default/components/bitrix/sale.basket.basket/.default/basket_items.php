@@ -202,10 +202,7 @@ if ($normalCount > 0):
                     } ?>
 
 
-                    <?/*Удалить Отложить*/
-                    ?>
-
-
+                    <?/*Удалить Отложить*/?>
                     <?if ($bDelayColumn || $bDeleteColumn) {?>
 
                         <div class="cell small-12 medium-2 large-2 medium-text-right text-center">
@@ -303,12 +300,6 @@ if ($normalCount > 0):
                 </div>
             </div>
         </div>
-
-
-
-
-
-
 
 
         <div class="cell small-12 medium-6 large-8 medium-text-right">

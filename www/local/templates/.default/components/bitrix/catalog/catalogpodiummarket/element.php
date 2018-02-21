@@ -20,6 +20,7 @@ $this->SetViewTarget('catalog_element');
 echo "padding-top-5";
 $this->EndViewTarget();
 ?>
+
 <?$APPLICATION->IncludeComponent("bitrix:breadcrumb","",Array(
         "START_FROM" => "0",
         "PATH" => "",
@@ -521,7 +522,7 @@ if ($ElementID > 0)
             <div class="cell">
                 <h2 class="text-transform-none">Подпишись на нашу рассылку, получи скидку 300&#160;р.    </h2>
             </div>
-
+            <div class="cell large-6">
                 <?$APPLICATION->IncludeComponent(
                     "asd:subscribe.quick.form",
                     "catalog_element",
@@ -547,7 +548,7 @@ if ($ElementID > 0)
                     ),
                     false
                 );?>
-
+            </div>
         </div>
     </div>
 
