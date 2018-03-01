@@ -21,109 +21,51 @@ IncludeTemplateLangFile(__FILE__);
 </div>
 <?}*/?>
 
-<div class="reveal" id="enter-popup" data-reveal data-deep-link="true">
-    <div class="grid-x grid-padding-x">
-        <div class="cell text-center">
-            <h2 class="reveal__title">Войти</h2>
-            <div>
-                <div class="reveal__enter">Войти через</div><a class="fa-stack text-asphalt soc" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"> </i></a><a class="fa-stack text-asphalt soc" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"> </i></a><a class="fa-stack text-asphalt soc" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"> </i></a>
-            </div>
-        </div>
-        <div class="cell">
-            <form action="shop-user-account.html">
-                <label>Ваш email
-                    <input type="email">
-                </label>
-                <label>Пароль
-                    <input type="password">
-                </label>
-                <p class="text-right"><a href="shop-user-recover.html" title="">Забыли пароль?</a></p>
-                <div class="text-center"> </div>
-                <div class="grid-x align-center">
-                    <div class="cell large-7">
-                        <button class="button expanded">Войти &nbsp;<i class="fa fa-sign-in fa-lg"></i></button>
-                    </div>
-                </div>
-            </form>
-            <p class="text-center"><a href="shop-user-registration.html" title="">Зарегистрироваться</a></p>
-        </div>
-    </div>
-    <button class="close-button" data-close aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
-</div>
+
+<?$APPLICATION->IncludeComponent("bitrix:system.auth.form","",Array(
+        "REGISTER_URL" => "register.php",
+        "FORGOT_PASSWORD_URL" => "",
+        "PROFILE_URL" => "profile.php",
+        "SHOW_ERRORS" => "Y",
+        "STORE_PASSWORD" => "N"
+    )
+);?>
+
 <div class="reveal" id="reg-popup" data-reveal data-deep-link="true">
-    <div class="grid-x grid-padding-x">
-        <div class="cell text-center">
-            <h2 class="reveal__title">Регистрация</h2>
-        </div>
-        <div class="cell">
-            <form action="shop-user-account.html">
-                <label>
-                    <input type="text" placeholder="Имя">
-                </label>
-                <label>
-                    <input type="text" placeholder="Фамилия">
-                </label>
-                <div class="check">
-                    <input class="check__input" type="radio" name="gend" id="a11" checked>
-                    <label class="check__label" for="a11">Женские      </label>
-                </div>
-                <div class="check">
-                    <input class="check__input" type="radio" name="gend" id="a21">
-                    <label class="check__label" for="a21">Мужские </label>
-                </div>
-                <div class="grid-x grid-padding-x">
-                    <div class="cell medium-9">
-                        <label>
-                            <input type="tel" placeholder="Телефон">
-                        </label>
-                        <label>
-                            <input type="text" placeholder="Дата рождения">
-                        </label>
-                        <label>
-                            <input type="password" placeholder="Пароль*">
-                        </label>
-                        <p class="help-text">Пароль должен быть не менее 6 символов</p>
-                    </div>
-                    <div class="cell">
-                        <div class="check">
-                            <input class="check__input" type="checkbox" id="y1">
-                            <label class="check__label" for="y1">Я ознакомлен и принимаю условия &nbsp;<a href="shop-regular.html" title="">Соглашения об использовании сайта</a>, в том числе в части обработки и использования моих персональных данных</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-x align-center">
-                    <div class="cell large-7">
-                        <button class="button expanded">Регистрация &nbsp;<i class="fa fa-sign-in fa-lg"></i></button>
-                    </div>
-                </div>
-            </form>
-            <p class="text-center"><a href="shop-index.html#enter-popup" title="">Войти</a></p>
-        </div>
-    </div>
-    <button class="close-button" data-close aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+    <?$APPLICATION->IncludeComponent("bitrix:main.register","",Array(
+            "USER_PROPERTY_NAME" => "",
+            "SEF_MODE" => "Y",
+            "SHOW_FIELDS" => Array("NAME", "LAST_NAME", "SECOND_NAME", "PERSONAL_GENDER", "PERSONAL_BIRTHDAY", "PERSONAL_PHONE", "UF_SUBSCRIBE"),
+            "REQUIRED_FIELDS" => Array("NAME","PERSONAL_PHONE"),
+            "AUTH" => "Y",
+            "USE_BACKURL" => "Y",
+            "SUCCESS_PAGE" => "",
+            "SET_TITLE" => "N",
+            "USER_PROPERTY" => Array(),
+            "SEF_FOLDER" => "/",
+            "VARIABLE_ALIASES" => Array(),
+            "AJAX_OPTION_JUMP" => "N",
+            "AJAX_OPTION_STYLE" => "Y",
+            "AJAX_OPTION_HISTORY" => "N",
+            "AJAX_OPTION_ADDITIONAL" => "",
+            "AJAX_MODE" => "Y",
+        )
+    );?>
 </div>
+
 <div class="reveal" id="recover-popup" data-reveal data-deep-link="true">
-    <div class="grid-x grid-padding-x">
-        <div class="cell text-center">
-            <h2 class="reveal__title">Забыли пароль</h2>
-        </div>
-        <div class="cell">
-            <form action="shop-user-account.html">
-                <div>Если вы забыли пароль, введите логин или E-Mail.</div>
-                <input type="text" placeholder="">
-                <p>
-                    Контрольная строка для смены пароля, а также ваши регистрационные данные, будут высланы вам по E-Mail.</p>
-                <div class="grid-x align-center">
-                    <div class="cell large-7">
-                        <button class="button expanded">Восстановить &nbsp;<i class="fa fa-envelope-o fa-lg"></i></button>
-                    </div>
-                </div>
-            </form>
-            <p class="text-center"><a href="#">Войти</a></p>
-        </div>
-    </div>
-    <button class="close-button" data-close aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+    <?$APPLICATION->IncludeComponent( "bitrix:system.auth.forgotpasswd",
+        ".default",
+        Array(
+            "AJAX_OPTION_JUMP" => "N",
+            "AJAX_OPTION_STYLE" => "Y",
+            "AJAX_OPTION_HISTORY" => "N",
+            "AJAX_OPTION_ADDITIONAL" => "",
+            "AJAX_MODE" => "Y",
+        )
+    );?>
 </div>
+
 <footer class="footer">
     <div class="grid-x grid-padding-x text-center medium-text-left">
         <div class="large-2 cell large-offset-1 medium-4">

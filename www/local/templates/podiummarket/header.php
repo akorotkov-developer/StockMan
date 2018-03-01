@@ -82,7 +82,20 @@ use Bitrix\Main\Page\AssetLocation;
                         "SHOW_TOTAL_PRICE" => "N"
                     )
                 );?>
-                <img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/heart.svg" alt=""></a><a class="header__enter hide-for-small-only" data-open="enter-popup">Войти</a></div>
+                <img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/heart.svg" alt=""></a>
+
+                <?if($USER->IsAuthorized()){?>
+                    <a class="header__enter hide-for-small-only" href="/personal/private/">Личный кабинет</a>
+                    <a class="header__enter hide-for-small-only" href="<?echo $APPLICATION->GetCurPageParam("logout=yes", array(
+                        "login",
+                        "logout",
+                        "register",
+                        "forgot_password",
+                        "change_password"));?>">Выйти</a>
+                <?} else {?>
+                    <a class="header__enter hide-for-small-only" data-open="enter-popup">Войти</a>
+                <?}?>
+            </div>
         </div>
     </header>
 </div>
