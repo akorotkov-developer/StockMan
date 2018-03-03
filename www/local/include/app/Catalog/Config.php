@@ -17,4 +17,7 @@ class Config
     const DETAILS = "DETAILS";
     const DELEVIRY_PAYS_BACKS = "DELEVIRY_PAYS_BACKS";
     const STILIST_COMMENTS = "STILIST_COMMENTS";
+
+    //Торговые предложения
+    const RAZMER = "RAZMER";
 }

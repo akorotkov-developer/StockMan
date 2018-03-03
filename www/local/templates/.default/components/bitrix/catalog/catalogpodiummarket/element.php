@@ -319,6 +319,84 @@ if ($ElementID > 0)
                             </div>
                         </div>
                     </li>*/?>
+                    <li class="accordion-item look is-active" data-accordion-item=""><a class="text-center accordion-title" href="#">Вам также может понравиться</a>
+                        <div class="accordion-content" data-tab-content="">
+                            <div class="grid-x text-center grid-padding-x small-up-1 medium-up-2 large-up-4 margin-bottom-8" data-equalizer data-equalize-by-row="true">
+                                <div class="cell position-relative">
+                                    <div class="dress">
+                                        <div class="dress__img" data-equalizer-watch><a href="#"> <img src="./i/d3.png" alt=""><img src="./i/d1-1.png" alt=""></a></div>
+                                        <div class="dress__title">ASHLEY WILLIAMS</div>
+                                        <div class="text-secondary">Полосатое платье-рубашка</div>
+                                        <div class="text-size-large margin-bottom-4">49 765. -  </div>
+                                        <div class="dress__size"><span class="margin-right-4">Размер</span>
+                                            <div class="checkbox-group">
+                                                <input class="checkbox-group__item" type="radio" id="size1" name="size">
+                                                <label class="checkbox-group__label" for="size1">44</label>
+                                                <input class="checkbox-group__item" type="radio" id="size2" name="size">
+                                                <label class="checkbox-group__label" for="size2">46</label>
+                                                <input class="checkbox-group__item" type="radio" id="size3" name="size">
+                                                <label class="checkbox-group__label" for="size3">48</label>
+                                            </div><a class="skirt__link" href="#">RU</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cell position-relative">
+                                    <div class="dress">
+                                        <div class="dress__img" data-equalizer-watch><a href="#"> <img src="./i/d2.png" alt=""><img src="./i/d1-1.png" alt=""></a></div>
+                                        <div class="dress__title">Proenza schouler</div>
+                                        <div class="text-secondary">Полосатое платье-рубашка</div>
+                                        <div class="text-size-large margin-bottom-4">49 765. -  </div>
+                                        <div class="dress__size"><span class="margin-right-4">Размер</span>
+                                            <div class="checkbox-group">
+                                                <input class="checkbox-group__item" type="radio" id="size1" name="size">
+                                                <label class="checkbox-group__label" for="size1">44</label>
+                                                <input class="checkbox-group__item" type="radio" id="size2" name="size">
+                                                <label class="checkbox-group__label" for="size2">46</label>
+                                                <input class="checkbox-group__item" type="radio" id="size3" name="size">
+                                                <label class="checkbox-group__label" for="size3">48</label>
+                                            </div><a class="skirt__link" href="#">RU</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cell position-relative">
+                                    <div class="dress">
+                                        <div class="dress__img" data-equalizer-watch><a href="#"> <img src="./i/d3.png" alt=""><img src="./i/d1-1.png" alt=""></a></div>
+                                        <div class="dress__title">ASHLEY WILLIAMS</div>
+                                        <div class="text-secondary">Полосатое платье-рубашка</div>
+                                        <div class="text-size-large margin-bottom-4">49 765. -  </div>
+                                        <div class="dress__size"><span class="margin-right-4">Размер</span>
+                                            <div class="checkbox-group">
+                                                <input class="checkbox-group__item" type="radio" id="size1" name="size">
+                                                <label class="checkbox-group__label" for="size1">44</label>
+                                                <input class="checkbox-group__item" type="radio" id="size2" name="size">
+                                                <label class="checkbox-group__label" for="size2">46</label>
+                                                <input class="checkbox-group__item" type="radio" id="size3" name="size">
+                                                <label class="checkbox-group__label" for="size3">48</label>
+                                            </div><a class="skirt__link" href="#">RU</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cell position-relative">
+                                    <div class="dress">
+                                        <div class="dress__img" data-equalizer-watch><a href="#"> <img src="./i/d1.png" alt=""><img src="./i/d1-1.png" alt=""></a></div>
+                                        <div class="dress__title">Proenza schouler</div>
+                                        <div class="text-secondary">Полосатое платье-рубашка</div>
+                                        <div class="text-size-large margin-bottom-4">49 765. -  </div>
+                                        <div class="dress__size"><span class="margin-right-4">Размер</span>
+                                            <div class="checkbox-group">
+                                                <input class="checkbox-group__item" type="radio" id="size1" name="size">
+                                                <label class="checkbox-group__label" for="size1">44</label>
+                                                <input class="checkbox-group__item" type="radio" id="size2" name="size">
+                                                <label class="checkbox-group__label" for="size2">46</label>
+                                                <input class="checkbox-group__item" type="radio" id="size3" name="size">
+                                                <label class="checkbox-group__label" for="size3">48</label>
+                                            </div><a class="skirt__link" href="#">RU</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                     <?
                     if (!empty($arRecomData))
                     {

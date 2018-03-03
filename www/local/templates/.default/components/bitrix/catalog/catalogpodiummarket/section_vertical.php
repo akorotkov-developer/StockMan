@@ -24,17 +24,6 @@ else
 
 <?
 $this->setFrameMode(true);
-$this->SetViewTarget('page_catalog');
-echo "style='display: none;'";
-$this->EndViewTarget();
-
-$this->SetViewTarget('commentbegin');
-echo "<!--";
-$this->EndViewTarget();
-
-$this->SetViewTarget('commentend');
-echo "-->";
-$this->EndViewTarget();
 ?>
 
 <div class="grid-x grid-padding-x">
