@@ -18,9 +18,10 @@ if ($arParams['SET_TITLE'] == 'Y')
 	$APPLICATION->SetTitle(Loc::getMessage("SPS_TITLE_PRIVATE"));
 }
 
-?><?$APPLICATION->IncludeComponent(
+?>
+<?$APPLICATION->IncludeComponent(
 	"bitrix:main.profile",
-	"",
+	"profile",
 	Array(
 		"SET_TITLE" =>$arParams["SET_TITLE"],
 		"AJAX_MODE" => $arParams['AJAX_MODE_PRIVATE'],
