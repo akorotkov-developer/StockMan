@@ -2,6 +2,12 @@
 IncludeTemplateLangFile(__FILE__);
 ?>
 
+<?
+if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
+?>
+    </div>
+<?}?>
+
 <?$APPLICATION->IncludeComponent("bitrix:system.auth.form","",Array(
         "REGISTER_URL" => "register.php",
         "FORGOT_PASSWORD_URL" => "",

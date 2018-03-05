@@ -118,3 +118,10 @@ use Bitrix\Main\Page\AssetLocation;
         "USE_EXT" => "Y"
     )
 );?>
+
+
+<?
+if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
+?>
+    <div class="content">
+<?}?>
