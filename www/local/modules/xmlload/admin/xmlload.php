@@ -211,8 +211,7 @@ if((file_exists($urlFile))and(file_exists($urlFileOffers))) {
 
                         });
                     })(jQuery);
-                </script>
-                <?
+                </script> <?
             }
             ?>
 

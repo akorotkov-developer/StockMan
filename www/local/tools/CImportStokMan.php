@@ -11,7 +11,7 @@ class ImportStokMan {
 
     public static $arPictureID = array();
     public static $arPictureProducts = array();
-    public static $PATH_PICT = '/upload/1c_catalog/import_files1/';
+    public static $PATH_PICT = '/upload/1c_catalog/import_files/';
 
     public static $FILE_NAME = '/upload/1c_catalog/import0_1.xml';
     public static $FILE_NAME_OFFERS = '/upload/1c_catalog/offers0_1.xml';
@@ -34,6 +34,11 @@ class ImportStokMan {
     public static $arProductsXML = array(); // XML - всех Карточек
     public static $arProductsXMLCode = array(); // XML - всех Карточек
     public static $arOffersXMLReplace = array(); // Замена Xml на Торговое предложение
+
+    public static $arNewOffersArticles = array(); // Артикулы новых предложений
+    public static $arNewOffersName = array(); // Названия новых предложений
+    public static $arNewOffersBaseEd = array(); // БазоваяЕдиница новых предложений
+
     public static $arOffersRazmer = array(); // Добавление свойства Размер
     public static $arOffersRazmerReplace = array(); // Добавление свойства Размер
     public static $arOffersBarCodeReplace = array(); // Штрихкод
@@ -58,7 +63,7 @@ class ImportStokMan {
     public static function processing() {
         self::processingFile();
         self::processingFileOffers(self::$arOffersRazmerReplace, self::$arOffersXMLReplace, self::$arOffersBarCodeReplace, self::$strRazmer);
-        self::processingFileImport(self::$arProductsXML, self::$arProductsXMLCode);
+        self::processingFileImport();
     }
     public static function processingFile() {
         $urlFile = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME;
@@ -146,7 +151,12 @@ class ImportStokMan {
                 $codeOffer = CUtil::translit(strtolower($strCodeProp), "ru", self::$translateParams);
             }
             self::$arOffersRazmer[$id] = $strRazmerOffers;
-            self::$arOffersBarCodeReplace[$id] = (string)$obProduct->Штрихкод;;
+            self::$arOffersBarCodeReplace[$id] = (string)$obProduct->Штрихкод;
+
+            self::$arNewOffersArticles[$id] = (string)$obProduct->Артикул;
+            self::$arNewOffersName[$id] = (string)$obProduct->Наименование;
+            self::$arNewOffersBaseEd[$id] = $obProduct->БазоваяЕдиница;
+
             self::$arProductsXML[$codeOffer] = $id;
             self::$arProductsXMLCode[$id] = $codeOffer;
             $arProductsXMLOffers[$codeOffer][] = $arImportProducts[$id];
@@ -168,6 +178,8 @@ class ImportStokMan {
 
     public static function processingFileOffers($arOffersRazmerReplace, $arOffersXMLReplace, $arOffersBarCodeReplace, $strRazmer)
     {
+        $arTemp = $arOffersXMLReplace;
+
         $arRazmerValueRemove = array();
         $propertyValueToRemove = array();
         foreach ($strRazmer->ВариантыЗначений->Справочник as $obPropetyV) {
@@ -191,6 +203,15 @@ class ImportStokMan {
 
         $xml->Классификатор->Свойства = $strRazmer->asXML();
 
+        $arStores = array();
+        foreach ($xml->ПакетПредложений->Склады->Склад as $obStore) {
+            $arStores[] = (string)$obStore->Ид;
+        }
+        $arPrices = array();
+        foreach ($xml->ПакетПредложений->ТипыЦен->ТипЦены as $obPrice) {
+            $arPrices[(string)$obPrice->Ид] = (string)$obPrice->Валюта;
+        }
+
         foreach ($xml->ПакетПредложений->Предложения->Предложение as $obOffer) {
             $id = (string)$obOffer->Ид;
             $obOffer->Ид = $arOffersXMLReplace[$id];
@@ -207,6 +228,42 @@ class ImportStokMan {
                 <Значение>' . $id . '</Значение>
             ';
             $obOffer->ЗначенияСвойств->ЗначенияСвойства[] = $strProdPropertyXML;
+            unset($arTemp[$id]);
+        }
+        foreach ($arTemp as $key => $val) {
+            $strNewOffersXML = '
+                <Ид>' . $val . '</Ид>
+                <Артикул>' . self::$arNewOffersArticles[$key] . '</Артикул>
+                <Штрихкод>' .  self::$arOffersBarCodeReplace[$key] . '</Штрихкод>
+                <Наименование>' .  self::$arNewOffersName[$key] . '</Наименование>
+                <ЗначенияСвойств>
+                    <ЗначенияСвойства>
+                         <Ид>' . self::$codePropertyXML_ID . '</Ид>
+                         <Значение>' . $key . '</Значение>
+                    </ЗначенияСвойства>
+                </ЗначенияСвойств>                
+				<Количество>0</Количество>
+            ';
+            $strNewOffersXML .=  '<Цены>';
+            foreach ($arPrices as $keyP => $currency) {
+                $strNewOffersXML .=  '
+					<Цена>
+						<Представление> 0 ' . $currency .' за шт</Представление>
+						<ИдТипаЦены>' . $keyP .'</ИдТипаЦены>
+						<ЦенаЗаЕдиницу>0</ЦенаЗаЕдиницу>
+						<Валюта>' . $currency .'</Валюта>
+						<Коэффициент>1</Коэффициент>
+					</Цена>
+					';
+            }
+            $strNewOffersXML .=  '</Цены>';
+            foreach ($arStores as $keyS) {
+                $strNewOffersXML .=  '
+				<Склад ИдСклада="' . $keyS .'" КоличествоНаСкладе="0"/>
+				';
+            }
+            $strNewOffersXML .= self::$arNewOffersBaseEd[$key]->asXML();
+            $xml->ПакетПредложений->Предложения->Предложение[] = $strNewOffersXML;
         }
 
         $xml->Классификатор->Свойства->Свойство[] = self::$strPropertyXML_ID;
@@ -220,8 +277,11 @@ class ImportStokMan {
         unset($urlFileOffers,$urlFileDataOffers,$xml,$strXML,$f_hdl);
     }
 
-    public static function processingFileImport($arProductsXML, $arProductsXMLCode)
+    public static function processingFileImport()
     {
+        $arProductsXML = self::$arProductsXML;
+        $arProductsXMLCode = self::$arProductsXMLCode;
+
         $urlFile = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME;
         $xml = simplexml_load_file($urlFile);
         $elementsToRemove = array();
@@ -338,22 +398,22 @@ class ImportStokMan {
                 "IBLOCK_ID" => self::$IBLOCK_ID,
                 "=PROPERTY_CML2_BAR_CODE" => $arBar
             );
-            $res = CIBlockElement::GetList(Array("SORT" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID", "XML_ID", "PROPERTY_CML2_BAR_CODE", "DETAIL_PICTURE", "PROPERTY_MORE_PHOTO"));
-            while ($ob = $res->GetNextElement()) {
-                $arFields = $ob->GetFields();
-                $arProps = $ob->GetProperties();
+            $res = CIBlockElement::GetList(Array("SORT" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID", "XML_ID", "PROPERTY_CML2_BAR_CODE", "DETAIL_PICTURE"));
+            while ($ar_fields = $res->GetNext()) {
                 $arPicture = array();
-                $arPicture['DETAIL_PICTURE'] = $arFields['DETAIL_PICTURE'];
-                $arPicture['MORE_PHOTO'] = $arProps['MORE_PHOTO']['VALUE'];
-                self::$arPictureProducts[$arFields['ID']] = $arPicture;
-                self::$arPictureID[$arFields['ID']] = $arFiles[$arProps['CML2_BAR_CODE']['VALUE']];
+                $arPicture['DETAIL_PICTURE'] = $ar_fields['DETAIL_PICTURE'];
+                self::$arPictureProducts[$ar_fields['ID']] = $ar_fields['DETAIL_PICTURE'];
+                self::$arPictureID[$ar_fields['ID']] = $arFiles[$ar_fields['PROPERTY_CML2_BAR_CODE_VALUE']];
             }
             $arFilter = Array(
                 "IBLOCK_ID" => self::$IBLOCK_OFFERS_ID,
                 "=PROPERTY_CML2_BAR_CODE" => $arBar
             );
-            $res = CIBlockElement::GetList(Array("SORT" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID", "PROPERTY_CML2_LINK.ID", "PROPERTY_CML2_BAR_CODE"));
+            $res = CIBlockElement::GetList(Array("SORT" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID", "PROPERTY_CML2_LINK.ID", "PROPERTY_CML2_LINK.DETAIL_PICTURE", "PROPERTY_CML2_BAR_CODE"));
             while ($ar_fields = $res->GetNext()) {
+                $arPicture = array();
+                $arPicture['DETAIL_PICTURE'] = $ar_fields['PROPERTY_CML2_LINK_DETAIL_PICTURE'];
+                self::$arPictureProducts[$ar_fields['PROPERTY_CML2_LINK_ID']] = $arPicture;
                 self::$arPictureID[$ar_fields['PROPERTY_CML2_LINK_ID']] = $arFiles[$ar_fields['PROPERTY_CML2_BAR_CODE_VALUE']];
             }
         }

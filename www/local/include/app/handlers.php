@@ -22,6 +22,21 @@ class UserRegister
 AddEventHandler("main", "OnBuildGlobalMenu", Array("StockManHandlers", "xmlLoad"));
 AddEventHandler("iblock", "OnAfterIBlockElementAdd", Array("StockManHandlers", "AfterElementAddHandler"));
 
+AddEventHandler("iblock", "OnAfterIBlockElementUpdate", Array("MyClass", "OnAfterIBlockElementUpdateHandler"));
+
+class MyClass
+{
+    // создаем обработчик события "OnAfterIBlockElementUpdate"
+    function OnAfterIBlockElementUpdateHandler(&$arFields)
+    {
+        if ($_SERVER['PHP_SELF'] == '/bitrix/admin/1c_exchange.php') {
+            if ($arFields['IBLOCK_ID'] == ImportStokMan::$IBLOCK_ID) {
+                AddMessage2Log($arFields);
+            }
+        }
+    }
+}
+
 class StockManHandlers
 {
     function xmlLoad(&$adminMenu, &$moduleMenu)
