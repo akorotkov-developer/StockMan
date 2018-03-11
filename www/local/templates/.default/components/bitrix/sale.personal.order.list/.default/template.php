@@ -479,9 +479,9 @@ else
 		if ($_REQUEST["show_canceled"] === 'Y' && count($arResult['ORDERS']))
 		{
 			?>
-			<h1 class="sale-order-title">
+			<h3>
 				<?= Loc::getMessage('SPOL_TPL_ORDERS_CANCELED_HEADER') ?>
-			</h1>
+			</h3>
 			<?
 		}
 
@@ -491,18 +491,18 @@ else
 			{
 				$orderHeaderStatus = $order['ORDER']['STATUS_ID'];
 				?>
-				<h1 class="sale-order-title">
+				<h3>
 					<?= Loc::getMessage('SPOL_TPL_ORDER_IN_STATUSES') ?> &laquo;<?=htmlspecialcharsbx($arResult['INFO']['STATUS'][$orderHeaderStatus]['NAME'])?>&raquo;
-				</h1>
+				</h3>
 				<?
 			}
 			?>
-			<div class="col-md-12 col-sm-12 sale-order-list-container">
-				<div class="row">
-					<div class="col-md-12 col-sm-12 sale-order-list-accomplished-title-container">
-						<div class="row">
-							<div class="col-md-8 col-sm-12 sale-order-list-accomplished-title-container">
-								<h2 class="sale-order-list-accomplished-title">
+			<div class="callout">
+
+
+
+
+								<h4>
 									<?= Loc::getMessage('SPOL_TPL_ORDER') ?>
 									<?= Loc::getMessage('SPOL_TPL_NUMBER_SIGN') ?>
 									<?= htmlspecialcharsbx($order['ORDER']['ACCOUNT_NUMBER'])?>
@@ -526,48 +526,40 @@ else
 									?>
 									<?= Loc::getMessage('SPOL_TPL_SUMOF') ?>
 									<?= $order['ORDER']['FORMATED_PRICE'] ?>
-								</h2>
-							</div>
-							<div class="col-md-4 col-sm-12 sale-order-list-accomplished-date-container">
+								</h4>
+                                <br>
+
+
 								<?
 								if ($_REQUEST["show_canceled"] !== 'Y')
 								{
 									?>
-									<span class="sale-order-list-accomplished-date">
+									<strong>
 										<?= Loc::getMessage('SPOL_TPL_ORDER_FINISHED')?>
-									</span>
+									</strong>
 									<?
 								}
 								else
 								{
 									?>
-									<span class="sale-order-list-accomplished-date canceled-order">
+									<strong>
 										<?= Loc::getMessage('SPOL_TPL_ORDER_CANCELED')?>
-									</span>
+									</strong>
 									<?
 								}
 								?>
-								<span class="sale-order-list-accomplished-date-number"><?= $order['ORDER']['DATE_STATUS_FORMATED'] ?></span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 sale-order-list-inner-accomplished">
-						<div class="row sale-order-list-inner-row">
-							<div class="col-md-3 col-sm-12 sale-order-list-about-accomplished">
-								<a class="sale-order-list-about-link" href="<?=htmlspecialcharsbx($order["ORDER"]["URL_TO_DETAIL"])?>">
-									<?=Loc::getMessage('SPOL_TPL_MORE_ON_ORDER')?>
-								</a>
-							</div>
-							<div class="col-md-3 col-md-offset-6 col-sm-12 sale-order-list-repeat-accomplished">
-								<a class="sale-order-list-repeat-link sale-order-link-accomplished" href="<?=htmlspecialcharsbx($order["ORDER"]["URL_TO_COPY"])?>">
-									<?=Loc::getMessage('SPOL_TPL_REPEAT_ORDER')?>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+								<strong><?= $order['ORDER']['DATE_STATUS_FORMATED'] ?></strong>
+
+
+
+
+                <hr class="margin-bottom-6">
+                <div class="grid-x grid-padding-x">
+                    <div class="cell small-12 medium-4"><a href="<?=htmlspecialcharsbx($order["ORDER"]["URL_TO_DETAIL"])?>" title=""><?=Loc::getMessage('SPOL_TPL_MORE_ON_ORDER')?></a></div>
+                    <div class="cell small-12 medium-8 medium-text-right">
+                        <a href="<?=htmlspecialcharsbx($order["ORDER"]["URL_TO_COPY"])?>" title=""><i class="fa fa-undo"></i> <?=Loc::getMessage('SPOL_TPL_REPEAT_ORDER')?></a>
+                    </div>
+                </div>
 			</div>
 			<?
 		}
