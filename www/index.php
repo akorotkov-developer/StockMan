@@ -119,6 +119,10 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
     <?
     $arFilter = array(
         "PROPERTY_".StockMan\Config::NEW_PRODUCT."_VALUE"  => "да", // это для свойства типа список
+        "!SECTION_ID" => array(
+            ImportStokMan::$IBLOCK_SECTION_ERROR_ID,
+            ImportStokMan::$IBLOCK_SECTION_ID,
+        )
     );
     ?>
     <?$APPLICATION->IncludeComponent(
