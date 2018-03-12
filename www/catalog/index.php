@@ -17,7 +17,7 @@ if ($_REQUEST["old"]=="Y") {
         "DETAIL_SET_CANONICAL_URL" => "Y",
         "USE_MAIN_ELEMENT_SECTION" => "Y",
         "HIDE_NOT_AVAILABLE" => "Y",
-        "BASKET_URL" => "/personal/cart/",
+        "BASKET_URL" => "/cart/",
         "ACTION_VARIABLE" => "action",
         "PRODUCT_ID_VARIABLE" => "id",
         "SECTION_ID_VARIABLE" => "SECTION_ID",

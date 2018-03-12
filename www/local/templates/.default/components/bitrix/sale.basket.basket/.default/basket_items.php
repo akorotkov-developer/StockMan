@@ -19,7 +19,7 @@ if ($normalCount > 0):
 
 
 <div id="basket_items_list">
-    <div id="basket_items">
+    <div class="callout" id="basket_items">
 
             <?
             foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader){
@@ -55,6 +55,7 @@ if ($normalCount > 0):
 
             $skipHeaders = array('PROPS', 'DELAY', 'DELETE', 'TYPE');
 
+            $countproducts = 0;
             foreach ($arResult["GRID"]["ROWS"] as $k => $arItem){
                 if ($arItem["DELAY"] == "N" && $arItem["CAN_BUY"] == "Y") {
                     ?>
@@ -228,8 +229,13 @@ if ($normalCount > 0):
                     <?}?>
 
                     </div>
-                    <hr class="margin-bottom-6">
                     <?
+                    $countproducts++;
+                    if (count($arResult["GRID"]["ROWS"]) != $countproducts) {
+                        ?>
+                        <hr class="margin-bottom-6">
+                        <?
+                    }
                 }
             }
             ?>
