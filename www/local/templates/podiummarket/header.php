@@ -74,7 +74,7 @@ use Bitrix\Main\Page\AssetLocation;
                         Array(
                             "HIDE_ON_BASKET_PAGES" => "Y",
                             "PATH_TO_AUTHORIZE" => "",
-                            "PATH_TO_BASKET" => SITE_DIR."cart/",
+                            "PATH_TO_BASKET" => SITE_DIR."personal/cart/",
                             "PATH_TO_ORDER" => SITE_DIR."personal/order/",
                             "PATH_TO_PERSONAL" => SITE_DIR."personal/",
                             "PATH_TO_PROFILE" => SITE_DIR."personal/",
