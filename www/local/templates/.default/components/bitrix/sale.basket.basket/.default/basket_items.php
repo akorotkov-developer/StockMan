@@ -16,361 +16,12 @@ $bPriceType    = false;
 
 if ($normalCount > 0):
 ?>
-
-
 <div id="basket_items_list">
-    <div class="callout" id="basket_items">
-
-            <?
-            foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader){
-                $arHeaders[] = $arHeader["id"];
-
-                // remember which values should be shown not in the separate columns, but inside other columns
-                if (in_array($arHeader["id"], array("TYPE")))
-                {
-                    $bPriceType = true;
-                    continue;
-                }
-                elseif ($arHeader["id"] == "PROPS")
-                {
-                    $bPropsColumn = true;
-                    continue;
-                }
-                elseif ($arHeader["id"] == "DELAY")
-                {
-                    $bDelayColumn = true;
-                    continue;
-                }
-                elseif ($arHeader["id"] == "DELETE")
-                {
-                    $bDeleteColumn = true;
-                    continue;
-                }
-                elseif ($arHeader["id"] == "WEIGHT")
-                {
-                    $bWeightColumn = true;
-                }
-            }
-
-
-            $skipHeaders = array('PROPS', 'DELAY', 'DELETE', 'TYPE');
-
-            $countproducts = 0;
-            foreach ($arResult["GRID"]["ROWS"] as $k => $arItem){
-                if ($arItem["DELAY"] == "N" && $arItem["CAN_BUY"] == "Y") {
-                    ?>
-                    <div class="grid-x grid-padding-x" id="<?= $arItem["ID"] ?>" data-item-name="<?= $arItem["NAME"] ?>"
-                    data-item-brand="<?= $arItem[$arParams['BRAND_PROPERTY'] . "_VALUE"] ?>"
-                    data-item-price="<?= $arItem["PRICE"] ?>"
-                    data-item-currency="<?= $arItem["CURRENCY"] ?>">
-                    <? foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader) {
-                        ?>
-                        <? if (in_array($arHeader["id"], $skipHeaders)) // some values are not shown in the columns in this template
-                            continue;
-
-                        if ($arHeader["name"] == '')
-                            $arHeader["name"] = GetMessage("SALE_" . $arHeader["id"]);
-                        if ($arHeader["id"] == "NAME") {
-                            ?>
-
-                            <?
-                            if (strlen($arItem["PREVIEW_PICTURE_SRC"]) > 0):
-                                $url = $arItem["PREVIEW_PICTURE_SRC"];
-                            elseif (strlen($arItem["DETAIL_PICTURE_SRC"]) > 0):
-                                $url = $arItem["DETAIL_PICTURE_SRC"];
-                            else:
-                                $url = $templateFolder . "/images/no_photo.png";
-                            endif;
-                            ?>
-                            <div class="cell small-12 medium-8 large-5">
-                                <div class="grid-x grid-padding-x">
-                                    <div class="cell medium-4"><img class="margin-bottom-6" src="<?= $url ?>"
-                                                                    alt="Товар"></div>
-                                    <?
-                                    if (!empty($arItem["BRAND"])):
-                                        ?>
-                                        <div class="bx_ordercart_brand">
-                                            <img alt="" src="<?= $arItem["BRAND"] ?>"/>
-                                        </div>
-                                        <?
-                                    endif;
-                                    ?>
-                                    <div class="cell medium-8">
-                                        <a class="text-insta text-uppercase text-decoration-none text-size-xlarge font-bold"
-                                           href="shop-product.html">Ashley Williams</a>
-                                        <div class="text-secondary margin-bottom-3"><?= $arItem["NAME"]; ?></div>
-                                        <ul class="hide-for-small-only hide-for-medium-only">
-                                            <li>Цвет: Красный</li>
-                                            <li>Страна: Китай</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        <?
-                        } ?>
-                    <?
-                    } ?>
-
-                    <?/*Цена*/
-                    ?>
-                    <? foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader) {
-                        ?>
-                        <? if (in_array($arHeader["id"], $skipHeaders)) // some values are not shown in the columns in this template
-                            continue;
-
-                        if ($arHeader["name"] == '')
-                            $arHeader["name"] = GetMessage("SALE_" . $arHeader["id"]); ?>
-
-                        <? if ($arHeader["id"] == "PRICE") {
-                            ?>
-
-                            <div class="cell small-12 medium-4 large-5">
-                            <div class="grid-x grid-padding-x">
-                            <div class="cell small-6 medium-6 large-3">
-                                <div class="margin-bottom-6"
-                                     id="current_price_<?= $arItem["ID"] ?>"><?= $arItem["PRICE_FORMATED"] ?>
-                                    <? if (floatval($arItem["DISCOUNT_PRICE_PERCENT"]) > 0):?>
-                                        <?= $arItem["FULL_PRICE_FORMATED"] ?>
-                                        <div id="old_price_<?= $arItem["ID"] ?>">
-                                            <del class="text-dark-gray"><?= $arItem["FULL_PRICE_FORMATED"] ?></del>
-                                        </div>
-                                    <?endif; ?>
-                                </div>
-                            </div>
-
-                        <?
-                        } ?>
-                    <?
-                    } ?>
-
-
-                    <?/*Количество*/
-                    ?>
-                    <? foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader) {
-                        ?>
-                        <? if (in_array($arHeader["id"], $skipHeaders)) // some values are not shown in the columns in this template
-                            continue;
-
-                        if ($arHeader["name"] == '')
-                            $arHeader["name"] = GetMessage("SALE_" . $arHeader["id"]); ?>
-
-                        <? if ($arHeader["id"] == "QUANTITY") {
-                            ?>
-                            <div class="cell small-6 medium-6 large-3">
-                                <input
-                                        type="number"
-                                        size="3"
-                                        id="QUANTITY_INPUT_<?= $arItem["ID"] ?>"
-                                        name="QUANTITY_INPUT_<?= $arItem["ID"] ?>"
-                                        maxlength="18"
-                                        style="max-width: 50px"
-                                        value="<?= $arItem["QUANTITY"] ?>"
-                                        onchange="updateQuantity('QUANTITY_INPUT_<?= $arItem["ID"] ?>', '<?= $arItem["ID"] ?>', <?= $ratio ?>, <?= $useFloatQuantityJS ?>)"
-                                >
-
-                                <input type="hidden" id="QUANTITY_<?= $arItem['ID'] ?>"
-                                       name="QUANTITY_<?= $arItem['ID'] ?>" value="<?= $arItem["QUANTITY"] ?>"/>
-                            </div>
-                        <?
-                        } ?>
-                    <?
-                    } ?>
-
-
-                    <?/*Общая цена*/
-                    ?>
-                    <? foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader) {
-                        ?>
-                        <? if (in_array($arHeader["id"], $skipHeaders)) // some values are not shown in the columns in this template
-                            continue;
-
-                        if ($arHeader["name"] == '')
-                            $arHeader["name"] = GetMessage("SALE_" . $arHeader["id"]); ?>
-
-                        <? if ($arHeader["id"] == "SUM") {
-                            ?>
-
-                            <div class="cell small-12 large-3 large-offset-2">
-                                <div class="margin-bottom-6"
-                                     id="sum_<?= $arItem["ID"] ?>"><?= $arItem[$arHeader["id"]]; ?></div>
-                            </div>
-                            </div>
-                            </div>
-
-                        <?
-                        } ?>
-                    <?
-                    } ?>
-
-
-                    <?/*Удалить Отложить*/?>
-                    <?if ($bDelayColumn || $bDeleteColumn) {?>
-
-                        <div class="cell small-12 medium-2 large-2 medium-text-right text-center">
-                            <div class="margin-bottom-6">
-                                <div><?                            if ($bDeleteColumn) {
-                                        ?>
-                                        <a href="<?= str_replace("#ID#", $arItem["ID"], $arUrls["delete"]) ?>"
-                                           onclick="return deleteProductRow(this)">
-                                            <?= GetMessage("SALE_DELETE") ?>
-                                        </a>
-                                        <br/>
-                                        <?
-                                    };?></div>
-                                <div><?if ($bDelayColumn) {
-                                        ?>
-                                        <a href="<?= str_replace("#ID#", $arItem["ID"], $arUrls["delay"]) ?>"><?= GetMessage("SALE_DELAY") ?></a>
-                                        <?
-                                    };?></div>
-                            </div>
-                        </div>
-
-
-                    <?}?>
-
-                    </div>
-                    <?
-                    $countproducts++;
-                    if (count($arResult["GRID"]["ROWS"]) != $countproducts) {
-                        ?>
-                        <hr class="margin-bottom-6">
-                        <?
-                    }
-                }
-            }
-            ?>
-
-
-
-
-    </div>
-    <input type="hidden" id="column_headers" value="<?=htmlspecialcharsbx(implode($arHeaders, ","))?>" />
-    <input type="hidden" id="offers_props" value="<?=htmlspecialcharsbx(implode($arParams["OFFERS_PROPS"], ","))?>" />
-    <input type="hidden" id="action_var" value="<?=htmlspecialcharsbx($arParams["ACTION_VARIABLE"])?>" />
-    <input type="hidden" id="quantity_float" value="<?=($arParams["QUANTITY_FLOAT"] == "Y") ? "Y" : "N"?>" />
-    <input type="hidden" id="price_vat_show_value" value="<?=($arParams["PRICE_VAT_SHOW_VALUE"] == "Y") ? "Y" : "N"?>" />
-    <input type="hidden" id="hide_coupon" value="<?=($arParams["HIDE_COUPON"] == "Y") ? "Y" : "N"?>" />
-    <input type="hidden" id="use_prepayment" value="<?=($arParams["USE_PREPAYMENT"] == "Y") ? "Y" : "N"?>" />
-    <input type="hidden" id="auto_calculation" value="<?=($arParams["AUTO_CALCULATION"] == "N") ? "N" : "Y"?>" />
-
-
-
-
-
-
-
-
-
-    <div class="grid-x grid-padding-x">
-        <div class="cell small-12 medium-6 large-4" id="coupons_block">
-                <?
-                if ($arParams["HIDE_COUPON"] != "Y")
-                {
-                    ?>
-            <div class="input-group">
-                <input type="text" class="input-group-field" id="coupon" name="COUPON" value="" onchange="enterCoupon();">
-                <div class="input-group-button">
-                    <button class="button"  onclick="enterCoupon();" type="button"><i class="fa fa-calculator"></i> <?=GetMessage('SALE_COUPON_APPLY'); ?>
-                    </button>
-                    <?
-                    if (!empty($arResult['COUPON_LIST']))
-                    {
-                        foreach ($arResult['COUPON_LIST'] as $oneCoupon)
-                        {
-                            $couponClass = 'disabled';
-                            switch ($oneCoupon['STATUS'])
-                            {
-                                case DiscountCouponsManager::STATUS_NOT_FOUND:
-                                case DiscountCouponsManager::STATUS_FREEZE:
-                                    $couponClass = 'bad';
-                                    break;
-                                case DiscountCouponsManager::STATUS_APPLYED:
-                                    $couponClass = 'good';
-                                    break;
-                            }
-                            ?><div class="bx_ordercart_coupon"><input disabled readonly type="text" name="OLD_COUPON[]" value="<?=htmlspecialcharsbx($oneCoupon['COUPON']);?>" class="<? echo $couponClass; ?>"><span class="<? echo $couponClass; ?>" data-coupon="<? echo htmlspecialcharsbx($oneCoupon['COUPON']); ?>"></span><div class="bx_ordercart_coupon_notes"><?
-                                if (isset($oneCoupon['CHECK_CODE_TEXT']))
-                                {
-                                    echo (is_array($oneCoupon['CHECK_CODE_TEXT']) ? implode('<br>', $oneCoupon['CHECK_CODE_TEXT']) : $oneCoupon['CHECK_CODE_TEXT']);
-                                }
-                                ?></div></div><?
-                        }
-                        unset($couponClass, $oneCoupon);
-                    }
-                    }
-                    else
-                    {
-                        ?>&nbsp;<?
-                    }
-                    ?>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="cell small-12 medium-6 large-8 medium-text-right">
-            <div class="margin-bottom-6">
-                Товаров на:<br>
-                <?if ($bWeightColumn && floatval($arResult['allWeight']) > 0):?>
-                    <span id="allWeight_FORMATED"><?=$arResult["allWeight_FORMATED"]?></span>
-                <?endif;?>
-                <?if ($arParams["PRICE_VAT_SHOW_VALUE"] == "Y"):?>
-                        <span id="allSum_wVAT_FORMATED"><?=$arResult["allSum_wVAT_FORMATED"]?></span>
-                    <?
-                    $showTotalPrice = (float)$arResult["DISCOUNT_PRICE_ALL"] > 0;
-                    ?>
-                        <span id="PRICE_WITHOUT_DISCOUNT">
-                            <?=($showTotalPrice ? $arResult["PRICE_WITHOUT_DISCOUNT"] : ''); ?>
-                        </span>
-                    <?
-                    if (floatval($arResult['allVATSum']) > 0):
-                        ?>
-                            <span id="allVATSum_FORMATED"><?=$arResult["allVATSum_FORMATED"]?></span>
-                        <?
-                    endif;
-                    ?>
-                <?endif;?>
-
-                <br>
-
-                <strong>
-                    Итого:
-                    <span class="fwb" id="allSum_FORMATED"><?=str_replace(" ", "&nbsp;", $arResult["allSum_FORMATED"])?></span>
-                </strong>
-            </div>
-        </div>
-    </div>
-    <hr class="margin-bottom-6">
-    <div class="margin-bottom-6 text-right">
-        <?if ($arParams["USE_PREPAYMENT"] == "Y" && strlen($arResult["PREPAY_BUTTON"]) > 0):?>
-            <?=$arResult["PREPAY_BUTTON"]?>
-            <span><?=GetMessage("SALE_OR")?></span>
-        <?endif;?>
-
-        <?
-        if ($arParams["AUTO_CALCULATION"] != "Y")
-        {
-            ?>
-            <a href="javascript:void(0)" onclick="updateBasket();" class="button"> <i class="fa fa-credit-card"></i><?=GetMessage("SALE_REFRESH")?></a>
-            <?
-        }
-        ?>
-        <a href="javascript:void(0)" onclick="checkOut();" class="button"> <i class="fa fa-credit-card"></i><?=GetMessage("SALE_ORDER")?></a>
-    </div>
-
-
-</div>
-
-
-
-
-<?/*<div id="basket_items_list">
-	<div class="bx_ordercart_order_table_container">
-		<table id="basket_items">
-
+	<div  class="callout">
+		<div id="basket_items">
 			<thead>
-				<tr>
-					<td class="margin"></td>
+				<div>
+					<div class="margin"></div>
 					<?
 					foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader):
 						$arHeaders[] = $arHeader["id"];
@@ -403,33 +54,33 @@ if ($normalCount > 0):
 
 						if ($arHeader["id"] == "NAME"):
 						?>
-							<td class="item" colspan="2" id="col_<?=$arHeader["id"];?>">
+							<div class="item" colspan="2" id="col_<?=$arHeader["id"];?>">
+                                <div></div>
 						<?
 						elseif ($arHeader["id"] == "PRICE"):
 						?>
-							<td class="price" id="col_<?=$arHeader["id"];?>">
+							<div class="price" id="col_<?=$arHeader["id"];?>">
 						<?
 						else:
 						?>
-							<td class="custom" id="col_<?=$arHeader["id"];?>">
+							<div class="custom" id="col_<?=$arHeader["id"];?>">
 						<?
 						endif;
 						?>
 							<?=$arHeader["name"]; ?>
-							</td>
+							</div>
 					<?
 					endforeach;
 
 					if ($bDeleteColumn || $bDelayColumn):
 					?>
-						<td class="custom"></td>
+						<div class="custom"></div>
 					<?
 					endif;
 					?>
-						<td class="margin"></td>
-				</tr>
+						<div class="margin"></div>
+				</div>
 			</thead>
-
 
 			<tbody>
 				<?
@@ -439,13 +90,13 @@ if ($normalCount > 0):
 
 					if ($arItem["DELAY"] == "N" && $arItem["CAN_BUY"] == "Y"):
 					?>
-					<tr id="<?=$arItem["ID"]?>"
+					<div id="<?=$arItem["ID"]?>"
 						 data-item-name="<?=$arItem["NAME"]?>"
 						 data-item-brand="<?=$arItem[$arParams['BRAND_PROPERTY']."_VALUE"]?>"
 						 data-item-price="<?=$arItem["PRICE"]?>"
 						 data-item-currency="<?=$arItem["CURRENCY"]?>"
 					>
-						<td class="margin"></td>
+						<div class="margin"></div>
 						<?
 						foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader):
 
@@ -457,7 +108,7 @@ if ($normalCount > 0):
 
 							if ($arHeader["id"] == "NAME"):
 							?>
-								<td class="itemphoto">
+								<div class="itemphoto">
 									<div class="bx_ordercart_photo_container">
 										<?
 										if (strlen($arItem["PREVIEW_PICTURE_SRC"]) > 0):
@@ -481,8 +132,8 @@ if ($normalCount > 0):
 									<?
 									endif;
 									?>
-								</td>
-								<td class="item">
+								</div>
+								<div class="item">
 									<h2 class="bx_ordercart_itemtitle">
 										<?if (strlen($arItem["DETAIL_PAGE_URL"]) > 0):?><a href="<?=$arItem["DETAIL_PAGE_URL"] ?>"><?endif;?>
 											<?=$arItem["NAME"]?>
@@ -548,7 +199,18 @@ if ($normalCount > 0):
 												unset($counter);
 											}
 											$countValues = count($arProp["VALUES"]);
-											$full = ($countValues > 5) ? "full" : "";
+											if ($countValues > 5)
+											{
+												$full = "full";
+												$fullWidth = ($countValues*20).'%';
+												$itemWidth = (100/$countValues).'%';
+											}
+											else
+											{
+												$full = "";
+												$fullWidth = '100%';
+												$itemWidth = '20%';
+											}
 
 											$marginLeft = 0;
 											if ($countValues > 5 && $selectedIndex > 5)
@@ -564,7 +226,7 @@ if ($normalCount > 0):
 
 														<div class="bx_scu">
 															<ul id="prop_<?=$arProp["CODE"]?>_<?=$arItem["ID"]?>"
-																style="width: 200%; margin-left: <?=$marginLeft; ?>"
+																style="width: <?=$fullWidth; ?>; margin-left: <?=$marginLeft; ?>"
 																class="sku_prop_list"
 																>
 																<?
@@ -573,7 +235,7 @@ if ($normalCount > 0):
 																	$counter++;
 																	$selected = ($selectedIndex == $counter ? ' bx_active' : '');
 																?>
-																	<li style="width:10%;"
+																	<li style="width: <?=$itemWidth; ?>; padding-top: <?=$itemWidth; ?>;"
 																		class="sku_prop<?=$selected?>"
 																		data-sku-selector="Y"
 																		data-value-id="<?=$arSkuValue["XML_ID"]?>"
@@ -605,7 +267,7 @@ if ($normalCount > 0):
 													<div class="bx_size_scroller_container">
 														<div class="bx_size">
 															<ul id="prop_<?=$arProp["CODE"]?>_<?=$arItem["ID"]?>"
-																style="width: 200%; margin-left: <?=$marginLeft; ?>;"
+																style="width: <?=$fullWidth; ?>; margin-left: <?=$marginLeft; ?>;"
 																class="sku_prop_list"
 																>
 																<?
@@ -617,7 +279,7 @@ if ($normalCount > 0):
 																		$selected = ($selectedIndex == $counter ? ' bx_active' : '');
 																		$skuValueName = htmlspecialcharsbx($arSkuValue['NAME']);
 																	?>
-																		<li style="width:10%;"
+																		<li style="width: <?=$itemWidth; ?>;"
 																			class="sku_prop<?=$selected?>"
 																			data-sku-selector="Y"
 																			data-value-id="<?=($arProp['TYPE'] == 'S' && $arProp['USER_TYPE'] == 'directory' ? $arSkuValue['XML_ID'] : $skuValueName); ?>"
@@ -645,16 +307,16 @@ if ($normalCount > 0):
 										endforeach;
 									endif;
 									?>
-								</td>
+								</div>
 							<?
 							elseif ($arHeader["id"] == "QUANTITY"):
 							?>
-								<td class="custom">
+								<div class="custom">
 									<span><?=$arHeader["name"]; ?>:</span>
 									<div class="centered">
-										<table cellspacing="0" cellpadding="0" class="counter">
-											<tr>
-												<td>
+										<div cellspacing="0" cellpadding="0" class="counter">
+											<div>
+												<div>
 													<?
 													$ratio = isset($arItem["MEASURE_RATIO"]) ? $arItem["MEASURE_RATIO"] : 0;
 													$useFloatQuantity = ($arParams["QUANTITY_FLOAT"] == "Y") ? true : false;
@@ -670,7 +332,7 @@ if ($normalCount > 0):
 														value="<?=$arItem["QUANTITY"]?>"
 														onchange="updateQuantity('QUANTITY_INPUT_<?=$arItem["ID"]?>', '<?=$arItem["ID"]?>', <?=$ratio?>, <?=$useFloatQuantityJS?>)"
 													>
-												</td>
+												</div>
 												<?
 												if (!isset($arItem["MEASURE_RATIO"]))
 												{
@@ -681,30 +343,30 @@ if ($normalCount > 0):
 													floatval($arItem["MEASURE_RATIO"]) != 0
 												):
 												?>
-													<td id="basket_quantity_control">
+													<div id="basket_quantity_control">
 														<div class="basket_quantity_control">
 															<a href="javascript:void(0);" class="plus" onclick="setQuantity(<?=$arItem["ID"]?>, <?=$arItem["MEASURE_RATIO"]?>, 'up', <?=$useFloatQuantityJS?>);"></a>
 															<a href="javascript:void(0);" class="minus" onclick="setQuantity(<?=$arItem["ID"]?>, <?=$arItem["MEASURE_RATIO"]?>, 'down', <?=$useFloatQuantityJS?>);"></a>
 														</div>
-													</td>
+													</div>
 												<?
 												endif;
 												if (isset($arItem["MEASURE_TEXT"]))
 												{
 													?>
-														<td style="text-align: left"><?=htmlspecialcharsbx($arItem["MEASURE_TEXT"])?></td>
+														<div style="text-align: left"><?=htmlspecialcharsbx($arItem["MEASURE_TEXT"])?></div>
 													<?
 												}
 												?>
-											</tr>
-										</table>
+											</div>
+										</div>
 									</div>
 									<input type="hidden" id="QUANTITY_<?=$arItem['ID']?>" name="QUANTITY_<?=$arItem['ID']?>" value="<?=$arItem["QUANTITY"]?>" />
-								</td>
+								</div>
 							<?
 							elseif ($arHeader["id"] == "PRICE"):
 							?>
-								<td class="price">
+								<div class="price">
 										<div class="current_price" id="current_price_<?=$arItem["ID"]?>">
 											<?=$arItem["PRICE_FORMATED"]?>
 										</div>
@@ -718,25 +380,25 @@ if ($normalCount > 0):
 										<div class="type_price"><?=GetMessage("SALE_TYPE")?></div>
 										<div class="type_price_value"><?=$arItem["NOTES"]?></div>
 									<?endif;?>
-								</td>
+								</div>
 							<?
 							elseif ($arHeader["id"] == "DISCOUNT"):
 							?>
-								<td class="custom">
+								<div class="custom">
 									<span><?=$arHeader["name"]; ?>:</span>
 									<div id="discount_value_<?=$arItem["ID"]?>"><?=$arItem["DISCOUNT_PRICE_PERCENT_FORMATED"]?></div>
-								</td>
+								</div>
 							<?
 							elseif ($arHeader["id"] == "WEIGHT"):
 							?>
-								<td class="custom">
+								<div class="custom">
 									<span><?=$arHeader["name"]; ?>:</span>
 									<?=$arItem["WEIGHT_FORMATED"]?>
-								</td>
+								</div>
 							<?
 							else:
 							?>
-								<td class="custom">
+								<div class="custom">
 									<span><?=$arHeader["name"]; ?>:</span>
 									<?
 									if ($arHeader["id"] == "SUM"):
@@ -753,14 +415,14 @@ if ($normalCount > 0):
 									<?
 									endif;
 									?>
-								</td>
+								</div>
 							<?
 							endif;
 						endforeach;
 
 						if ($bDelayColumn || $bDeleteColumn):
 						?>
-							<td class="control">
+							<div class="control">
 								<?
 								if ($bDeleteColumn):
 									?>
@@ -777,18 +439,18 @@ if ($normalCount > 0):
 								<?
 								endif;
 								?>
-							</td>
+							</div>
 						<?
 						endif;
 						?>
-							<td class="margin"></td>
-					</tr>
+							<div class="margin"></div>
+					</div>
 					<?
 					endif;
 				endforeach;
 				?>
 			</tbody>
-		</table>
+		</div>
 	</div>
 	<input type="hidden" id="column_headers" value="<?=htmlspecialcharsbx(implode($arHeaders, ","))?>" />
 	<input type="hidden" id="offers_props" value="<?=htmlspecialcharsbx(implode($arParams["OFFERS_PROPS"], ","))?>" />
@@ -841,46 +503,46 @@ if ($normalCount > 0):
 ?>
 		</div>
 		<div class="bx_ordercart_order_pay_right">
-			<table class="bx_ordercart_order_sum">
+			<div class="bx_ordercart_order_sum">
 				<?if ($bWeightColumn && floatval($arResult['allWeight']) > 0):?>
-					<tr>
-						<td class="custom_t1"><?=GetMessage("SALE_TOTAL_WEIGHT")?></td>
-						<td class="custom_t2" id="allWeight_FORMATED"><?=$arResult["allWeight_FORMATED"]?>
-						</td>
-					</tr>
+					<div>
+						<div class="custom_t1"><?=GetMessage("SALE_TOTAL_WEIGHT")?></div>
+						<div class="custom_t2" id="allWeight_FORMATED"><?=$arResult["allWeight_FORMATED"]?>
+						</div>
+					</div>
 				<?endif;?>
 				<?if ($arParams["PRICE_VAT_SHOW_VALUE"] == "Y"):?>
-					<tr>
-						<td><?echo GetMessage('SALE_VAT_EXCLUDED')?></td>
-						<td id="allSum_wVAT_FORMATED"><?=$arResult["allSum_wVAT_FORMATED"]?></td>
-					</tr>
+					<div>
+						<div><?echo GetMessage('SALE_VAT_EXCLUDED')?></div>
+						<div id="allSum_wVAT_FORMATED"><?=$arResult["allSum_wVAT_FORMATED"]?></div>
+					</div>
 					<?
 					$showTotalPrice = (float)$arResult["DISCOUNT_PRICE_ALL"] > 0;
 					?>
-						<tr style="display: <?=($showTotalPrice ? 'table-row' : 'none'); ?>;">
-							<td class="custom_t1"></td>
-							<td class="custom_t2" style="text-decoration:line-through; color:#828282;" id="PRICE_WITHOUT_DISCOUNT">
+						<div style="display: <?=($showTotalPrice ? 'table-row' : 'none'); ?>;">
+							<div class="custom_t1"></div>
+							<div class="custom_t2" style="text-decoration:line-through; color:#828282;" id="PRICE_WITHOUT_DISCOUNT">
 								<?=($showTotalPrice ? $arResult["PRICE_WITHOUT_DISCOUNT"] : ''); ?>
-							</td>
-						</tr>
+							</div>
+						</div>
 					<?
 					if (floatval($arResult['allVATSum']) > 0):
 						?>
-						<tr>
-							<td><?echo GetMessage('SALE_VAT')?></td>
-							<td id="allVATSum_FORMATED"><?=$arResult["allVATSum_FORMATED"]?></td>
-						</tr>
+						<div>
+							<div><?echo GetMessage('SALE_VAT')?></div>
+							<div id="allVATSum_FORMATED"><?=$arResult["allVATSum_FORMATED"]?></div>
+						</div>
 						<?
 					endif;
 					?>
 				<?endif;?>
-					<tr>
-						<td class="fwb"><?=GetMessage("SALE_TOTAL")?></td>
-						<td class="fwb" id="allSum_FORMATED"><?=str_replace(" ", "&nbsp;", $arResult["allSum_FORMATED"])?></td>
-					</tr>
+					<div>
+						<div class="fwb"><?=GetMessage("SALE_TOTAL")?></div>
+						<div class="fwb" id="allSum_FORMATED"><?=str_replace(" ", "&nbsp;", $arResult["allSum_FORMATED"])?></div>
+					</div>
 
 
-			</table>
+			</div>
 			<div style="clear:both;"></div>
 		</div>
 		<div style="clear:both;"></div>
@@ -902,20 +564,19 @@ if ($normalCount > 0):
 		</div>
 	</div>
 </div>
-    */?>
 <?
 else:
 ?>
 <div id="basket_items_list">
-	<table>
+	<div>
 		<tbody>
-			<tr>
-				<td style="text-align:center">
+			<div>
+				<div style="text-align:center">
 					<div class=""><?=GetMessage("SALE_NO_ITEMS");?></div>
-				</td>
-			</tr>
+				</div>
+			</div>
 		</tbody>
-	</table>
+	</div>
 </div>
 <?
 endif;

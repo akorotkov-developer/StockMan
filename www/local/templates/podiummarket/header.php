@@ -45,9 +45,12 @@ use Bitrix\Main\Page\AssetLocation;
                 </div>
                 <div class="cell large-4 medium-4 text-center medium-text-left hide-for-small-only header__people">
                     <ul class="people">
-                        <li class="people__item"><a class="people__link" href="#">Женщинам</a></li>
-                        <li class="people__item"><a class="people__link people__link_active" href="#">Мужчинам</a></li>
-                        <li class="people__item"><a class="people__link" href="#">Детям</a></li>
+                        <?
+                        $uf_arresult = CIBlockSection::GetList(Array("SORT"=>"­­ASC"), Array("IBLOCK_ID" => StockMan\Config::CATALOG_ID, "SECTION_ID"=>false, "ACTIVE"=>"Y"), false);
+                        while ($uf_value = $uf_arresult->GetNext()) {
+                            ?>
+                            <li class="people__item"><a class="people__link" href="<?=$uf_value['SECTION_PAGE_URL']?>"><?=$uf_value["NAME"];?></a></li>
+                        <?}?>
                     </ul>
                 </div>
                 <div class="cell show-for-small-only small-2">
@@ -63,7 +66,7 @@ use Bitrix\Main\Page\AssetLocation;
                         </form>
                     </div>
                 </div>
-                <div class="cell text-center large-4 medium-4 small-4"><a class="header__logo" href="#"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/logo.svg" alt=""></a></div>
+                <div class="cell text-center large-4 medium-4 small-4"><a class="header__logo" href="/main.php"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/logo.svg" alt=""></a></div>
                 <div class="cell large-4 header__book medium-4 small-4">
                     <?$APPLICATION->IncludeComponent(
                         "bitrix:sale.basket.basket.line",

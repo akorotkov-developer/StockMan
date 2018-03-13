@@ -124,10 +124,7 @@ function updateBasketTable(basketItemId, res)
 		propId,
 		arProp,
 		bIsImageProperty,
-		countValues,
 		full,
-		fullWidth,
-		itemWidth,
 		arVal,
 		valId,
 		arSkuValue,
@@ -226,7 +223,7 @@ function updateBasketTable(basketItemId, res)
 					case 'TYPE':
 						break;
 					case 'NAME':
-						// first <div> - image and brand
+						// first <td> - image and brand
 						oCellName = newRow.insertCell(-1);
 						imageURL = '';
 						cellNameHTML = '';
@@ -270,7 +267,7 @@ function updateBasketTable(basketItemId, res)
 
 						oCellName.innerHTML = cellNameHTML;
 
-						// second <div> - name, basket props, sku props
+						// second <td> - name, basket props, sku props
 						oCellItem = newRow.insertCell(-1);
 						cellItemHTML = '';
 						oCellItem.setAttribute('class', 'item');
@@ -328,19 +325,7 @@ function updateBasketTable(basketItemId, res)
 									selectedIndex = 0;
 									arProp = arItem.SKU_DATA[propId];
 									bIsImageProperty = false;
-									countValues = BX.util.array_keys(arProp['VALUES']).length;
-									if (countValues > 5)
-									{
-										full = 'full';
-										fullWidth = (countValues*20) + '%';
-										itemWidth = (100/countValues) + '%';
-									}
-									else
-									{
-										full = '';
-										fullWidth = '100%';
-										itemWidth = '20%';
-									}
+									full = (BX.util.array_keys(arProp['VALUES']).length > 5) ? 'full' : '';
 
 									counter = 0;
 									for (valId in arProp['VALUES'])
@@ -359,9 +344,8 @@ function updateBasketTable(basketItemId, res)
 									}
 
 									marginLeft = '0';
-									if (full !== '' && selectedIndex > 5)
+									if (full != '' && selectedIndex > 5)
 										marginLeft = ((5 - selectedIndex) * 20) + '%';
-
 									// sku property can contain list of images or values
 									if (bIsImageProperty)
 									{
@@ -370,7 +354,7 @@ function updateBasketTable(basketItemId, res)
 										cellItemHTML += '<div class="bx_scu_scroller_container">';
 										cellItemHTML += '<div class="bx_scu">';
 
-										cellItemHTML += '<ul id="prop_' + arProp['CODE'] + '_' + arItem['ID'] + '" style="width: ' + fullWidth + '; margin-left: ' + marginLeft + ';" class="sku_prop_list">';
+										cellItemHTML += '<ul id="prop_' + arProp['CODE'] + '_' + arItem['ID'] + '" style="width: 200%; margin-left: ' + marginLeft + ';" class="sku_prop_list">';
 
 										counter = 0;
 										for (valueId in arProp['VALUES'])
@@ -379,7 +363,7 @@ function updateBasketTable(basketItemId, res)
 											arSkuValue = arProp['VALUES'][valueId];
 											selected = (selectedIndex == counter ? ' bx_active' : '');
 
-											cellItemHTML += '<li style="width: ' + itemWidth + '; padding-top: ' + itemWidth + ';"\
+											cellItemHTML += '<li style="width:10%;"\
 															class="sku_prop' + selected + '" \
 															data-sku-selector="Y" \
 															data-value-id="' + arSkuValue['XML_ID'] + '" \
@@ -407,7 +391,7 @@ function updateBasketTable(basketItemId, res)
 										cellItemHTML += '<div class="bx_size_scroller_container">';
 										cellItemHTML += '<div class="bx_size">';
 
-										cellItemHTML += '<ul id="prop_' + arProp['CODE'] + '_' + arItem['ID'] + '" style="width: ' + fullWidth + '; margin-left: ' + marginLeft + ';" class="sku_prop_list">';
+										cellItemHTML += '<ul id="prop_' + arProp['CODE'] + '_' + arItem['ID'] + '" style="width: 200%; margin-left: ' + marginLeft + ';" class="sku_prop_list">';
 
 										counter = 0;
 										for (valueId in arProp['VALUES'])
@@ -416,7 +400,7 @@ function updateBasketTable(basketItemId, res)
 											arSkuValue = arProp['VALUES'][valueId];
 											selected = (selectedIndex == counter ? ' bx_active' : '');
 
-											cellItemHTML += '<li style="width: ' + itemWidth + ';"\
+											cellItemHTML += '<li style="width:10%;"\
 															class="sku_prop ' + selected + '" \
 															data-sku-selector="Y" \
 															data-value-id="' + (arProp['TYPE'] === 'S' && arProp['USER_TYPE'] === 'directory' ? arSkuValue['XML_ID'] : BX.util.htmlspecialchars(arSkuValue['NAME'])) + '" \
@@ -465,9 +449,9 @@ function updateBasketTable(basketItemId, res)
 						oCellQuantityHTML += '<span>' + getColumnName(res, arColumns[i]) + ':</span>';
 
 						oCellQuantityHTML += '<div class="centered">';
-						oCellQuantityHTML += '<div cellspacing="0" cellpadding="0" class="counter">';
-						oCellQuantityHTML += '<div>';
-						oCellQuantityHTML += '<div>';
+						oCellQuantityHTML += '<table cellspacing="0" cellpadding="0" class="counter">';
+						oCellQuantityHTML += '<tr>';
+						oCellQuantityHTML += '<td>';
 
 						oCellQuantityHTML += '<input type="text" size="3" id="QUANTITY_INPUT_' + arItem['ID'] + '"\
 											name="QUANTITY_INPUT_' + arItem['ID'] + '"\
@@ -476,25 +460,25 @@ function updateBasketTable(basketItemId, res)
 											onchange="updateQuantity(\'QUANTITY_INPUT_' + arItem['ID'] + '\',\'' + arItem['ID'] + '\', ' + ratio + ',' + bUseFloatQuantity + ')"\
 						>';
 
-						oCellQuantityHTML += '</div>';
+						oCellQuantityHTML += '</td>';
 
 						if (ratio != 0
 							&& ratio != ''
 						) // if not Set parent, show quantity control
 						{
-							oCellQuantityHTML += '<div id="basket_quantity_control">\
+							oCellQuantityHTML += '<td id="basket_quantity_control">\
 							<div class="basket_quantity_control">\
 								<a href="javascript:void(0);" class="plus" onclick="setQuantity(' + arItem['ID'] + ', ' + ratio + ', \'up\', ' + bUseFloatQuantity + ');"></a>\
 								<a href="javascript:void(0);" class="minus" onclick="setQuantity(' + arItem['ID'] + ', ' + ratio + ', \'down\', ' + bUseFloatQuantity + ');"></a>\
 							</div>\
-						</div>';
+						</td>';
 						}
 
 						if (arItem.hasOwnProperty('MEASURE_TEXT') && arItem['MEASURE_TEXT'].length > 0)
-							oCellQuantityHTML += '<div style="text-align: left">' + BX.util.htmlspecialchars(arItem['MEASURE_TEXT']) + '</div>';
+							oCellQuantityHTML += '<td style="text-align: left">' + BX.util.htmlspecialchars(arItem['MEASURE_TEXT']) + '</td>';
 
-						oCellQuantityHTML += '</div>';
-						oCellQuantityHTML += '</div>';
+						oCellQuantityHTML += '</tr>';
+						oCellQuantityHTML += '</table>';
 						oCellQuantityHTML += '</div>';
 
 						oCellQuantityHTML += '<input type="hidden" id="QUANTITY_' + arItem['ID'] + '" name="QUANTITY_' + arItem['ID'] + '" value="' + arItem['QUANTITY'] + '" />';
@@ -590,10 +574,8 @@ function updateBasketTable(basketItemId, res)
 				if (BX('old_price_' + id))
 					BX('old_price_' + id).innerHTML = (item.DISCOUNT_PRICE_PERCENT > 0) ? item.FULL_PRICE_FORMATED : '';
 
-				if (BX('sum_' + id)){
+				if (BX('sum_' + id))
 					BX('sum_' + id).innerHTML = item.SUM;
-					console.log(item.SUM);
-				}
 
 				// if the quantity was set by user to 0 or was too much, we need to show corrected quantity value from ajax response
 				if (BX('QUANTITY_' + id))
@@ -913,7 +895,6 @@ function leftScroll(prop, id, count)
 function rightScroll(prop, id, count)
 {
 	count = parseInt(count, 10);
-
 	var el = BX('prop_' + prop + '_' + id);
 
 	if (el)

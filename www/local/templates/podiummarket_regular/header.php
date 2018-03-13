@@ -15,13 +15,16 @@ require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/
         )
     );?>
 
-    <div class="grid-container">
-        <div class="grid-x grid-padding-x">
-            <div class="cell">
-                <h1><?$APPLICATION->ShowTitle();?></h1>
+
+    <?if (strpos( $APPLICATION->GetCurPage(), 'cart') != 1) {?>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="cell">
+                    <h1><?$APPLICATION->ShowTitle();?></h1>
+                </div>
             </div>
         </div>
-    </div>
+    <?}?>
 
 
     <div class="grid-container">

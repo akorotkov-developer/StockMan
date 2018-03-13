@@ -7,28 +7,28 @@
 $bPriceType  = false;
 $bDelayColumn  = false;
 $bDeleteColumn = false;
-$bWeightColumn = false;
 $bPropsColumn  = false;
 ?>
-<div id="basket_items_delayed" class="bx_ordercart_order_table_container" style="display:none">
-	<table id="delayed_items">
+<div id="basket_items_not_available" class="bx_ordercart_order_table_container" style="display:none">
+	<table>
+
 		<thead>
 			<tr>
 				<td class="margin"></td>
 				<?
 				foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader):
-					if (in_array($arHeader["id"], array("TYPE"))) // some header columns are shown differently
+
+					if (!in_array($arHeader["id"], array("NAME", "PROPS", "PRICE", "TYPE", "QUANTITY", "DELETE", "WEIGHT")))
+						continue;
+
+					if (in_array($arHeader["id"], array("TYPE")))
 					{
 						$bPriceType = true;
 						continue;
 					}
-					elseif ($arHeader["id"] == "PROPS")
+					elseif ($arHeader["id"] == "PROPS") // some header columns are shown differently
 					{
 						$bPropsColumn = true;
-						continue;
-					}
-					elseif ($arHeader["id"] == "DELAY")
-					{
 						continue;
 					}
 					elseif ($arHeader["id"] == "DELETE")
@@ -72,18 +72,17 @@ $bPropsColumn  = false;
 
 		<tbody>
 			<?
-			$skipHeaders = array('PROPS', 'DELAY', 'DELETE', 'TYPE');
+			$needHeaders = array('NAME', 'PRICE', 'QUANTITY', 'WEIGHT');
 
 			foreach ($arResult["GRID"]["ROWS"] as $k => $arItem):
-
-				if ($arItem["DELAY"] == "Y" && $arItem["CAN_BUY"] == "Y"):
+				if (isset($arItem["NOT_AVAILABLE"]) && $arItem["NOT_AVAILABLE"] == true):
 			?>
-				<tr id="<?=$arItem["ID"]?>">
+				<tr>
 					<td class="margin"></td>
 					<?
 					foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader):
 
-						if (in_array($arHeader["id"], $skipHeaders)) // some values are not shown in columns in this template
+						if (!in_array($arHeader["id"], $needHeaders))
 							continue;
 
 						if ($arHeader["id"] == "NAME"):
@@ -98,6 +97,7 @@ $bPropsColumn  = false;
 									else:
 										$url = $templateFolder."/images/no_photo.png";
 									endif;
+
 									if (strlen($arItem["DETAIL_PAGE_URL"]) > 0):?><a href="<?=$arItem["DETAIL_PAGE_URL"] ?>"><?endif;?>
 										<div class="bx_ordercart_photo" style="background-image:url('<?=$url?>')"></div>
 									<?if (strlen($arItem["DETAIL_PAGE_URL"]) > 0):?></a><?endif;?>
@@ -112,7 +112,6 @@ $bPropsColumn  = false;
 								endif;
 								?>
 							</td>
-
 							<td class="item">
 								<h2 class="bx_ordercart_itemtitle">
 									<?if (strlen($arItem["DETAIL_PAGE_URL"]) > 0):?><a href="<?=$arItem["DETAIL_PAGE_URL"] ?>"><?endif;?>
@@ -151,7 +150,7 @@ $bPropsColumn  = false;
 										{
 											if (empty($propValue) || !is_array($propValue))
 												continue;
-											$propsMap[$propValue['CODE']] = (isset($propValue['~VALUE']) ? $propValue['~VALUE'] : $propValue['VALUE']);
+											$propsMap[$propValue['CODE']] = $propValue['VALUE'];
 										}
 										unset($propValue);
 										foreach ($arItem["SKU_DATA"] as $propId => $arProp):
@@ -177,18 +176,7 @@ $bPropsColumn  = false;
 												unset($counter);
 											}
 											$countValues = count($arProp["VALUES"]);
-											if ($countValues > 5)
-											{
-												$full = "full";
-												$fullWidth = ($countValues*20).'%';
-												$itemWidth = (100/$countValues).'%';
-											}
-											else
-											{
-												$full = "";
-												$fullWidth = '100%';
-												$itemWidth = '20%';
-											}
+											$full = ($countValues > 5) ? "full" : "";
 
 											$marginLeft = 0;
 											if ($countValues > 5 && $selectedIndex > 5)
@@ -202,45 +190,44 @@ $bPropsColumn  = false;
 													</span>
 													<div class="bx_scu_scroller_container">
 														<div class="bx_scu">
-															<ul id="prop_<?=$arProp["CODE"]?>_<?=$arItem["ID"]?>" style="width: <?=$fullWidth; ?>; margin-left: <?=$marginLeft; ?>">
-															<?
-															$counter = 0;
-															foreach ($arProp["VALUES"] as $valueId => $arSkuValue):
-																$counter++;
-																$selected = ($selectedIndex == $counter ? ' class="bx_active"' : '');
-															?>
-																<li style="width: <?=$itemWidth; ?>; padding-top: <?=$itemWidth; ?>;"<?=$selected?>>
-																	<a href="javascript:void(0)" class="cnt"><span class="cnt_item" style="background-image:url(<?=$arSkuValue["PICT"]["SRC"]; ?>)"></span></a>
-																</li>
-															<?
-															endforeach;
-															unset($counter);
-															?>
-															</ul>
-														</div>
-														<div class="bx_slide_left" onclick="leftScroll('<?=$arProp["CODE"]?>', <?=$arItem["ID"]?>, <?=$countValues?>);"></div>
-														<div class="bx_slide_right" onclick="rightScroll('<?=$arProp["CODE"]?>', <?=$arItem["ID"]?>, <?=$countValues?>);"></div>
-													</div>
-
-												</div>
-											<?
-											else:
-											?>
-												<div class="bx_item_detail_size_small_noadaptive <?=$full?>">
-													<span class="bx_item_section_name_gray">
-														<?=htmlspecialcharsbx($arProp["NAME"]);?>:
-													</span>
-													<div class="bx_size_scroller_container">
-														<div class="bx_size">
-															<ul id="prop_<?=$arProp["CODE"]?>_<?=$arItem["ID"]?>" style="width: <?=$fullWidth; ?>; margin-left: <?=$marginLeft; ?>;">
+															<ul id="prop_<?=$arProp["CODE"]?>_<?=$arItem["ID"]?>" style="width: 200%; margin-left: <?=$marginLeft; ?>">
 																<?
 																$counter = 0;
 																foreach ($arProp["VALUES"] as $valueId => $arSkuValue):
 																	$counter++;
 																	$selected = ($selectedIndex == $counter ? ' class="bx_active"' : '');
 																?>
-																	<li style="width: <?=$itemWidth; ?>;"<?=$selected?>>
-																		<a href="javascript:void(0);" class="cnt"><?=htmlspecialcharsbx($arSkuValue["NAME"]); ?></a>
+																<li style="width:10%;"<?=$selected?>>
+																	<a href="javascript:void(0)" class="cnt"><span class="cnt_item" style="background-image:url(<?=$arSkuValue["PICT"]["SRC"];?>)"></span></a>
+																</li>
+																<?
+																endforeach;
+																unset($counter);
+																?>
+															</ul>
+														</div>
+														<div class="bx_slide_left" onclick="leftScroll('<?=$arProp["CODE"]?>', <?=$arItem["ID"]?>, <?=$countValues?>);"></div>
+														<div class="bx_slide_right" onclick="rightScroll('<?=$arProp["CODE"]?>', <?=$arItem["ID"]?>, <?=$countValues?>);"></div>
+													</div>
+												</div>
+											<?
+											else:
+											?>
+												<div class="bx_item_detail_size_small_noadaptive <?=$full?>">
+													<span class="bx_item_section_name_gray">
+														<?=htmlspecialcharsbx($arProp["NAME"])?>:
+													</span>
+													<div class="bx_size_scroller_container">
+														<div class="bx_size">
+															<ul id="prop_<?=$arProp["CODE"]?>_<?=$arItem["ID"]?>" style="width: 200%; margin-left: <?=$marginLeft; ?>">
+																<?
+																$counter = 0;
+																foreach ($arProp["VALUES"] as $valueId => $arSkuValue):
+																	$counter++;
+																	$selected = ($selectedIndex == $counter ? ' class="bx_active"' : '');
+																?>
+																	<li style="width:10%;"<?=$selected?>>
+																		<a href="javascript:void(0);" class="cnt"><?=$arSkuValue["NAME"]?></a>
 																	</li>
 																<?
 																endforeach;
@@ -257,7 +244,6 @@ $bPropsColumn  = false;
 										endforeach;
 								endif;
 								?>
-								<input type="hidden" name="DELAY_<?=$arItem["ID"]?>" value="Y"/>
 							</td>
 						<?
 						elseif ($arHeader["id"] == "QUANTITY"):
