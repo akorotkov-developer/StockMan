@@ -71,6 +71,7 @@ BX.namespace('BX.Sale.PersonalOrderComponent');
 				{
 					event.preventDefault();
 
+					console.log(params.url);
 					var btn = rowPayment.parentNode.getElementsByClassName('sale-order-detail-payment-options-methods-button-container')[0];
 					var linkReturn = rowPayment.parentNode.getElementsByClassName('sale-order-detail-payment-inner-row-template')[0];
 					BX.ajax(
@@ -108,3 +109,22 @@ BX.namespace('BX.Sale.PersonalOrderComponent');
 		}
 	};
 })();
+
+$( document ).ready(function() {
+    $('.sale-order-detail-show-link').on('click', function() {
+        $(".sale-order-detail-payment-options-shipment-composition-map-js").show();
+        $(".sale-order-detail-hide-link").show();
+        $(".sale-order-detail-show-link").hide();
+    });
+
+    $('.sale-order-detail-hide-link').on('click', function() {
+        $(".sale-order-detail-payment-options-shipment-composition-map-js").hide();
+        $(".sale-order-detail-hide-link").hide();
+        $(".sale-order-detail-show-link").show();
+    });
+
+    $('.payment-img').on('click', function() {
+        $(this).next().trigger('click');
+    });
+});
+

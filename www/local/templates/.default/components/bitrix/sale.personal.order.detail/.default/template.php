@@ -6,8 +6,8 @@ use Bitrix\Main\Localization\Loc,
 
 if ($arParams['GUEST_MODE'] !== 'Y')
 {
-	Asset::getInstance()->addJs("/bitrix/components/bitrix/sale.order.payment.change/templates/.default/script.js");
-	Asset::getInstance()->addCss("/bitrix/components/bitrix/sale.order.payment.change/templates/.default/style.css");
+	Asset::getInstance()->addJs("/local/templates/.default/components/bitrix/sale.order.payment.change/.default/script.js");
+	Asset::getInstance()->addCss("/local/templates/.default/components/bitrix/sale.order.payment.change/.default/style.css");
 }
 
 CJSCore::Init(array('clipboard', 'fx'));
@@ -328,19 +328,24 @@ else
 
 
 
+
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 sale-order-detail-payment-options-methods-container">
                     <?
                     foreach ($arResult['PAYMENT'] as $payment)
                     {
                         ?>
-
-                        <div class="col-md-2 col-sm-5 col-xs-12 sale-order-detail-payment-options-methods-image-container">
-                            <span class="sale-order-detail-payment-options-methods-image-element"
-                              style="background-image: url('<?=strlen($payment['PAY_SYSTEM']["SRC_LOGOTIP"]) ? htmlspecialcharsbx($payment['PAY_SYSTEM']["SRC_LOGOTIP"]) : '/bitrix/images/sale/nopaysystem.gif'?>');"></span>
-                        </div>
-
+                        <div class="row payment-options-methods-row">
+                            <div class="col-md-12 col-sm-12 col-xs-12 sale-order-detail-payment-options-methods">
+                                <div class="row sale-order-detail-payment-options-methods-information-block">
+                                    <div class="col-md-2 col-sm-5 col-xs-12 sale-order-detail-payment-options-methods-image-container">
+													<span class="sale-order-detail-payment-options-methods-image-element"
+                                                          style="background-image: url('<?=strlen($payment['PAY_SYSTEM']["SRC_LOGOTIP"]) ? htmlspecialcharsbx($payment['PAY_SYSTEM']["SRC_LOGOTIP"]) : '/bitrix/images/sale/nopaysystem.gif'?>');"></span>
+                                    </div>
                                     <div class="col-md-8 col-sm-7 col-xs-10 sale-order-detail-payment-options-methods-info">
-
-                                            <strong>
+                                        <div class="sale-order-detail-payment-options-methods-info-title">
+                                            <div class="sale-order-detail-methods-title">
                                                 <?
                                                 $paymentData[$payment['ACCOUNT_NUMBER']] = array(
                                                     "payment" => $payment['ACCOUNT_NUMBER'],
@@ -356,37 +361,39 @@ else
                                                     $paymentSubTitle .= " ".Loc::getMessage('SPOD_FROM')." ".$payment['DATE_BILL']->format($arParams['ACTIVE_DATE_FORMAT']);
                                                 }
                                                 $paymentSubTitle .=",";
+                                                echo "<strong>";
                                                 echo htmlspecialcharsbx($paymentSubTitle);
+                                                echo "</strong>";
                                                 ?>
-                                                <strong><?=$payment['PAY_SYSTEM_NAME']?></strong>
+                                                <span class="sale-order-list-payment-title-element"><?=$payment['PAY_SYSTEM_NAME']?></span>
                                                 <?
                                                 if ($payment['PAID'] === 'Y')
                                                 {
                                                     ?>
-                                                    <label class="label success">
-                                                    <?=Loc::getMessage('SPOD_PAYMENT_PAID')?></label>
+                                                    <span class="sale-order-detail-payment-options-methods-info-title-status-success">
+																	<?=Loc::getMessage('SPOD_PAYMENT_PAID')?></span>
                                                     <?
                                                 }
                                                 elseif ($arResult['IS_ALLOW_PAY'] == 'N')
                                                 {
                                                     ?>
-                                                    <label class="label">
-                                                    <?=Loc::getMessage('SPOD_TPL_RESTRICTED_PAID')?></label>
+                                                    <span class="sale-order-detail-payment-options-methods-info-title-status-restricted">
+																	<?=Loc::getMessage('SPOD_TPL_RESTRICTED_PAID')?></span>
                                                     <?
                                                 }
                                                 else
                                                 {
                                                     ?>
-                                                    <label class="label">
-                                                    <?=Loc::getMessage('SPOD_PAYMENT_UNPAID')?></label>
+                                                    <span class="sale-order-detail-payment-options-methods-info-title-status-alert">
+																	<?=Loc::getMessage('SPOD_PAYMENT_UNPAID')?></span>
                                                     <?
                                                 }
                                                 ?>
-                                            </strong>
-
-                                        <div>
-                                            <span class=""><?= Loc::getMessage('SPOD_ORDER_PRICE_BILL')?>:</span>
-                                            <span class=""><?=$payment['PRICE_FORMATED']?></span>
+                                            </div>
+                                        </div>
+                                        <div class="sale-order-detail-payment-options-methods-info-total-price">
+                                            <span class="sale-order-detail-sum-name"><?= Loc::getMessage('SPOD_ORDER_PRICE_BILL')?>:</span>
+                                            <span class="sale-order-detail-sum-number"><?=$payment['PRICE_FORMATED']?></span>
                                         </div>
                                         <?
                                         if (!empty($payment['CHECK_DATA']))
@@ -436,22 +443,18 @@ else
                                         }
                                         ?>
                                     </div>
-
-
                                     <?
                                     if ($payment['PAY_SYSTEM']["IS_CASH"] !== "Y")
                                     {
                                         ?>
-                                        <div>
+                                        <div class="col-md-2 col-sm-12 col-xs-12 sale-order-detail-payment-options-methods-button-container">
                                             <?
                                             if ($payment['PAY_SYSTEM']['PSA_NEW_WINDOW'] === 'Y' && $arResult["IS_ALLOW_PAY"] !== "N")
                                             {
                                                 ?>
-
-                                                <a class="button"
+                                                <a class="btn-theme sale-order-detail-payment-options-methods-button-element-new-window"
                                                    target="_blank"
                                                    href="<?=htmlspecialcharsbx($payment['PAY_SYSTEM']['PSA_ACTION_FILE'])?>">
-                                                    <i class="fa fa-credit-card"></i>&nbsp;
                                                     <?= Loc::getMessage('SPOD_ORDER_PAY') ?>
                                                 </a>
                                                 <?
@@ -461,13 +464,13 @@ else
                                                 if ($payment["PAID"] === "Y" || $arResult["CANCELED"] === "Y" || $arResult["IS_ALLOW_PAY"] === "N")
                                                 {
                                                     ?>
-                                                    <a class="button"><i class="fa fa-credit-card"></i>&nbsp;<?= Loc::getMessage('SPOD_ORDER_PAY') ?></a>
+                                                    <a class="btn-theme sale-order-detail-payment-options-methods-button-element inactive-button button"><?= Loc::getMessage('SPOD_ORDER_PAY') ?></a>
                                                     <?
                                                 }
                                                 else
                                                 {
                                                     ?>
-                                                    <a class="button"><i class="fa fa-credit-card"></i>&nbsp;<?= Loc::getMessage('SPOD_ORDER_PAY') ?></a>
+                                                    <a class="btn-theme sale-order-detail-payment-options-methods-button-element active-button button"><?= Loc::getMessage('SPOD_ORDER_PAY') ?></a>
                                                     <?
                                                 }
                                             }
@@ -481,7 +484,7 @@ else
                                             <i class="fa fa-long-arrow-left"></i> <?=Loc::getMessage('SPOD_CANCEL_PAYMENT')?>
                                         </a>
                                     </div>
-
+                                </div>
                                 <?
                                 if ($payment["PAID"] !== "Y"
                                     && $payment['PAY_SYSTEM']["IS_CASH"] !== "Y"
@@ -491,20 +494,28 @@ else
                                 {
                                     ?>
                                     <div class="row sale-order-detail-payment-options-methods-template col-md-12 col-sm-12 col-xs-12">
-                                        <span class="sale-paysystem-close active-button">
-                                            <span class="sale-paysystem-close-item sale-order-payment-cancel"></span><!--sale-paysystem-close-item-->
-                                        </span><!--sale-paysystem-close-->
+														<span class="sale-paysystem-close active-button">
+															<span class="sale-paysystem-close-item sale-order-payment-cancel"></span><!--sale-paysystem-close-item-->
+														</span><!--sale-paysystem-close-->
                                         <?=$payment['BUFFERED_OUTPUT']?>
-                                            <!--<a class="sale-order-payment-cancel">--><?//= Loc::getMessage('SPOD_CANCEL_PAY') ?><!--</a>-->
+                                        <!--<a class="sale-order-payment-cancel">--><?//= Loc::getMessage('SPOD_CANCEL_PAY') ?><!--</a>-->
                                     </div>
                                     <?
                                 }
                                 ?>
-
-
+                            </div>
+                        </div>
                         <?
                     }
                     ?>
+                </div>
+            </div>
+
+
+
+
+
+
 
 
 
@@ -605,7 +616,7 @@ else
 
 
 
-                                <div class="col-md-9 col-md-offset-3 col-sm-12 sale-order-detail-payment-options-shipment-composition-map">
+                                <div class="col-md-9 col-md-offset-3 col-sm-12 sale-order-detail-payment-options-shipment-composition-map sale-order-detail-payment-options-shipment-composition-map-js">
                                     <?
                                     $store = $arResult['DELIVERY']['STORE_LIST'][$shipment['STORE_ID']];
                                     if (isset($store))
@@ -614,7 +625,7 @@ else
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 sale-order-detail-map-container">
                                                 <div class="row">
-                                                    <h4 class="sale-order-detail-payment-options-shipment-composition-map-title">
+                                                    <h4>
                                                         <?= Loc::getMessage('SPOD_SHIPMENT_STORE')?>
                                                     </h4>
                                                     <?
@@ -669,106 +680,97 @@ else
                                         }
                                     }
                                     ?>
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12 sale-order-detail-payment-options-shipment-composition-container">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-xs-12 sale-order-detail-payment-options-shipment-composition-title">
-                                                    <h3 class="sale-order-detail-payment-options-shipment-composition-title-element"><?= Loc::getMessage('SPOD_ORDER_SHIPMENT_BASKET')?></h3>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="sale-order-detail-order-section bx-active">
-                                                    <div class="sale-order-detail-order-section-content container-fluid">
-                                                        <div class="sale-order-detail-order-table-fade sale-order-detail-order-table-fade-right">
-                                                            <div style="width: 100%; overflow-x: auto; overflow-y: hidden;">
-                                                                <div class="sale-order-detail-order-item-table">
-                                                                    <div class="sale-order-detail-order-item-tr hidden-sm hidden-xs">
-                                                                        <div class="sale-order-detail-order-item-td"
-                                                                             style="padding-bottom: 5px;">
-                                                                            <div class="sale-order-detail-order-item-td-title">
-                                                                                <?= Loc::getMessage('SPOD_NAME')?>
-                                                                            </div>
+
+
+
+
+
+
+
+
+
+                                            <h3><?= Loc::getMessage('SPOD_ORDER_SHIPMENT_BASKET')?></h3>
+
+                                            <div class="callout">
+
+                                                <?
+                                                    $productcounts = 0;
+                                                    foreach ($shipment['ITEMS'] as $item)
+                                                    {
+                                                        $basketItem = $arResult['BASKET'][$item['BASKET_ID']];
+                                                        ?>
+                                                        <div class="grid-x grid-padding-x">
+
+
+                                                                    <div class="cell small-3 medium-2 large-2">
+                                                                        <a href="<?=htmlspecialcharsbx($basketItem['DETAIL_PAGE_URL'])?>">
+                                                                            <?
+                                                                                if (strlen($basketItem['PICTURE']['SRC']))
+                                                                                {
+                                                                                    $imageSrc = htmlspecialcharsbx($basketItem['PICTURE']['SRC']);
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    $imageSrc = $this->GetFolder().'/images/no_photo.png';
+                                                                                }
+                                                                            ?>
+                                                                            <img class="margin-bottom-6" src="<?=$imageSrc?>" >
+                                                                        </a>
+                                                                    </div>
+
+                                                                    <div class="cell small-9 medium-5 large-5">
+                                                                        <h5><a class="text-insta text-decoration-none text-size-xlarge" href="<?=htmlspecialcharsbx($basketItem['DETAIL_PAGE_URL'])?>"><?=htmlspecialcharsbx($basketItem['NAME'])?></a></h5>
+
+                                                                        <div class="grid-x grid-padding-x">
+                                                                            <?
+                                                                            if (isset($basketItem['PROPS']) && is_array($basketItem['PROPS']))
+                                                                            {
+                                                                                foreach ($basketItem['PROPS'] as $itemProps)
+                                                                                {
+                                                                                    ?>
+                                                                                    <div class="large-3 medium-12 small-5 cell">
+                                                                                        <?= htmlspecialcharsbx($itemProps['NAME']) ?>
+                                                                                    </div>
+                                                                                    <div class="large-9 medium-12 small-7 cell">
+                                                                                        <?= htmlspecialcharsbx($itemProps['VALUE']) ?>
+                                                                                    </div>
+                                                                                    <?
+                                                                                }
+                                                                            }
+                                                                            ?>
                                                                         </div>
-                                                                        <div class="sale-order-detail-order-item-nth-4p1"></div>
-                                                                        <div class="sale-order-detail-order-item-td sale-order-detail-order-item-properties bx-text-right"
-                                                                             style="padding-bottom: 5px;">
-                                                                            <div class="sale-order-detail-order-item-td-title">
-                                                                                <?= Loc::getMessage('SPOD_QUANTITY')?>
+                                                                    </div>
+
+
+
+                                                                    <div class="cell small-12 medium-5 large-5">
+                                                                        <div class="grid-x grid-padding-x">
+                                                                            <div class="cell small-6 medium-7 large-4">
+                                                                                <div class="margin-bottom-6">
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="cell small-6 medium-5 large-3">
+
+                                                                            </div>
+                                                                            <div class="cell small-12 large-5 text-center medium-text-left">
+                                                                                <div class="margin-bottom-6"><?=$item['QUANTITY']?>&nbsp;<?=htmlspecialcharsbx($item['MEASURE_NAME'])?></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <?
-                                                                        foreach ($shipment['ITEMS'] as $item)
-                                                                        {
-                                                                            $basketItem = $arResult['BASKET'][$item['BASKET_ID']];
-                                                                            ?>
-                                                                            <div class="sale-order-detail-order-item-tr sale-order-detail-order-basket-info sale-order-detail-order-item-tr-first">
-                                                                                <div class="sale-order-detail-order-item-td"
-                                                                                     style="min-width: 300px;">
-                                                                                    <div class="sale-order-detail-order-item-block">
-                                                                                        <div class="sale-order-detail-order-item-img-block">
-                                                                                            <a href="<?=htmlspecialcharsbx($basketItem['DETAIL_PAGE_URL'])?>">
-                                                                                                <?
-                                                                                                    if (strlen($basketItem['PICTURE']['SRC']))
-                                                                                                    {
-                                                                                                        $imageSrc = htmlspecialcharsbx($basketItem['PICTURE']['SRC']);
-                                                                                                    }
-                                                                                                    else
-                                                                                                    {
-                                                                                                        $imageSrc = $this->GetFolder().'/images/no_photo.png';
-                                                                                                    }
-                                                                                                ?>
-                                                                                                <div class="sale-order-detail-order-item-imgcontainer"
-                                                                                                     style="background-image: url(<?=$imageSrc?>);
-                                                                                                         background-image:
-                                                                                                         -webkit-image-set(url(<?=$imageSrc?>) 1x,
-                                                                                                         url(<?=$imageSrc?>) 2x)">
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </div>
-                                                                                        <div class="sale-order-detail-order-item-content">
-                                                                                            <div class="sale-order-detail-order-item-title">
-                                                                                                <a href="<?=htmlspecialcharsbx($basketItem['DETAIL_PAGE_URL'])?>"><?=htmlspecialcharsbx($basketItem['NAME'])?></a>
-                                                                                            </div>
-                                                                                            <?
-                                                                                                if (isset($basketItem['PROPS']) && is_array($basketItem['PROPS']))
-                                                                                                {
-                                                                                                    foreach ($basketItem['PROPS'] as $itemProps)
-                                                                                                    {
-                                                                                                        ?>
-                                                                                                        <div class="sale-order-detail-order-item-color">
-                                                                                        <span class="sale-order-detail-order-item-color-name">
-                                                                                            <?= htmlspecialcharsbx($itemProps['NAME']) ?>:</span>
-                                                                                                            <span class="sale-order-detail-order-item-color-type"><?= htmlspecialcharsbx($itemProps['VALUE']) ?></span>
-                                                                                                        </div>
-                                                                                                        <?
-                                                                                                    }
-                                                                                                }
-                                                                                            ?>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="sale-order-detail-order-item-nth-4p1"></div>
-                                                                                <div class="sale-order-detail-order-item-td sale-order-detail-order-item-properties bx-text-right">
-                                                                                    <div class="sale-order-detail-order-item-td-title col-xs-7  col-sm-7 col-dm-7 visible-xs visible-sm">
-                                                                                        <?= Loc::getMessage('SPOD_QUANTITY')?>
-                                                                                    </div>
-                                                                                    <div class="sale-order-detail-order-item-td-text">
-                                                                                        <span><?=$item['QUANTITY']?>&nbsp;<?=htmlspecialcharsbx($item['MEASURE_NAME'])?></span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <?
-                                                                        }
-                                                                    ?>
-                                                                </div>
-                                                            </div>
+
+
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                        <?
+                                                        $productcounts++;
+                                                        if ($productcounts != count($shipment['ITEMS'])) {
+                                                            ?>
+                                                            <hr class="margin-bottom-6">
+                                                            <?
+                                                        }
+                                                    }
+                                                ?>
                                             </div>
-                                        </div>
-                                    </div>
                                 </div>
 
 

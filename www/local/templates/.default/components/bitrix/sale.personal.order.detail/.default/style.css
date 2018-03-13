@@ -1,3 +1,7 @@
+.btn-theme {
+	margin-top: 10px!important;
+	margin-bottom: 0px!important;
+}
 .sale-order-detail-about-order-inner-container-name-read-more {
 	margin: 0px!important;
 	border-bottom: 0px!important;
@@ -461,7 +465,7 @@
 .sale-order-detail-about-order-inner-container-name-read-more,
 .sale-order-list-cancel-payment{
 	margin: 29px 0 0 0;
-	border-bottom: 1px dashed #337ab7;
+	border-bottom: 0px dashed #337ab7;
 	cursor: pointer;
 }
 
@@ -511,6 +515,7 @@
 .sale-order-detail-about-order-inner-container-name-read-less:after,
 .sale-order-detail-hide-link:after {
 	background-position: -1px -33px;
+	display: none;
 }
 
 .sale-order-detail-hide-link:after,
@@ -528,6 +533,7 @@
 .sale-order-detail-payment-options-methods-info-change-link:after,
 .sale-order-detail-show-link:after {
 	background-position: -1px -39px;
+	display: none;
 }
 
 .sale-order-detail-about-order-inner-container-name-read-more:hover:after,
@@ -613,7 +619,7 @@ div.sale-order-detail-about-order-inner-container-repeat {
 
 /* payment */
 
-.sale-order-detail-payment-options-methods-container {
+/*.sale-order-detail-payment-options-methods-container {
 	position: relative;
 	overflow: hidden;
 }
@@ -627,35 +633,35 @@ div.sale-order-detail-about-order-inner-container-repeat {
 	width: 1px;
 	height: 100%;
 	background: #777f8a;
-}
+}*/
 
 div.payment-options-methods-row {
 	position: relative;
-	padding: 0 0 0 69px;
+	padding: 0 0 0 0px;
 	margin: 0 0 0 -15px;
 	overflow: hidden;
 }
 
 div.payment-options-methods-row:before {
-	content: '';
+/*	content: '';
 	position: absolute;
 	top: 50%;
 	left: 34px;
 	margin: -1px 0 0 0;
 	height: 1px;
 	width: 30px;
-	background: #777f8a;
+	background: #777f8a;*/
 }
 
 div.payment-options-methods-row:last-child:after {
-	content: '';
+/*	content: '';
 	position: absolute;
 	top: 50%;
 	left: 33px;
 	bottom: 0;
 	display: block;
 	width: 1px;
-	background: #fff;
+	background: #fff;*/
 }
 
 .sale-order-detail-payment-options-inner-container {
@@ -664,7 +670,7 @@ div.payment-options-methods-row:last-child:after {
 
 div.sale-order-detail-payment-options-methods,
 div.sale-order-detail-payment-options-shipment {
-	padding: 20px 0 26px 0;
+	padding: 20px 0 0px 0;
 	border-top: 1px solid #f2f2f2;
 	overflow: hidden;
 }
@@ -732,8 +738,8 @@ div.sale-order-detail-payment-options-methods-image-container {
 
 .sale-order-detail-payment-options-methods-info-title,
 .sale-order-detail-payment-options-methods-shipment-list-item-title {
-	font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #000;
+	/*font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #000;*/
 }
 
 .sale-order-detail-payment-options-shipment-button-element {
@@ -797,28 +803,28 @@ div.sale-order-detail-payment-options-methods-button-container {
 
 .sale-order-detail-payment-options-methods-button-element,
 .sale-order-detail-payment-options-methods-button-element-new-window{
-	cursor: pointer;
+	/*cursor: pointer;
 	display: block;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
-	/*max-width: 115px;*/
+	max-width: 115px;
 	background: #70bb18;
 	color: #fff;
 	font: bold 13px/38px "Helvetica Neue", Helvetica, Arial, sans-serif;
-	text-align: center;
+	text-align: center;*/
 }
 
 .sale-order-detail-about-order-inner-container-repeat-button:hover,
 .sale-order-detail-payment-options-methods-button-element.active-button:hover,
 .sale-order-detail-payment-options-methods-button-element-new-window:hover{
-	color: #fff;
+	/*color: #fff;
 	background: #7bd314;
 	-webkit-transition: background ease-out 0.5s;
 	-moz-transition: background ease-out 0.5s;
 	-ms-transition: background ease-out 0.5s;
 	-o-transition: background ease-out 0.5s;
-	transition: background ease-out 0.5s;
+	transition: background ease-out 0.5s;*/
 }
 
 .sale-order-detail-about-order-inner-container-repeat-button:visited,
