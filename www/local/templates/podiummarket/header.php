@@ -23,6 +23,7 @@ use Bitrix\Main\Page\AssetLocation;
         <?
         $APPLICATION->SetAdditionalCss(StockMan\Config::STOCKMAN_TEMPLATE_PATH . "/template_styles.css");
         ?>
+        <link rel="shortcut icon" href="/favicon.png"/>
         <title><?$APPLICATION->ShowTitle()?></title>
     </head>
 <body>
