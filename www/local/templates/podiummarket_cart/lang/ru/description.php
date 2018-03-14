@@ -1,3 +1,3 @@
 <?
-$MESS["CSST_TEMPLATE_NAME"] = "PodiumMarket - Корзина";
+$MESS["CSST_TEMPLATE_NAME"] = "PodiumMarket - Одна колонка";
 ?>
