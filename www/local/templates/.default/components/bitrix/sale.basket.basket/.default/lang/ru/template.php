@@ -16,7 +16,7 @@ $MESS["SALE_WEIGHT_G"] = "г";
 $MESS["SALE_DELAYED_TITLE"] = "Отложено";
 $MESS["SALE_UNAVAIL_TITLE"] = "Отсутствуют в продаже";
 $MESS["STB_ORDER_PROMT"] = "Для того чтобы начать оформление заказа, нажмите кнопку \"Оформить заказ\".";
-$MESS["STB_COUPON_PROMT"] = "Введите код купона для скидки:";
+$MESS["STB_COUPON_PROMT"] = "№ купона на скидку";
 $MESS["SALE_VAT"] = "НДС:";
 $MESS["SALE_VAT_EXCLUDED"] = "Товаров на:";
 $MESS["SALE_VAT_INCLUDED"] = "В том числе НДС:";
@@ -33,6 +33,6 @@ $MESS["SALE_BASKET_ITEMS_SUBSCRIBED"] = "Ожидаемые";
 $MESS["SALE_BASKET_ITEMS_NOT_AVAILABLE"] = "Отсутствуют";
 $MESS["SALE_NO_ITEMS"] = "В вашей корзине ещё нет товаров.";
 $MESS["SALE_REFRESH"] = "Пересчитать";
-$MESS["SALE_COUPON_APPLY"] = "Ок";
+$MESS["SALE_COUPON_APPLY"] = "Пересчитать";
 $MESS["SALE_COUPON_APPLY_TITLE"] = "Нажмите для применения нового купона";
 ?>

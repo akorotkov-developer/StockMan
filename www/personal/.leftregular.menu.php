@@ -37,7 +37,7 @@ $aMenuLinks = Array(
     ),
 	Array(
 		"Корзина",
-		"/cart/",
+		"/personal/cart/",
 		Array(), 
 		Array(), 
 		"" 

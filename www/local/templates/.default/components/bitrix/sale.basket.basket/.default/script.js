@@ -20,11 +20,11 @@ BasketPoolQuantity.prototype.updateQuantity = function()
 		checkAnalytics(this.lastStableQuantities, items);
 	}
 
-	if (!!items && items.rows.length > 0)
+	if (!!items && BX.findChildren(items,{class: 'x-basket_item'}, true, true).length > 0)
 	{
-		for (var i = 1; items.rows.length > i; i++)
+		for (var i = 0; BX.findChildren(items,{class: 'x-basket_item'}, true, true).length > i; i++)
 		{
-			var itemId = items.rows[i].id;
+			var itemId = BX.findChildren(items,{class: 'x-basket_item'}, true, true)[i].id;
 			this.currentQuantity[itemId] = BX('QUANTITY_' + itemId).value;
 		}
 	}
@@ -158,7 +158,7 @@ function updateBasketTable(basketItemId, res)
 		return;
 	}
 
-	rows = table.rows;
+	rows = BX.findChildren(table,{class: 'x-basket_item'}, true, true);
 	lastRow = rows[rows.length - 1];
 	bUseFloatQuantity = (res.PARAMS.QUANTITY_FLOAT === 'Y');
 
@@ -226,7 +226,7 @@ function updateBasketTable(basketItemId, res)
 					case 'TYPE':
 						break;
 					case 'NAME':
-						// first <div> - image and brand
+						// first <td> - image and brand
 						oCellName = newRow.insertCell(-1);
 						imageURL = '';
 						cellNameHTML = '';
@@ -248,39 +248,35 @@ function updateBasketTable(basketItemId, res)
 
 						if (arItem.DETAIL_PAGE_URL.length > 0)
 						{
-							cellNameHTML = '<div class="bx_ordercart_photo_container">\
-							<a href="' + arItem.DETAIL_PAGE_URL + '">\
-								<div class="bx_ordercart_photo" style="background-image:url(\'' + imageURL + '\')"></div>\
-							</a>\
-						</div>';
+							cellNameHTML = '<a href="' + arItem.DETAIL_PAGE_URL + '">\
+								<img class="margin-bottom-6" src="' + imageURL + '" alt="' + arItem['NAME'] + '">\
+							</a>';
 						}
 						else
 						{
-							cellNameHTML = '<div class="bx_ordercart_photo_container">\
-							<div class="bx_ordercart_photo" style="background-image:url(\'' + imageURL + '\')"></div>\
-						</div>';
+							cellNameHTML = '<img class="margin-bottom-6" src="' + imageURL + '" alt="' + arItem['NAME'] + '">';
 						}
 
-						if (arItem.BRAND && arItem.BRAND.length > 0)
+						/*if (arItem.BRAND && arItem.BRAND.length > 0)
 						{
 							cellNameHTML += '<div class="bx_ordercart_brand">\
 							<img alt="" src="' + arItem.BRAND + '"/>\
 						</div>';
-						}
+						}*/
 
 						oCellName.innerHTML = cellNameHTML;
 
-						// second <div> - name, basket props, sku props
+						// second <td> - name, basket props, sku props
 						oCellItem = newRow.insertCell(-1);
 						cellItemHTML = '';
 						oCellItem.setAttribute('class', 'item');
 
 						if (arItem['DETAIL_PAGE_URL'].length > 0)
-							cellItemHTML += '<h2 class="bx_ordercart_itemtitle"><a href="' + arItem['DETAIL_PAGE_URL'] + '">' + arItem['NAME'] + '</a></h2>';
+							cellItemHTML += '<h5><a target="_blank" class="text-insta text-decoration-none text-size-xlarge" href="' + arItem['DETAIL_PAGE_URL'] + '">' + arItem['NAME'] + '</a></h5>';
 						else
-							cellItemHTML += '<h2 class="bx_ordercart_itemtitle">' + arItem['NAME'] + '</h2>';
+							cellItemHTML += '<h5>' + arItem['NAME'] + '</h2>';
 
-						cellItemHTML += '<div class="bx_ordercart_itemart">';
+						cellItemHTML += '<div class="rid-x grid-padding-x">';
 
 						if (bShowPropsColumn)
 						{
@@ -365,8 +361,8 @@ function updateBasketTable(basketItemId, res)
 									// sku property can contain list of images or values
 									if (bIsImageProperty)
 									{
-										cellItemHTML += '<div class="bx_item_detail_scu_small_noadaptive ' + full + '">';
-										cellItemHTML += '<span class="bx_item_section_name_gray">' + BX.util.htmlspecialchars(arProp['NAME']) + '</span>';
+										cellItemHTML += '<div class="grid-x grid-padding-x ' + full + '">';
+										cellItemHTML += '<span class="large-3 medium-12 small-5 cell">' + BX.util.htmlspecialchars(arProp['NAME']) + '</span>';
 										cellItemHTML += '<div class="bx_scu_scroller_container">';
 										cellItemHTML += '<div class="bx_scu">';
 
@@ -402,8 +398,8 @@ function updateBasketTable(basketItemId, res)
 									}
 									else // not image
 									{
-										cellItemHTML += '<div class="bx_item_detail_size_small_noadaptive ' + full + '">';
-										cellItemHTML += '<span class="bx_item_section_name_gray">' + BX.util.htmlspecialchars(arProp['NAME']) + '</span>';
+										cellItemHTML += '<div class="grid-x grid-padding-x ' + full + '">';
+										cellItemHTML += '<span class="large-3 medium-12 small-5 cell">' + BX.util.htmlspecialchars(arProp['NAME']) + '</span>';
 										cellItemHTML += '<div class="bx_size_scroller_container">';
 										cellItemHTML += '<div class="bx_size">';
 
@@ -464,10 +460,10 @@ function updateBasketTable(basketItemId, res)
 						oCellQuantity.setAttribute('class', 'custom');
 						oCellQuantityHTML += '<span>' + getColumnName(res, arColumns[i]) + ':</span>';
 
-						oCellQuantityHTML += '<div class="centered">';
-						oCellQuantityHTML += '<div cellspacing="0" cellpadding="0" class="counter">';
-						oCellQuantityHTML += '<div>';
-						oCellQuantityHTML += '<div>';
+						oCellQuantityHTML += '<div class="cell small-12 medium-5 large-5">';
+						oCellQuantityHTML += '<table cellspacing="0" cellpadding="0" class="counter">';
+						oCellQuantityHTML += '<tr>';
+						oCellQuantityHTML += '<td>';
 
 						oCellQuantityHTML += '<input type="text" size="3" id="QUANTITY_INPUT_' + arItem['ID'] + '"\
 											name="QUANTITY_INPUT_' + arItem['ID'] + '"\
@@ -476,25 +472,25 @@ function updateBasketTable(basketItemId, res)
 											onchange="updateQuantity(\'QUANTITY_INPUT_' + arItem['ID'] + '\',\'' + arItem['ID'] + '\', ' + ratio + ',' + bUseFloatQuantity + ')"\
 						>';
 
-						oCellQuantityHTML += '</div>';
+						oCellQuantityHTML += '</td>';
 
 						if (ratio != 0
 							&& ratio != ''
 						) // if not Set parent, show quantity control
 						{
-							oCellQuantityHTML += '<div id="basket_quantity_control">\
+							oCellQuantityHTML += '<td id="basket_quantity_control">\
 							<div class="basket_quantity_control">\
 								<a href="javascript:void(0);" class="plus" onclick="setQuantity(' + arItem['ID'] + ', ' + ratio + ', \'up\', ' + bUseFloatQuantity + ');"></a>\
 								<a href="javascript:void(0);" class="minus" onclick="setQuantity(' + arItem['ID'] + ', ' + ratio + ', \'down\', ' + bUseFloatQuantity + ');"></a>\
 							</div>\
-						</div>';
+						</td>';
 						}
 
 						if (arItem.hasOwnProperty('MEASURE_TEXT') && arItem['MEASURE_TEXT'].length > 0)
-							oCellQuantityHTML += '<div style="text-align: left">' + BX.util.htmlspecialchars(arItem['MEASURE_TEXT']) + '</div>';
+							oCellQuantityHTML += '<td style="text-align: left">' + BX.util.htmlspecialchars(arItem['MEASURE_TEXT']) + '</td>';
 
-						oCellQuantityHTML += '</div>';
-						oCellQuantityHTML += '</div>';
+						oCellQuantityHTML += '</tr>';
+						oCellQuantityHTML += '</table>';
 						oCellQuantityHTML += '</div>';
 
 						oCellQuantityHTML += '<input type="hidden" id="QUANTITY_' + arItem['ID'] + '" name="QUANTITY_' + arItem['ID'] + '" value="' + arItem['QUANTITY'] + '" />';
@@ -511,8 +507,8 @@ function updateBasketTable(basketItemId, res)
 						fullPrice = (arItem['DISCOUNT_PRICE_PERCENT'] > 0) ? arItem['FULL_PRICE_FORMATED'] : '';
 
 						oCellPrice.setAttribute('class', 'price');
-						oCellPrice.innerHTML = '<div class="current_price" id="current_price_' + arItem['ID'] + '">' + arItem['PRICE_FORMATED'] + '</div>' +
-							'<div class="old_price" id="old_price_' + arItem['ID'] + '">' + fullPrice + '</div>';
+						oCellPrice.innerHTML = '<span id="current_price_' + arItem['ID'] + '">' + arItem['PRICE_FORMATED'] + '</span>' +
+							'<div><del class="text-dark-gray" id="old_price_' + arItem['ID'] + '">' + fullPrice + '</del></div>';
 
 						if (bShowPriceType && arItem['NOTES'].length > 0)
 						{
@@ -590,10 +586,8 @@ function updateBasketTable(basketItemId, res)
 				if (BX('old_price_' + id))
 					BX('old_price_' + id).innerHTML = (item.DISCOUNT_PRICE_PERCENT > 0) ? item.FULL_PRICE_FORMATED : '';
 
-				if (BX('sum_' + id)){
+				if (BX('sum_' + id))
 					BX('sum_' + id).innerHTML = item.SUM;
-					console.log(item.SUM);
-				}
 
 				// if the quantity was set by user to 0 or was too much, we need to show corrected quantity value from ajax response
 				if (BX('QUANTITY_' + id))
@@ -619,7 +613,7 @@ function updateBasketTable(basketItemId, res)
 		for (i = res['WARNING_MESSAGE'].length - 1; i >= 0; i--)
 			warningText += res['WARNING_MESSAGE'][i] + '<br/>';
 
-		BX('warning_message').innerHTML = warningText;
+		BX('warning_message').innerHTML = '<div class="callout alert">' + warningText + '</div>';
 	}
 
 	// update total basket values
@@ -641,7 +635,7 @@ function updateBasketTable(basketItemId, res)
 		{
 			var showPriceWithoutDiscount = (res['BASKET_DATA']['PRICE_WITHOUT_DISCOUNT'] != res['BASKET_DATA']['allSum_FORMATED']);
 			BX('PRICE_WITHOUT_DISCOUNT').innerHTML = showPriceWithoutDiscount ? res['BASKET_DATA']['PRICE_WITHOUT_DISCOUNT'].replace(/\s/g, '&nbsp;') : '';
-			BX.style(BX('PRICE_WITHOUT_DISCOUNT').parentNode, 'display', (showPriceWithoutDiscount ? 'table-row' : 'none'));
+			BX.style(BX('PRICE_WITHOUT_DISCOUNT').parentNode, 'display', (showPriceWithoutDiscount ? 'block' : 'none'));
 		}
 
 		BX.onCustomEvent('OnBasketChange');
@@ -653,20 +647,20 @@ function updateBasketTable(basketItemId, res)
  */
 function couponCreate(couponBlock, oneCoupon)
 {
-	var couponClass = 'disabled';
+	var couponClass = 'input-group-field callout secondary';
 
 	if (!BX.type.isElementNode(couponBlock))
 		return;
 	if (oneCoupon.JS_STATUS === 'BAD')
-		couponClass = 'bad';
+		couponClass = 'input-group-field callout alert';
 	else if (oneCoupon.JS_STATUS === 'APPLYED')
-		couponClass = 'good';
+		couponClass = 'input-group-field callout success';
 
 	couponBlock.appendChild(BX.create(
 		'div',
 		{
 			props: {
-				className: 'bx_ordercart_coupon'
+				className: 'input-group'
 			},
 			children: [
 				BX.create(
@@ -684,26 +678,35 @@ function couponCreate(couponBlock, oneCoupon)
 						}
 					}
 				),
-				BX.create(
-					'span',
-					{
-						props: {
-							className: couponClass
-						},
-						attrs: {
-							'data-coupon': oneCoupon.COUPON
-						}
-					}
-				),
-				BX.create(
-					'div',
-					{
-						props: {
-							className: 'bx_ordercart_coupon_notes'
-						},
-						html: oneCoupon.JS_CHECK_CODE
-					}
-				)
+                BX.create(
+                    'div',
+                    {
+                        props: {
+                            className: 'margin-left-5'
+                        },
+                        children: [
+                            BX.create(
+                                'span',
+                                {
+                                    text: "Удалить",
+                                    attrs: {
+                                        'data-coupon': oneCoupon.COUPON,
+										'style': "cursor: pointer; text-decoration: underline;"
+                                    }
+                                }
+                            ),
+                            BX.create(
+                                'div',
+                                {
+                                    props: {
+                                        className: 'text-secondary'
+                                    },
+                                    html: oneCoupon.JS_CHECK_CODE
+                                }
+                            )
+						]
+                    }
+                ),
 			]
 		}
 	));
@@ -762,15 +765,15 @@ function couponListUpdate(res)
 					}
 					if (couponFound)
 					{
-						couponClass = 'disabled';
+						couponClass = 'input-group-field callout secondary';
 						if (res.COUPON_LIST[i].JS_STATUS === 'BAD')
-							couponClass = 'bad';
+							couponClass = 'input-group-field callout alert';
 						else if (res.COUPON_LIST[i].JS_STATUS === 'APPLYED')
-							couponClass = 'good';
+							couponClass = 'input-group-field callout success';
 
 						BX.adjust(couponsCollection[key], {props: {className: couponClass}});
-						BX.adjust(couponsCollection[key].nextSibling, {props: {className: couponClass}});
-						BX.adjust(couponsCollection[key].nextSibling.nextSibling, {html: res.COUPON_LIST[i].JS_CHECK_CODE});
+						//BX.adjust(couponsCollection[key].nextSibling, {props: {className: couponClass}});
+						//BX.adjust(couponsCollection[key].nextSibling.nextSibling, {html: res.COUPON_LIST[i].JS_CHECK_CODE});
 					}
 					else
 					{
@@ -953,6 +956,7 @@ function updateQuantity(controlId, basketId, ratio, bUseFloatQuantity)
 		bIsCorrectQuantityForRatio = false,
 		autoCalculate = ((BX("auto_calculation") && BX("auto_calculation").value == "Y") || !BX("auto_calculation"));
 
+
 	if (ratio === 0 || ratio == 1)
 	{
 		bIsCorrectQuantityForRatio = true;
@@ -980,6 +984,7 @@ function updateQuantity(controlId, basketId, ratio, bUseFloatQuantity)
 
 	newVal = (bUseFloatQuantity === false && bIsQuantityFloat === false) ? parseInt(newVal) : parseFloat(newVal).toFixed(4);
 	newVal = correctQuantity(newVal);
+
 
 	if (bIsCorrectQuantityForRatio)
 	{
@@ -1137,16 +1142,16 @@ function recalcBasketAjax(params)
 		}
 	}
 
-	if (!!items && items.rows.length > 0)
+	if (!!items && BX.findChildren(items,{class: 'x-basket_item'}, true, true).length > 0)
 	{
-		for (i = 1; items.rows.length > i; i++)
-			postData['QUANTITY_' + items.rows[i].id] = BX('QUANTITY_' + items.rows[i].id).value;
+		for (i = 0; BX.findChildren(items,{class: 'x-basket_item'}, true, true).length > i; i++)
+			postData['QUANTITY_' + BX.findChildren(items,{class: 'x-basket_item'}, true, true)[i].id] = BX('QUANTITY_' + BX.findChildren(items,{class: 'x-basket_item'}, true, true)[i].id).value;
 	}
 
-	if (!!delayedItems && delayedItems.rows.length > 0)
+	if (!!delayedItems && BX.findChildren(delayedItems,{class: 'x-basket_item'}, true, true).length > 0)
 	{
-		for (i = 1; delayedItems.rows.length > i; i++)
-			postData['DELAY_' + delayedItems.rows[i].id] = 'Y';
+		for (i = 0; BX.findChildren(delayedItems,{class: 'x-basket_item'}, true, true).length > i; i++)
+			postData['DELAY_' + BX.findChildren(delayedItems,{class: 'x-basket_item'}, true, true)[i].id] = 'Y';
 	}
 
 	basketPoolQuantity.setProcessing(true);
@@ -1186,15 +1191,10 @@ function recalcBasketAjax(params)
 
 function showBasketItemsList(val)
 {
-	BX.removeClass(BX("basket_toolbar_button"), "current");
-	BX.removeClass(BX("basket_toolbar_button_delayed"), "current");
-	BX.removeClass(BX("basket_toolbar_button_subscribed"), "current");
-	BX.removeClass(BX("basket_toolbar_button_not_available"), "current");
-
-	BX("normal_count").style.display = 'inline-block';
-	BX("delay_count").style.display = 'inline-block';
-	BX("subscribe_count").style.display = 'inline-block';
-	BX("not_available_count").style.display = 'inline-block';
+	BX.addClass(BX("basket_toolbar_button"), "light-gray");
+	BX.addClass(BX("basket_toolbar_button_delayed"), "light-gray");
+	BX.addClass(BX("basket_toolbar_button_subscribed"), "light-gray");
+	BX.addClass(BX("basket_toolbar_button_not_available"), "light-gray");
 
 	if (val == 2)
 	{
@@ -1203,8 +1203,7 @@ function showBasketItemsList(val)
 		if (BX("basket_items_delayed"))
 		{
 			BX("basket_items_delayed").style.display = 'block';
-			BX.addClass(BX("basket_toolbar_button_delayed"), "current");
-			BX("delay_count").style.display = 'none';
+			BX.removeClass(BX("basket_toolbar_button_delayed"), "light-gray");
 		}
 		if (BX("basket_items_subscribed"))
 			BX("basket_items_subscribed").style.display = 'none';
@@ -1220,8 +1219,7 @@ function showBasketItemsList(val)
 		if (BX("basket_items_subscribed"))
 		{
 			BX("basket_items_subscribed").style.display = 'block';
-			BX.addClass(BX("basket_toolbar_button_subscribed"), "current");
-			BX("subscribe_count").style.display = 'none';
+			BX.removeClass(BX("basket_toolbar_button_subscribed"), "light-gray");
 		}
 		if (BX("basket_items_not_available"))
 			BX("basket_items_not_available").style.display = 'none';
@@ -1237,8 +1235,7 @@ function showBasketItemsList(val)
 		if (BX("basket_items_not_available"))
 		{
 			BX("basket_items_not_available").style.display = 'block';
-			BX.addClass(BX("basket_toolbar_button_not_available"), "current");
-			BX("not_available_count").style.display = 'none';
+			BX.removeClass(BX("basket_toolbar_button_not_available"), "light-gray");
 		}
 	}
 	else
@@ -1246,8 +1243,7 @@ function showBasketItemsList(val)
 		if (BX("basket_items_list"))
 		{
 			BX("basket_items_list").style.display = 'block';
-			BX.addClass(BX("basket_toolbar_button"), "current");
-			BX("normal_count").style.display = 'none';
+			BX.removeClass(BX("basket_toolbar_button"), "light-gray");
 		}
 		if (BX("basket_items_delayed"))
 			BX("basket_items_delayed").style.display = 'none';
@@ -1409,8 +1405,8 @@ function getCurrencyCode()
 }
 
 BX.ready(function() {
-
 	basketPoolQuantity = new BasketPoolQuantity();
+
 	var couponBlock = BX('coupons_block'),
 		basketItems = BX('basket_items');
 

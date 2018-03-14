@@ -11,7 +11,7 @@
 /** @var string $componentPath */
 /** @var CBitrixBasketComponent $component */
 $templateData = array(
-	'TEMPLATE_THEME' => $this->GetFolder().'/themes/'.$arParams['TEMPLATE_THEME'].'/style.css',
+	//'TEMPLATE_THEME' => $this->GetFolder().'/themes/'.$arParams['TEMPLATE_THEME'].'/style.css',
 	'TEMPLATE_CLASS' => 'bx_'.$arParams['TEMPLATE_THEME'],
 );
 $this->addExternalCss($templateData['TEMPLATE_THEME']);
@@ -98,8 +98,10 @@ if (strlen($arResult["ERROR_MESSAGE"]) <= 0)
 		<?
 		if (!empty($arResult["WARNING_MESSAGE"]) && is_array($arResult["WARNING_MESSAGE"]))
 		{
+		    ?><div class="callout alert"><?
 			foreach ($arResult["WARNING_MESSAGE"] as $v)
-				ShowError($v);
+            ?><div><?ShowError($v);?></div><?
+			?></div><?
 		}
 		?>
 	</div>
@@ -129,22 +131,18 @@ if (strlen($arResult["ERROR_MESSAGE"]) <= 0)
 
 	?>
 		<form method="post" action="<?=POST_FORM_ACTION_URI?>" name="basket_form" id="basket_form">
-			<div id="basket_form_container">
-				<div class="bx_ordercart <?=$templateData['TEMPLATE_CLASS']; ?>">
-					<div class="margin-bottom-6">
-						<a href="javascript:void(0)" id="basket_toolbar_button" class="button" onclick="showBasketItemsList()"><?=GetMessage("SALE_BASKET_ITEMS")?><div id="normal_count" class="flat" style="display:none">&nbsp;(<?=$normalCount?>)</div></a>
-						<a href="javascript:void(0)" id="basket_toolbar_button_delayed" class="button light-gray" onclick="showBasketItemsList(2)" <?=$delayHidden?>><?=GetMessage("SALE_BASKET_ITEMS_DELAYED")?><div id="delay_count" class="flat">&nbsp;(<?=$delayCount?>)</div></a>
-						<a href="javascript:void(0)" id="basket_toolbar_button_subscribed" class="button light-gray" onclick="showBasketItemsList(3)" <?=$subscribeHidden?>><?=GetMessage("SALE_BASKET_ITEMS_SUBSCRIBED")?><div id="subscribe_count" class="flat">&nbsp;(<?=$subscribeCount?>)</div></a>
-						<a href="javascript:void(0)" id="basket_toolbar_button_not_available" class="button light-gray" onclick="showBasketItemsList(4)" <?=$naHidden?>><?=GetMessage("SALE_BASKET_ITEMS_NOT_AVAILABLE")?><div id="not_available_count" class="flat">&nbsp;(<?=$naCount?>)</div></a>
-					</div>
-					<?
-					include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items.php");
-					include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_delayed.php");
-					include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_subscribed.php");
-					include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_not_available.php");
-					?>
-				</div>
-			</div>
+            <div class="margin-bottom-6">
+                <a href="javascript:void(0)" id="basket_toolbar_button" class="button" onclick="showBasketItemsList()"><?=GetMessage("SALE_BASKET_ITEMS")?></a>
+                <a href="javascript:void(0)" id="basket_toolbar_button_delayed" class="button light-gray" onclick="showBasketItemsList(2)" <?=$delayHidden?>><?=GetMessage("SALE_BASKET_ITEMS_DELAYED")?></a>
+                <?/*<a href="javascript:void(0)" id="basket_toolbar_button_subscribed" class="button light-gray" onclick="showBasketItemsList(3)" <?=$subscribeHidden?>><?=GetMessage("SALE_BASKET_ITEMS_SUBSCRIBED")?></a>
+                <a href="javascript:void(0)" id="basket_toolbar_button_not_available" class="button light-gray" onclick="showBasketItemsList(4)" <?=$naHidden?>><?=GetMessage("SALE_BASKET_ITEMS_NOT_AVAILABLE")?></a>*/?>
+            </div>
+            <?
+            include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items.php");
+            include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_delayed.php");
+            //include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_subscribed.php");
+            //include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_not_available.php");
+            ?>
 			<input type="hidden" name="BasketOrder" value="BasketOrder" />
 			<!-- <input type="hidden" name="ajax_post" id="ajax_post" value="Y"> -->
 		</form>
