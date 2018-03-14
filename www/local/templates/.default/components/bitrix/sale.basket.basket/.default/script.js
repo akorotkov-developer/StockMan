@@ -614,6 +614,8 @@ function updateBasketTable(basketItemId, res)
 			warningText += res['WARNING_MESSAGE'][i] + '<br/>';
 
 		BX('warning_message').innerHTML = '<div class="callout alert">' + warningText + '</div>';
+	} else {
+        BX('warning_message').innerHTML = '';
 	}
 
 	// update total basket values
