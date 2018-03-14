@@ -869,11 +869,11 @@ div.sale-order-detail-payment-options-methods-template {
 }
 
 .inactive-button {
-	background: #dff0d8;
+	/*background: #dff0d8;*/
 }
 
 .inactive-button:hover{
-	color: #FFFFFF;
+	/*color: #FFFFFF;*/
 }
 
 .sale-order-detail-payment-options-shipment-composition-item-product-container,

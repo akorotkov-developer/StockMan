@@ -2,12 +2,12 @@
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 use Bitrix\Main\Localization\Loc,
-	Bitrix\Main\Page\Asset;
+    Bitrix\Main\Page\Asset;
 
 if ($arParams['GUEST_MODE'] !== 'Y')
 {
-	Asset::getInstance()->addJs("/local/templates/.default/components/bitrix/sale.order.payment.change/.default/script.js");
-	Asset::getInstance()->addCss("/local/templates/.default/components/bitrix/sale.order.payment.change/.default/style.css");
+    Asset::getInstance()->addJs("/local/templates/.default/components/bitrix/sale.order.payment.change/.default/script.js");
+    Asset::getInstance()->addCss("/local/templates/.default/components/bitrix/sale.order.payment.change/.default/style.css");
 }
 
 CJSCore::Init(array('clipboard', 'fx'));
@@ -16,30 +16,30 @@ $APPLICATION->SetTitle("");
 
 if (!empty($arResult['ERRORS']['FATAL']))
 {
-	foreach ($arResult['ERRORS']['FATAL'] as $error)
-	{
-		ShowError($error);
-	}
+    foreach ($arResult['ERRORS']['FATAL'] as $error)
+    {
+        ShowError($error);
+    }
 
-	$component = $this->__component;
+    $component = $this->__component;
 
-	if ($arParams['AUTH_FORM_IN_TEMPLATE'] && isset($arResult['ERRORS']['FATAL'][$component::E_NOT_AUTHORIZED]))
-	{
-		$APPLICATION->AuthForm('', false, false, 'N', false);
-	}
+    if ($arParams['AUTH_FORM_IN_TEMPLATE'] && isset($arResult['ERRORS']['FATAL'][$component::E_NOT_AUTHORIZED]))
+    {
+        $APPLICATION->AuthForm('', false, false, 'N', false);
+    }
 }
 else
 {
-	if (!empty($arResult['ERRORS']['NONFATAL']))
-	{
-		foreach ($arResult['ERRORS']['NONFATAL'] as $error)
-		{
-			ShowError($error);
-		}
-	}
-	?>
+    if (!empty($arResult['ERRORS']['NONFATAL']))
+    {
+        foreach ($arResult['ERRORS']['NONFATAL'] as $error)
+        {
+            ShowError($error);
+        }
+    }
+    ?>
 
-	<div class="container-fluid sale-order-detail">
+    <div class="container-fluid sale-order-detail">
         <h2>
             <?= Loc::getMessage('SPOD_LIST_MY_ORDER', array(
                 '#ACCOUNT_NUMBER#' => htmlspecialcharsbx($arResult["ACCOUNT_NUMBER"]),
@@ -47,16 +47,16 @@ else
             )) ?>
         </h2>
 
-		<?
-		if ($arParams['GUEST_MODE'] !== 'Y')
-		{
-			?>
+        <?
+        if ($arParams['GUEST_MODE'] !== 'Y')
+        {
+            ?>
             <div class="margin-bottom-6">
                 <a href="<?= htmlspecialcharsbx($arResult["URL_TO_LIST"]) ?>">&larr; <?= Loc::getMessage('SPOD_RETURN_LIST_ORDERS') ?></a>
             </div>
-			<?
-		}
-		?>
+            <?
+        }
+        ?>
 
         <h4>
             <?= Loc::getMessage('SPOD_SUB_ORDER_TITLE', array(
@@ -88,7 +88,7 @@ else
             <?= Loc::getMessage('SPOD_LIST_ORDER_INFO') ?>
         </h5>
 
-		<div class="callout">
+        <div class="callout">
 
             <div class="row">
                 <div class="sale-order-detail-about-order-inner-container-name">
@@ -188,7 +188,7 @@ else
                         </div>
                     </div>
                     <?
-                    }
+                }
                 ?>
             </div>
             <div class="sale-order-detail-about-order-inner-container-details">
@@ -202,7 +202,7 @@ else
                         ?>
                         <li class="">
                             <strong>
-                            <?= Loc::getMessage('SPOD_LOGIN')?>:
+                                <?= Loc::getMessage('SPOD_LOGIN')?>:
                             </strong>
                             <div class="">
                                 <?= htmlspecialcharsbx($arResult["USER"]["LOGIN"]) ?>
@@ -523,456 +523,491 @@ else
         </div>
 
 
-			<?
-			if (count($arResult['SHIPMENT']))
-			{
-				?>
-                <h5>
-                    <?= Loc::getMessage('SPOD_ORDER_SHIPMENT') ?>
-                </h5>
+        <?
+        if (count($arResult['SHIPMENT']))
+        {
+            ?>
+            <h5>
+                <?= Loc::getMessage('SPOD_ORDER_SHIPMENT') ?>
+            </h5>
 
-				<div class="callout">
+            <div class="callout">
 
-                    <?
-                        foreach ($arResult['SHIPMENT'] as $shipment)
+                <?
+                foreach ($arResult['SHIPMENT'] as $shipment)
+                {
+                    ?>
+                    <div>
+                        <div class="col-md-3 col-sm-5 sale-order-detail-payment-options-shipment-image-container">
+                            <?
+                            if (strlen($shipment['DELIVERY']["SRC_LOGOTIP"]))
+                            {
+                                ?>
+                                <span class="sale-order-detail-payment-options-shipment-image-element"
+                                      style="background-image: url('<?=htmlspecialcharsbx($shipment['DELIVERY']["SRC_LOGOTIP"])?>')"></span>
+                                <?
+                            }
+                            ?>
+                        </div>
+
+                        <strong>
+                            <?
+                            //change date
+                            if (!strlen($shipment['PRICE_DELIVERY_FORMATED']))
+                            {
+                                $shipment['PRICE_DELIVERY_FORMATED'] = 0;
+                            }
+                            $shipmentRow = Loc::getMessage('SPOD_SUB_ORDER_SHIPMENT')." ".Loc::getMessage('SPOD_NUM_SIGN').$shipment["ACCOUNT_NUMBER"];
+                            if ($shipment["DATE_DEDUCTED"])
+                            {
+                                $shipmentRow .= " ".Loc::getMessage('SPOD_FROM')." ".$shipment["DATE_DEDUCTED"]->format($arParams['ACTIVE_DATE_FORMAT']);
+                            }
+                            $shipmentRow = htmlspecialcharsbx($shipmentRow);
+                            $shipmentRow .= ", ".Loc::getMessage('SPOD_SUB_PRICE_DELIVERY', array(
+                                    '#PRICE_DELIVERY#' => $shipment['PRICE_DELIVERY_FORMATED']
+                                ));
+                            echo $shipmentRow;
+                            ?>
+                        </strong>
+                        <?
+                        if (strlen($shipment["DELIVERY_NAME"]))
                         {
                             ?>
-                                <div>
-                                    <div class="col-md-3 col-sm-5 sale-order-detail-payment-options-shipment-image-container">
+                            <div class="sale-order-detail-payment-options-methods-shipment-list-item">
+                                <?= Loc::getMessage('SPOD_ORDER_DELIVERY')?>: <?= htmlspecialcharsbx($shipment["DELIVERY_NAME"])?>
+                            </div>
+                            <?
+                        }
+                        ?>
+                        <div>
+                            <?= Loc::getMessage('SPOD_ORDER_SHIPMENT_STATUS')?>:
+                            <?= htmlspecialcharsbx($shipment['STATUS_NAME'])?>
+                        </div>
+                        <?
+                        if (strlen($shipment['TRACKING_NUMBER']))
+                        {
+                            ?>
+                            <div>
+                                <span class=""><?= Loc::getMessage('SPOD_ORDER_TRACKING_NUMBER')?>:</span>
+                                <span class=""><?= htmlspecialcharsbx($shipment['TRACKING_NUMBER'])?></span>
+                                <span class=""></span>
+                            </div>
+                            <?
+                        }
+                        ?>
+                        <div class="sale-order-detail-payment-options-methods-shipment-list-item-link">
+                            <a class="sale-order-detail-show-link"><?= Loc::getMessage('SPOD_LIST_SHOW_ALL')?></a>
+                            <a class="sale-order-detail-hide-link"><?= Loc::getMessage('SPOD_LIST_LESS')?></a>
+                        </div>
+
+                        <?
+                        if (strlen($shipment['TRACKING_URL']))
+                        {
+                            ?>
+                            <div class="col-md-2 col-sm-12 sale-order-detail-payment-options-shipment-button-container">
+                                <a class="sale-order-detail-payment-options-shipment-button-element" href="<?=$shipment['TRACKING_URL']?>">
+                                    <?= Loc::getMessage('SPOD_ORDER_CHECK_TRACKING')?>
+                                </a>
+                            </div>
+                            <?
+                        }
+                        ?>
+                    </div>
+                    <!--row-->
+
+
+
+                    <div class="col-md-9 col-md-offset-3 col-sm-12 sale-order-detail-payment-options-shipment-composition-map sale-order-detail-payment-options-shipment-composition-map-js">
+                        <?
+                        $store = $arResult['DELIVERY']['STORE_LIST'][$shipment['STORE_ID']];
+                        if (isset($store))
+                        {
+                            ?>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 sale-order-detail-map-container">
+                                    <div class="row">
+                                        <h4>
+                                            <?= Loc::getMessage('SPOD_SHIPMENT_STORE')?>
+                                        </h4>
                                         <?
-                                            if (strlen($shipment['DELIVERY']["SRC_LOGOTIP"]))
-                                            {
-                                                ?>
-                                                <span class="sale-order-detail-payment-options-shipment-image-element"
-                                                      style="background-image: url('<?=htmlspecialcharsbx($shipment['DELIVERY']["SRC_LOGOTIP"])?>')"></span>
-                                                <?
-                                            }
+                                        $APPLICATION->IncludeComponent(
+                                            "bitrix:map.yandex.view",
+                                            "",
+                                            Array(
+                                                "INIT_MAP_TYPE" => "COORDINATES",
+                                                "MAP_DATA" =>   serialize(
+                                                    array(
+                                                        'yandex_lon' => $store['GPS_S'],
+                                                        'yandex_lat' => $store['GPS_N'],
+                                                        'PLACEMARKS' => array(
+                                                            array(
+                                                                "LON" => $store['GPS_S'],
+                                                                "LAT" => $store['GPS_N'],
+                                                                "TEXT" => htmlspecialcharsbx($store['TITLE'])
+                                                            )
+                                                        )
+                                                    )
+                                                ),
+                                                "MAP_WIDTH" => "100%",
+                                                "MAP_HEIGHT" => "300",
+                                                "CONTROLS" => array("ZOOM", "SMALLZOOM", "SCALELINE"),
+                                                "OPTIONS" => array(
+                                                    "ENABLE_DRAGGING",
+                                                    "ENABLE_SCROLL_ZOOM",
+                                                    "ENABLE_DBLCLICK_ZOOM"
+                                                ),
+                                                "MAP_ID" => ""
+                                            )
+                                        );
                                         ?>
                                     </div>
-
-                                        <strong>
-                                            <?
-                                                //change date
-                                                if (!strlen($shipment['PRICE_DELIVERY_FORMATED']))
-                                                {
-                                                    $shipment['PRICE_DELIVERY_FORMATED'] = 0;
-                                                }
-                                                $shipmentRow = Loc::getMessage('SPOD_SUB_ORDER_SHIPMENT')." ".Loc::getMessage('SPOD_NUM_SIGN').$shipment["ACCOUNT_NUMBER"];
-                                                if ($shipment["DATE_DEDUCTED"])
-                                                {
-                                                    $shipmentRow .= " ".Loc::getMessage('SPOD_FROM')." ".$shipment["DATE_DEDUCTED"]->format($arParams['ACTIVE_DATE_FORMAT']);
-                                                }
-                                                $shipmentRow = htmlspecialcharsbx($shipmentRow);
-                                                $shipmentRow .= ", ".Loc::getMessage('SPOD_SUB_PRICE_DELIVERY', array(
-                                                        '#PRICE_DELIVERY#' => $shipment['PRICE_DELIVERY_FORMATED']
-                                                    ));
-                                                echo $shipmentRow;
-                                            ?>
-                                        </strong>
-                                        <?
-                                            if (strlen($shipment["DELIVERY_NAME"]))
-                                            {
-                                                ?>
-                                                <div class="sale-order-detail-payment-options-methods-shipment-list-item">
-                                                    <?= Loc::getMessage('SPOD_ORDER_DELIVERY')?>: <?= htmlspecialcharsbx($shipment["DELIVERY_NAME"])?>
-                                                </div>
-                                                <?
-                                            }
-                                        ?>
-                                        <div>
-                                            <?= Loc::getMessage('SPOD_ORDER_SHIPMENT_STATUS')?>:
-                                            <?= htmlspecialcharsbx($shipment['STATUS_NAME'])?>
-                                        </div>
-                                        <?
-                                            if (strlen($shipment['TRACKING_NUMBER']))
-                                            {
-                                                ?>
-                                                <div>
-                                                    <span class=""><?= Loc::getMessage('SPOD_ORDER_TRACKING_NUMBER')?>:</span>
-                                                    <span class=""><?= htmlspecialcharsbx($shipment['TRACKING_NUMBER'])?></span>
-                                                    <span class=""></span>
-                                                </div>
-                                                <?
-                                            }
-                                        ?>
-                                        <div class="sale-order-detail-payment-options-methods-shipment-list-item-link">
-                                            <a class="sale-order-detail-show-link"><?= Loc::getMessage('SPOD_LIST_SHOW_ALL')?></a>
-                                            <a class="sale-order-detail-hide-link"><?= Loc::getMessage('SPOD_LIST_LESS')?></a>
-                                        </div>
-
-                                    <?
-                                        if (strlen($shipment['TRACKING_URL']))
-                                        {
-                                            ?>
-                                            <div class="col-md-2 col-sm-12 sale-order-detail-payment-options-shipment-button-container">
-                                                <a class="sale-order-detail-payment-options-shipment-button-element" href="<?=$shipment['TRACKING_URL']?>">
-                                                    <?= Loc::getMessage('SPOD_ORDER_CHECK_TRACKING')?>
-                                                </a>
-                                            </div>
-                                            <?
-                                        }
-                                    ?>
                                 </div>
-                            <!--row-->
-
-
-
-                                <div class="col-md-9 col-md-offset-3 col-sm-12 sale-order-detail-payment-options-shipment-composition-map sale-order-detail-payment-options-shipment-composition-map-js">
-                                    <?
-                                    $store = $arResult['DELIVERY']['STORE_LIST'][$shipment['STORE_ID']];
-                                    if (isset($store))
-                                    {
-                                        ?>
+                            </div>
+                            <?
+                            if (strlen($store['ADDRESS']))
+                            {
+                                ?>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 sale-order-detail-payment-options-shipment-map-address">
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 sale-order-detail-map-container">
-                                                <div class="row">
-                                                    <h4>
-                                                        <?= Loc::getMessage('SPOD_SHIPMENT_STORE')?>
-                                                    </h4>
-                                                    <?
-                                                        $APPLICATION->IncludeComponent(
-                                                            "bitrix:map.yandex.view",
-                                                            "",
-                                                            Array(
-                                                                "INIT_MAP_TYPE" => "COORDINATES",
-                                                                "MAP_DATA" =>   serialize(
-                                                                    array(
-                                                                        'yandex_lon' => $store['GPS_S'],
-                                                                        'yandex_lat' => $store['GPS_N'],
-                                                                        'PLACEMARKS' => array(
-                                                                            array(
-                                                                                "LON" => $store['GPS_S'],
-                                                                                "LAT" => $store['GPS_N'],
-                                                                                "TEXT" => htmlspecialcharsbx($store['TITLE'])
-                                                                            )
-                                                                        )
-                                                                    )
-                                                                ),
-                                                                "MAP_WIDTH" => "100%",
-                                                                "MAP_HEIGHT" => "300",
-                                                                "CONTROLS" => array("ZOOM", "SMALLZOOM", "SCALELINE"),
-                                                                "OPTIONS" => array(
-                                                                    "ENABLE_DRAGGING",
-                                                                    "ENABLE_SCROLL_ZOOM",
-                                                                    "ENABLE_DBLCLICK_ZOOM"
-                                                                ),
-                                                                "MAP_ID" => ""
-                                                            )
-                                                        );
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?
-                                        if (strlen($store['ADDRESS']))
-                                        {
-                                            ?>
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 sale-order-detail-payment-options-shipment-map-address">
-                                                    <div class="row">
                                         <span class="col-md-2 sale-order-detail-payment-options-shipment-map-address-title">
                                             <?= Loc::getMessage('SPOD_STORE_ADDRESS')?>:</span>
                                             <span class="col-md-10 sale-order-detail-payment-options-shipment-map-address-element">
                                             <?= htmlspecialcharsbx($store['ADDRESS'])?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?
+                            }
+                        }
+                        ?>
+
+
+
+
+
+
+
+
+
+                        <h3><?= Loc::getMessage('SPOD_ORDER_SHIPMENT_BASKET')?></h3>
+
+                        <div class="callout">
+
+                            <?
+                            $productcounts = 0;
+                            foreach ($shipment['ITEMS'] as $item)
+                            {
+                                $basketItem = $arResult['BASKET'][$item['BASKET_ID']];
+                                ?>
+                                <div class="grid-x grid-padding-x">
+
+
+                                    <div class="cell small-3 medium-2 large-2">
+                                        <a href="<?=htmlspecialcharsbx($basketItem['DETAIL_PAGE_URL'])?>">
+                                            <?
+                                            if (strlen($basketItem['PICTURE']['SRC']))
+                                            {
+                                                $imageSrc = htmlspecialcharsbx($basketItem['PICTURE']['SRC']);
+                                            }
+                                            else
+                                            {
+                                                $imageSrc = $this->GetFolder().'/images/no_photo.png';
+                                            }
+                                            ?>
+                                            <img class="margin-bottom-6" src="<?=$imageSrc?>" >
+                                        </a>
+                                    </div>
+
+                                    <div class="cell small-9 medium-5 large-5">
+                                        <h5><a class="text-insta text-decoration-none text-size-xlarge" href="<?=htmlspecialcharsbx($basketItem['DETAIL_PAGE_URL'])?>"><?=htmlspecialcharsbx($basketItem['NAME'])?></a></h5>
+
+                                        <div class="grid-x grid-padding-x">
+                                            <?
+                                            if (isset($basketItem['PROPS']) && is_array($basketItem['PROPS']))
+                                            {
+                                                foreach ($basketItem['PROPS'] as $itemProps)
+                                                {
+                                                    ?>
+                                                    <div class="large-3 medium-12 small-5 cell">
+                                                        <?= htmlspecialcharsbx($itemProps['NAME']) ?>
                                                     </div>
+                                                    <div class="large-9 medium-12 small-7 cell">
+                                                        <?= htmlspecialcharsbx($itemProps['VALUE']) ?>
+                                                    </div>
+                                                    <?
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="cell small-12 medium-5 large-5">
+                                        <div class="grid-x grid-padding-x">
+                                            <div class="cell small-6 medium-7 large-4">
+                                                <div class="margin-bottom-6">
+
                                                 </div>
                                             </div>
-                                            <?
-                                        }
-                                    }
-                                    ?>
+                                            <div class="cell small-6 medium-5 large-3">
 
-
-
-
-
-
-
-
-
-                                            <h3><?= Loc::getMessage('SPOD_ORDER_SHIPMENT_BASKET')?></h3>
-
-                                            <div class="callout">
-
-                                                <?
-                                                    $productcounts = 0;
-                                                    foreach ($shipment['ITEMS'] as $item)
-                                                    {
-                                                        $basketItem = $arResult['BASKET'][$item['BASKET_ID']];
-                                                        ?>
-                                                        <div class="grid-x grid-padding-x">
-
-
-                                                                    <div class="cell small-3 medium-2 large-2">
-                                                                        <a href="<?=htmlspecialcharsbx($basketItem['DETAIL_PAGE_URL'])?>">
-                                                                            <?
-                                                                                if (strlen($basketItem['PICTURE']['SRC']))
-                                                                                {
-                                                                                    $imageSrc = htmlspecialcharsbx($basketItem['PICTURE']['SRC']);
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    $imageSrc = $this->GetFolder().'/images/no_photo.png';
-                                                                                }
-                                                                            ?>
-                                                                            <img class="margin-bottom-6" src="<?=$imageSrc?>" >
-                                                                        </a>
-                                                                    </div>
-
-                                                                    <div class="cell small-9 medium-5 large-5">
-                                                                        <h5><a class="text-insta text-decoration-none text-size-xlarge" href="<?=htmlspecialcharsbx($basketItem['DETAIL_PAGE_URL'])?>"><?=htmlspecialcharsbx($basketItem['NAME'])?></a></h5>
-
-                                                                        <div class="grid-x grid-padding-x">
-                                                                            <?
-                                                                            if (isset($basketItem['PROPS']) && is_array($basketItem['PROPS']))
-                                                                            {
-                                                                                foreach ($basketItem['PROPS'] as $itemProps)
-                                                                                {
-                                                                                    ?>
-                                                                                    <div class="large-3 medium-12 small-5 cell">
-                                                                                        <?= htmlspecialcharsbx($itemProps['NAME']) ?>
-                                                                                    </div>
-                                                                                    <div class="large-9 medium-12 small-7 cell">
-                                                                                        <?= htmlspecialcharsbx($itemProps['VALUE']) ?>
-                                                                                    </div>
-                                                                                    <?
-                                                                                }
-                                                                            }
-                                                                            ?>
-                                                                        </div>
-                                                                    </div>
-
-
-
-                                                                    <div class="cell small-12 medium-5 large-5">
-                                                                        <div class="grid-x grid-padding-x">
-                                                                            <div class="cell small-6 medium-7 large-4">
-                                                                                <div class="margin-bottom-6">
-
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="cell small-6 medium-5 large-3">
-
-                                                                            </div>
-                                                                            <div class="cell small-12 large-5 text-center medium-text-left">
-                                                                                <div class="margin-bottom-6"><?=$item['QUANTITY']?>&nbsp;<?=htmlspecialcharsbx($item['MEASURE_NAME'])?></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-                                                        </div>
-                                                        <?
-                                                        $productcounts++;
-                                                        if ($productcounts != count($shipment['ITEMS'])) {
-                                                            ?>
-                                                            <hr class="margin-bottom-6">
-                                                            <?
-                                                        }
-                                                    }
-                                                ?>
                                             </div>
+                                            <div class="cell small-12 large-5 text-center medium-text-left">
+                                                <div class="margin-bottom-6"><?=$item['QUANTITY']?>&nbsp;<?=htmlspecialcharsbx($item['MEASURE_NAME'])?></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
-
-
-
-
-                            <?
-                        }
-                    ?>
-
-
-
-				</div>
-				<?
-			}
-			?>
-
-            <h5>
-                <?= Loc::getMessage('SPOD_ORDER_BASKET')?>
-            </h5>
-
-			<div class="callout">
-
-
-                <?
-                $countproducts = 0;
-
-                foreach ($arResult['BASKET'] as $basketItem)
-                {
-                    ?>
-                    <div class="grid-x grid-padding-x">
-                        <div class="cell small-3 medium-2 large-2">
-                            <a href="<?=$basketItem['DETAIL_PAGE_URL']?>">
                                 <?
-                                if (strlen($basketItem['PICTURE']['SRC']))
-                                {
-                                    $imageSrc = $basketItem['PICTURE']['SRC'];
+                                $productcounts++;
+                                if ($productcounts != count($shipment['ITEMS'])) {
+                                    ?>
+                                    <hr class="margin-bottom-6">
+                                    <?
                                 }
-                                else
-                                {
-                                    $imageSrc = $this->GetFolder().'/images/no_photo.png';
-                                }
-                                ?>
-                                <img class="margin-bottom-6" src="<?=$imageSrc?>" alt="товар">
-                            </a>
-                        </div>
-                        <div class="cell small-9 medium-5 large-5">
-                            <?
-                            echo "<pre>";
-                            var_dump($basketItem["PRODUCT_ID"]);
-                            echo "</pre>";
-                            $res = CIBlockElement::GetList(array(), array('ID'=>$basketItem["PRODUCT_ID"]), false, false, array('ID', 'IBLOCK_ID', 'NAME', 'DETAIL_PAGE_URL'));
-                            if ($arElement = $res->GetNext())
-                            {
-                                echo "<pre>"; print_r($arElement); echo "</pre>";
                             }
                             ?>
-                            <h5><a class="text-insta text-decoration-none text-size-xlarge" href="<?=$basketItem['DETAIL_PAGE_URL']?>"><?=htmlspecialcharsbx($basketItem['NAME'])?></a></h5>
-                            <div class="grid-x grid-padding-x">
-                                <?
-                                if (isset($basketItem['PROPS']) && is_array($basketItem['PROPS']))
-                                {
-                                    foreach ($basketItem['PROPS'] as $itemProps)
-                                    {
-                                        ?>
-                                        <div class="large-3 medium-12 small-5 cell">
-                                            <?=htmlspecialcharsbx($itemProps['NAME'])?>:
-                                        </div>
-                                        <div class="large-9 medium-12 small-7 cell">
-                                            <?=htmlspecialcharsbx($itemProps['VALUE'])?>
-                                        </div>
-                                        <?
-                                    }
-                                }
-                                ?>
-                            </div>
                         </div>
+                    </div>
 
 
-                        <div class="cell small-12 medium-5 large-5">
-                            <div class="grid-x grid-padding-x">
 
+
+                    <?
+                }
+                ?>
+
+
+
+            </div>
+            <?
+        }
+        ?>
+
+        <h5>
+            <?= Loc::getMessage('SPOD_ORDER_BASKET')?>
+        </h5>
+
+        <div class="callout">
+
+
+            <?
+            $countproducts = 0;
+
+            foreach ($arResult['BASKET'] as $basketItem)
+            {
+                ?>
+                <div class="grid-x grid-padding-x">
+                    <div class="cell small-3 medium-2 large-2">
+
+                        <?
+                        if (strlen($basketItem['PICTURE']['SRC']))
+                        {
+                            $imageSrc = $basketItem['PICTURE']['SRC'];
+                        }
+                        else
+                        {
+                            $imageSrc = $this->GetFolder().'/images/no_photo.png';
+                        }
+                        ?>
+                        <img class="margin-bottom-6" src="<?=$imageSrc?>" alt="товар">
+
+                    </div>
+                    <div class="cell small-9 medium-5 large-5">
+                        <h5>
+                            <?=htmlspecialcharsbx($basketItem['NAME'])?>
+                        </h5>
+                        <div class="grid-x grid-padding-x">
+                            <?
+                            if (isset($basketItem['PROPS']) && is_array($basketItem['PROPS']))
+                            {
+                                foreach ($basketItem['PROPS'] as $itemProps)
+                                {
+                                    ?>
+                                    <div class="large-3 medium-12 small-5 cell">
+                                        <?=htmlspecialcharsbx($itemProps['NAME'])?>:
+                                    </div>
+                                    <div class="large-9 medium-12 small-7 cell">
+                                        <?=htmlspecialcharsbx($itemProps['VALUE'])?>
+                                    </div>
+                                    <?
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+
+                    <div class="cell small-12 medium-5 large-5">
+                        <div class="grid-x grid-padding-x">
+                            <?
+                            if (!is_null($basketItem["DISCOUNT_PRICE_PERCENT_FORMATED"]))
+                            {
+                                ?>
+                                <div class="cell small-6 medium-7 large-4">
+                                    <div class="margin-bottom-6">
+                                        <del><?=$basketItem['BASE_PRICE_FORMATED']?></del>
+                                    </div>
+                                    <div class="margin-bottom-6">
+                                        <?= $basketItem['DISCOUNT_PRICE_PERCENT_FORMATED'] ?>
+                                    </div>
+                                </div>
+                            <?} else {?>
                                 <div class="cell small-6 medium-7 large-4">
                                     <div class="margin-bottom-6">
                                         <?=$basketItem['BASE_PRICE_FORMATED']?>
                                     </div>
                                 </div>
+                            <?}?>
 
 
 
+                            <?
+                            if (strlen($basketItem["DISCOUNT_PRICE_PERCENT_FORMATED"]))
+                            {
+                                /*?>
+                                <div>
+                                    <strong class="bx-price"><?= $basketItem['DISCOUNT_PRICE_PERCENT_FORMATED'] ?></strong>
+                                </div>
+                                <?*/
+                            }
+                            elseif (strlen($arResult["SHOW_DISCOUNT_TAB"]))
+                            {
+                                /*?>
+                                <div class="sale-order-detail-order-item-td sale-order-detail-order-item-properties bx-text-right">
+                                    <div class="sale-order-detail-order-item-td-title col-xs-7 col-sm-5 visible-xs visible-sm">
+
+                                    </div>
+                                    <div class="sale-order-detail-order-item-td-text">
+                                        <strong class="bx-price"></strong>
+                                    </div>
+                                </div>
+                                <?*/
+                            }
+                            ?>
+
+
+                            <div class="cell small-6 medium-5 large-3">
+                                <?=$basketItem['QUANTITY']?>&nbsp;
                                 <?
-                                if (strlen($basketItem["DISCOUNT_PRICE_PERCENT_FORMATED"]))
+                                if (strlen($basketItem['MEASURE_NAME']))
                                 {
-                                    ?>
-                                    <div class="sale-order-detail-order-item-td sale-order-detail-order-item-properties bx-text-right">
-                                        <div class="sale-order-detail-order-item-td-title col-xs-7 col-sm-5 visible-xs visible-sm">
-                                            <?= Loc::getMessage('SPOD_DISCOUNT') ?>
-                                        </div>
-                                        <div class="sale-order-detail-order-item-td-text">
-                                            <strong class="bx-price"><?= $basketItem['DISCOUNT_PRICE_PERCENT_FORMATED'] ?></strong>
-                                        </div>
-                                    </div>
-                                    <?
+                                    echo htmlspecialcharsbx($basketItem['MEASURE_NAME']);
                                 }
-                                elseif (strlen($arResult["SHOW_DISCOUNT_TAB"]))
+                                else
                                 {
-                                    ?>
-                                    <div class="sale-order-detail-order-item-td sale-order-detail-order-item-properties bx-text-right">
-                                        <div class="sale-order-detail-order-item-td-title col-xs-7 col-sm-5 visible-xs visible-sm">
-                                            <?= Loc::getMessage('SPOD_DISCOUNT') ?>
-                                        </div>
-                                        <div class="sale-order-detail-order-item-td-text">
-                                            <strong class="bx-price"></strong>
-                                        </div>
-                                    </div>
-                                    <?
+                                    echo Loc::getMessage('SPOD_DEFAULT_MEASURE');
                                 }
                                 ?>
-
-
-                                <div class="cell small-6 medium-5 large-3">
-                                    <?=$basketItem['QUANTITY']?>&nbsp;
-                                    <?
-                                    if (strlen($basketItem['MEASURE_NAME']))
-                                    {
-                                        echo htmlspecialcharsbx($basketItem['MEASURE_NAME']);
-                                    }
-                                    else
-                                    {
-                                        echo Loc::getMessage('SPOD_DEFAULT_MEASURE');
-                                    }
-                                    ?>
-                                </div>
-
-                                <div class="cell small-12 large-5">
-                                    <div class="margin-bottom-6">
-                                        <?=$basketItem['FORMATED_SUM']?>
-                                    </div>
-                                </div>
                             </div>
 
+                            <div class="cell small-12 large-5">
+                                <div class="margin-bottom-6">
+                                    <?=$basketItem['FORMATED_SUM']?>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
+                    </div>
+                </div>
+
+                <?
+                $countproducts++;
+                if (count($arResult['BASKET']) != $countproducts) {
+                    ?>
+                    <hr class="margin-bottom-6">
                     <?
-                    $countproducts++;
-                    if (count($arResult['BASKET']) != $countproducts) {
-                        ?>
-                        <hr class="margin-bottom-6">
+                }
+            }
+            ?>
+
+        </div>
+
+
+
+
+
+
+
+        <div class="margin-bottom-6 lead">
+            <ul class="">
+                <?
+                if (floatval($arResult["ORDER_WEIGHT"]))
+                {
+                    ?>
+                    <li class="">
+                        <?= Loc::getMessage('SPOD_TOTAL_WEIGHT')?>:
                         <?
-                    }
+                        if (floatval($arResult["ORDER_WEIGHT"]))
+                        {
+                            ?>
+                            <?= $arResult['ORDER_WEIGHT_FORMATED'] ?>
+                            <?
+                        }
+                        ?>
+                    </li>
+                    <?
+                }
+
+                if ($arResult['PRODUCT_SUM_FORMATED'] != $arResult['PRICE_FORMATED'] && !empty($arResult['PRODUCT_SUM_FORMATED']))
+                {
+                    ?>
+                    <li class="">
+                        <?= Loc::getMessage('SPOD_COMMON_SUM')?>:
+                        <?
+                        if ($arResult['PRODUCT_SUM_FORMATED'] != $arResult['PRICE_FORMATED'] && !empty($arResult['PRODUCT_SUM_FORMATED']))
+                        {
+                            ?>
+                            <?=$arResult['PRODUCT_SUM_FORMATED']?>
+                            <?
+                        }
+                        ?>
+                    </li>
+                    <?
+                }
+
+                if (strlen($arResult["PRICE_DELIVERY_FORMATED"]))
+                {
+                    ?>
+                    <li class="">
+                        <?= Loc::getMessage('SPOD_DELIVERY')?>:
+                        <?
+                        if (strlen($arResult["PRICE_DELIVERY_FORMATED"]))
+                        {
+                            ?>
+                            <?= $arResult["PRICE_DELIVERY_FORMATED"] ?>
+                            <?
+                        }
+                        ?>
+                    </li>
+                    <?
+                }
+
+                if ((float)$arResult["TAX_VALUE"] > 0)
+                {
+                    ?>
+                    <li class="">
+                        <?= Loc::getMessage('SPOD_TAX') ?>:
+
+                        <?
+                        if ((float)$arResult["TAX_VALUE"] > 0)
+                        {
+                            ?>
+                            <?= $arResult["TAX_VALUE_FORMATED"] ?>
+                            <?
+                        }
+                        ?>
+                    </li>
+                    <?
                 }
                 ?>
-
-			</div>
-
-
-
-
-
-
-            <div class="margin-bottom-6 lead">
-                <ul class="">
-                    <?
-                    if (floatval($arResult["ORDER_WEIGHT"]))
-                    {
-                        ?>
-                        <li class="">
-                            <?= Loc::getMessage('SPOD_TOTAL_WEIGHT')?>:
-                        </li>
-                        <?
-                    }
-
-                    if ($arResult['PRODUCT_SUM_FORMATED'] != $arResult['PRICE_FORMATED'] && !empty($arResult['PRODUCT_SUM_FORMATED']))
-                    {
-                        ?>
-                        <li class="">
-                            <?= Loc::getMessage('SPOD_COMMON_SUM')?>:
-                        </li>
-                        <?
-                    }
-
-                    if (strlen($arResult["PRICE_DELIVERY_FORMATED"]))
-                    {
-                        ?>
-                        <li class="">
-                            <?= Loc::getMessage('SPOD_DELIVERY')?>:
-                        </li>
-                        <?
-                    }
-
-                    if ((float)$arResult["TAX_VALUE"] > 0)
-                    {
-                        ?>
-                        <li class="">
-                            <?= Loc::getMessage('SPOD_TAX') ?>:
-                        </li>
-                        <?
-                    }
-                    ?>
-                    <li class=""><?= Loc::getMessage('SPOD_SUMMARY')?>:</li>
-                </ul>
+                <li class=""><?= Loc::getMessage('SPOD_SUMMARY')?>: <?=$arResult['PRICE_FORMATED']?></li>
+            </ul>
+            <?/*
                 <ul class="">
                     <?
                     if (floatval($arResult["ORDER_WEIGHT"]))
@@ -1004,32 +1039,32 @@ else
                     }
                     ?>
                     <li class=""><?=$arResult['PRICE_FORMATED']?></li>
-                </ul>
-            </div>
+                </ul>*/?>
+        </div>
 
 
-		<!--sale-order-detail-general-->
-		<?
-		if ($arParams['GUEST_MODE'] !== 'Y' && $arResult['LOCK_CHANGE_PAYSYSTEM'] !== 'Y')
-		{
-			?>
-			<a class="sale-order-detail-back-to-list-link-down" href="<?= $arResult["URL_TO_LIST"] ?>">&larr; <?= Loc::getMessage('SPOD_RETURN_LIST_ORDERS')?></a>
-			<?
-		}
-		?>
-	</div>
-	<?
-	$javascriptParams = array(
-		"url" => CUtil::JSEscape($this->__component->GetPath().'/ajax.php'),
-		"templateFolder" => CUtil::JSEscape($templateFolder),
-		"paymentList" => $paymentData
-	);
-	$javascriptParams = CUtil::PhpToJSObject($javascriptParams);
-	?>
-	<script>
-		BX.Sale.PersonalOrderComponent.PersonalOrderDetail.init(<?=$javascriptParams?>);
-	</script>
-<?
+        <!--sale-order-detail-general-->
+        <?
+        if ($arParams['GUEST_MODE'] !== 'Y' && $arResult['LOCK_CHANGE_PAYSYSTEM'] !== 'Y')
+        {
+            ?>
+            <a class="sale-order-detail-back-to-list-link-down" href="<?= $arResult["URL_TO_LIST"] ?>">&larr; <?= Loc::getMessage('SPOD_RETURN_LIST_ORDERS')?></a>
+            <?
+        }
+        ?>
+    </div>
+    <?
+    $javascriptParams = array(
+        "url" => CUtil::JSEscape($this->__component->GetPath().'/ajax.php'),
+        "templateFolder" => CUtil::JSEscape($templateFolder),
+        "paymentList" => $paymentData
+    );
+    $javascriptParams = CUtil::PhpToJSObject($javascriptParams);
+    ?>
+    <script>
+        BX.Sale.PersonalOrderComponent.PersonalOrderDetail.init(<?=$javascriptParams?>);
+    </script>
+    <?
 }
 ?>
 
