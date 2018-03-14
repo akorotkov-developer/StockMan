@@ -19,7 +19,7 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
     }*/
     ?>
     <div class="hide-for-small-only" id="menu-left">
-        <div class="margin-bottom-2"><a class="text-uppercase text-decoration-none" href="/catalog/">Вся одежда</a></div>
+
         <ul class="cloth">
             <?
             $previousLevel = 0;
@@ -34,7 +34,7 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
                 <?if ($arItem["IS_PARENT"]):?>
 
                     <?if ($arItem["DEPTH_LEVEL"] == 1):?>
-                        <li class="cloth__item"><a class="cloth__link <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?>" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a>
+                        <li class="cloth__item" <?if (intval($WrokCatalog->GetElmentCountByName($arItem["TEXT"]))==0) {echo "style='display:none;'";}?>><a class="cloth__link <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?>" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a>
                         <?if ($arItem["SELECTED"]) {?>
                             <?$selected = true;?>
                             <ul class="cloth">
@@ -43,7 +43,7 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
                         <?}?>
                     <?else:?>
                         <?if ($arItem["SELECTED"] || $selected) {?>
-                            <li class="cloth__item"><a class="cloth__link <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?> cloth__link_inside" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a>
+                            <li class="cloth__item" <?if (intval($WrokCatalog->GetElmentCountByName($arItem["TEXT"]))==0) {echo "style='display:none;'";}?>><a class="cloth__link <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?> cloth__link_inside" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a>
                             <ul class="cloth">
                         <?}?>
                     <?endif?>
@@ -53,10 +53,10 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
                     <?if ($arItem["PERMISSION"] > "D"):?>
 
                         <?if ($arItem["DEPTH_LEVEL"] == 1):?>
-                            <li class="cloth__item"><a class="cloth__link <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?>" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a></li>
+                            <li class="cloth__item" <?if (intval($WrokCatalog->GetElmentCountByName($arItem["TEXT"]))==0) {echo "style='display:none;'";}?>><a class="cloth__link <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?>" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a></li>
                         <?else:?>
                             <?if ($selected) {?>
-                                <li class="cloth__item"><a class="cloth__link cloth__link_inside <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?>" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a></li>
+                                <li class="cloth__item" <?if (intval($WrokCatalog->GetElmentCountByName($arItem["TEXT"]))==0) {echo "style='display:none;'";}?>><a class="cloth__link cloth__link_inside <?if ($arItem["SELECTED"]) {?>cloth__link_more<?}?>" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?><span class="cloth__num"><?=$WrokCatalog->GetElmentCountByName($arItem["TEXT"]);?></span></a></li>
                             <?}?>
                         <?endif?>
 
