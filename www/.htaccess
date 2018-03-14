@@ -17,6 +17,10 @@ ErrorDocument 404 /404.php
   Options +FollowSymLinks
   RewriteEngine On
 
+  RewriteCond %{THE_REQUEST} /(.*)index.php.*$
+  RewriteCond %{THE_REQUEST} !bitrix/admin/
+  RewriteRule .* /%1 [R=302,L]
+
   RewriteCond %{REQUEST_URI} (.*/[^/.]+)($|\?)
   RewriteRule .* %1/ [R=301,L]
 

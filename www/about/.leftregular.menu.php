@@ -1,67 +1,39 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Главная",
+		"О компании",
 		"index.php",
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"О портале",
-		"museum/",
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Условия пользования",
-		"team/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	),
     Array(
-        "Реклама на портале",
-        "sponsor/",
-        Array(),
-        Array(),
-        ""
-    ),
-    Array(
-        "Партнёры",
-        "partners/",
+        "Контакты",
+        "/about/contacts/",
         Array(),
         Array(),
         ""
     ),
 	Array(
-		"Контактная информация",
-		"thanks/",
-		Array(), 
-		Array(), 
-		"" 
-	),
-    Array(
-        "О портале",
-        "social_activities/",
+        "Оплата",
+        "/about/payment/",
         Array(),
         Array(),
         ""
     ),
-	Array(
-		"Условия пользования",
-		"/about/contribute/",
-		Array(), 
-		Array(), 
-		"" 
-	),
     Array(
-        "",
-        "/about/brandbook/",
+        "Доставка",
+        "/about/delivery/",
         Array(),
         Array(),
         ""
-    )
+    ),
+    Array(
+        "Возврат",
+        "/about/purchase-returns/",
+        Array(),
+        Array(),
+        ""
+    ),
 );
 ?>

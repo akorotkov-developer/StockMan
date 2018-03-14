@@ -2,35 +2,35 @@
 $aMenuLinks = Array(
 	Array(
 		"Программа лояльности",
-		"/company/loyalty/",
+		"/help/loyalty/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Как сделать заказ",
-		"/company/howto/",
+		"/help/howto/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Конфиденциальность",
-		"/company/confidentiality/",
+		"/help/confidentiality/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Где купить",
-		"/company/buy/",
+		"/help/buy/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Гарантия",
-		"/company/guaranty/",
+		"/help/guaranty/",
 		Array(), 
 		Array(), 
 		"" 

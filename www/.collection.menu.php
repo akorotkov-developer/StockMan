@@ -2,28 +2,28 @@
 $aMenuLinks = Array(
 	Array(
 		"Женская коллекция",
-		"about/howto/", 
+		"catalog/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Мужская коллекция",
-		"about/delivery/", 
+		"catalog/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Сумки",
-		"about/", 
+		"catalog/",
 		Array(), 
 		Array(), 
 		"" 
 	),
     Array(
         "Аксессуары",
-        "about/",
+        "catalog/",
         Array(),
         Array(),
         ""

@@ -31,10 +31,8 @@ if ('' == $arParams['TEMPLATE_THEME'])
 
 $arProductsId = array();
 $arProductIdOffers = array();
-$idIBLOCKOFFERS = 0;
 foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
     if ($arItem['IBLOCK_ID'] != StockMan\Config::CATALOG_ID) {
-        $idIBLOCKOFFERS = $arItem['IBLOCK_ID'];
         $mxResult = CCatalogSku::GetProductInfo(
             $arItem["PRODUCT_ID"]
         );

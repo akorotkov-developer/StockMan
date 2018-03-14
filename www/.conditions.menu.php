@@ -2,31 +2,38 @@
 $aMenuLinks = Array(
 	Array(
 		"Оплата",
-		"/company/payment/",
+		"/about/payment/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Доставка",
-		"/company/delivery/",
+		"/about/delivery/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Возврат",
-		"/company/purchase-returns/",
+		"/about/purchase-returns/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"О компании",
-		"/company/",
+		"/about/",
 		Array(), 
 		Array(), 
 		"" 
-	)
+	),
+    Array(
+        "Контакты",
+        "/about/contacts/",
+        Array(),
+        Array(),
+        ""
+    )
 );
 ?>

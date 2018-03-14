@@ -1,5 +1,3 @@
 <?
-$sSectionName = "Доставка";
-$arDirProperties = array(
-);
+$sSectionName="Доставка";
 ?>
