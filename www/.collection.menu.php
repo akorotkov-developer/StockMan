@@ -1,28 +1,28 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 $aMenuLinks = Array(
 	Array(
-		"ЖЕНСКАЯ КОЛЛЕКЦИЯ",
+		"Женская коллекция",
 		"about/howto/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"МУЖСКАЯ КОЛЛЕКЦИЯ",
+		"Мужская коллекция",
 		"about/delivery/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"СУМКИ",
+		"Сумки",
 		"about/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
     Array(
-        "АКСЕССУАРЫ",
+        "Аксессуары",
         "about/",
         Array(),
         Array(),

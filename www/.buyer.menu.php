@@ -1,32 +1,39 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+<?
 $aMenuLinks = Array(
 	Array(
-		"ПРОГРАММА ЛОЯЛЬНОСТИ",
-		"about/howto/", 
+		"Программа лояльности",
+		"/company/loyalty/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"КАК СДЕЛАТЬ ЗАКАЗ",
-		"about/delivery/", 
+		"Как сделать заказ",
+		"/company/howto/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"КОНФИДЕНЦИАЛЬНОСТЬ",
-		"about/", 
+		"Конфиденциальность",
+		"/company/confidentiality/",
 		Array(), 
 		Array(), 
 		"" 
 	),
-    Array(
-        "ГДЕ КУПИТЬ",
-        "about/",
-        Array(),
-        Array(),
-        ""
-    )
+	Array(
+		"Где купить",
+		"/company/buy/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Гарантия",
+		"/company/guaranty/",
+		Array(), 
+		Array(), 
+		"" 
+	)
 );
 ?>

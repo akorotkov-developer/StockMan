@@ -1,22 +1,29 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+<?
 $aMenuLinks = Array(
 	Array(
-		"ОПЛАТА",
-		"about/howto/", 
+		"Оплата",
+		"/company/payment/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"ДОСТАВКА",
-		"about/delivery/", 
+		"Доставка",
+		"/company/delivery/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"ВОЗВРАТ",
-		"about/", 
+		"Возврат",
+		"/company/purchase-returns/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"О компании",
+		"/company/",
 		Array(), 
 		Array(), 
 		"" 
