@@ -31,28 +31,36 @@ use Bitrix\Main\Page\AssetLocation;
         <header class="header sticky" data-sticky data-margin-top="0" data-sticky-on="large">
             <div class="grid-x grid-padding-x">
                 <div class="cell text-center background-insta header__hat"><a class="header__tel" href="tel:88003011129">8 (800) 301-11-29 (бесплатный, многоканальный)</a></div>
-                <div class="cell large-4 medium-4 text-center medium-text-left header__gender">
-                    <div class="sort">
-                        <div class="sort__main">Женщинам</div>
-                        <div class="sort__other">
-                            <div class="sort__over">
-                                <div> <a href="#">Женщинам</a></div>
-                                <div> <a href="#">Мужчинам</a></div>
-                                <div> <a href="#">Детям</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cell large-4 medium-4 text-center medium-text-left hide-for-small-only header__people">
-                    <ul class="people">
-                        <?
-                        $uf_arresult = CIBlockSection::GetList(Array("SORT"=>"­­ASC"), Array("IBLOCK_ID" => StockMan\Config::CATALOG_ID, "SECTION_ID"=>false, "ACTIVE"=>"Y"), false);
-                        while ($uf_value = $uf_arresult->GetNext()) {
-                            ?>
-                            <li class="people__item"><a class="people__link" href="<?=$uf_value['SECTION_PAGE_URL']?>"><?=$uf_value["NAME"];?></a></li>
-                        <?}?>
-                    </ul>
-                </div>
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:menu",
+                    "header__gender",
+                    Array(
+                        "ALLOW_MULTI_SELECT" => "Y",
+                        "DELAY" => "N",
+                        "MAX_LEVEL" => "1",
+                        "MENU_CACHE_GET_VARS" => "",
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_TYPE" => "A",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "ROOT_MENU_TYPE" => "catalog-level1",
+                        "USE_EXT" => "N"
+                    )
+                );?>
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:menu",
+                    "header__people",
+                    Array(
+                        "ALLOW_MULTI_SELECT" => "Y",
+                        "DELAY" => "N",
+                        "MAX_LEVEL" => "1",
+                        "MENU_CACHE_GET_VARS" => "",
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_TYPE" => "A",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "ROOT_MENU_TYPE" => "catalog-level1",
+                        "USE_EXT" => "N"
+                    )
+                );?>
                 <div class="cell show-for-small-only small-2">
                     <button class="menu-icon header__menu dark" type="button" data-toggle="responsive-menu"></button>
                 </div>
