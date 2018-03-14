@@ -64,16 +64,14 @@ use Bitrix\Main\Page\AssetLocation;
                 <div class="cell show-for-small-only small-2">
                     <button class="menu-icon header__menu dark" type="button" data-toggle="responsive-menu"></button>
                 </div>
-                <div class="cell show-for-small-only small-2 header__detective" data-responsive-toggle="search-menu" data-hide-for="medium"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/search.svg" alt="" data-toggle="search-menu">
-                    <div class="detective" id="search-menu">
-                        <form class="search-top input-group" action="shop-search.html" method="get">
-                            <input class="search-top__input input-group-field" type="text" value="" placeholder="Поиск">
-                            <div class="input-group-button">
-                                <button class="search-top__button fa fa-search" type="submit"></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:search.form",
+                    "header__detective",
+                    Array(
+                        "USE_SUGGEST" => "N",
+                        "PAGE" => "catalog/"
+                    )
+                );?>
                 <div class="cell text-center large-4 medium-4 small-4"><a class="header__logo" href="/main.php"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/logo.svg" alt=""></a></div>
                 <div class="cell large-4 header__book medium-4 small-4">
                     <?$APPLICATION->IncludeComponent(
