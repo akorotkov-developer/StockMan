@@ -105,7 +105,7 @@ if (empty($availablePages))
 }
 else
 {
-	?>
+	/*?>
 	<div class="row">
 		<div class="col-md-12 sale-personal-section-index">
 			<div class="row sale-personal-section-row-flex">
@@ -131,6 +131,11 @@ else
 			</div>
 		</div>
 	</div>
-	<?
+	<?*/
+	?>
+    <p>
+        В личном кабинете Вы можете проверить текущее состояние корзины, ход выполнения Ваших заказов, просмотреть или изменить личную информацию, а также подписаться на новости и другие информационные рассылки.
+    </p>
+    <?
 }
 ?>
