@@ -1,5 +1,45 @@
 <?php
 /**
+ * Получаем DETAIL_PAGE_URL и TSVET - товара по торговому предложению
+ * $arProductsId - массив id торговых предложений
+ * $arProductIdOffers - массив [#ID_Товар#] = #ID_торговоеПредложение#
+ */
+if (!function_exists('getDetailInfoProduct')) {
+    function getDetailInfoProduct($arProductsId, $arProductIdOffers)
+    {
+        $arProducts = array();
+        if (count($arProductsId) > 0 ){
+            $arFilter = Array(
+                "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
+                "ACTIVE"=>"Y",
+                "ID" => $arProductsId
+            );
+            $arSelect = array(
+                "IBLOCK_ID",
+                "ID",
+                "DETAIL_PAGE_URL"
+            );
+            $res = CIBlockElement::GetList(Array("ID"=>"ASC"), $arFilter, false, false, $arSelect);
+            while($ar_fields = $res->GetNext()) {
+                $arProductsTemp = array();
+                $resP = CIBlockElement::GetProperty(StockMan\Config::CATALOG_ID, $ar_fields["ID"], "sort", "asc", array("CODE" => "TSVET"));
+                if ($ob = $resP->GetNext())
+                {
+                    $arProp = CIBlockFormatProperties::GetDisplayValue($ar_fields, $ob);
+                    $arProductsTemp['prop']['name'] = $arProp['NAME'];
+                    $arProductsTemp['prop']['val'] = $arProp['DISPLAY_VALUE'];
+                }
+
+                $arProductsTemp['url'] = $ar_fields['DETAIL_PAGE_URL'];
+                $arProducts[$arProductIdOffers[$ar_fields['ID']]] = $arProductsTemp;
+                unset($arProductsTemp);
+            }
+        }
+        return $arProducts;
+    }
+}
+
+/**
  * Переводит cтроку из кодировки $sFromEncoding в UTF-8
  *
  * @param string $sStr - строка, которую необходимо перевести в другую кодировку

@@ -91,7 +91,7 @@ else
 		<div class="callout">
 
             <div class="row">
-                <div class="col-md-4 col-sm-6 sale-order-detail-about-order-inner-container-name">
+                <div class="sale-order-detail-about-order-inner-container-name">
                     <div class="sale-order-detail-about-order-inner-container-name-title">
                         <?
                         $userName = $arResult["USER"]["NAME"] ." ". $arResult["USER"]["SECOND_NAME"] ." ". $arResult["USER"]["LAST_NAME"];
@@ -104,22 +104,23 @@ else
                             echo Loc::getMessage('SPOD_LOGIN').':';
                         }
                         ?>
-                    </div>
-                    <div class="sale-order-detail-about-order-inner-container-name-detail">
-                        <?
-                        if (strlen($userName))
-                        {
-                            echo htmlspecialcharsbx($userName);
-                        }
-                        elseif (strlen($arResult['FIO']))
-                        {
-                            echo htmlspecialcharsbx($arResult['FIO']);
-                        }
-                        else
-                        {
-                            echo htmlspecialcharsbx($arResult["USER"]['LOGIN']);
-                        }
-                        ?>
+
+                        <strong>
+                            <?
+                            if (strlen($userName))
+                            {
+                                echo htmlspecialcharsbx($userName);
+                            }
+                            elseif (strlen($arResult['FIO']))
+                            {
+                                echo htmlspecialcharsbx($arResult['FIO']);
+                            }
+                            else
+                            {
+                                echo htmlspecialcharsbx($arResult["USER"]['LOGIN']);
+                            }
+                            ?>
+                        </strong>
                     </div>
                     <div class="grid-x grid-padding-x">
                         <div class="cell small-12 medium-4">
@@ -133,12 +134,12 @@ else
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6 sale-order-detail-about-order-inner-container-status">
-                    <div>
-                        <?= Loc::getMessage('SPOD_LIST_CURRENT_STATUS', array(
-                            '#DATE_ORDER_CREATE#' => $arResult["DATE_INSERT_FORMATED"]
-                        )) ?>
-                    </div>
+                <div class=" sale-order-detail-about-order-inner-container-status">
+
+                    <?= Loc::getMessage('SPOD_LIST_CURRENT_STATUS', array(
+                        '#DATE_ORDER_CREATE#' => $arResult["DATE_INSERT_FORMATED"]
+                    )) ?>
+
                     <strong>
                         <?
                         if ($arResult['CANCELED'] !== 'Y')
@@ -154,9 +155,9 @@ else
                 </div>
 
                 <div class="margin-bottom-6">
-                    <div>
-                        <?= Loc::getMessage('SPOD_ORDER_PRICE')?>:
-                    </div>
+
+                    <?= Loc::getMessage('SPOD_ORDER_PRICE')?>:
+
                     <strong>
                         <?= $arResult["PRICE_FORMATED"]?>
                     </strong>
@@ -190,7 +191,7 @@ else
                     }
                 ?>
             </div>
-            <div class="col-md-12 col-sm-12 col-xs-12 sale-order-detail-about-order-inner-container-details">
+            <div class="sale-order-detail-about-order-inner-container-details">
                 <h4 class="sale-order-detail-about-order-inner-container-details-title">
                     <?= Loc::getMessage('SPOD_USER_INFORMATION') ?>
                 </h4>
@@ -330,20 +331,20 @@ else
 
 
 
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 sale-order-detail-payment-options-methods-container">
+            <div class="">
+                <div class="sale-order-detail-payment-options-methods-container">
                     <?
                     foreach ($arResult['PAYMENT'] as $payment)
                     {
                         ?>
                         <div class="row payment-options-methods-row">
-                            <div class="col-md-12 col-sm-12 col-xs-12 sale-order-detail-payment-options-methods">
-                                <div class="row sale-order-detail-payment-options-methods-information-block">
-                                    <div class="col-md-2 col-sm-5 col-xs-12 sale-order-detail-payment-options-methods-image-container">
+                            <div class="sale-order-detail-payment-options-methods">
+                                <div class="sale-order-detail-payment-options-methods-information-block">
+                                    <div class="sale-order-detail-payment-options-methods-image-container">
 													<span class="sale-order-detail-payment-options-methods-image-element"
                                                           style="background-image: url('<?=strlen($payment['PAY_SYSTEM']["SRC_LOGOTIP"]) ? htmlspecialcharsbx($payment['PAY_SYSTEM']["SRC_LOGOTIP"]) : '/bitrix/images/sale/nopaysystem.gif'?>');"></span>
                                     </div>
-                                    <div class="col-md-8 col-sm-7 col-xs-10 sale-order-detail-payment-options-methods-info">
+                                    <div class="sale-order-detail-payment-options-methods-info">
                                         <div class="sale-order-detail-payment-options-methods-info-title">
                                             <div class="sale-order-detail-methods-title">
                                                 <?
@@ -447,7 +448,7 @@ else
                                     if ($payment['PAY_SYSTEM']["IS_CASH"] !== "Y")
                                     {
                                         ?>
-                                        <div class="col-md-2 col-sm-12 col-xs-12 sale-order-detail-payment-options-methods-button-container">
+                                        <div class="sale-order-detail-payment-options-methods-button-container">
                                             <?
                                             if ($payment['PAY_SYSTEM']['PSA_NEW_WINDOW'] === 'Y' && $arResult["IS_ALLOW_PAY"] !== "N")
                                             {
@@ -479,7 +480,7 @@ else
                                         <?
                                     }
                                     ?>
-                                    <div class="sale-order-detail-payment-inner-row-template col-md-offset-3 col-sm-offset-5 col-md-5 col-sm-10 col-xs-12">
+                                    <div class="sale-order-detail-payment-inner-row-template">
                                         <a class="sale-order-list-cancel-payment">
                                             <i class="fa fa-long-arrow-left"></i> <?=Loc::getMessage('SPOD_CANCEL_PAYMENT')?>
                                         </a>
@@ -493,7 +494,7 @@ else
                                     && $arResult["IS_ALLOW_PAY"] !== "N")
                                 {
                                     ?>
-                                    <div class="row sale-order-detail-payment-options-methods-template col-md-12 col-sm-12 col-xs-12">
+                                    <div class="sale-order-detail-payment-options-methods-template">
 														<span class="sale-paysystem-close active-button">
 															<span class="sale-paysystem-close-item sale-order-payment-cancel"></span><!--sale-paysystem-close-item-->
 														</span><!--sale-paysystem-close-->
@@ -817,6 +818,16 @@ else
                             </a>
                         </div>
                         <div class="cell small-9 medium-5 large-5">
+                            <?
+                            echo "<pre>";
+                            var_dump($basketItem["PRODUCT_ID"]);
+                            echo "</pre>";
+                            $res = CIBlockElement::GetList(array(), array('ID'=>$basketItem["PRODUCT_ID"]), false, false, array('ID', 'IBLOCK_ID', 'NAME', 'DETAIL_PAGE_URL'));
+                            if ($arElement = $res->GetNext())
+                            {
+                                echo "<pre>"; print_r($arElement); echo "</pre>";
+                            }
+                            ?>
                             <h5><a class="text-insta text-decoration-none text-size-xlarge" href="<?=$basketItem['DETAIL_PAGE_URL']?>"><?=htmlspecialcharsbx($basketItem['NAME'])?></a></h5>
                             <div class="grid-x grid-padding-x">
                                 <?

@@ -39,39 +39,13 @@ foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
             $arItem["PRODUCT_ID"]
         );
 
-        $arProductsId[$arItem["PRODUCT_ID"]] = $mxResult["ID"];
+        $arProductsId[] = $mxResult["ID"];
         $arProductIdOffers[$mxResult["ID"]] = $arItem["PRODUCT_ID"];
     }
 }
 
-$arProducts = array();
-if ($idIBLOCKOFFERS > 0 ){
-    $arFilter = Array(
-        "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
-        "ACTIVE"=>"Y",
-        "ID" => $arProductsId
-    );
-    $arSelect = array(
-        "IBLOCK_ID",
-        "ID",
-        "DETAIL_PAGE_URL"
-    );
-    $res = CIBlockElement::GetList(Array("ID"=>"ASC"), $arFilter, false, false, $arSelect);
-    while($ar_fields = $res->GetNext()) {
-        $arProductsTemp = array();
-        $resP = CIBlockElement::GetProperty(StockMan\Config::CATALOG_ID, $ar_fields["ID"], "sort", "asc", array("CODE" => "TSVET"));
-        if ($ob = $resP->GetNext())
-        {
-            $arProp = CIBlockFormatProperties::GetDisplayValue($ar_fields, $ob);
-            $arProductsTemp['prop']['name'] = $arProp['NAME'];
-            $arProductsTemp['prop']['val'] = $arProp['DISPLAY_VALUE'];
-        }
+$arProducts = getDetailInfoProduct($arProductsId, $arProductIdOffers);
 
-        $arProductsTemp['url'] = $ar_fields['DETAIL_PAGE_URL'];
-        $arProducts[$arProductIdOffers[$ar_fields['ID']]] = $arProductsTemp;
-        unset($arProductsTemp);
-    }
-}
 $arResult["PROD_OFFERS"] = $arProducts;
 $this->__component->SetResultCacheKeys(array(
     "PROD_OFFERS"
