@@ -18,6 +18,7 @@ $WrokCatalog = new StockMan\Catalog\Workcatalog;
         }
     }*/
     ?>
+
     <div class="hide-for-small-only" id="menu-left">
 
         <ul class="cloth">

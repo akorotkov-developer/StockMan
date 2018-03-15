@@ -6,7 +6,6 @@ if ($_REQUEST["old"]=="Y") {
     $temp = "";
 }
 ?>
-
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog",
 	$temp,

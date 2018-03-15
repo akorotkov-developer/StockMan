@@ -38,6 +38,29 @@ if (!function_exists('getDetailInfoProduct')) {
         return $arProducts;
     }
 }
+
+//Сохраняем ID Корневой секции в сессию
+function SaveIdCatalogSection($ID_SECTION) {
+    $_SESSION['CurrentSectionCatalog'] = $ID_SECTION;
+}
+function GetIdSectionCatalog($ID_CURRENT_SECTION) {
+    $p = $ID_CURRENT_SECTION;
+    $treeofSections = array();
+    $treeofSections[] = $p;
+    while (!is_null($p)) {
+        $res = CIBlockSection::GetByID($p);
+        if ($ar_res = $res->GetNext()) {
+            $p = $ar_res['IBLOCK_SECTION_ID'];
+            $treeofSections[] = $ar_res['IBLOCK_SECTION_ID'];
+        }
+    }
+    array_pop($treeofSections);
+    $_SESSION['CurrentSectionCatalog'] = end($treeofSections);
+
+    SaveIdCatalogSection(end($treeofSections));
+    return end($treeofSections);
+}
+
 /**
  * Получаем значение свойства TSVET - товара по торговому предложению
  */

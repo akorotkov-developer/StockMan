@@ -136,10 +136,34 @@ if ($isFilter || $isSidebar): ?>
 <?endif?>
 
 
-    <div class="grid-x grid-padding-x ffff">
+    <div class="grid-x grid-padding-x">
         <?/*Левое меню*/?>
         <div class="cell small-12 medium-4 large-3 xlarge-2 text-center medium-text-left">
             <?$APPLICATION->IncludeComponent(
+                "bitrix:catalog.section.list",
+                "menuleft",
+                Array(
+                    "VIEW_MODE" => "LINE",
+                    "SHOW_PARENT_NAME" => "Y",
+                    "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+                    "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+                    "SECTION_ID" => GetIdSectionCatalog($arResult["VARIABLES"]["SECTION_ID"]), // GetIdSectionCatalog();
+                    "SECTION_CODE" => "",
+                    "SECTION_URL" => "",
+                    "COUNT_ELEMENTS" => "N",
+                    "TOP_DEPTH" => "4",
+                    "SECTION_FIELDS" => "",
+                    "SECTION_USER_FIELDS" => "",
+                    "ADD_SECTIONS_CHAIN" => "Y",
+                    "CACHE_TYPE" => "A",
+                    "CACHE_TIME" => "36000000",
+                    "CACHE_NOTES" => "",
+                    "CACHE_GROUPS" => "Y",
+                    "CURREN_SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"]
+                )
+            );?>
+
+            <?/*$APPLICATION->IncludeComponent(
                 "bitrix:menu",
                 "leftcatalogmenu",
                 array(
@@ -150,14 +174,14 @@ if ($isFilter || $isSidebar): ?>
                     "MENU_CACHE_USE_GROUPS" => "Y",
                     "MENU_CACHE_GET_VARS" => array(
                     ),
-                    "MAX_LEVEL" => "2",
+                    "MAX_LEVEL" => "3",
                     "CHILD_MENU_TYPE" => "left",
                     "USE_EXT" => "Y",
                     "DELAY" => "N",
                     "ALLOW_MULTI_SELECT" => "N"
                 ),
                 false
-            );?>
+            );*/?>
         </div>
 
             <?
