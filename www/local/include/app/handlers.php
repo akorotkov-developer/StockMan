@@ -22,23 +22,49 @@ class UserRegister
 AddEventHandler("main", "OnBuildGlobalMenu", Array("StockManHandlers", "xmlLoad"));
 AddEventHandler("iblock", "OnAfterIBlockElementAdd", Array("StockManHandlers", "AfterElementAddHandler"));
 
-AddEventHandler("iblock", "OnAfterIBlockElementUpdate", Array("MyClass", "OnAfterIBlockElementUpdateHandler"));
 
-class MyClass
-{
-    // создаем обработчик события "OnAfterIBlockElementUpdate"
-    function OnAfterIBlockElementUpdateHandler(&$arFields)
-    {
-        if ($_SERVER['PHP_SELF'] == '/bitrix/admin/1c_exchange.php') {
-            if ($arFields['IBLOCK_ID'] == ImportStokMan::$IBLOCK_ID) {
-                AddMessage2Log($arFields);
-            }
-        }
-    }
-}
+// зарегистрируем функцию как обработчик двух событий
+AddEventHandler('form', 'onBeforeResultAdd',array('StockManHandlers', 'onBeforeResultAddHandler'));
 
 class StockManHandlers
 {
+
+    function onBeforeResultAddHandler($WEB_FORM_ID, &$arFields, &$arrVALUES)
+    {
+        if ($WEB_FORM_ID == StockMan\Config::FORM_FAQ_ID)
+        {
+            CModule::IncludeModule("iblock");
+            $name = htmlspecialcharsbx($arrVALUES['form_text_1']);
+            $email = htmlspecialcharsbx($arrVALUES['form_email_2']);
+            $text = htmlspecialcharsbx($arrVALUES['form_textarea_3']);
+
+            $el = new CIBlockElement;
+
+            $PROP = array();
+            $PROP[212] = $email;
+            $PROP[213] = $name;
+
+            $arLoadProductArray = Array(
+                "IBLOCK_SECTION_ID" => false,
+                "IBLOCK_ID"      => 12,
+                "PROPERTY_VALUES"=> $PROP,
+                "NAME"           => $name . ' - ' . $email,
+                "ACTIVE"         => "N",
+                "PREVIEW_TEXT"   => $text
+            );
+            $PRODUCT_ID = $el->Add($arLoadProductArray);
+
+            $arEventFields = array(
+                "TEXT_USER"     => $text,
+                "NAME_USER"     => $name,
+                "EMAIL_USER"    => $email,
+                "LINK"          => '/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=12&type=faq&ID=' . $PRODUCT_ID . '&lang=ru&find_section_section=-1&WF=Y',
+
+            );
+            CEvent::Send("FORM_FAQ", 's1', $arEventFields);
+        }
+    }
+
     function xmlLoad(&$adminMenu, &$moduleMenu)
     {
         global $USER;

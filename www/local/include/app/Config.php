@@ -7,6 +7,8 @@ class Config
 {
     const STOCKMAN_TEMPLATE_PATH = '/local/templates/podiummarket';
 
+    //Site ID
+    const FORM_FAQ_ID = 1;
 
     //Site ID
     const SITE_ID = "s1";
