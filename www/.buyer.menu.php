@@ -8,8 +8,8 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Как сделать заказ",
-		"/help/howto/",
+		"Ваши вопросы",
+		"/faq/",
 		Array(), 
 		Array(), 
 		"" 

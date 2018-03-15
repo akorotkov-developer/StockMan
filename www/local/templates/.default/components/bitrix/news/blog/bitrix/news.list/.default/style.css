@@ -1,0 +1,9 @@
+.action__text_nolink {
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.x-masonry{
+    width: 100%;
+}
