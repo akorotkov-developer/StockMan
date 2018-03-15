@@ -22,7 +22,7 @@ if (!function_exists('getDetailInfoProduct')) {
             $res = CIBlockElement::GetList(Array("ID"=>"ASC"), $arFilter, false, false, $arSelect);
             while($ar_fields = $res->GetNext()) {
                 $arProductsTemp = array();
-                $resP = CIBlockElement::GetProperty(StockMan\Config::CATALOG_ID, $ar_fields["ID"], "sort", "asc", array("CODE" => "TSVET"));
+                $resP = CIBlockElement::GetProperty(StockMan\Config::CATALOG_ID, $ar_fields["ID"], "sort", "asc", array("CODE" => ImportStokMan::$CODE_PROPERTYY_TSVET));
                 if ($ob = $resP->GetNext())
                 {
                     $arProp = CIBlockFormatProperties::GetDisplayValue($ar_fields, $ob);
@@ -36,6 +36,32 @@ if (!function_exists('getDetailInfoProduct')) {
             }
         }
         return $arProducts;
+    }
+}
+/**
+ * Получаем значение свойства TSVET - товара по торговому предложению
+ */
+if (!function_exists('getTsvetProduct')) {
+    function getTsvetProduct($id)
+    {
+        $return = '';
+        $mxResult = CCatalogSku::GetProductInfo($id);
+        if (intval($mxResult["ID"]) > 0) {
+            $id = $mxResult["ID"];
+        }
+        $resP = CIBlockElement::GetProperty(StockMan\Config::CATALOG_ID, $id, "sort", "asc", array("CODE" => ImportStokMan::$CODE_PROPERTYY_TSVET));
+        if ($ob = $resP->GetNext())
+        {
+            $ar_fields = array(
+                "ID" => $id,
+                "IBLOCK_ID" => StockMan\Config::CATALOG_ID
+            );
+            $arProp = CIBlockFormatProperties::GetDisplayValue($ar_fields, $ob);
+            if (isset($arProp["DISPLAY_VALUE"]{1})) {
+                $return = htmlspecialcharsbx($arProp["DISPLAY_VALUE"]);
+            }
+        }
+        return $return;
     }
 }
 

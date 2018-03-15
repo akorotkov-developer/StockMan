@@ -28,6 +28,9 @@ class ImportStokMan {
     public static $XML_ID_TSVET = 'cf6449d9-5b32-11e7-80e0-00155d0f1c03';
     public static $XML_ID_RAZMER = 'ff296996-5b34-11e7-80e0-00155d0f1c03';
 
+    public static $CODE_PROPERTYY_TSVET = 'TSVET';
+    public static $NAME_PROPERTYY_TSVET = 'Цвет';
+
     public static $STR_DELIMITER_OFFERS = '-p';
 
 
