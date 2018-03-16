@@ -23,3 +23,87 @@ li.product-item-scu-item-text-container.selected div.product-item-scu-item-text-
 .button_order_podiummarket {
     margin-top: 20px;
 }
+.popup-window.popup-window-with-titlebar {
+    width: 96%;
+    left: 2%!important;
+}
+.popup-window-close-icon:after {
+    width: 17px!important;
+    height: 17px!important;
+}
+.popup-window-titlebar-text {
+    box-sizing: border-box;
+    color: rgb(34, 34, 34);
+    display: block;
+    font-family: Calibri, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    -webkit-box-direction: normal;
+    -webkit-font-smoothing: antialiased;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.popup-window-with-titlebar .popup-window-content {
+    color: rgb(34, 34, 34);
+    display: block;
+    font-family: Calibri, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    -webkit-box-direction: normal;
+    -webkit-font-smoothing: antialiased;
+}
+.bx-yellow .btn.btn-default {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 1.5rem 0;
+    font-family: inherit;
+    padding: .625rem 1.125rem;
+    -webkit-appearance: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    -webkit-transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    background-color: #222;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 1.125rem;
+}
+.bx-yellow .btn.btn-default:hover {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 1.5rem 0;
+    font-family: inherit;
+    padding: .625rem 1.125rem;
+    -webkit-appearance: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    -webkit-transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    background-color: #222;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 1.125rem;
+}
+.popup-window-content img {
+    max-height: 200px!important;
+}

@@ -27,6 +27,12 @@ class Workcatalog
         return $activeElements;
     }
 
+    //Получить количество елементов по ID секции
+    public function GetElmentCountBySectionID($section_id) {
+        $activeElements = \CIBlockSection::GetSectionElementsCount($section_id, Array("CNT_ACTIVE" => "Y"));
+        return $activeElements;
+    }
+
     public function GetElmentCountByName($sectionName) {
         $res = \CIBlockSection::GetList(array(), array('IBLOCK_ID' => \StockMan\Config::CATALOG_ID, '=NAME' => $sectionName, 'SITE_ID' => \StockMan\Config::SITE_ID));
         $section = $res->Fetch();
