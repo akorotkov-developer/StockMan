@@ -150,7 +150,7 @@ if ($isFilter || $isSidebar): ?>
                     "SECTION_ID" => GetIdSectionCatalog($arResult["VARIABLES"]["SECTION_ID"]), // GetIdSectionCatalog();
                     "SECTION_CODE" => "",
                     "SECTION_URL" => "",
-                    "COUNT_ELEMENTS" => "N",
+                    "COUNT_ELEMENTS" => "Y",
                     "TOP_DEPTH" => "4",
                     "SECTION_FIELDS" => "",
                     "SECTION_USER_FIELDS" => "",
