@@ -54,7 +54,7 @@ $aMenuLinks = Array(
     ),
     Array(
         "Блог",
-        "catalog/",
+        "blog/",
         Array(),
         Array("image" =>  StockMan\Config::STOCKMAN_TEMPLATE_PATH."/images/blog.svg")
     )

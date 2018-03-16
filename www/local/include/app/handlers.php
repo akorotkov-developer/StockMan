@@ -26,8 +26,21 @@ AddEventHandler("iblock", "OnAfterIBlockElementAdd", Array("StockManHandlers", "
 // зарегистрируем функцию как обработчик двух событий
 AddEventHandler('form', 'onBeforeResultAdd',array('StockManHandlers', 'onBeforeResultAddHandler'));
 
+AddEventHandler("iblock", "OnAfterIBlockElementUpdate", Array("StockManHandlers", "OnAfterIBlockElementUpdateHandler"));
+
 class StockManHandlers
 {
+    // создаем обработчик события "OnAfterIBlockElementUpdate"
+    function OnAfterIBlockElementUpdateHandler(&$arFields)
+    {
+        if ($arFields['IBLOCK_ID'] == ImportStokMan::$IBLOCK_ID) {
+            if (!is_array($arFields["PROPERTY_VALUES"][216])) {
+                if ((is_array($arFields["PROPERTY_VALUES"][74]))and(count($arFields["PROPERTY_VALUES"][74])>0)) {
+                    AddMessage2Log($arFields);
+                }
+            }
+        }
+    }
 
     function onBeforeResultAddHandler($WEB_FORM_ID, &$arFields, &$arrVALUES)
     {

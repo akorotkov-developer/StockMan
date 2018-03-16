@@ -46,14 +46,19 @@
                 <?
                 $modalIndex = 0;
                 ?>
-                <?foreach($arResult as $arItem){?>
+                <?foreach($arResult as $arItem){
+                    $classActive = '';
+                    if ($arItem['SELECTED']) {
+                        $classActive = 'menu-base__link_active';
+                    }
+                    ?>
                     <?if ($arItem["MODAL"]) {?>
-                        <li class="menu-base__item"><a class="menu-base__link"  data-toggle-hover-dd="menu_item_<?=$modalIndex?>" data-toggle="subheader<?=$modalIndex?>"><img class="show-for-small-only" src="<?=$arItem["PARAMS"]["image"]?>" alt=""><?=$arItem["TEXT"]?><i class="fa fa-chevron-right show-for-small-only"></i></a></li>
+                        <li class="menu-base__item"><a class="menu-base__link <?=$classActive?>"  data-toggle-hover-dd="menu_item_<?=$modalIndex?>" data-toggle="subheader<?=$modalIndex?>"><img class="show-for-small-only" src="<?=$arItem["PARAMS"]["image"]?>" alt=""><?=$arItem["TEXT"]?><i class="fa fa-chevron-right show-for-small-only"></i></a></li>
                         <?
                         $modalIndex++;
                         ?>
                     <?} else {?>
-                        <li class="menu-base__item"><a class="menu-base__link" href="<?=$arItem["LINK"]?>"><img class="show-for-small-only" src="<?=$arItem["PARAMS"]["image"]?>" alt=""><?=$arItem["TEXT"]?></a></li>
+                        <li class="menu-base__item"><a class="menu-base__link <?=$classActive?>" href="<?=$arItem["LINK"]?>"><img class="show-for-small-only" src="<?=$arItem["PARAMS"]["image"]?>" alt=""><?=$arItem["TEXT"]?></a></li>
                     <?}?>
                 <?}?>
             </ul>
