@@ -54,4 +54,22 @@ class Config
         "11" => "ноября",
         "12" => "декабря",
     );
+
+    //Новинка (Да\Нет)
+    const PROP_NOVINKA_VAL = 26;
+    const PROP_NOVINKA = 'NOVINKA';
+    //Новинка (Дата)
+    const PROP_NOVINKA_DATE = 'NOVINKA_DATE';
+    //уже был Новинкой (Да\Нет)
+    const PROP_WAS_NOVINKA_VAL = 27;
+    const PROP_WAS_NOVINKA = 'WAS_NOVINKA';
+    //какой период считать новинкой
+    const PROP_PERIOD_NOVINKA = '-2 week';
+
+    public function getFilterNovinka($strData){
+        return array(
+            "!PROPERTY_" . self::PROP_NOVINKA => false,
+            ">=PROPERTY_" . self::PROP_NOVINKA_DATE => $strData
+        );
+    }
 }

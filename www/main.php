@@ -108,22 +108,17 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
 
         </div>
     </div>
-    <div class="grid-x grid-padding-x text-center">
-        <div class="cell margin-bottom-20">
-            <div class="cat text-center">
-                <h2 class="cat__head">Новинки каталога   </h2>
-            </div>
-        </div>
-    </div>
     <?/*Новинки*/?>
     <?
+    $strData = strtotime(StockMan\Config::PROP_PERIOD_NOVINKA);
+    $arFilterNovinki = StockMan\Config::getFilterNovinka($strData);
     $arFilter = array(
-        "PROPERTY_".StockMan\Config::NEW_PRODUCT."_VALUE"  => "да", // это для свойства типа список
         "!SECTION_ID" => array(
             ImportStokMan::$IBLOCK_SECTION_ERROR_ID,
             ImportStokMan::$IBLOCK_SECTION_ID,
         )
     );
+    $arFilter = array_merge($arFilter, $arFilterNovinki);
     ?>
     <?$APPLICATION->IncludeComponent(
         "bitrix:catalog.section",
@@ -142,9 +137,9 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
             "BACKGROUND_IMAGE" => "-",
             "BASKET_URL" => "/personal/basket.php",
             "BROWSER_TITLE" => "-",
-            "CACHE_FILTER" => "N",
+            "CACHE_FILTER" => "Y",
             "CACHE_GROUPS" => "Y",
-            "CACHE_TIME" => "36000000",
+            "CACHE_TIME" => "36000",
             "CACHE_TYPE" => "A",
             "COMPATIBLE_MODE" => "Y",
             "CONVERT_CURRENCY" => "N",

@@ -2,7 +2,7 @@
 $aMenuLinks = Array(
 	Array(
 		"О компании",
-		"index.php",
+		"/about/",
 		Array(),
 		Array(),
 		""
@@ -10,6 +10,13 @@ $aMenuLinks = Array(
     Array(
         "Контакты",
         "/about/contacts/",
+        Array(),
+        Array(),
+        ""
+    ),
+    Array(
+        "Где купить",
+        "/help/buy/",
         Array(),
         Array(),
         ""

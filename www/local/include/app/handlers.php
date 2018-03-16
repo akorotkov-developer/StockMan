@@ -33,10 +33,21 @@ class StockManHandlers
     // создаем обработчик события "OnAfterIBlockElementUpdate"
     function OnAfterIBlockElementUpdateHandler(&$arFields)
     {
-        if ($arFields['IBLOCK_ID'] == ImportStokMan::$IBLOCK_ID) {
-            if (!is_array($arFields["PROPERTY_VALUES"][216])) {
-                if ((is_array($arFields["PROPERTY_VALUES"][74]))and(count($arFields["PROPERTY_VALUES"][74])>0)) {
-                    AddMessage2Log($arFields);
+        if ($_SERVER['PHP_SELF'] == '/bitrix/admin/1c_exchange.php') {
+            if ($arFields['IBLOCK_ID'] == ImportStokMan::$IBLOCK_ID) {
+                $idProduct = $arFields['ID'];
+                // не был новинкой
+                if (!is_array($arFields["PROPERTY_VALUES"][216])) {
+                    // есть картинка
+                    if ((intval($arFields['DETAIL_PICTURE']['old_file'])>0) or ((is_array($arFields["PROPERTY_VALUES"][74]))and(count($arFields["PROPERTY_VALUES"][74])>0))) {
+                        $arPropuct = CCatalogProduct::GetByID($idProduct);
+                        if ($arPropuct["AVAILABLE"] == "Y") {
+                            $strData = time();
+                            CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], $strData, StockMan\Config::PROP_NOVINKA_DATE);
+                            CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], StockMan\Config::PROP_NOVINKA_VAL, StockMan\Config::PROP_NOVINKA);
+                            CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], StockMan\Config::PROP_WAS_NOVINKA_VAL, StockMan\Config::PROP_WAS_NOVINKA);
+                        }
+                    }
                 }
             }
         }

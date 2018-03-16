@@ -38,7 +38,7 @@ require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/
         }
         ?>
         <div class="cell small-12 medium-5 large-3" <?=$divhide?>>
-            <div class="margin-bottom-6 show-for-small-only" data-responsive-toggle="menu-left" data-hide-for="medium"><span class="button expanded" data-toggle><i class="fa fa-lg fa-bars"></i>&nbsp;Навигация</span></div>
+            <div class="margin-bottom-6 show-for-small-only" data-responsive-toggle="menu-left" data-hide-for="medium"><span class="button expanded" data-toggle><i class="fa fa-lg fa-bars"></i>&nbsp;РќР°РІРёРіР°С†РёСЏ</span></div>
             <div class="callout" id="menu-left">
                 <?$APPLICATION->IncludeComponent("bitrix:menu","leftmenu",Array(
                         "ROOT_MENU_TYPE" => "leftregular",

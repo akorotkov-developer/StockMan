@@ -463,4 +463,32 @@ if (!empty($arResult['ITEMS']))
 		}
 	}
 }
+
+foreach ($arResult["ITEMS"] as $key => $val) {
+    $arPic = !empty($arItem['PREVIEW_PICTURE_SECOND']) ? $arItem['PREVIEW_PICTURE_SECOND'] : $arItem['PREVIEW_PICTURE'];
+
+    $arPic = CFile::GetFileArray($arPic['ID']);
+    $width = 250;
+    $height = 325;
+    if ($arPic) {
+        if ($arPic["WIDTH"] <= $width) {
+            $width = $arPic["WIDTH"]-1;
+        }
+        if ($arPic["HEIGHT"] <= $height) {
+            $height = $arPic["HEIGHT"]-1;
+        }
+
+        $arPicRes = CFile::ResizeImageGet(
+            $arPic,
+            array("width" => $width, "height" => $height),
+            BX_RESIZE_IMAGE_PROPORTIONAL_ALT,
+            true,
+            false,
+            false,
+            75
+        );
+        $arResult["ITEMS"][$key]["P_PICTURE"]["SRC"] = $arPicRes["src"];
+    }
+}
+
 ?>
