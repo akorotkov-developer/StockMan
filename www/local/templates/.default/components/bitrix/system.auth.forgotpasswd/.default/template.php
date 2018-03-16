@@ -1,10 +1,7 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?><?
 
 ShowMessage($arParams["~AUTH_RESULT"]);
-
 ?>
-
-
 <div class="grid-x grid-padding-x">
     <div class="cell text-center">
         <h2 class="reveal__title">Забыли пароль</h2>

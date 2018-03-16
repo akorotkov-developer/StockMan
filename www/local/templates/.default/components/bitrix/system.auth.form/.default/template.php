@@ -95,7 +95,7 @@ CJSCore::Init();
                                 </tr>
                         <?endif?>
 
-                        <p class="text-right"><a data-open="recover-popup" title=""><?=GetMessage("AUTH_FORGOT_PASSWORD_2")?></a></p>
+                        <p class="text-right"><a href="/auth/?forgot_password=yes" title=""><?=GetMessage("AUTH_FORGOT_PASSWORD_2")?></a></p>
 
                         <div class="text-center"> </div>
                         <div class="grid-x align-center">

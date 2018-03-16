@@ -16,7 +16,7 @@ use Bitrix\Main\ModuleManager;
 $this->setFrameMode(true);
 ?>
 <?
-$this->SetViewTarget('catalog_element');
+/*$this->SetViewTarget('catalog_element');
 echo "padding-top-5";
 $this->EndViewTarget();
 ?>
@@ -26,7 +26,7 @@ $this->EndViewTarget();
         "PATH" => "",
         "SITE_ID" => StockMan\Config::SITE_ID
     )
-);?>
+);*/?>
 
 <?
 if (isset($arParams['USE_COMMON_SETTINGS_BASKET_POPUP']) && $arParams['USE_COMMON_SETTINGS_BASKET_POPUP'] == 'Y')

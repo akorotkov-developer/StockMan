@@ -135,7 +135,10 @@ if ($isFilter || $isSidebar): ?>
 
 <?endif?>
 
-
+    <?
+    //Сохраняем текующий каталог
+    SaveIdCatalogSection(GetIdSectionCatalog($arResult["VARIABLES"]["SECTION_ID"]));
+    ?>
     <div class="grid-x grid-padding-x">
         <?/*Левое меню*/?>
         <div class="cell small-12 medium-4 large-3 xlarge-2 text-center medium-text-left">
