@@ -39,7 +39,7 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
         );?>
     </div>
 
-    <div class="reveal" id="recover-popup" data-reveal data-deep-link="true">
+    <?/*<div class="reveal" id="recover-popup" data-reveal data-deep-link="true">
         <?$APPLICATION->IncludeComponent( "bitrix:system.auth.forgotpasswd",
             ".default",
             Array(
@@ -50,7 +50,7 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                 "AJAX_MODE" => "Y",
             )
         );?>
-    </div>
+    </div>*/?>
 
     <footer class="footer">
         <div class="grid-x grid-padding-x text-center medium-text-left">

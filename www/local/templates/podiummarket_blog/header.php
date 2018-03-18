@@ -3,15 +3,6 @@ IncludeTemplateLangFile(__FILE__);
 
 require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/header.php');
 ?>
-<?if ($APPLICATION->GetCurPage() == '/blog/') {?>
-<div class="content">
-    <div class="grid-container">
-        <div class="grid-x grid-padding-x text-center">
-            <div class="cell margin-bottom-13">
-                <h1><?$APPLICATION->ShowTitle();?></h1>
-            </div>
-        </div>
-<?} else {?>
 <div class="content padding-top-5">
     <?$APPLICATION->IncludeComponent("bitrix:breadcrumb","",
         Array(
@@ -20,6 +11,15 @@ require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/
             "SITE_ID" => StockMan\Config::SITE_ID
         )
     );?>
+<?if ($APPLICATION->GetCurPage() == '/blog/') {?>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x text-center">
+            <div class="cell margin-bottom-13">
+                <h1><?$APPLICATION->ShowTitle();?></h1>
+            </div>
+        </div>
+<?} else {?>
+
     <div class="grid-x grid-padding-x text-center">
         <div class="cell">
             <h1><?$APPLICATION->ShowTitle();?></h1>

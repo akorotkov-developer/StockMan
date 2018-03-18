@@ -1,6 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 $aMenuLinks = Array(
-    Array(
+    /*Array(
         "Новинки",
         "about/howto/",
         Array(),
@@ -13,7 +13,7 @@ $aMenuLinks = Array(
         Array(),
         Array("image" => StockMan\Config::STOCKMAN_TEMPLATE_PATH."/images/brands.svg"),
         ""
-    ),
+    ),*/
     Array(
         "Одежда",
         "about/contacts/",
