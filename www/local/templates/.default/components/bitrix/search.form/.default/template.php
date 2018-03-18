@@ -11,12 +11,11 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);?>
-
-<div class="hide-for-small-only large-3 cell medium-3 text-center medium-text-left">
-    <form class="search-top input-group" action="<?=$arResult["FORM_ACTION"]?>" method="get">
-        <input class="search-top__input input-group-field" type="text" name="q" value="" placeholder="Поиск">
+<div class="search-form hide-for-small-only large-3 cell medium-3 text-center medium-text-left">
+    <form class="search-top input-group" action="<?=$arResult["FORM_ACTION"]?>">
+        <input type="text" name="q"  class="search-top__input input-group-field" value="" placeholder="Поиск"/>
         <div class="input-group-button">
-            <button class="search-top__button fa fa-search" name="s" type="submit"></button>
+            <button name="s" class="search-top__button fa fa-search" type="submit" value="" />
         </div>
     </form>
 </div>

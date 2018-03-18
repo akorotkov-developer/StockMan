@@ -82,21 +82,18 @@ if (0 < $arResult["SECTIONS_COUNT"])
                             <?
                         }
                         ?>
-                        <li class="menu-base__item"><a class="menu-base__link" href="#"><img class="show-for-small-only" src="./images/sale.svg" alt="">Sale</a></li>
-                        <li class="menu-base__item"><a class="menu-base__link" href="/blog/"><img class="show-for-small-only" src="./images/blog.svg" alt="">Блог</a></li>
+                        <li class="menu-base__item"><a class="menu-base__link" href="#"><img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/sale.svg" alt="">Sale</a></li>
+                        <li class="menu-base__item"><a class="menu-base__link" href="/blog/"><img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/blog.svg" alt="">Блог</a></li>
                         <?
                     }
                     ?>
                 </ul>
             </div>
-            <div class="hide-for-small-only large-3 cell medium-3 text-center medium-text-left">
-                <form class="search-top input-group" action="shop-search.html" method="get">
-                    <input class="search-top__input input-group-field" type="text" value="" placeholder="Поиск">
-                    <div class="input-group-button">
-                        <button class="search-top__button fa fa-search" type="submit"></button>
-                    </div>
-                </form>
-            </div>
+            <?$APPLICATION->IncludeComponent("bitrix:search.form","",Array(
+                    "USE_SUGGEST" => "N",
+                    "PAGE" => "#SITE_DIR#search/index.php"
+                )
+            );?>
         </div>
     </div>
 
