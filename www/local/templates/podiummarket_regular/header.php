@@ -20,7 +20,7 @@ require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/
         <div class="grid-container">
             <div class="grid-x grid-padding-x">
                 <div class="cell">
-                    <h1><?$APPLICATION->ShowTitle();?></h1>
+                    <h1><?$APPLICATION->ShowTitle(false);?></h1>
                 </div>
             </div>
         </div>

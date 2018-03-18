@@ -8,11 +8,22 @@
         if($arParams["MAX_LEVEL"] == 1 && $arItem["DEPTH_LEVEL"] > 1)
             continue;
     ?>
-	<?if($arItem["SELECTED"]):?>
-		<li class="active"><a href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a></li>
-	<?else:?>
-		<li><a href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a></li>
-	<?endif?>
+        <?
+
+        if ( strpos($APPLICATION->GetCurPage(), "/orders") !=0 and $_GET["filter_history"] and $arItem["TEXT"]=="Текущие заказы") {
+            ?>
+            <li><a href="<?= $arItem["LINK"] ?>"><?= $arItem["TEXT"] ?></a></li>
+            <?
+        } else {
+        ?>
+            <?if($arItem["SELECTED"]):?>
+                <li class="active"><a href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a></li>
+            <?else:?>
+                <li><a href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a></li>
+            <?endif?>
+        <?
+        }
+        ?>
 
 <?endforeach?>
 
