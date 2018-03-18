@@ -41,7 +41,15 @@ if (!function_exists('getDetailInfoProduct')) {
 
 //Сохраняем ID Корневой секции в сессию
 function SaveIdCatalogSection($ID_SECTION) {
-    $_SESSION['CurrentSectionCatalog'] = $ID_SECTION;
+    setcookie("CATALO_SECTION", $ID_SECTION);
+    return $ID_SECTION;
+}
+function GetHomeCtalogSection () {
+    if (!$_COOKIE["CATALO_SECTION"]) {
+        return StockMan\Config::CATALOG_HOME_SECTION_ID;
+    } else {
+        return $_COOKIE["CATALO_SECTION"];
+    }
 }
 function GetIdSectionCatalog($ID_CURRENT_SECTION) {
     $p = $ID_CURRENT_SECTION;

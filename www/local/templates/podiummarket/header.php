@@ -113,7 +113,7 @@ use Bitrix\Main\Page\AssetLocation;
         </header>
     </div>
 
-<?$APPLICATION->IncludeComponent(
+<?/*$APPLICATION->IncludeComponent(
     "bitrix:menu",
     "topmenu",
     Array(
@@ -126,6 +126,30 @@ use Bitrix\Main\Page\AssetLocation;
         "MENU_CACHE_USE_GROUPS" => "Y",
         "ROOT_MENU_TYPE" => "basemenu",
         "USE_EXT" => "Y"
+    )
+);*/?>
+
+<?$APPLICATION->IncludeComponent(
+    "bitrix:catalog.section.list",
+    "menutop",
+    Array(
+        "VIEW_MODE" => "LINE",
+        "SHOW_PARENT_NAME" => "Y",
+        "IBLOCK_TYPE" => StockMan\Config::CATALOG_TYPE,
+        "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
+        "SECTION_ID" => GetHomeCtalogSection(), // GetIdSectionCatalog();
+        "SECTION_CODE" => "",
+        "SECTION_URL" => "",
+        "COUNT_ELEMENTS" => "Y",
+        "TOP_DEPTH" => "4",
+        "SECTION_FIELDS" => "",
+        "SECTION_USER_FIELDS" => "",
+        "ADD_SECTIONS_CHAIN" => "Y",
+        "CACHE_TYPE" => "A",
+        "CACHE_TIME" => "36000000",
+        "CACHE_NOTES" => "",
+        "CACHE_GROUPS" => "Y",
+        "CURREN_SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"]
     )
 );?>
 

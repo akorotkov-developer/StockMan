@@ -19,6 +19,7 @@ class Config
 
     //ID Каталога
     const CATALOG_ID = 10;
+    const CATALOG_HOME_SECTION_ID = 23;
     const CATALOG_TYPE = "1c_catalog";
 
     const CATALOG_PRICE = "Розничная";
