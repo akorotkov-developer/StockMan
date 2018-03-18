@@ -195,6 +195,6 @@ CJSCore::Init();
             <?endif?>
 
         </div>
+        <button class="close-button" data-close aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
     </div>
-    <button class="close-button" data-close aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
 </div>

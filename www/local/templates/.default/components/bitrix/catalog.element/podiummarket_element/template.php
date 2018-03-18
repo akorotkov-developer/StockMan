@@ -160,7 +160,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 
         <div class="full reveal reveal_my" id="exampleModal1" data-reveal="">
             <div class="pants text-center"></div>
-            <button class="close-button" data-close="" aria-label="Close modal" type="button"><span aria-hidden="true">?</span></button>
+            <button class="close-button" data-close="" aria-label="Close modal" type="button"><span aria-hidden="true">x</span></button>
         </div>
         <div class="grid-x grid-padding-x">
             <div class="cell small-6"><a class="skirt__prev">Back</a></div>
@@ -313,19 +313,15 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                 }
                 ?>
 
-
+                <?
+                $tsvet = getDetailInfoProduct($arResult["ID"]);
+                ?>
                 <div class="small-12 medium-2 large-2 cell">Цвет:</div>
                 <div class="cell large-4 medium-4">
                     <div class="fit text-center">
                         <input class="fit__input" type="radio" id="col1" name="col">
-                        <label class="fit__label" for="col1"><img src="/i/try1.png" alt="">
-                            <div class="fit__text">Хакки</div>
-                        </label>
-                    </div>
-                    <div class="fit text-center">
-                        <input class="fit__input" type="radio" id="col2" name="col">
-                        <label class="fit__label" for="col2"><img src="/i/try2.png" alt="">
-                            <div class="fit__text">Черный</div>
+                        <label class="fit__label" for="col1">
+                            <div class="fit__text"><?=$tsvet[""]["prop"]["val"];?></div>
                         </label>
                     </div>
                 </div>

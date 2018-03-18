@@ -88,45 +88,34 @@ if ($isFilter || $isSidebar): ?>
             ?>
         <?endif?>
 
+
         <?/*Сортировка*/?>
         <div class="cell small-12 medium-4 large-6 text-center medium-text-right">
-            <a class="text-secondary margin-right-7" href="#">На модели</a>
+
             <div class="sort text-left">
                 <div class="sort__main">Сортировать</div>
                 <div class="sort__other sort__other_right">
-                    <div class="sort__over">
+                    <div class="sort__over" id="sortbox">
                         <div>
                             <div class="check">
-                                <input class="check__input" type="checkbox" id="j1">
-                                <label class="check__label" for="j1">по популярности</label>
+                                <input class="check__input" type="checkbox" id="j1" value="name">
+                                <label class="check__label" for="j1">по названию</label>
                             </div>
                         </div>
                         <div>
                             <div class="check">
-                                <input class="check__input" type="checkbox" id="j2">
+                                <input class="check__input" type="checkbox" id="j2" value="catalog_PRICE_3">
                                 <label class="check__label" for="j2">по возрастанию цены</label>
                             </div>
                         </div>
                         <div>
                             <div class="check">
-                                <input class="check__input" type="checkbox" id="j3">
-                                <label class="check__label" for="j3">по убыванию цены</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="check">
-                                <input class="check__input" type="checkbox" id="j4">
-                                <label class="check__label" for="j4">по новинкам</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="check">
-                                <input class="check__input" type="checkbox" id="j5">
-                                <label class="check__label" for="j5">по скидкам</label>
+                                <input class="check__input" type="checkbox" id="j3" value="timestamp_x">
+                                <label class="check__label" for="j3">по дате поступления</label>
                             </div>
                         </div>
                     </div>
-                    <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
+                    <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="">Применить</a></div>
                 </div>
             </div>
         </div>
@@ -157,7 +146,7 @@ if ($isFilter || $isSidebar): ?>
                     "TOP_DEPTH" => "4",
                     "SECTION_FIELDS" => "",
                     "SECTION_USER_FIELDS" => "",
-                    "ADD_SECTIONS_CHAIN" => "Y",
+                    "ADD_SECTIONS_CHAIN" => "N",
                     "CACHE_TYPE" => "A",
                     "CACHE_TIME" => "36000000",
                     "CACHE_NOTES" => "",
@@ -334,7 +323,7 @@ if ($isFilter || $isSidebar): ?>
                     'COMPARE_NAME' => $arParams['COMPARE_NAME'],
                     'BACKGROUND_IMAGE' => (isset($arParams['SECTION_BACKGROUND_IMAGE']) ? $arParams['SECTION_BACKGROUND_IMAGE'] : ''),
                     'COMPATIBLE_MODE' => (isset($arParams['COMPATIBLE_MODE']) ? $arParams['COMPATIBLE_MODE'] : ''),
-                    'DISABLE_INIT_JS_IN_COMPONENT' => (isset($arParams['DISABLE_INIT_JS_IN_COMPONENT']) ? $arParams['DISABLE_INIT_JS_IN_COMPONENT'] : '')
+                    'DISABLE_INIT_JS_IN_COMPONENT' => (isset($arParams['DISABLE_INIT_JS_IN_COMPONENT']) ? $arParams['DISABLE_INIT_JS_IN_COMPONENT'] : ''),
                 ),
                 $component
             );

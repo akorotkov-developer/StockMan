@@ -8,7 +8,7 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Личный счет",
+		"Внутренний счет",
 		"/personal/account/",
 		Array(), 
 		Array(), 

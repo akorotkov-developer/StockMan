@@ -2,6 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 $temp = 'catalogpodiummarket';
+//$temp = '';
 if ($_REQUEST["old"]=="Y") {
     $temp = "";
 }
@@ -99,8 +100,8 @@ if ($_REQUEST["old"]=="Y") {
         "SECTIONS_SHOW_PARENT_NAME" => "N",
         "PAGE_ELEMENT_COUNT" => "10",
         "LINE_ELEMENT_COUNT" => "3",
-        "ELEMENT_SORT_FIELD" => "desc",
-        "ELEMENT_SORT_ORDER" => "asc",
+        "ELEMENT_SORT_FIELD" => $_GET["sort"],
+        "ELEMENT_SORT_ORDER" => $_GET["method"],
         "ELEMENT_SORT_FIELD2" => "id",
         "ELEMENT_SORT_ORDER2" => "desc",
         "LIST_PROPERTY_CODE" => array(

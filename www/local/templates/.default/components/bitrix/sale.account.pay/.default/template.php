@@ -58,7 +58,7 @@ else
 					<div class="row">
 						<div class="col-xs-12 sale-acountpay-block form-horizontal">
 							<div class="" style="max-width: 200px;">
-								<div class="form-group" style="margin-bottom: 0;">
+								<div class="form-group" style="margin-bottom: 0; float: left">
 									<?
 									$inputElement = "
 										<div class='col-sm-9'>
@@ -69,14 +69,19 @@ else
 											.($arParams['SELL_USER_INPUT'] === 'N' ? "disabled" :"").
 											"></label>
 										</div>";
-									$tempCurrencyRow = trim(str_replace("#", "", $arResult['FORMATED_CURRENCY']));
-									$labelWrapper = "<label class='control-label input-lg input-lg col-sm-3'>".$tempCurrencyRow."</label>";
-									$currencyRow = str_replace($tempCurrencyRow, $labelWrapper, $arResult['FORMATED_CURRENCY']);
-									$currencyRow = str_replace("#", $inputElement, $currencyRow);
-									echo $currencyRow;
+                                    $tempCurrencyRow = trim(str_replace("#", "", $arResult['FORMATED_CURRENCY']));
+                                    $currencyRow = str_replace($tempCurrencyRow, $labelWrapper, $arResult['FORMATED_CURRENCY']);
+                                    $currencyRow = str_replace("#", $inputElement, $currencyRow);
+                                    echo $currencyRow;
 									?>
 								</div>
 							</div>
+                            <div style="position: relative; top: 38px; left: 30px;">
+                                <?
+                                echo $labelWrapper = "<label class='control-label input-lg input-lg col-sm-3'>".$tempCurrencyRow."</label>";
+                                ?>
+                            </div>
+                            <div style="clear: both"></div>
 						</div>
 					</div>
 				<?
