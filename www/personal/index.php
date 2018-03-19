@@ -21,7 +21,7 @@ $APPLICATION->SetTitle("Персональный раздел");
 		"NAV_TEMPLATE" => "",
 		"ORDER_HISTORIC_STATUSES" => array("F"),
 		"PATH_TO_BASKET" => "/personal/cart/",
-		"PATH_TO_CATALOG" => "/catalog/",
+		"PATH_TO_CATALOG" => "/",
 		"PATH_TO_CONTACT" => "/about/contacts/",
 		"PATH_TO_PAYMENT" => "/personal/order/payment/",
 		"PER_PAGE" => "20",

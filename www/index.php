@@ -216,7 +216,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
         "DETAIL_BRAND_PROP_CODE" => "BRAND_REF",
         "SIDEBAR_SECTION_SHOW" => "Y",
         "SIDEBAR_DETAIL_SHOW" => "Y",
-        "SIDEBAR_PATH" => "/catalog/sidebar.php",
+        "SIDEBAR_PATH" => "/catalog_sidebar.php",
         "CATALOG_ELEMENT_TEMPLATE" => "podiummarket_element",
         "COMPONENT_TEMPLATE" => "catalogpodiummarket",
         "HIDE_NOT_AVAILABLE_OFFERS" => "Y",
