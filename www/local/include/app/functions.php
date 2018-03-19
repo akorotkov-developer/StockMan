@@ -10,7 +10,7 @@ if (!function_exists('getDetailInfoProduct')) {
         $arProducts = array();
         if (count($arProductsId) > 0 ){
             $arFilter = Array(
-                "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
+                //"IBLOCK_ID" => StockMan\Config::CATALOG_ID,
                 "ACTIVE"=>"Y",
                 "ID" => $arProductsId
             );

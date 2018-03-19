@@ -31,7 +31,14 @@ foreach ($arResult as $ar) {
         $arLink[] = $ar['LINK'];
     }
 }
+$arSection = array('/women/', '/men/', '/kids/');
+if (!in_array($arResultNew[1]['LINK'], $arSection)) {
+    if (in_array($arResultNew[count($arResultNew)-1]['LINK'], $arSection)) {
+        unset($arResultNew[count($arResultNew)-1]);
+    }
+}
 $arResult = $arResultNew;
+
 $itemSize = count($arResult);
 for($index = 0; $index < $itemSize; $index++)
 {
