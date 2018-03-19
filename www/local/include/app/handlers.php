@@ -27,9 +27,21 @@ AddEventHandler("iblock", "OnAfterIBlockElementAdd", Array("StockManHandlers", "
 AddEventHandler('form', 'onBeforeResultAdd',array('StockManHandlers', 'onBeforeResultAddHandler'));
 
 AddEventHandler("iblock", "OnAfterIBlockElementUpdate", Array("StockManHandlers", "OnAfterIBlockElementUpdateHandler"));
+AddEventHandler("main", "OnEpilog", Array("StockManHandlers", "ShowError404"));
 
 class StockManHandlers
 {
+    function ShowError404() {
+        if (CHTTP::GetLastStatus()=='404 Not Found') {
+            global $APPLICATION;
+            global $USER;
+            $APPLICATION->RestartBuffer();
+            require $_SERVER['DOCUMENT_ROOT'].StockMan\Config::STOCKMAN_TEMPLATE_PATH.'/header.php';
+            require $_SERVER['DOCUMENT_ROOT'] . '/404.php';
+            require $_SERVER['DOCUMENT_ROOT'].StockMan\Config::STOCKMAN_TEMPLATE_PATH.'/footer.php';
+        }
+    }
+
     // создаем обработчик события "OnAfterIBlockElementUpdate"
     function OnAfterIBlockElementUpdateHandler(&$arFields)
     {

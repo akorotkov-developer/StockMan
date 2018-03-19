@@ -35,7 +35,18 @@ $APPLICATION->IncludeComponent(
 	$component,
 	array("HIDE_ICONS" => "Y")
 );
-    ?></div><?
+    ?>
+
+        <?
+        require_once($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/include_areas/brends_list.php');
+        ?>
+
+    </div>
+
+    <?
+    require_once($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/include_areas/information_block.php');
+    ?>
+<?
 if ($arParams["USE_COMPARE"] === "Y")
 {
 	$APPLICATION->IncludeComponent(

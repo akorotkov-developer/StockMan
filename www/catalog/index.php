@@ -1,15 +1,10 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
-$temp = 'catalogpodiummarket';
-//$temp = '';
-if ($_REQUEST["old"]=="Y") {
-    $temp = "";
-}
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog",
-	$temp,
+	'catalogpodiummarket',
 	array(
         "IBLOCK_TYPE" => StockMan\Config::CATALOG_TYPE,
         "IBLOCK_ID" => StockMan\Config::CATALOG_ID,

@@ -23,7 +23,15 @@ if(!is_array($css) || !in_array("/bitrix/css/main/font-awesome.css", $css))
 }*/
 
 $strReturn .= '<div class="grid-x grid-padding-x"><div class="cell"><ul class="breadcrumbs">';
-
+$arLink = array();
+$arResultNew = array();
+foreach ($arResult as $ar) {
+    if (!in_array($ar['LINK'], $arLink)) {
+        $arResultNew[] = $ar;
+        $arLink[] = $ar['LINK'];
+    }
+}
+$arResult = $arResultNew;
 $itemSize = count($arResult);
 for($index = 0; $index < $itemSize; $index++)
 {
