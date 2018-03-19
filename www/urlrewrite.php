@@ -1,28 +1,10 @@
 <?
 $arUrlRewrite = array(
 	array(
-		"CONDITION" => "#^/online/([\\.\\-0-9a-zA-Z]+)(/?)([^/]*)#",
-		"RULE" => "alias=\$1",
-		"ID" => "bitrix:im.router",
-		"PATH" => "/desktop_app/router.php",
-	),
-	array(
 		"CONDITION" => "#^/bitrix/services/ymarket/#",
 		"RULE" => "",
 		"ID" => "",
 		"PATH" => "/bitrix/services/ymarket/index.php",
-	),
-	array(
-		"CONDITION" => "#^/online/(/?)([^/]*)#",
-		"RULE" => "",
-		"ID" => "bitrix:im.router",
-		"PATH" => "/desktop_app/router.php",
-	),
-	array(
-		"CONDITION" => "#^/stssync/calendar/#",
-		"RULE" => "",
-		"ID" => "bitrix:stssync.server",
-		"PATH" => "/bitrix/services/stssync/calendar/index.php",
 	),
 	array(
 		"CONDITION" => "#^/personal/#",
@@ -43,12 +25,6 @@ $arUrlRewrite = array(
 		"PATH" => "/store/index.php",
 	),
 	array(
-		"CONDITION" => "#^/news/#",
-		"RULE" => "",
-		"ID" => "bitrix:news",
-		"PATH" => "/news/index.php",
-	),
-	array(
 		"CONDITION" => "#^/faq/#",
 		"RULE" => "",
 		"ID" => "bitrix:news",
@@ -60,12 +36,6 @@ $arUrlRewrite = array(
 		"ID" => "bitrix:news",
 		"PATH" => "/blog/index.php",
 	),
-    array(
-        "CONDITION" => "#^/([a-zA-Z0-9\\-\\_]+)-catalog/(\\?.*)*\$#",
-        "RULE" => "SECTION_CODE=\$1",
-        "ID" => "",
-        "PATH" => "/catalog/index.php",
-    ),
 );
 
 ?>

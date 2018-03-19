@@ -19,6 +19,7 @@ class Config
 
     //ID Каталога
     const CATALOG_ID = 10;
+    const CATALOG_OFFERS = 11;
     const CATALOG_HOME_SECTION_ID = 23;
     const CATALOG_TYPE = "1c_catalog";
 
@@ -69,8 +70,7 @@ class Config
 
     public function getFilterNovinka($strData){
         return array(
-            "!PROPERTY_" . self::PROP_NOVINKA => false,
-            ">=PROPERTY_" . self::PROP_NOVINKA_DATE => $strData
+            "!PROPERTY_" . self::PROP_NOVINKA => false
         );
     }
 }
