@@ -31,7 +31,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
         "CACHE_FILTER" => "Y",
         "CACHE_GROUPS" => "Y",
         "SET_TITLE" => "Y",
-        "ADD_SECTIONS_CHAIN" => "Y",
+        "ADD_SECTIONS_CHAIN" => "N",
         "ADD_ELEMENT_CHAIN" => "Y",
         "SET_STATUS_404" => "Y",
         "DETAIL_DISPLAY_NAME" => "Y",

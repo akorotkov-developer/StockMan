@@ -30,25 +30,35 @@ if ('' == $arParams['TEMPLATE_THEME'])
 	$arParams['TEMPLATE_THEME'] = 'blue';
 
 $arProductsId = array();
+$arOffersIdProduct = array();
 $arProductIdOffers = array();
 foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
-    if ($arItem['IBLOCK_ID'] != StockMan\Config::CATALOG_ID) {
+    //if ($arItem['IBLOCK_ID'] != StockMan\Config::CATALOG_ID) {
+        $id = $arItem["PRODUCT_ID"];
         $mxResult = CCatalogSku::GetProductInfo(
-            $arItem["PRODUCT_ID"]
+            $id
         );
+        if (intval($mxResult["ID"]) > 0) {
+            $id = $mxResult["ID"];
+        }
 
-        $arProductsId[] = $mxResult["ID"];
-        $arProductIdOffers[$mxResult["ID"]] = $arItem["PRODUCT_ID"];
-    }
+        $arProductsId[] = $id;
+        $arProductIdOffers[$id] = $arItem["PRODUCT_ID"];
+        $arOffersIdProduct[$arItem["PRODUCT_ID"]] = $id;
+    //}
 }
 
 $arProducts = getDetailInfoProduct($arProductsId, $arProductIdOffers);
 
+$arRes = array();
+foreach ($arOffersIdProduct as $k => $arItem) {
+    $arRes[$k] = $arProducts[$arProductIdOffers[$arItem]];
+}
+$arProducts = $arRes;
 $arResult["PROD_OFFERS"] = $arProducts;
 $this->__component->SetResultCacheKeys(array(
     "PROD_OFFERS"
 ));
-
 
 foreach ($arResult["GRID"]["ROWS"] as $k => $arItem) {
     if (!isset($arItem['DETAIL_PAGE_URL']{1})) {

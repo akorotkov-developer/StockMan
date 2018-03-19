@@ -88,16 +88,14 @@ if ($normalCount > 0) {
                             ?>
                         </div>
                         <div class="cell small-9 medium-5 large-5">
-                            <h5>
-                                <? if (strlen($arItem["DETAIL_PAGE_URL"]) > 0){
+                            <h5><? if (strlen($arItem["DETAIL_PAGE_URL"]) > 0){
                                 ?><a target="_blank" class="text-insta text-decoration-none text-size-xlarge"
                                      href="<?= $arItem["DETAIL_PAGE_URL"] ?>"><?
                                     }
                                     ?><?= $arItem["NAME"] ?><?
                                     if (strlen($arItem["DETAIL_PAGE_URL"]) > 0){
                                     ?></a><?
-                            } ?>
-                            </h5>
+                            } ?></h5>
 
                             <? /*<div class="text-secondary margin-bottom-3">Полосатое платье-рубашка</div>*/ ?>
                             <div class="rid-x grid-padding-x">

@@ -74,7 +74,7 @@ use Bitrix\Main\Page\AssetLocation;
                         "PAGE" => "catalog/"
                     )
                 );?>
-                <div class="cell text-center large-4 medium-4 small-4"><a class="header__logo" href="/main.php"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/logo.svg" alt=""></a></div>
+                <div class="cell text-center large-4 medium-4 small-4"><a class="header__logo" href="/"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/logo.svg" alt=""></a></div>
                 <div class="cell large-4 header__book medium-4 small-4">
                     <?$APPLICATION->IncludeComponent(
                         "bitrix:sale.basket.basket.line",
