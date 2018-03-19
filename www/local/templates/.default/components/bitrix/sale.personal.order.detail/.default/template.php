@@ -58,6 +58,7 @@ else
         }
         ?>
 
+        <?/*
         <h4>
             <?= Loc::getMessage('SPOD_SUB_ORDER_TITLE', array(
                 "#ACCOUNT_NUMBER#"=> htmlspecialcharsbx($arResult["ACCOUNT_NUMBER"]),
@@ -82,6 +83,7 @@ else
             <?=Loc::getMessage('SPOD_TPL_SUMOF')?>
             <?=$arResult["PRICE_FORMATED"]?>
         </h4>
+        */?>
 
 
         <h5>
@@ -453,7 +455,7 @@ else
                                             if ($payment['PAY_SYSTEM']['PSA_NEW_WINDOW'] === 'Y' && $arResult["IS_ALLOW_PAY"] !== "N")
                                             {
                                                 ?>
-                                                <a class="btn-theme sale-order-detail-payment-options-methods-button-element-new-window"
+                                                <a class="btn-theme sale-order-detail-payment-options-methods-button-element-new-window button"
                                                    target="_blank"
                                                    href="<?=htmlspecialcharsbx($payment['PAY_SYSTEM']['PSA_ACTION_FILE'])?>">
                                                     <?= Loc::getMessage('SPOD_ORDER_PAY') ?>
@@ -793,7 +795,13 @@ else
         </h5>
 
         <div class="callout">
-
+        <?
+/*        echo "<pre>";
+        var_dump($arResult['BASKET'][66]["PRODUCT_ID"]);
+        echo "</pre>";*/
+        $fsdk = getDetailInfoProduct(false, $arResult['BASKET'][66]["PRODUCT_ID"]);
+        var_dump($fsdk);
+        ?>
 
             <?
             $countproducts = 0;
