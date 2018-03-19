@@ -13,10 +13,10 @@
 /** @var CBitrixComponent $component */
 
 $this->setFrameMode(true);
-
+?><div class="grid-container"><?
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog.section.list",
-	"",
+	"central",
 	array(
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
@@ -35,7 +35,7 @@ $APPLICATION->IncludeComponent(
 	$component,
 	array("HIDE_ICONS" => "Y")
 );
-
+    ?></div><?
 if ($arParams["USE_COMPARE"] === "Y")
 {
 	$APPLICATION->IncludeComponent(
