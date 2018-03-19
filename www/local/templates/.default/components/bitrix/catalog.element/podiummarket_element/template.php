@@ -1,6 +1,7 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 use \Bitrix\Main\Localization\Loc;
+use Bitrix\Highloadblock\HighloadBlockTable as HLBT;
 
 /**
  * @global CMain $APPLICATION
@@ -199,7 +200,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                 <?
             }
             ?>
-            <div class="text-uppercase text-size-xsmall margin-bottom-3">ID <?=$arResult["PROPERTIES"]["CML2_BAR_CODE"]["VALUE"]?></div>
+            <div class="text-uppercase text-size-xsmall margin-bottom-3" id="ID-article">ID <?=$arResult["PROPERTIES"]["CML2_ARTICLE"]["VALUE"]?></div>
 
             <?/*ЦЕНА*/?>
             <div class="skirt__price">
@@ -247,8 +248,8 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                 ?>
             </div>
 
-            <div class="grid-x" id="<?=$itemIds['TREE_ID']?>">
 
+            <div class="grid-x" id="<?=$itemIds['TREE_ID']?>">
                 <?
                 foreach ($arParams['PRODUCT_INFO_BLOCK_ORDER'] as $blockName)
                 {
@@ -280,6 +281,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 
                                                         <ul>
                                                             <?
+                                                            $counOffer = 0;
                                                             foreach ($skuProperty['VALUES'] as &$value)
                                                             {
                                                                 $value['NAME'] = htmlspecialcharsbx($value['NAME']);
@@ -290,11 +292,14 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                                                                         data-treevalue="<?=$propertyId?>_<?=$value['ID']?>"
                                                                         data-onevalue="<?=$value['ID']?>">
                                                                         <div class="product-item-scu-item-text-block">
-                                                                            <div class="product-item-scu-item-text"><?=$value['NAME']?></div>
+                                                                            <?
+                                                                            $article = GetArticulOfferByID($arResult['OFFERS'][$counOffer]["ID"]);
+                                                                            ?>
+                                                                            <div class="product-item-scu-item-text" data-article="<?=$article["PROPERTY_CML2_ARTICLE_VALUE"];?>"><?=$value['NAME']?></div>
                                                                         </div>
                                                                     </li>
                                                                     <?
-
+                                                                $counOffer++;
                                                             }
                                                             ?>
                                                         </ul>
@@ -326,6 +331,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                     </div>
                 </div>
             </div>
+
 
             <?/*Добавить в корзину*/?>
             <div class="grid-x grid-padding-x skirt__grid" data-entity="main-button-container" id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>"
@@ -401,10 +407,34 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 
             <ul class="accordion" data-accordion="">
                 <?if ($arResult["PROPERTIES"]["SOSTAV"]["VALUE"]) {?>
-                    <li class="accordion-item is-active" data-accordion-item=""><a class="accordion-title" href="#">Состав</a>
+                    <li class="accordion-item is-active" data-accordion-item=""><a class="accordion-title" href="#">Детали</a>
                         <div class="accordion-content" data-tab-content="">
                             <div>
-                                <?=$arResult["PROPERTIES"]["SOSTAV"]["VALUE"];?>
+                                <p>
+                                    Состав: <?=$arResult["PROPERTIES"]["SOSTAV"]["VALUE"];?>
+                                </p>
+                                <p>
+<!--                                    Страна производства: <?/*=$arResult["PROPERTIES"]["OSNOVNAYA_STRANA_PROISKHOZHDENIYA"]["VALUE"]*/?>
+                                    --><?/*
+                                    // подключаем пространство имен класса HighloadBlockTable и даём ему псевдоним HLBT для удобной работы
+
+                                    // id highload-инфоблока
+                                    $MY_HL_BLOCK_ID = 98;
+                                    //подключаем модуль highloadblock
+                                    CModule::IncludeModule('highloadblock');
+                                    //Напишем функцию получения экземпляра класса:
+                                    function GetEntityDataClass($HlBlockId) {
+                                        if (empty($HlBlockId) || $HlBlockId < 1)
+                                        {
+                                            return false;
+                                        }
+                                        $hlblock = HLBT::getById($HlBlockId)->fetch();
+                                        $entity = HLBT::compileEntity($hlblock);
+                                        $entity_data_class = $entity->getDataClass();
+                                        return $entity_data_class;
+                                    }*/
+                                    ?>
+                                </p>
                             </div>
                         </div>
                     </li>
@@ -420,7 +450,15 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                 <?}?>
                 <li class="accordion-item" data-accordion-item=""><a class="accordion-title" href="#">доставка, оплата и возврат</a>
                     <div class="accordion-content" data-tab-content="">
-                        <div>Несомненный цветовой тренд сезона - красный, стал акцентом летней коллекции ready-to-wear бренда Mother Of Pearl. Обратите внимание на это женственное платье, лиф которого выполнен из жаккардовой ткани, а юбка - из плиссированного материала. Акцентами стали черные бретели. Носите с голубой или белой обувью - на контрасте.</div>
+                        <div>
+                            <?$APPLICATION->IncludeComponent("bitrix:main.include","",Array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "PATH" => "/deliveryandpay/index.php",
+                                    "AREA_FILE_RECURSIVE" => "Y",
+                                    "EDIT_TEMPLATE" => ""
+                                )
+                            );?>
+                        </div>
                     </div>
                 </li>
             </ul>

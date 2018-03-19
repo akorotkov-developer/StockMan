@@ -1,3 +1,9 @@
+<?$GLOBALS['arrFilter'] = array("SECTION_ID" => Array($sectionID));?>
+<?
+echo "<pre>";
+var_dump($sectionID);
+echo "</pre>";
+?>
 <?$APPLICATION->IncludeComponent(
     "bitrix:news.list",
     "slider",
@@ -25,7 +31,7 @@
             0 => "DETAIL_PICTURE",
             1 => ""
         ),
-        "FILTER_NAME" => "",
+        "FILTER_NAME" => "arrFilter",
         "HIDE_LINK_WHEN_NO_DETAIL" => "N",
         "IBLOCK_TYPE" => StockMan\Config::SLIDER_TYPE,
         "IBLOCK_ID" => StockMan\Config::SLIDER_ID,

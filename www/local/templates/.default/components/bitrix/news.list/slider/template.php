@@ -13,6 +13,8 @@
 $this->setFrameMode(true);
 ?>
 
+
+
 <div class="sale margin-bottom-9">
     <?foreach($arResult["ITEMS"] as $arItem):?>
         <?

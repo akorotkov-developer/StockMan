@@ -1,4 +1,11 @@
 $( document ).ready(function() {
+    /*При клике на размер менять артикул*/
+    $('.product-item-scu-item-text-block').on('click', function() {
+        $("#ID-article").text("ID "+ $(this).find('.product-item-scu-item-text').attr('data-article'));
+    });
+    /*----------------------------------*/
+    $(this).find('.product-item-scu-item-text').attr('data-article')
+
     var flag = 0;
     $('.js-apply').click(clickCheckbox);
 

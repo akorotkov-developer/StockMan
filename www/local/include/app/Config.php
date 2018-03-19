@@ -23,6 +23,11 @@ class Config
     const CATALOG_HOME_SECTION_ID = 23;
     const CATALOG_TYPE = "1c_catalog";
 
+    //ID разделов для слайдера баннеров
+    const WOMEN_ID = 219;
+    const MEN_ID = 218;
+    const KIDS_ID = 220;
+
     const CATALOG_PRICE = "Розничная";
 
     /*----------Меню--------*/

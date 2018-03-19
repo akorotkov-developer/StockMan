@@ -386,3 +386,18 @@ if (!function_exists('editPictAndWaterMark')) {
         return $return;
     }
 }
+
+/*Получить Артикул Торгового предложения*/
+function GetArticulOfferByID($ITEM_ID) {
+    $IBLOCK_ID = StockMan\Config::CATALOG_OFFERS;
+    $ID = $ITEM_ID;
+
+        $articul = "";
+        $rsOffers = CIBlockElement::GetList(array('PROPERTY_CML2_ARTICLE'), array('IBLOCK_ID' => $IBLOCK_ID, 'ID'=>$ID), array('PROPERTY_CML2_ARTICLE'));
+        while ($arOffer = $rsOffers->GetNext()) {
+            $articul = $arOffer;
+        }
+
+    return $articul;
+}
+/*--------------------------------------*/
