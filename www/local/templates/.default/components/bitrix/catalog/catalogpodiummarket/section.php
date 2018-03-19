@@ -71,8 +71,20 @@ if ($isFilter)
 ?>
 
 <?
-if ($isVerticalFilter)
-	include($_SERVER["DOCUMENT_ROOT"]."/".$this->GetFolder()."/section_vertical.php");
-else
-	include($_SERVER["DOCUMENT_ROOT"]."/".$this->GetFolder()."/section_horizontal.php");
+$flagFirstlevel = false;
+$rsParentSection = CIBlockSection::GetByID($arCurSection["ID"]);
+if ($arParentSection = $rsParentSection->GetNext())
+{
+	if (intval($arParentSection["IBLOCK_SECTION_ID"]) == 0 ) {
+        $flagFirstlevel = true;
+	}
+}
+if (!$flagFirstlevel) {
+    if ($isVerticalFilter)
+        include($_SERVER["DOCUMENT_ROOT"] . "/" . $this->GetFolder() . "/section_vertical.php");
+    else
+        include($_SERVER["DOCUMENT_ROOT"] . "/" . $this->GetFolder() . "/section_horizontal.php");
+} else {
+    include($_SERVER["DOCUMENT_ROOT"] . "/" . $this->GetFolder() . "/section_first_level.php");
+}
 ?>
