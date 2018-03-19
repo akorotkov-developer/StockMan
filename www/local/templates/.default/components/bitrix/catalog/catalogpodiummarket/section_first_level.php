@@ -31,11 +31,33 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
 }
 ?>
 
+
+<div class="sale margin-bottom-9">
+    <?
+    $rs = CAdvBanner::GetList($by="s_id", $order="desc", array("TYPE_SID" => "BANNER_MAIN_PAGE_FORSLIDER_".$pathname, "TYPE_SID_EXACT_MATCH" => "Y"), $if_filtered);
+    while($ar = $rs->Fetch()) {
+        $dom = new DOMDocument;
+        $dom->loadHTML(CAdvBanner::GetHTML($ar));
+        foreach ($dom->getElementsByTagName('a') as $node) {
+            $arRes["LINK_BANNER"] = $node->getAttribute( 'href' );
+        }
+        foreach ($dom->getElementsByTagName('img') as $node) {
+            $arRes["IMG_BANNER"] = $node->getAttribute( 'src' );
+        }
+        ?>
+        <a class="sale__slide" href="<?=$arRes["LINK_BANNER"]?>"  style="background-image:url(<?=$arRes["IMG_BANNER"]?>);" >
+            <div class="sale__mobile" style="background-image:url(<?=$arRes["IMG_BANNER"]?>?>);"></div>
+        </a>
+        <?
+    }
+    ?>
+</div>
+
 <?
 /*require_once($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/include_areas/top_slider_catalog.php');*/
 ?>
 
-<?$GLOBALS['arrFilter'] = array("SECTION_ID" => Array($sectionID));?>
+<?/*$GLOBALS['arrFilter'] = array("SECTION_ID" => Array($sectionID));?>
 <?$APPLICATION->IncludeComponent(
     "bitrix:news.list",
     "slider",
@@ -95,7 +117,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
         "SORT_ORDER2" => "ASC",
         "STRICT_SECTION_CHECK" => "N"
     )
-);?>
+);*/?>
 
 
 
