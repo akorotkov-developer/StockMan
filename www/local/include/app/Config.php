@@ -28,7 +28,7 @@ class Config
     const MEN_ID = 218;
     const KIDS_ID = 220;
 
-    const CATALOG_PRICE = "Розничная";
+    const CATALOG_PRICE = "Розничная ПМ";
 
     /*----------Меню--------*/
     const INDEX_CATALOG_SECTION_ID_1 = 0;
