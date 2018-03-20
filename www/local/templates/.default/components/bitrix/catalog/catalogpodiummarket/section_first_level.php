@@ -14,6 +14,7 @@ use Bitrix\Main\ModuleManager;
 $this->setFrameMode(true);
 ?>
 
+
 <?
 switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
     case "men":

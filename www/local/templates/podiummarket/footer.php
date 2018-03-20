@@ -140,7 +140,7 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                         "SHOW_HIDDEN" => "Y",
                         "ALLOW_ANONYMOUS" => "Y",
                         "SHOW_AUTH_LINKS" => "Y",
-                        "CACHE_TYPE" => "A",
+                        "CACHE_TYPE" => "N",
                         "CACHE_TIME" => "3600",
                         "SET_TITLE" => "Y",
                         "AJAX_OPTION_JUMP" => "N",

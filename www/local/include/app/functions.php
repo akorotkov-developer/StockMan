@@ -39,16 +39,49 @@ if (!function_exists('getDetailInfoProduct')) {
     }
 }
 
+//Получить ID_секции элемента по коду
+function GetSectionIDbyElementCODE($ELEMENT_CODE, $SECTION_CODE){
+    $id = CIBlockFindTools::GetElementID("", $ELEMENT_CODE, "", $SECTION_CODE, "");
+
+    $arSelect = Array("ID", "NAME", "IBLOCK_SECTION_ID");
+    $arFilter = Array("IBLOCK_ID"=>10, "ID"=>$id, "ACTIVE"=>"Y");
+    $res = CIBlockElement::GetList(Array("PROPERTY_rating"=>"DESC"), $arFilter, false, Array("nPageSize"=>50), $arSelect);
+
+    $ob = $res->GetNextElement();
+    $arFields = $ob->GetFields();
+    return $arFields["IBLOCK_SECTION_ID"];
+}
+
+//Получить корневой каталог для Меню
+function GetParrentCatalogForMenu($SECTION_ID) {
+    $p = $SECTION_ID;
+    $treeofSections = array();
+    $treeofSections[] = $p;
+    while (!is_null($p)) {
+        $res = CIBlockSection::GetByID($p);
+        if ($ar_res = $res->GetNext()) {
+            $p = $ar_res['IBLOCK_SECTION_ID'];
+            $treeofSections[] = $ar_res['IBLOCK_SECTION_ID'];
+        }
+    }
+    array_pop($treeofSections);
+    return end($treeofSections);
+}
+
 //Сохраняем ID Корневой секции в сессию
 function SaveIdCatalogSection($ID_SECTION) {
-    setcookie("CATALO_SECTION", $ID_SECTION);
-    return $ID_SECTION;
+    global $APPLICATION;
+    //$APPLICATION->set_cookie("CATALOG_SECTION", $ID_SECTION, time()+60*60*24*30*12*2);
+    $_SESSION['CATLOG_SECTION'] = $ID_SECTION;
 }
 function GetHomeCtalogSection() {
-    if (!$_COOKIE["CATALOG_SECTION"]) {
+    global $APPLICATION;
+    //$CATALOG_SECTION = $APPLICATION->get_cookie("CATALOG_SECTION");
+    $CATALOG_SECTION = $_SESSION['CATLOG_SECTION'];
+    if (!$CATALOG_SECTION) {
         return StockMan\Config::CATALOG_HOME_SECTION_ID;
     } else {
-        return $_COOKIE["CATALOG_SECTION"];
+        return $CATALOG_SECTION;
     }
 }
 function GetIdSectionCatalog($ID_CURRENT_SECTION) {

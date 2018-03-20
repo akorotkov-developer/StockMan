@@ -13,7 +13,13 @@
 /** @var CBitrixComponent $component */
 
 $this->setFrameMode(true);
-?><div class="grid-container"><?
+?>
+
+
+<?SaveIdCatalogSection($arResult['VARIABLES']['SECTION_ID'])?>
+<?$_SESSION['CATLOG_SECTION'] = $arResult['VARIABLES']['SECTION_ID']?>
+
+    <div class="grid-container"><?
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog.section.list",
 	"central",

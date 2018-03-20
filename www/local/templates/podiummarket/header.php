@@ -130,31 +130,10 @@ use Bitrix\Main\Page\AssetLocation;
     )
 );*/?>
 
-<?
-$homeCatalog = GetHomeCtalogSection();
-$APPLICATION->IncludeComponent(
-    "bitrix:catalog.section.list",
-    "menutop",
-    Array(
-        "VIEW_MODE" => "LINE",
-        "SHOW_PARENT_NAME" => "Y",
-        "IBLOCK_TYPE" => StockMan\Config::CATALOG_TYPE,
-        "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
-        "SECTION_ID" => $homeCatalog, // GetIdSectionCatalog();
-        "SECTION_CODE" => "",
-        "SECTION_URL" => "",
-        "COUNT_ELEMENTS" => "Y",
-        "TOP_DEPTH" => "4",
-        "SECTION_FIELDS" => "",
-        "SECTION_USER_FIELDS" => "",
-        "ADD_SECTIONS_CHAIN" => "N",
-        "CACHE_TYPE" => "A",
-        "CACHE_TIME" => "3600",
-        "CACHE_NOTES" => "",
-        "CACHE_GROUPS" => "Y",
-        "CURREN_SECTION_ID" => $homeCatalog
-    )
-);?>
+
+
+<?$menu = $APPLICATION->ShowViewContent('top_menu');?>
+
 
 
 <?

@@ -14,7 +14,17 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\ModuleManager;
 
 $this->setFrameMode(true);
+?>
 
+
+
+
+<?SaveIdCatalogSection(GetParrentCatalogForMenu($arResult['VARIABLES']['SECTION_ID']))?>
+<?$_SESSION['CATLOG_SECTION'] = $arResult['VARIABLES']['SECTION_ID']?>
+
+
+
+<?
 if (!isset($arParams['FILTER_VIEW_MODE']) || (string)$arParams['FILTER_VIEW_MODE'] == '')
 	$arParams['FILTER_VIEW_MODE'] = 'VERTICAL';
 $arParams['USE_FILTER'] = (isset($arParams['USE_FILTER']) && $arParams['USE_FILTER'] == 'Y' ? 'Y' : 'N');

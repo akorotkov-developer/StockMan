@@ -28,6 +28,17 @@ $this->EndViewTarget();
     )
 );*/?>
 
+
+
+<?
+$sect_id = GetSectionIDbyElementCODE($arResult["VARIABLES"]["ELEMENT_CODE"], $arResult["VARIABLES"]["SECTION_CODE"]);
+$parrenSectId = GetParrentCatalogForMenu($sect_id);
+?>
+<?SaveIdCatalogSection(GetParrentCatalogForMenu($parrenSectId))?>
+<?$_SESSION['CATLOG_SECTION'] = GetParrentCatalogForMenu($parrenSectId)?>
+
+
+
 <?
 if (isset($arParams['USE_COMMON_SETTINGS_BASKET_POPUP']) && $arParams['USE_COMMON_SETTINGS_BASKET_POPUP'] == 'Y')
 {

@@ -26,6 +26,10 @@ else
 $this->setFrameMode(true);
 ?>
 
+
+
+
+
 <div class="grid-x grid-padding-x">
     <div class="cell text-center">
         <h1 class="margin-bottom-0"><?=$WrokCatalog->GetSectionNameByCode($arResult["VARIABLES"]["SECTION_CODE"]);?></h1>
@@ -124,7 +128,8 @@ if ($isFilter || $isSidebar): ?>
 
 <?endif?>
 
-    <?
+
+<?
     //Сохраняем текующий каталог
     SaveIdCatalogSection(GetIdSectionCatalog($arResult["VARIABLES"]["SECTION_ID"]));
     ?>

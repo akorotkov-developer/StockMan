@@ -157,6 +157,8 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
     }
 }
 ?>
+
+
     <div class="skirt" id="<?=$itemIds['ID']?>" itemscope itemtype="http://schema.org/Product">
 
         <div class="full reveal reveal_my" id="exampleModal1" data-reveal="">

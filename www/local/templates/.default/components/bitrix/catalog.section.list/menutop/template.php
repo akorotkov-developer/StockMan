@@ -35,9 +35,11 @@ if (0 < $arResult["SECTIONS_COUNT"])
                         <?
                     }
                     foreach ($depthlevelfirst["CHILD"] as $depthlevelsecond) {
+                        if (intval($WrokCatalog->GetElmentCountBySectionID($depthlevelsecond['ID']))==0) {$displaynone = "style='display:none;'";}
                         ?>
-                        <li class="trousers__item"><a class="trousers__link" href="<?=$depthlevelsecond["SECTION_PAGE_URL"];?>"><?=$depthlevelsecond["NAME"];?></a></li>
+                        <li class="trousers__item" <?=$displaynone;?>><a class="trousers__link" href="<?=$depthlevelsecond["SECTION_PAGE_URL"];?>"><?=$depthlevelsecond["NAME"];?></a></li>
                         <?
+                        $displaynone = '';
                     }
                     ?>
                     </ul>
@@ -79,9 +81,11 @@ if (0 < $arResult["SECTIONS_COUNT"])
                             if ($depthlevelfirst["CHILD"]) {
                                 $data_toogle = 'data-toggle-hover-dd="menu_item_'.$depthlevelfirst["ID"].'" data-toggle="subheader'.$depthlevelfirst["ID"].'"';
                             }
+                            if (intval($WrokCatalog->GetElmentCountBySectionID($depthlevelfirst['ID']))==0) {$displaynone = "style='display:none;'";}
                             ?>
-                            <li class="menu-base__item"><a class="menu-base__link <?=$activeItemFisrtLevel;?>" <?=$data_toogle;?> href="<?=$depthlevelfirst['SECTION_PAGE_URL']?>"><img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH.$depthlevelfirst['UF_PICTURE']?>" alt=""><?=$depthlevelfirst["NAME"];?></a></li>
+                            <li class="menu-base__item" <?=$displaynone;?>><a class="menu-base__link <?=$activeItemFisrtLevel;?>" <?=$data_toogle;?> href="<?=$depthlevelfirst['SECTION_PAGE_URL']?>"><img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH.$depthlevelfirst['UF_PICTURE']?>" alt=""><?=$depthlevelfirst["NAME"];?></a></li>
                             <?
+                            $displaynone = '';
                         }
                         ?>
                         <li class="menu-base__item"><a class="menu-base__link" href="#"><img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/sale.svg" alt="">Sale</a></li>
@@ -134,9 +138,11 @@ if (0 < $arResult["SECTIONS_COUNT"])
                                                             <ul>
                                                         <?
                                                     }
+                                                    if (intval($WrokCatalog->GetElmentCountBySectionID($depthlevelsecond['ID']))==0) {$displaynone = "style='display:none;'";}
                                                     ?>
-                                                    <li><a href="<?=$depthlevelsecond['SECTION_PAGE_URL'];?>"><?=$depthlevelsecond['NAME'];?></a></li>
+                                                    <li <?=$displaynone?>><a href="<?=$depthlevelsecond['SECTION_PAGE_URL'];?>"><?=$depthlevelsecond['NAME'];?></a></li>
                                                     <?
+                                                    $displaynone = '';
                                                     $elementscount++;
                                                 }
             ?>
