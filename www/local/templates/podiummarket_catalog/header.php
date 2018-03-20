@@ -13,7 +13,7 @@ if ($APPLICATION->GetCurPage() == "/") {
     $isMain = true;
 }
 ?>
-<?if ($isSearch) {
+<?if (($isSearch)and($isMain)) {
    ?><div class="content content_medium"><?
 } else {
     ?><div class="content <?$APPLICATION->ShowViewContent('catalog_element');?> padding-top-5 <?if ($isMain) {?>padding-bottom-0<?}?>"><?

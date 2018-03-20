@@ -48,14 +48,62 @@ $this->setFrameMode(true);
     </div>
 </div>
 <div class="content">
+    <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-4 large-3 xlarge-2 text-center medium-text-left">
+            <?
+            $homeCatalog = GetHomeCtalogSection();
+            $APPLICATION->IncludeComponent(
+                "bitrix:catalog.section.list",
+                "tree-search",
+                Array(
+                    "VIEW_MODE" => "LINE",
+                    "SHOW_PARENT_NAME" => "Y",
+                    "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+                    "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+                    "SECTION_ID" => $homeCatalog,
+                    "SECTION_CODE" => "",
+                    "SECTION_URL" => "",
+                    "COUNT_ELEMENTS" => "Y",
+                    "TOP_DEPTH" => "1",
+                    "SECTION_FIELDS" => "",
+                    "SECTION_USER_FIELDS" => "",
+                    "ADD_SECTIONS_CHAIN" => "N",
+                    "CACHE_TYPE" => "A",
+                    "CACHE_TIME" => "36000000",
+                    "CACHE_NOTES" => "",
+                    "CACHE_GROUPS" => "Y",
+                    "CURREN_SECTION_ID" => $homeCatalog
+                )
+            );?>
+        </div>
 <?
-
 if (!empty($arElements) && is_array($arElements))
 {
 		global $searchFilter;
 		$searchFilter = array(
 			"=ID" => $arElements,
 		);
+
+        $arSectionSearch = array();
+        $arIdSectionSearch = array();
+        if (isset($_COOKIE["CATALOG_SECTION"])) {
+            $arIdSectionSearch[] = GetHomeCtalogSection();
+            $rsParentSection = CIBlockSection::GetByID(GetHomeCtalogSection());
+            if ($arParentSection = $rsParentSection->GetNext())
+            {
+               $arFilter = array('IBLOCK_ID' => $arParentSection['IBLOCK_ID'],'>LEFT_MARGIN' => $arParentSection['LEFT_MARGIN'],'<RIGHT_MARGIN' => $arParentSection['RIGHT_MARGIN'],'>DEPTH_LEVEL' => $arParentSection['DEPTH_LEVEL']);
+               $rsSect = CIBlockSection::GetList(array('left_margin' => 'asc'),$arFilter, false,  array("IBLOCK_ID", "ID"));
+               while ($arSect = $rsSect->GetNext())
+               {
+                   $arIdSectionSearch[] = $arSect["ID"];
+               }
+            }
+            $arSectionSearch = array(
+                "SECTION_ID" => $arIdSectionSearch
+            );
+            $searchFilter = array_merge($searchFilter, $arSectionSearch);
+       }
+
 		$APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
 		".default",
@@ -170,6 +218,7 @@ if (!empty($arElements) && is_array($arElements))
 		$arResult["THEME_COMPONENT"],
 		array('HIDE_ICONS' => 'Y')
 	);
+    ?></div><?
 }
 elseif (is_array($arElements))
 {
