@@ -91,7 +91,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
             </div>
             <?$APPLICATION->IncludeComponent("bitrix:search.form","",Array(
                     "USE_SUGGEST" => "N",
-                    "PAGE" => "#SITE_DIR#search/index.php"
+                    "PAGE" => "/"
                 )
             );?>
         </div>

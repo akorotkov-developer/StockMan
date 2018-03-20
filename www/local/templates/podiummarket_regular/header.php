@@ -3,10 +3,7 @@ IncludeTemplateLangFile(__FILE__);
 
 require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/header.php');
 ?>
-
-
-    <div class="content">
-
+<div class="content <?if (strpos($APPLICATION->GetCurPage(), '/faq/') !== false) {?> padding-top-5<?}?>">
     <?$APPLICATION->IncludeComponent("bitrix:breadcrumb","",
         Array(
             "START_FROM" => "0",
@@ -14,8 +11,6 @@ require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/
             "SITE_ID" => StockMan\Config::SITE_ID
         )
     );?>
-
-
     <?if (strpos( $APPLICATION->GetCurPage(), 'cart') != 1) {?>
         <div class="grid-container">
             <div class="grid-x grid-padding-x">
@@ -25,12 +20,8 @@ require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/
             </div>
         </div>
     <?}?>
-
-
     <div class="grid-container">
         <div class="grid-x grid-padding-x">
-
-
             <?
             $curDir = $APPLICATION->GetCurDir();
             $menu = new CMenu('leftregular');
@@ -41,7 +32,6 @@ require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/
                 $divhide = "style = 'display: none'";
             }
             ?>
-
             <div class="cell small-12 medium-5 large-3" <?=$divhide?>>
                 <div class="margin-bottom-6 show-for-small-only" data-responsive-toggle="menu-left" data-hide-for="medium"><span class="button expanded" data-toggle><i class="fa fa-lg fa-bars"></i>&nbsp;Навигация</span></div>
                 <div class="callout" id="menu-left">
@@ -60,12 +50,7 @@ require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/
                     );?>
                 </div>
             </div>
-
-
             <div class="<?=$divclasses?>">
-
-
-
 <?/*if ($APPLICATION->GetCurPage() != "/") {?>
 <div class="content">
     <div class="grid-container">

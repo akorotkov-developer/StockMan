@@ -936,3 +936,10 @@ $this->setFrameMode(true);
 		?><? echo $arResult["NAV_STRING"]; ?><?
 	}
 }
+if ($arResult['NAV_RESULT']->NavRecordCount > 0) {
+    $start = ($arResult['NAV_RESULT']->NavPageNomer == 1 ? '1' : ($arResult['NAV_RESULT']->NavPageNomer - 1) * $arResult['NAV_RESULT']->NavPageSize + 1);
+    $end = $arResult['NAV_RESULT']->NavPageNomer * $arResult['NAV_RESULT']->NavPageSize;
+    $this->SetViewTarget('catalog_search_info');?>
+    <div class="text-secondary margin-bottom-13">Результаты поиска <?=$start?>-<?=$end?> из <?=$arResult['NAV_RESULT']->NavRecordCount?></div>
+    <?$this->EndViewTarget();
+}

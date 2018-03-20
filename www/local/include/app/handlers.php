@@ -29,8 +29,24 @@ AddEventHandler('form', 'onBeforeResultAdd',array('StockManHandlers', 'onBeforeR
 AddEventHandler("iblock", "OnAfterIBlockElementUpdate", Array("StockManHandlers", "OnAfterIBlockElementUpdateHandler"));
 AddEventHandler("main", "OnEpilog", Array("StockManHandlers", "ShowError404"));
 
+AddEventHandler("search", "BeforeIndex", Array("StockManHandlers", "BeforeIndexHandler"));
+
 class StockManHandlers
 {
+    function BeforeIndexHandler($arFields)
+    {
+        if ($arFields["PARAM2"] == ImportStokMan::$IBLOCK_ID && CModule::IncludeModule("catalog") && CCatalog::GetByID($arFields["PARAM2"]))
+        {
+            $arFilterSection = array(ImportStokMan::$IBLOCK_SECTION_ERROR_ID, ImportStokMan::$IBLOCK_SECTION_ID);
+            $res = CIBlockElement::GetByID($arFields["ITEM_ID"]);
+            if($ar_res = $res->GetNext()) {
+                if (in_array($ar_res["IBLOCK_SECTION_ID"],$arFilterSection)) {
+                    $arFields["BODY"] = $arFields["TITLE"] = '';
+                }
+            }
+        }
+       return $arFields;
+    }
     function ShowError404() {
         if (CHTTP::GetLastStatus()=='404 Not Found') {
             global $APPLICATION;

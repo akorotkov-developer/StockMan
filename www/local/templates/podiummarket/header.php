@@ -71,7 +71,7 @@ use Bitrix\Main\Page\AssetLocation;
                     "header__detective",
                     Array(
                         "USE_SUGGEST" => "N",
-                        "PAGE" => "catalog/"
+                        "PAGE" => "/"
                     )
                 );?>
                 <div class="cell text-center large-4 medium-4 small-4"><a class="header__logo" href="/"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/logo.svg" alt=""></a></div>
@@ -130,7 +130,9 @@ use Bitrix\Main\Page\AssetLocation;
     )
 );*/?>
 
-<?$APPLICATION->IncludeComponent(
+<?
+$homeCatalog = GetHomeCtalogSection();
+$APPLICATION->IncludeComponent(
     "bitrix:catalog.section.list",
     "menutop",
     Array(
@@ -138,19 +140,19 @@ use Bitrix\Main\Page\AssetLocation;
         "SHOW_PARENT_NAME" => "Y",
         "IBLOCK_TYPE" => StockMan\Config::CATALOG_TYPE,
         "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
-        "SECTION_ID" => GetHomeCtalogSection(), // GetIdSectionCatalog();
+        "SECTION_ID" => $homeCatalog, // GetIdSectionCatalog();
         "SECTION_CODE" => "",
         "SECTION_URL" => "",
         "COUNT_ELEMENTS" => "Y",
         "TOP_DEPTH" => "4",
         "SECTION_FIELDS" => "",
         "SECTION_USER_FIELDS" => "",
-        "ADD_SECTIONS_CHAIN" => "Y",
+        "ADD_SECTIONS_CHAIN" => "N",
         "CACHE_TYPE" => "A",
-        "CACHE_TIME" => "36000000",
+        "CACHE_TIME" => "3600",
         "CACHE_NOTES" => "",
         "CACHE_GROUPS" => "Y",
-        "CURREN_SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"]
+        "CURREN_SECTION_ID" => $homeCatalog
     )
 );?>
 

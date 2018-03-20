@@ -11,7 +11,7 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 
-
+$APPLICATION->AddChainItem("Поиск", "/?q=&s=");
 
 if ($arParams["USE_COMPARE"]=="Y")
 {

@@ -2,7 +2,15 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
 ?>
-
+<?
+global  $arFilterSection;
+$arFilterSection = array(
+    "!SECTION_ID" => array(
+        ImportStokMan::$IBLOCK_SECTION_ERROR_ID,
+        ImportStokMan::$IBLOCK_SECTION_ID,
+    ),
+);
+?>
 <?$APPLICATION->IncludeComponent(
     "bitrix:catalog",
     'catalogpodiummarket',
@@ -31,13 +39,13 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
         "CACHE_FILTER" => "Y",
         "CACHE_GROUPS" => "Y",
         "SET_TITLE" => "Y",
-        "ADD_SECTIONS_CHAIN" => "N",
+        "ADD_SECTIONS_CHAIN" => "Y",
         "ADD_ELEMENT_CHAIN" => "Y",
         "SET_STATUS_404" => "Y",
         "DETAIL_DISPLAY_NAME" => "Y",
         "USE_ELEMENT_COUNTER" => "Y",
         "USE_FILTER" => "Y",
-        "FILTER_NAME" => "",
+        "FILTER_NAME" => "arFilterSection",
         "FILTER_VIEW_MODE" => "VERTICAL",
         "FILTER_FIELD_CODE" => array(
             0 => "",
@@ -241,7 +249,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
         "SECTION_ADD_TO_BASKET_ACTION" => "ADD",
         "DETAIL_ADD_TO_BASKET_ACTION_PRIMARY" => array(
         ),
-        "SEARCH_PAGE_RESULT_COUNT" => "50",
+        "SEARCH_PAGE_RESULT_COUNT" => "250",
         "SEARCH_RESTART" => "N",
         "SEARCH_NO_WORD_LOGIC" => "Y",
         "SEARCH_USE_LANGUAGE_GUESS" => "Y",

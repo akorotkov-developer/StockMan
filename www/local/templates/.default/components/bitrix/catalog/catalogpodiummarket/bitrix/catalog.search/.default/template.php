@@ -12,33 +12,44 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+            <div class="cell text-center">
+                <h1 class="margin-bottom-0">Поиск</h1>
+                <?$APPLICATION->ShowViewContent('catalog_search_info');?>
+            </div>
+        </div>
+        <?$arElements = $APPLICATION->IncludeComponent(
+            "bitrix:search.page",
+            "search",
+            Array(
+                "RESTART" => $arParams["RESTART"],
+                "NO_WORD_LOGIC" => $arParams["NO_WORD_LOGIC"],
+                "USE_LANGUAGE_GUESS" => $arParams["USE_LANGUAGE_GUESS"],
+                "CHECK_DATES" => $arParams["CHECK_DATES"],
+                "arrFILTER" => array("iblock_".$arParams["IBLOCK_TYPE"]),
+                "arrFILTER_iblock_".$arParams["IBLOCK_TYPE"] => array($arParams["IBLOCK_ID"]),
+                "USE_TITLE_RANK" => "N",
+                "DEFAULT_SORT" => "rank",
+                "FILTER_NAME" => "",
+                "SHOW_WHERE" => "N",
+                "arrWHERE" => array(),
+                "SHOW_WHEN" => "N",
+                "PAGE_RESULT_COUNT" => $arParams["PAGE_RESULT_COUNT"],
+                "DISPLAY_TOP_PAGER" => "N",
+                "DISPLAY_BOTTOM_PAGER" => "N",
+                "PAGER_TITLE" => "",
+                "PAGER_SHOW_ALWAYS" => "N",
+                "PAGER_TEMPLATE" => "N",
+            ),
+            false,
+            array('HIDE_ICONS' => 'Y')
+        );?>
+    </div>
+</div>
+<div class="content">
 <?
-$arElements = $APPLICATION->IncludeComponent(
-	"bitrix:search.page",
-	".default",
-	Array(
-		"RESTART" => $arParams["RESTART"],
-		"NO_WORD_LOGIC" => $arParams["NO_WORD_LOGIC"],
-		"USE_LANGUAGE_GUESS" => $arParams["USE_LANGUAGE_GUESS"],
-		"CHECK_DATES" => $arParams["CHECK_DATES"],
-		"arrFILTER" => array("iblock_".$arParams["IBLOCK_TYPE"]),
-		"arrFILTER_iblock_".$arParams["IBLOCK_TYPE"] => array($arParams["IBLOCK_ID"]),
-		"USE_TITLE_RANK" => "N",
-		"DEFAULT_SORT" => "rank",
-		"FILTER_NAME" => "",
-		"SHOW_WHERE" => "N",
-		"arrWHERE" => array(),
-		"SHOW_WHEN" => "N",
-		"PAGE_RESULT_COUNT" => $arParams["PAGE_RESULT_COUNT"],
-		"DISPLAY_TOP_PAGER" => "N",
-		"DISPLAY_BOTTOM_PAGER" => "N",
-		"PAGER_TITLE" => "",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => "N",
-	),
-	$component,
-	array('HIDE_ICONS' => 'Y')
-);
+
 if (!empty($arElements) && is_array($arElements))
 {
 		global $searchFilter;
@@ -162,6 +173,17 @@ if (!empty($arElements) && is_array($arElements))
 }
 elseif (is_array($arElements))
 {
-	echo GetMessage("CT_BCSE_NOT_FOUND");
+    ?>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+            <div class="cell">
+            <?echo GetMessage("CT_BCSE_NOT_FOUND");?>
+			</div>
+        </div>
+    </div>
+<?
+    $this->SetViewTarget('catalog_search_info');?>
+    <div class="text-secondary margin-bottom-13"><?echo GetMessage("CT_BCSE_NOT_FOUND")?></div>
+    <?$this->EndViewTarget();
 }
 ?>
