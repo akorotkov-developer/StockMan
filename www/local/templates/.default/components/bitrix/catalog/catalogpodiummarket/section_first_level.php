@@ -34,7 +34,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
 
 <div class="sale margin-bottom-9">
     <?
-    $rs = CAdvBanner::GetList($by="s_id", $order="desc", array("TYPE_SID" => "BANNER_MAIN_PAGE_FORSLIDER_".$pathname, "TYPE_SID_EXACT_MATCH" => "Y"), $if_filtered);
+    $rs = CAdvBanner::GetList($by="s_id", $order="desc", array("TYPE_SID" => "BANNER_MAIN_PAGE_FORSLIDER", "TYPE_SID_EXACT_MATCH" => "Y"), $if_filtered);
     while($ar = $rs->Fetch()) {
         $dom = new DOMDocument;
         $dom->loadHTML(CAdvBanner::GetHTML($ar));
@@ -126,7 +126,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
 <div class="grid-container margin-bottom-17">
     <div class="grid-x grid-padding-x text-center">
         <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerdress",Array(
-                "TYPE" => "BANNER_MAIN_PAGE_DRESS_".$pathname,
+                "TYPE" => "BANNER_MAIN_PAGE_DRESS",
                 "CACHE_TYPE" => "A",
                 "NOINDEX" => "Y",
                 "CACHE_TIME" => "3600"
@@ -134,7 +134,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
         );?>
 
         <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerbag",Array(
-                "TYPE" => "BANNER_MAIN_PAGE_BAGS_".$pathname,
+                "TYPE" => "BANNER_MAIN_PAGE_BAGS",
                 "CACHE_TYPE" => "A",
                 "NOINDEX" => "Y",
                 "CACHE_TIME" => "3600"
@@ -142,7 +142,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
         );?>
 
         <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerprices",Array(
-                "TYPE" => "BANNER_MAIN_PAGE_OURPRICES_".$pathname,
+                "TYPE" => "BANNER_MAIN_PAGE_OURPRICES",
                 "CACHE_TYPE" => "A",
                 "NOINDEX" => "Y",
                 "CACHE_TIME" => "3600"
@@ -150,7 +150,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
         );?>
 
         <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerprint",Array(
-                "TYPE" => "BANNER_MAIN_PAGE_PRINT_".$pathname,
+                "TYPE" => "BANNER_MAIN_PAGE_PRINT",
                 "CACHE_TYPE" => "A",
                 "NOINDEX" => "Y",
                 "CACHE_TIME" => "3600"
@@ -158,7 +158,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
         );?>
 
         <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannercollectionjacket",Array(
-                "TYPE" => "BANNER_MAIN_PAGE_COLLECTION_JACKET_".$pathname,
+                "TYPE" => "BANNER_MAIN_PAGE_COLLECTION_JACKET",
                 "CACHE_TYPE" => "A",
                 "NOINDEX" => "Y",
                 "CACHE_TIME" => "3600"

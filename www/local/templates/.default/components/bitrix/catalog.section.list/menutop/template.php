@@ -13,6 +13,8 @@
 $this->setFrameMode(true);
 
 $WrokCatalog = new StockMan\Catalog\Workcatalog;
+
+
 if (0 < $arResult["SECTIONS_COUNT"])
 {
 ?>

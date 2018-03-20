@@ -19,8 +19,10 @@ while ($arSection = $rsSections->GetNext()) {
 unset( $sectionLinc );
 $arResult['ROOT'] = $arResult['ROOT']['CHILD'];
 
+$CurrentCatalog = GetHomeCtalogSection();
+
 foreach ($arResult['ROOT'] as $key) {
-    if ($key["ID"] != $_SESSION['CurrentSectionCatalog']) {
+    if ($key["ID"] != $CurrentCatalog) {
         unset($arResult['ROOT'][$key["ID"]]);
     }
 }

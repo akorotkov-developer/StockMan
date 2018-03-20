@@ -159,6 +159,6 @@ $APPLICATION->IncludeComponent(
 
 <?
 if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
-?>
+    ?>
     <div class="content">
 <?}?>
