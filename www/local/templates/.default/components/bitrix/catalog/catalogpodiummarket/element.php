@@ -281,7 +281,7 @@ if ($ElementID > 0)
                             "MESS_BTN_DETAIL" => $arParams['MESS_BTN_DETAIL'],
                             "MESS_BTN_SUBSCRIBE" => $arParams['MESS_BTN_SUBSCRIBE'],
                             "MESS_NOT_AVAILABLE" => $arParams['MESS_NOT_AVAILABLE'],
-                            "PAGE_ELEMENT_COUNT" => 5,
+                            "PAGE_ELEMENT_COUNT" => 4,
                             "SHOW_FROM_SECTION" => "N",
                             "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
                             "IBLOCK_ID" => $arParams["IBLOCK_ID"],

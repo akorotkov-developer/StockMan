@@ -1,3 +1,6 @@
+.accordion .is-active .accordion-title .recommendet-items:before {
+    display: none;
+}
 /* catalog.section */
 .bx_item_list_you_looked_horizontal{
     margin-bottom:20px;

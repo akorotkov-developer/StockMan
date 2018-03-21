@@ -163,11 +163,17 @@ if (!empty($arResult['ITEMS']))
     <ul class="accordion" data-accordion="" data-allow-all-closed="true">
 
         <li class="accordion-item look is-active" data-accordion-item="">
-            <a class="text-center accordion-title" href="#">Вам также может понравиться</a>
-            <div class="accordion-content" data-tab-content="">
+            <a class="text-center accordion-title recommendet-items">Вам также может понравиться</a>
+            <div class="accordion-content" data-tab-content="" style="display: block">
                 <div class="grid-x text-center grid-padding-x small-up-1 medium-up-2 large-up-4 margin-bottom-8" data-equalizer data-equalize-by-row="true">
 
                     <?
+               /*     echo "<pre>";
+                    var_dump($arResult["SKU_PROPS"]);
+                    echo "</pre>";*/
+
+
+
                     foreach ($arResult['ITEMS'] as $key => $arItem)
                     {?>
                         <div class="cell position-relative">
@@ -185,8 +191,8 @@ if (!empty($arResult['ITEMS']))
                                         <?}?>
                                     </a>
                                 </div>
-                                <div class="dress__title"><?=$productTitle;?></div>
-                                <div class="text-secondary">Полосатое платье-рубашка</div>
+                                <div class="dress__title"><?=$arItem["NAME"];?></div>
+
                                 <div class="text-size-large margin-bottom-4">
                                     <?
                                     if (!empty($arItem['MIN_PRICE']))
@@ -220,7 +226,7 @@ if (!empty($arResult['ITEMS']))
                                     . -
                                 </div>
 
-                                <div class="dress__size"><span class="margin-right-4">Размер</span>
+ <!--                               <div class="dress__size"><span class="margin-right-4">Размер</span>
                                     <div class="checkbox-group">
                                         <input class="checkbox-group__item" type="radio" id="size1" name="size">
                                         <label class="checkbox-group__label" for="size1">44</label>
@@ -229,7 +235,7 @@ if (!empty($arResult['ITEMS']))
                                         <input class="checkbox-group__item" type="radio" id="size3" name="size">
                                         <label class="checkbox-group__label" for="size3">48</label>
                                     </div><a class="skirt__link" href="#">RU</a>
-                                </div>
+                                </div>-->
 
                             </div>
                         </div>

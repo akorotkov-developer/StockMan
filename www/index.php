@@ -9,6 +9,11 @@ $arFilterSection = array(
         ImportStokMan::$IBLOCK_SECTION_ERROR_ID,
         ImportStokMan::$IBLOCK_SECTION_ID,
     ),
+    array (
+        "LOGIC" => "OR",
+        array("!DETAIL_PICTURE" => false),
+        array("!PROPERTY_MORE_PHOTO" => false),
+    )
 );
 ?>
 <?$APPLICATION->IncludeComponent(
@@ -102,7 +107,7 @@ $arFilterSection = array(
         "SECTION_TOP_DEPTH" => "1",
         "SECTIONS_VIEW_MODE" => "TILE",
         "SECTIONS_SHOW_PARENT_NAME" => "N",
-        "PAGE_ELEMENT_COUNT" => "10",
+        "PAGE_ELEMENT_COUNT" => "30",
         "LINE_ELEMENT_COUNT" => "3",
         "ELEMENT_SORT_FIELD" => $_GET["sort"],
         "ELEMENT_SORT_ORDER" => $_GET["method"],
@@ -125,21 +130,14 @@ $arFilterSection = array(
             3 => "",
         ),
         "LIST_OFFERS_PROPERTY_CODE" => array(
-            0 => "SIZES_SHOES",
-            1 => "SIZES_CLOTHES",
-            2 => "COLOR_REF",
-            3 => "MORE_PHOTO",
-            4 => "ARTNUMBER",
-            5 => "",
+            StockMan\Catalog\Config::RAZMER,
         ),
         "LIST_OFFERS_LIMIT" => "0",
         "SECTION_BACKGROUND_IMAGE" => "UF_BACKGROUND_IMAGE",
         "DETAIL_PROPERTY_CODE" => array(
-            0 => "NEWPRODUCT",
-            1 => "MANUFACTURER",
-            2 => "MATERIAL",
-            3 => "TSVET",
-            4 => "RAZMER"
+              "SOSTAV",
+              "OSNOVNAYA_STRANA_PROISKHOZHDENIYA",
+              "SEZON_SVOYSTVO"
         ),
         "DETAIL_META_KEYWORDS" => "-",
         "DETAIL_META_DESCRIPTION" => "-",
@@ -277,7 +275,7 @@ $arFilterSection = array(
         "MESS_COMMENTS_TAB" => "Комментарии",
         "DETAIL_SHOW_POPULAR" => "Y",
         "DETAIL_SHOW_VIEWED" => "Y",
-        "USE_GIFTS_SECTION" => "Y",
+        "USE_GIFTS_SECTION" => "N",
         "GIFTS_SECTION_LIST_PAGE_ELEMENT_COUNT" => "4",
         "GIFTS_SECTION_LIST_HIDE_BLOCK_TITLE" => "N",
         "GIFTS_SECTION_LIST_BLOCK_TITLE" => "Подарки к товарам этого раздела",

@@ -446,38 +446,26 @@ function GetArticulOfferByID($ITEM_ID) {
 }
 /*--------------------------------------*/
 
-/*Получить страну производителя товара*/
-function GetElementInHigLoadBlock($XML_ID, $HIGHLOADBLOCK_ID) {
-    CModule::IncludeModule('highloadblock');
+/*Получить предыдущий и следующий элементы каталога*/
+function GetPrevNextElements($ID_ElEMENT) {
 
-    $hlblock_id = $HIGHLOADBLOCK_ID; // ID вашего Highload-блока
-    $hlblock   = Bitrix\Highloadblock\HighloadBlockTable::getById( $hlblock_id )->fetch(); // получаем объект вашего HL блока
-    $entity   = Bitrix\Highloadblock\HighloadBlockTable::compileEntity( $hlblock );  // получаем рабочую сущность
-    $entity_data_class = $entity->getDataClass(); // получаем экземпляр класса
-    $entity_table_name = $hlblock['TABLE_NAME']; // присваиваем переменной название HL таблицы
-    $sTableID = 'tbl_'.$entity_table_name; // добавляем префикс и окончательно формируем название
+    $IBLOCK_ID = StockMan\Config::CATALOG_ID;
 
+    $ID = $ID_ElEMENT;
 
-    $arFilter = array("UF_XML_ID" => $XML_ID); // зададим фильтр по ID пользователя
-    $arSelect = array('*'); // выбираем все поля
-    $arOrder = array(); // сортировка будет по возрастанию ID статей
+    $query = CIBlockElement::GetList(array('ID' => 'ASC'), array(
+        'IBLOCK_ID' => $IBLOCK_ID,
+        'ACTIVE' => 'Y',
+        'SECTION_GLOBAL_ACTIVE' => 'Y'),
+        false, array('nPageSize' => 1, 'nElementID' => $ID),
+        array('ID', 'DETAIL_PAGE_URL')
+    );
 
-    // подготавливаем данные
-    $rsData = $entity_data_class::getList(array(
-        "select" => $arSelect,
-        "filter" => $arFilter,
-        "limit" => '5', //ограничим выборку пятью элементами
-        "order" => $arOrder
-    ));
-
-    // выполняем запрос. Передаем в него наши данные и название таблицы, которое мы получили в самом начале
-    $rsData = new CDBResult($rsData, $sTableID); // записываем в переменную объект CDBResult
-
-    // а далее простой цикл и знакомый нам метод Fetch (или GetNext, кому что нравится)
-    while($arRes = $rsData->Fetch()){
-        $Res = $arRes;
+    while($elem = $query->GetNextElement()){
+        $arFields = $elem->GetFields();
+        $PrevNext[] = $arFields['DETAIL_PAGE_URL'];
     }
 
-    return $Res;
+    return $PrevNext;
 }
-/*------------------------------------*/
+/*-------------------------------------------------*/

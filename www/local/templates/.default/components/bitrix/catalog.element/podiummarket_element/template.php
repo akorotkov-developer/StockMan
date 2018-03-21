@@ -158,19 +158,6 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 }
 ?>
 
-<?
-if ($_GET["tst"] == "tst") {
-?>
-
-    <?
-/*   var_dump($arResult["PROPERTIES"]["SEZON_SVOYSTVO"]["VALUE"]);
-   $sezon = GetElementInHigLoadBlock($arResult["PROPERTIES"]["SEZON_SVOYSTVO"]["VALUE"], StockMan\Config::HIGHLOAD_SEZON_ID);
-   echo "<pre>";
-   var_dump(StockMan\Config::HIGHLOAD_SEZON_ID);
-   echo "</pre>";*/
-
-}
-?>
 
     <div class="skirt" id="<?=$itemIds['ID']?>" itemscope itemtype="http://schema.org/Product">
 
@@ -178,9 +165,12 @@ if ($_GET["tst"] == "tst") {
             <div class="pants text-center"></div>
             <button class="close-button" data-close="" aria-label="Close modal" type="button"><span aria-hidden="true">x</span></button>
         </div>
+        <?
+        $PrevNext = GetPrevNextElements($arResult["ID"]);
+        ?>
         <div class="grid-x grid-padding-x">
-            <div class="cell small-6"><a class="skirt__prev">Back</a></div>
-            <div class="cell text-right small-6"><a class="skirt__next">Next</a></div>
+            <div class="cell small-6"><a href="<?=array_shift($PrevNext)?>" class="skirt__prev">Back</a></div>
+            <div class="cell text-right small-6"><a href="<?=end($PrevNext);?>" class="skirt__next">Next</a></div>
         </div>
 
 
@@ -292,7 +282,7 @@ if ($_GET["tst"] == "tst") {
 
 
                                         <div class="small-12 medium-2 large-2 cell"><?=htmlspecialcharsEx($skuProperty['NAME'])?>:</div>
-                                        <div class="cell large-4 medium-4" data-entity="sku-line-block">
+                                        <div class="cell large-10 medium-10" data-entity="sku-line-block">
                                             <div class="checkbox-group">
 
                                                         <ul>
@@ -424,27 +414,18 @@ if ($_GET["tst"] == "tst") {
                     <li class="accordion-item is-active" data-accordion-item=""><a class="accordion-title" href="#">Детали</a>
                         <div class="accordion-content" data-tab-content="">
                             <div>
-                                <?if ($arResult["PROPERTIES"]["SOSTAV"]["VALUE"]) {?>
-                                    <p>
-                                        Состав: <?=$arResult["PROPERTIES"]["SOSTAV"]["VALUE"];?>
-                                    </p>
-                                <?}?>
                                 <?
-                                $country = GetElementInHigLoadBlock($arResult["PROPERTIES"]["OSNOVNAYA_STRANA_PROISKHOZHDENIYA"]["VALUE"], StockMan\Config::HIGHLOAD_COUNTRY_ID);
+                                foreach ($arResult['DISPLAY_PROPERTIES'] as $property)
+                                {
+                                    if ($property['DISPLAY_VALUE']) {
+                                        ?>
+                                            <div>
+                                                <?=$property['NAME']?> : <?=$property['DISPLAY_VALUE']?>
+                                            </div>
+                                        <?
+                                    }
+                                }
                                 ?>
-                                <?if ($country) {?>
-                                    <p>
-                                        Страна производитель: <?=$country["UF_NAME"]?>
-                                    </p>
-                                <?}?>
-                                <?
-                                $sezon = GetElementInHigLoadBlock($arResult["PROPERTIES"]["SEZON_SVOYSTVO"]["VALUE"], StockMan\Config::HIGHLOAD_SEZON_ID);
-                                ?>
-                                <?if ($sezon) {?>
-                                    <p>
-                                        Сезон: <?=$sezon["UF_NAME"];?>
-                                    </p>
-                                <?}?>
                             </div>
                         </div>
                     </li>
@@ -463,7 +444,7 @@ if ($_GET["tst"] == "tst") {
                         <div>
                             <?$APPLICATION->IncludeComponent("bitrix:main.include","",Array(
                                     "AREA_FILE_SHOW" => "file",
-                                    "PATH" => "/deliveryandpay/index.php",
+                                    "PATH" => StockMan\Config::STOCKMAN_TEMPLATE_PATH."/include_areas/deliveryandpay.php",
                                     "AREA_FILE_RECURSIVE" => "Y",
                                     "EDIT_TEMPLATE" => ""
                                 )
