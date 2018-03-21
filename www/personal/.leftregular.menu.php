@@ -1,7 +1,12 @@
 <?
+$current =array();
+if ($_GET["CANCEL"] == "Y") {
+	$current = array("Отмененные заказы","/?CANCEL=Y",array("SELECT_Y"=>"Y",),array(),"");
+}
 $aMenuLinks = Array(
+    $current,
 	Array(
-		"Текущие заказы",
+        "Текущие заказы",
 		"/personal/orders/",
 		Array(), 
 		Array(), 
@@ -22,7 +27,7 @@ $aMenuLinks = Array(
 		"" 
 	),
     Array(
-        "История заказов",
+        "Завершенные заказы",
         "/personal/orders/?filter_history=Y",
         Array(),
         Array(),

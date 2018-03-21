@@ -108,7 +108,7 @@ $arFilterSection = array(
         "SECTIONS_VIEW_MODE" => "TILE",
         "SECTIONS_SHOW_PARENT_NAME" => "N",
         "PAGE_ELEMENT_COUNT" => "30",
-        "LINE_ELEMENT_COUNT" => "3",
+        "LINE_ELEMENT_COUNT" => "1",
         "ELEMENT_SORT_FIELD" => $_GET["sort"],
         "ELEMENT_SORT_ORDER" => $_GET["method"],
         "ELEMENT_SORT_FIELD2" => "id",
@@ -130,9 +130,9 @@ $arFilterSection = array(
             3 => "",
         ),
         "LIST_OFFERS_PROPERTY_CODE" => array(
-            StockMan\Catalog\Config::RAZMER,
+            //StockMan\Catalog\Config::RAZMER,
         ),
-        "LIST_OFFERS_LIMIT" => "0",
+        "LIST_OFFERS_LIMIT" => "10",
         "SECTION_BACKGROUND_IMAGE" => "UF_BACKGROUND_IMAGE",
         "DETAIL_PROPERTY_CODE" => array(
               "SOSTAV",

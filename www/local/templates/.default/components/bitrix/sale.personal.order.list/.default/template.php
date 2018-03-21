@@ -310,7 +310,7 @@ else
                                 ?>
 
                                 <a class="button inactive-button ">
-                                    <i class="fa fa-credit-card"></i><?=Loc::getMessage('SPOL_TPL_PAY')?>
+                                    <i class="fa fa-credit-card"></i>&nbsp;<?=Loc::getMessage('SPOL_TPL_PAY')?>
                                 </a>
 
                                 <?
@@ -320,7 +320,7 @@ else
                                 ?>
 
                                 <a class="button" target="_blank" href="<?=htmlspecialcharsbx($payment['PSA_ACTION_FILE'])?>">
-                                    <i class="fa fa-credit-card"></i><?=Loc::getMessage('SPOL_TPL_PAY')?>
+                                    <i class="fa fa-credit-card"></i>&nbsp;<?=Loc::getMessage('SPOL_TPL_PAY')?>
                                 </a>
 
                                 <?
@@ -330,7 +330,7 @@ else
                                 ?>
 
                                 <a class="button ajax_reload button_order_podiummarket" href="<?=htmlspecialcharsbx($payment['PSA_ACTION_FILE'])?>">
-                                    <?=Loc::getMessage('SPOL_TPL_PAY')?>
+                                    <i class="fa fa-credit-card"></i>&nbsp;<?=Loc::getMessage('SPOL_TPL_PAY')?>
                                 </a>
 
                                 <?

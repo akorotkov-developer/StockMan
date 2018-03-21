@@ -5,13 +5,13 @@
 <div class="callout">
 	<?if(strlen($arResult["ERROR_MESSAGE"])<=0):?>
 		<form method="post" action="<?=POST_FORM_ACTION_URI?>">
-			
+
 			<input type="hidden" name="CANCEL" value="Y">
 			<?=bitrix_sessid_post()?>
 			<input type="hidden" name="ID" value="<?=$arResult["ID"]?>">
-			
+
 			<?=GetMessage("SALE_CANCEL_ORDER1") ?>
-			
+
 			<a href="<?=$arResult["URL_TO_DETAIL"]?>"><?=GetMessage("SALE_CANCEL_ORDER2")?> #<?=$arResult["ACCOUNT_NUMBER"]?></a>?
 			<b><?= GetMessage("SALE_CANCEL_ORDER3") ?></b><br />
 
