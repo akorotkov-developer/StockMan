@@ -1,12 +1,6 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 
 <?if (!empty($arResult)){?>
-    <?
-    echo "<pre>";
-    var_dump($_SESSION['CATLOG_SECTION']);
-    var_dump($arResult);
-    echo "</pre>";
-    ?>
     <div class="cell large-4 medium-4 text-center medium-text-left hide-for-small-only header__people">
         <ul class="people">
             <?

@@ -44,7 +44,7 @@ function GetSectionIDbyElementCODE($ELEMENT_CODE, $SECTION_CODE){
     $id = CIBlockFindTools::GetElementID("", $ELEMENT_CODE, "", $SECTION_CODE, "");
 
     $arSelect = Array("ID", "NAME", "IBLOCK_SECTION_ID");
-    $arFilter = Array("IBLOCK_ID"=>10, "ID"=>$id, "ACTIVE"=>"Y");
+    $arFilter = Array("IBLOCK_ID"=>StockMan\Config::CATALOG_ID, "ID"=>$id, "ACTIVE"=>"Y");
     $res = CIBlockElement::GetList(Array("PROPERTY_rating"=>"DESC"), $arFilter, false, Array("nPageSize"=>50), $arSelect);
 
     $ob = $res->GetNextElement();
@@ -66,6 +66,17 @@ function GetParrentCatalogForMenu($SECTION_ID) {
     }
     array_pop($treeofSections);
     return end($treeofSections);
+}
+//Получить Section_code  по ID секции
+function GetSectionCodeBySectionID($ID_SECTION) {
+    $arFilter = Array('IBLOCK_ID'=>StockMan\Config::CATALOG_ID, "ID" => $ID_SECTION);
+    $db_list = CIBlockSection::GetList(array(), $arFilter, true, array("CODE"));
+
+    while($ar_result = $db_list->GetNext())
+    {
+        $sectionCode = $ar_result["CODE"];
+    }
+    return $sectionCode;
 }
 
 //Сохраняем ID Корневой секции в сессию
