@@ -445,3 +445,39 @@ function GetArticulOfferByID($ITEM_ID) {
     return $articul;
 }
 /*--------------------------------------*/
+
+/*Получить страну производителя товара*/
+function GetElementInHigLoadBlock($XML_ID, $HIGHLOADBLOCK_ID) {
+    CModule::IncludeModule('highloadblock');
+
+    $hlblock_id = $HIGHLOADBLOCK_ID; // ID вашего Highload-блока
+    $hlblock   = Bitrix\Highloadblock\HighloadBlockTable::getById( $hlblock_id )->fetch(); // получаем объект вашего HL блока
+    $entity   = Bitrix\Highloadblock\HighloadBlockTable::compileEntity( $hlblock );  // получаем рабочую сущность
+    $entity_data_class = $entity->getDataClass(); // получаем экземпляр класса
+    $entity_table_name = $hlblock['TABLE_NAME']; // присваиваем переменной название HL таблицы
+    $sTableID = 'tbl_'.$entity_table_name; // добавляем префикс и окончательно формируем название
+
+
+    $arFilter = array("UF_XML_ID" => $XML_ID); // зададим фильтр по ID пользователя
+    $arSelect = array('*'); // выбираем все поля
+    $arOrder = array(); // сортировка будет по возрастанию ID статей
+
+    // подготавливаем данные
+    $rsData = $entity_data_class::getList(array(
+        "select" => $arSelect,
+        "filter" => $arFilter,
+        "limit" => '5', //ограничим выборку пятью элементами
+        "order" => $arOrder
+    ));
+
+    // выполняем запрос. Передаем в него наши данные и название таблицы, которое мы получили в самом начале
+    $rsData = new CDBResult($rsData, $sTableID); // записываем в переменную объект CDBResult
+
+    // а далее простой цикл и знакомый нам метод Fetch (или GetNext, кому что нравится)
+    while($arRes = $rsData->Fetch()){
+        $Res = $arRes;
+    }
+
+    return $Res;
+}
+/*------------------------------------*/

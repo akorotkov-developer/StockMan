@@ -19,6 +19,8 @@ class Config
 
     //ID Каталога
     const CATALOG_ID = 10;
+    const HIGHLOAD_COUNTRY_ID = 98;
+    const HIGHLOAD_SEZON_ID = 76;
     const CATALOG_OFFERS = 11;
     const CATALOG_HOME_SECTION_ID = 23;
     const CATALOG_TYPE = "1c_catalog";

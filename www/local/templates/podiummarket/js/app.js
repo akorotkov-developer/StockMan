@@ -2188,7 +2188,7 @@ $(document).foundation();
       slidesToShow: 4,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 5000,
+      autoplaySpeed: 7000,
       autoplayHoverPause: true,
       fade: false,
       swipeToSlide: true,

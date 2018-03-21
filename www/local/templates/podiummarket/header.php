@@ -96,7 +96,6 @@ use Bitrix\Main\Page\AssetLocation;
                             "SHOW_TOTAL_PRICE" => "N"
                         )
                     );?>
-                    <img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/heart.svg" alt=""></a>
 
                     <?if($USER->IsAuthorized()){?>
                         <a class="header__enter hide-for-small-only" href="/personal/private/">Личный кабинет</a>

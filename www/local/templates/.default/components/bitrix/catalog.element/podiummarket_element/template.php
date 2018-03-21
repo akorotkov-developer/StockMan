@@ -158,6 +158,19 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 }
 ?>
 
+<?
+if ($_GET["tst"] == "tst") {
+?>
+
+    <?
+/*   var_dump($arResult["PROPERTIES"]["SEZON_SVOYSTVO"]["VALUE"]);
+   $sezon = GetElementInHigLoadBlock($arResult["PROPERTIES"]["SEZON_SVOYSTVO"]["VALUE"], StockMan\Config::HIGHLOAD_SEZON_ID);
+   echo "<pre>";
+   var_dump(StockMan\Config::HIGHLOAD_SEZON_ID);
+   echo "</pre>";*/
+
+}
+?>
 
     <div class="skirt" id="<?=$itemIds['ID']?>" itemscope itemtype="http://schema.org/Product">
 
@@ -169,6 +182,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
             <div class="cell small-6"><a class="skirt__prev">Back</a></div>
             <div class="cell text-right small-6"><a class="skirt__next">Next</a></div>
         </div>
+
 
 
         <div class="skirt__wrapper">
@@ -403,8 +417,6 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                             break;
                     }
                 }?>
-
-                <div class="cell medium-6"><a class="button skirt__heart" href="#">Добавить в Избранное</a></div>
             </div>
 
             <ul class="accordion" data-accordion="">
@@ -412,31 +424,27 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                     <li class="accordion-item is-active" data-accordion-item=""><a class="accordion-title" href="#">Детали</a>
                         <div class="accordion-content" data-tab-content="">
                             <div>
-                                <p>
-                                    Состав: <?=$arResult["PROPERTIES"]["SOSTAV"]["VALUE"];?>
-                                </p>
-                                <p>
-<!--                                    Страна производства: <?/*=$arResult["PROPERTIES"]["OSNOVNAYA_STRANA_PROISKHOZHDENIYA"]["VALUE"]*/?>
-                                    --><?/*
-                                    // подключаем пространство имен класса HighloadBlockTable и даём ему псевдоним HLBT для удобной работы
-
-                                    // id highload-инфоблока
-                                    $MY_HL_BLOCK_ID = 98;
-                                    //подключаем модуль highloadblock
-                                    CModule::IncludeModule('highloadblock');
-                                    //Напишем функцию получения экземпляра класса:
-                                    function GetEntityDataClass($HlBlockId) {
-                                        if (empty($HlBlockId) || $HlBlockId < 1)
-                                        {
-                                            return false;
-                                        }
-                                        $hlblock = HLBT::getById($HlBlockId)->fetch();
-                                        $entity = HLBT::compileEntity($hlblock);
-                                        $entity_data_class = $entity->getDataClass();
-                                        return $entity_data_class;
-                                    }*/
-                                    ?>
-                                </p>
+                                <?if ($arResult["PROPERTIES"]["SOSTAV"]["VALUE"]) {?>
+                                    <p>
+                                        Состав: <?=$arResult["PROPERTIES"]["SOSTAV"]["VALUE"];?>
+                                    </p>
+                                <?}?>
+                                <?
+                                $country = GetElementInHigLoadBlock($arResult["PROPERTIES"]["OSNOVNAYA_STRANA_PROISKHOZHDENIYA"]["VALUE"], StockMan\Config::HIGHLOAD_COUNTRY_ID);
+                                ?>
+                                <?if ($country) {?>
+                                    <p>
+                                        Страна производитель: <?=$country["UF_NAME"]?>
+                                    </p>
+                                <?}?>
+                                <?
+                                $sezon = GetElementInHigLoadBlock($arResult["PROPERTIES"]["SEZON_SVOYSTVO"]["VALUE"], StockMan\Config::HIGHLOAD_SEZON_ID);
+                                ?>
+                                <?if ($sezon) {?>
+                                    <p>
+                                        Сезон: <?=$sezon["UF_NAME"];?>
+                                    </p>
+                                <?}?>
                             </div>
                         </div>
                     </li>
