@@ -467,8 +467,8 @@ if (!empty($arResult['ITEMS']))
 foreach ($arResult["ITEMS"] as $key => $val) {
     $arPic = !empty($val['PREVIEW_PICTURE_SECOND']) ? $val['PREVIEW_PICTURE_SECOND'] : $val['PREVIEW_PICTURE'];
     $arPic = CFile::GetFileArray($arPic['ID']);
-    $width = 250;
-    $height = 325;
+    $width = 285;
+    $height = 370;
     if ($arPic) {
         if ($arPic["WIDTH"] <= $width) {
             $width = $arPic["WIDTH"] - 1;
