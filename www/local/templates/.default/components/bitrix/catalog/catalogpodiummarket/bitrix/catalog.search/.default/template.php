@@ -50,35 +50,12 @@ $this->setFrameMode(true);
 <div class="content">
     <div class="grid-x grid-padding-x">
         <div class="cell small-12 medium-4 large-3 xlarge-2 text-center medium-text-left">
-            <?
-            $homeCatalog = GetHomeCtalogSection();
-            $APPLICATION->IncludeComponent(
-                "bitrix:catalog.section.list",
-                "tree-search",
-                Array(
-                    "VIEW_MODE" => "LINE",
-                    "SHOW_PARENT_NAME" => "Y",
-                    "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-                    "IBLOCK_ID" => $arParams["IBLOCK_ID"],
-                    "SECTION_ID" => $homeCatalog,
-                    "SECTION_CODE" => "",
-                    "SECTION_URL" => "",
-                    "COUNT_ELEMENTS" => "Y",
-                    "TOP_DEPTH" => "1",
-                    "SECTION_FIELDS" => "",
-                    "SECTION_USER_FIELDS" => "",
-                    "ADD_SECTIONS_CHAIN" => "N",
-                    "CACHE_TYPE" => "A",
-                    "CACHE_TIME" => "36000000",
-                    "CACHE_NOTES" => "",
-                    "CACHE_GROUPS" => "Y",
-                    "CURREN_SECTION_ID" => $homeCatalog
-                )
-            );?>
+            <?$APPLICATION->ShowViewContent('catalog_search_section');?>
         </div>
 <?
 if (!empty($arElements) && is_array($arElements))
 {
+
 		global $searchFilter;
 		$searchFilter = array(
 			"=ID" => $arElements,
@@ -102,6 +79,14 @@ if (!empty($arElements) && is_array($arElements))
                 "SECTION_ID" => $arIdSectionSearch
             );
             $searchFilter = array_merge($searchFilter, $arSectionSearch);
+       }
+
+       if (intval($_REQUEST["section_search_id"])>0) {
+
+           $arSectionSearch = array(
+               "SECTION_ID" => intval($_REQUEST["section_search_id"])
+           );
+           $searchFilter = array_merge($searchFilter, $arSectionSearch);
        }
 
 		$APPLICATION->IncludeComponent(
@@ -218,17 +203,62 @@ if (!empty($arElements) && is_array($arElements))
 		$arResult["THEME_COMPONENT"],
 		array('HIDE_ICONS' => 'Y')
 	);
+
+    $arIdSection = array();
+    $arSelect = Array("ID", "SECTION_ID");
+    $arFilter = Array("ID"=>$arElements);
+    $res = CIBlockElement::GetList(Array(), $arFilter, array("IBLOCK_SECTION_ID"), false, $arSelect);
+    while($ar_fields = $res->GetNext())
+    {
+        $arIdSection[] = $ar_fields["IBLOCK_SECTION_ID"];
+    }
+    $this->SetViewTarget('catalog_search_section');
+    if (count($arIdSection) > 0) {
+        $section_search_id = intval($_REQUEST['section_search_id']);
+        ?><ul class="cloth"><?
+        $arFilter = Array($arParams["IBLOCK_ID"], "ID" => $arIdSection);
+        $db_list = CIBlockSection::GetList(Array("ID"=>"ASC"), $arFilter, true);
+        while($ar_result = $db_list->GetNext())
+        {
+            ?><li class="cloth__item">
+                    <a class="cloth__link <?if ($section_search_id == $ar_result['ID']) {?>cloth__link_more<?}?>" href="<?=$APPLICATION->GetCurPageParam("section_search_id=" . $ar_result['ID'], array("section_search_id"))?>"><?=$ar_result['NAME']?></a>
+            </li><?
+        }
+        ?></ul><?
+
+        /*$homeCatalog = GetHomeCtalogSection();
+        $APPLICATION->IncludeComponent(
+            "bitrix:catalog.section.list",
+            "tree-search",
+            Array(
+                "SECTION_ID_SEARCH" => $arIdSection,
+                "VIEW_MODE" => "LINE",
+                "SHOW_PARENT_NAME" => "Y",
+                "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+                "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+                "SECTION_ID" => $homeCatalog,
+                "SECTION_CODE" => "",
+                "SECTION_URL" => "",
+                "COUNT_ELEMENTS" => "Y",
+                "TOP_DEPTH" => "5",
+                "SECTION_FIELDS" => "",
+                "SECTION_USER_FIELDS" => "",
+                "ADD_SECTIONS_CHAIN" => "N",
+                "CACHE_TYPE" => "A",
+                "CACHE_TIME" => "3600",
+                "CACHE_NOTES" => "",
+                "CACHE_GROUPS" => "Y",
+                "CURREN_SECTION_ID" => $homeCatalog
+            )
+        );*/
+    }
+    $this->EndViewTarget();
     ?></div><?
 }
 elseif (is_array($arElements))
 {
     ?>
-    <div class="grid-container">
-        <div class="grid-x grid-padding-x">
-            <div class="cell">
-            <?echo GetMessage("CT_BCSE_NOT_FOUND");?>
-			</div>
-        </div>
+    <div class="cell small-12 medium-8 xlarge-10 large-9"><?echo GetMessage("CT_BCSE_NOT_FOUND");?></div>
     </div>
 <?
     $this->SetViewTarget('catalog_search_info');?>

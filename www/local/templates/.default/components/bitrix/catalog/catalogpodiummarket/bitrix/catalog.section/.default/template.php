@@ -130,7 +130,7 @@ $this->setFrameMode(true);
             ?>
 
             <div class="cell position-relative" id="<? echo $strMainID; ?>">
-                <div class="dress">
+                <div class="dress dress__inner">
                     <div class="dress__img" data-equalizer-watch>
                         <a href="<? echo $arItem['DETAIL_PAGE_URL']; ?>">
                             <?
@@ -939,6 +939,9 @@ $this->setFrameMode(true);
 if ($arResult['NAV_RESULT']->NavRecordCount > 0) {
     $start = ($arResult['NAV_RESULT']->NavPageNomer == 1 ? '1' : ($arResult['NAV_RESULT']->NavPageNomer - 1) * $arResult['NAV_RESULT']->NavPageSize + 1);
     $end = $arResult['NAV_RESULT']->NavPageNomer * $arResult['NAV_RESULT']->NavPageSize;
+    if ($end > $arResult['NAV_RESULT']->NavRecordCount) {
+        $end =  $arResult['NAV_RESULT']->NavRecordCount;
+    }
     $this->SetViewTarget('catalog_search_info');?>
     <div class="text-secondary margin-bottom-13">Результаты поиска <?=$start?>-<?=$end?> из <?=$arResult['NAV_RESULT']->NavRecordCount?></div>
     <?$this->EndViewTarget();

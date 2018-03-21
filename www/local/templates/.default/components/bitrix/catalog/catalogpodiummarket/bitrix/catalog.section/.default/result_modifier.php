@@ -463,4 +463,60 @@ if (!empty($arResult['ITEMS']))
 		}
 	}
 }
+foreach ($arResult["ITEMS"] as $key => $val) {
+    if (!empty($val['PRODUCT_PREVIEW_SECOND'])) {
+        $arPic = CFile::GetFileArray($val['PRODUCT_PREVIEW_SECOND']["ID"]);
+        $width = 285;
+        $height = 370;
+        if ($arPic) {
+            if ($arPic["WIDTH"] <= $width) {
+                $width = $arPic["WIDTH"] - 1;
+            }
+            if ($arPic["HEIGHT"] <= $height) {
+                $height = $arPic["HEIGHT"] - 1;
+            }
+
+            $arPicRes = CFile::ResizeImageGet(
+                $arPic,
+                array("width" => $width, "height" => $height),
+                BX_RESIZE_IMAGE_PROPORTIONAL_ALT,
+                true,
+                false,
+                false,
+                75
+            );
+            $arResult["ITEMS"][$key]["PRODUCT_PREVIEW_SECOND"]["SRC"] = $arPicRes["src"];
+        }
+    }
+    $imgsrc1 = false;
+    if ($val['PREVIEW_PICTURE']['SRC']) {
+        $imgsrc1 = $val['PREVIEW_PICTURE'];
+    } elseif ($val['DETAIL_PICTURE']['SRC']) {
+        $imgsrc1 = $val['DETAIL_PICTURE'];
+    }
+    if ($imgsrc1 !== false) {
+        $arPic = CFile::GetFileArray($imgsrc1["ID"]);
+        $width = 285;
+        $height = 370;
+        if ($arPic) {
+            if ($arPic["WIDTH"] <= $width) {
+                $width = $arPic["WIDTH"] - 1;
+            }
+            if ($arPic["HEIGHT"] <= $height) {
+                $height = $arPic["HEIGHT"] - 1;
+            }
+
+            $arPicRes = CFile::ResizeImageGet(
+                $arPic,
+                array("width" => $width, "height" => $height),
+                BX_RESIZE_IMAGE_PROPORTIONAL_ALT,
+                true,
+                false,
+                false,
+                75
+            );
+            $arResult["ITEMS"][$key]["PREVIEW_PICTURE"]["SRC"] = $arPicRes["src"];
+        }
+    }
+}
 ?>
