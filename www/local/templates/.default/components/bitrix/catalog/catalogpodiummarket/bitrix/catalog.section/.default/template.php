@@ -130,7 +130,7 @@ $this->setFrameMode(true);
             ?>
 
             <div class="cell position-relative" id="<? echo $strMainID; ?>">
-                <div class="dress dress__inner">
+                <div class="dress <?if (count($arResult['ITEMS'])==1) {?>dress__inner<?}?>">
                     <div class="dress__img" data-equalizer-watch>
                         <a href="<? echo $arItem['DETAIL_PAGE_URL']; ?>">
                             <?
@@ -185,11 +185,14 @@ $this->setFrameMode(true);
                         unset($minPrice);
                     ?>
                     <div class="text-size-large margin-bottom-4"><?=$price_product?></div>
-
-
-
-
                     <?
+                    foreach ($arItem['OFFERS'] as $arOffer) {
+                        echo "<pre>";
+                        //print_r($arOffer['PROPERTIES'][StockMan\Catalog\Config::RAZMER]);
+                       // print_r($arOffer['DISPLAY_PROPERTIES']);
+                        echo "</pre>";
+                    }
+
                     if ('Y' == $arParams['PRODUCT_DISPLAY_MODE'])
                     {
                         if (!empty($arItem['OFFERS_PROP']))
@@ -936,13 +939,11 @@ $this->setFrameMode(true);
 		?><? echo $arResult["NAV_STRING"]; ?><?
 	}
 }
-if ($arResult['NAV_RESULT']->NavRecordCount > 0) {
-    $start = ($arResult['NAV_RESULT']->NavPageNomer == 1 ? '1' : ($arResult['NAV_RESULT']->NavPageNomer - 1) * $arResult['NAV_RESULT']->NavPageSize + 1);
-    $end = $arResult['NAV_RESULT']->NavPageNomer * $arResult['NAV_RESULT']->NavPageSize;
-    if ($end > $arResult['NAV_RESULT']->NavRecordCount) {
-        $end =  $arResult['NAV_RESULT']->NavRecordCount;
-    }
-    $this->SetViewTarget('catalog_search_info');?>
-    <div class="text-secondary margin-bottom-13">Результаты поиска <?=$start?>-<?=$end?> из <?=$arResult['NAV_RESULT']->NavRecordCount?></div>
-    <?$this->EndViewTarget();
+
+$nameSection = $arResult['NAME'];
+if (isset($arResult["IPROPERTY_VALUES"]['SECTION_PAGE_TITLE']{1})) {
+    $nameSection = htmlspecialchars($arResult["IPROPERTY_VALUES"]['SECTION_PAGE_TITLE']);
 }
+$this->SetViewTarget('catalog_section_h1');?>
+    <h1 class="margin-bottom-0"><?=$nameSection?></h1>
+<?$this->EndViewTarget();

@@ -55,43 +55,47 @@ $this->setFrameMode(true);
 <?
 if (!empty($arElements) && is_array($arElements))
 {
-
-		global $searchFilter;
-		$searchFilter = array(
-			"=ID" => $arElements,
-		);
-
-        $arSectionSearch = array();
-        $arIdSectionSearch = array();
-        if (isset($_COOKIE["CATALOG_SECTION"])) {
-            $arIdSectionSearch[] = GetHomeCtalogSection();
-            $rsParentSection = CIBlockSection::GetByID(GetHomeCtalogSection());
-            if ($arParentSection = $rsParentSection->GetNext())
+    global $searchFilter;
+    $searchFilter = array(
+        "=ID" => $arElements,
+        array (
+            "LOGIC" => "OR",
+            array("!DETAIL_PICTURE" => false),
+            //array("!PROPERTY_MORE_PHOTO" => false),
+        )
+    );
+    $arSectionSearch = array();
+    $arIdSectionSearch = array();
+    if (isset($_COOKIE["CATALOG_SECTION"])) {
+        $arIdSectionSearch[] = GetHomeCtalogSection();
+        $rsParentSection = CIBlockSection::GetByID(GetHomeCtalogSection());
+        if ($arParentSection = $rsParentSection->GetNext())
+        {
+            $arFilter = array('IBLOCK_ID' => $arParentSection['IBLOCK_ID'],'>LEFT_MARGIN' => $arParentSection['LEFT_MARGIN'],'<RIGHT_MARGIN' => $arParentSection['RIGHT_MARGIN'],'>DEPTH_LEVEL' => $arParentSection['DEPTH_LEVEL']);
+            $rsSect = CIBlockSection::GetList(array('left_margin' => 'asc'),$arFilter, false,  array("IBLOCK_ID", "ID"));
+            while ($arSect = $rsSect->GetNext())
             {
-               $arFilter = array('IBLOCK_ID' => $arParentSection['IBLOCK_ID'],'>LEFT_MARGIN' => $arParentSection['LEFT_MARGIN'],'<RIGHT_MARGIN' => $arParentSection['RIGHT_MARGIN'],'>DEPTH_LEVEL' => $arParentSection['DEPTH_LEVEL']);
-               $rsSect = CIBlockSection::GetList(array('left_margin' => 'asc'),$arFilter, false,  array("IBLOCK_ID", "ID"));
-               while ($arSect = $rsSect->GetNext())
-               {
-                   $arIdSectionSearch[] = $arSect["ID"];
-               }
+                $arIdSectionSearch[] = $arSect["ID"];
             }
-            $arSectionSearch = array(
-                "SECTION_ID" => $arIdSectionSearch
-            );
-            $searchFilter = array_merge($searchFilter, $arSectionSearch);
-       }
+        }
+        $arSectionSearch = array(
+            "SECTION_ID" => $arIdSectionSearch
+        );
+        $searchFilter = array_merge($searchFilter, $arSectionSearch);
+    }
 
-       if (intval($_REQUEST["section_search_id"])>0) {
+    if (intval($_REQUEST["section_search_id"])>0) {
 
-           $arSectionSearch = array(
-               "SECTION_ID" => intval($_REQUEST["section_search_id"])
-           );
-           $searchFilter = array_merge($searchFilter, $arSectionSearch);
-       }
+        $arSectionSearch = array(
+            "SECTION_ID" => intval($_REQUEST["section_search_id"])
+        );
+        $searchFilter = array_merge($searchFilter, $arSectionSearch);
+    }
 
-		$APPLICATION->IncludeComponent(
+
+		$ar = $APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
-		".default",
+		"search",
 		array(
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
@@ -204,55 +208,45 @@ if (!empty($arElements) && is_array($arElements))
 		array('HIDE_ICONS' => 'Y')
 	);
 
-    $arIdSection = array();
-    $arSelect = Array("ID", "SECTION_ID");
-    $arFilter = Array("ID"=>$arElements);
-    $res = CIBlockElement::GetList(Array(), $arFilter, array("IBLOCK_SECTION_ID"), false, $arSelect);
-    while($ar_fields = $res->GetNext())
-    {
-        $arIdSection[] = $ar_fields["IBLOCK_SECTION_ID"];
-    }
-    $this->SetViewTarget('catalog_search_section');
-    if (count($arIdSection) > 0) {
-        $section_search_id = intval($_REQUEST['section_search_id']);
-        ?><ul class="cloth"><?
-        $arFilter = Array($arParams["IBLOCK_ID"], "ID" => $arIdSection);
-        $db_list = CIBlockSection::GetList(Array("ID"=>"ASC"), $arFilter, true);
-        while($ar_result = $db_list->GetNext())
-        {
-            ?><li class="cloth__item">
-                    <a class="cloth__link <?if ($section_search_id == $ar_result['ID']) {?>cloth__link_more<?}?>" href="<?=$APPLICATION->GetCurPageParam("section_search_id=" . $ar_result['ID'], array("section_search_id"))?>"><?=$ar_result['NAME']?></a>
-            </li><?
-        }
-        ?></ul><?
 
-        /*$homeCatalog = GetHomeCtalogSection();
-        $APPLICATION->IncludeComponent(
-            "bitrix:catalog.section.list",
-            "tree-search",
-            Array(
-                "SECTION_ID_SEARCH" => $arIdSection,
-                "VIEW_MODE" => "LINE",
-                "SHOW_PARENT_NAME" => "Y",
-                "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-                "IBLOCK_ID" => $arParams["IBLOCK_ID"],
-                "SECTION_ID" => $homeCatalog,
-                "SECTION_CODE" => "",
-                "SECTION_URL" => "",
-                "COUNT_ELEMENTS" => "Y",
-                "TOP_DEPTH" => "5",
-                "SECTION_FIELDS" => "",
-                "SECTION_USER_FIELDS" => "",
-                "ADD_SECTIONS_CHAIN" => "N",
-                "CACHE_TYPE" => "A",
-                "CACHE_TIME" => "3600",
-                "CACHE_NOTES" => "",
-                "CACHE_GROUPS" => "Y",
-                "CURREN_SECTION_ID" => $homeCatalog
-            )
-        );*/
+    if ($ar == 0 ){
+        $this->SetViewTarget('catalog_search_section');
+        $this->EndViewTarget();
+        ?><div class="cell small-12 medium-8 xlarge-10 large-9">Сожалеем, но ничего не найдено.</div><?
+    } else {
+        $arIdSection = array();
+        $arSelect = Array("ID", "SECTION_ID");
+        $arFilter = Array(
+            "ID"=>$arElements,
+            array (
+                "LOGIC" => "OR",
+                array("!DETAIL_PICTURE" => false),
+                array("!PROPERTY_MORE_PHOTO" => false),
+            ));
+        $res = CIBlockElement::GetList(Array(), $arFilter, array("IBLOCK_SECTION_ID"), false, $arSelect);
+        while($ar_fields = $res->GetNext())
+        {
+            $arIdSection[] = $ar_fields["IBLOCK_SECTION_ID"];
+        }
+
+        $this->SetViewTarget('catalog_search_section');
+        if (count($arIdSection) > 0) {
+            $section_search_id = intval($_REQUEST['section_search_id']);
+            ?><ul class="cloth"><?
+            $arFilter = Array($arParams["IBLOCK_ID"], "ID" => $arIdSection);
+            $db_list = CIBlockSection::GetList(Array("ID"=>"ASC"), $arFilter, true);
+            while($ar_result = $db_list->GetNext())
+            {
+                ?><li class="cloth__item">
+                <a class="cloth__link <?if ($section_search_id == $ar_result['ID']) {?>cloth__link_more<?}?>" href="<?=$APPLICATION->GetCurPageParam("section_search_id=" . $ar_result['ID'], array("section_search_id"))?>"><?=$ar_result['NAME']?></a>
+                </li><?
+            }
+            ?></ul><?
+        }
+        $this->EndViewTarget();
     }
-    $this->EndViewTarget();
+
+
     ?></div><?
 }
 elseif (is_array($arElements))

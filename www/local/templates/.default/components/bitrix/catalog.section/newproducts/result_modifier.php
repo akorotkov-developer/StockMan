@@ -468,7 +468,7 @@ foreach ($arResult["ITEMS"] as $key => $val) {
     $arPic = !empty($val['PREVIEW_PICTURE_SECOND']) ? $val['PREVIEW_PICTURE_SECOND'] : $val['PREVIEW_PICTURE'];
     $arPic = CFile::GetFileArray($arPic['ID']);
     $width = 285;
-    $height = 370;
+    $height = 400;
     if ($arPic) {
         if ($arPic["WIDTH"] <= $width) {
             $width = $arPic["WIDTH"] - 1;
@@ -480,7 +480,7 @@ foreach ($arResult["ITEMS"] as $key => $val) {
         $arPicRes = CFile::ResizeImageGet(
             $arPic,
             array("width" => $width, "height" => $height),
-            BX_RESIZE_IMAGE_PROPORTIONAL_ALT,
+            BX_RESIZE_IMAGE_PROPORTIONAL ,
             true,
             false,
             false,

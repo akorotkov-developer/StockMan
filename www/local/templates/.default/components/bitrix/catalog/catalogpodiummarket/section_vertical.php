@@ -21,22 +21,15 @@ else
     $basketAction = isset($arParams['SECTION_ADD_TO_BASKET_ACTION']) ? $arParams['SECTION_ADD_TO_BASKET_ACTION'] : '';
 }
 ?>
-
 <?
 $this->setFrameMode(true);
 ?>
-
-
-
-
-
 <div class="grid-x grid-padding-x">
     <div class="cell text-center">
-        <h1 class="margin-bottom-0"><?=$WrokCatalog->GetSectionNameByCode($arResult["VARIABLES"]["SECTION_CODE"]);?></h1>
-        <div class="text-secondary margin-bottom-1"><?=$WrokCatalog->GetElmentCountByCode($arResult["VARIABLES"]["SECTION_CODE"]);?> товаров(а)</div>
+        <?$APPLICATION->ShowViewContent('catalog_section_h1');?>
+        <?$APPLICATION->ShowViewContent('catalog_section_count');?>
     </div>
 </div>
-
 <?
 if ($isFilter || $isSidebar): ?>
     <div class="grid-x grid-padding-x margin-bottom-12">
@@ -73,6 +66,38 @@ if ($isFilter || $isSidebar): ?>
                     $component,
                     array('HIDE_ICONS' => 'Y')
                 );
+                $this->SetViewTarget('catalog_section_header_filter');
+                    $APPLICATION->IncludeComponent(
+                        "bitrix:catalog.smart.filter",
+                        "header-catalogfilter",
+                        array(
+                            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+                            "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+                            "SECTION_ID" => $arCurSection['ID'],
+                            "FILTER_NAME" => $arParams["FILTER_NAME"],
+                            "PRICE_CODE" => $arParams["PRICE_CODE"],
+                            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+                            "CACHE_TIME" => $arParams["CACHE_TIME"],
+                            "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+                            "SAVE_IN_SESSION" => "N",
+                            "FILTER_VIEW_MODE" => $arParams["FILTER_VIEW_MODE"],
+                            "XML_EXPORT" => "Y",
+                            "SECTION_TITLE" => "NAME",
+                            "SECTION_DESCRIPTION" => "DESCRIPTION",
+                            'HIDE_NOT_AVAILABLE' => $arParams["HIDE_NOT_AVAILABLE"],
+                            "TEMPLATE_THEME" => $arParams["TEMPLATE_THEME"],
+                            'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
+                            'CURRENCY_ID' => $arParams['CURRENCY_ID'],
+                            "SEF_MODE" => $arParams["SEF_MODE"],
+                            "SEF_RULE" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["smart_filter"],
+                            "SMART_FILTER_PATH" => $arResult["VARIABLES"]["SMART_FILTER_PATH"],
+                            "PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
+                            "INSTANT_RELOAD" => $arParams["INSTANT_RELOAD"],
+                        ),
+                        $component,
+                        array('HIDE_ICONS' => 'Y')
+                    );
+                $this->EndViewTarget();
                 ?>
         <? endif ?>
         <? if ($isSidebar): ?>
@@ -91,11 +116,8 @@ if ($isFilter || $isSidebar): ?>
             );
             ?>
         <?endif?>
-
-
         <?/*Сортировка*/?>
         <div class="cell small-12 medium-4 large-6 text-center medium-text-right">
-
             <div class="sort text-left">
                 <div class="sort__main">Сортировать</div>
                 <div class="sort__other sort__other_right">
@@ -125,10 +147,7 @@ if ($isFilter || $isSidebar): ?>
         </div>
         <?/*Конец сортировки*/?>
     </div>
-
 <?endif?>
-
-
 <?
     //Сохраняем текующий каталог
     SaveIdCatalogSection(GetIdSectionCatalog($arResult["VARIABLES"]["SECTION_ID"]));
@@ -180,7 +199,6 @@ if ($isFilter || $isSidebar): ?>
                 false
             );*/?>
         </div>
-
             <?
             if (ModuleManager::isModuleInstalled("sale"))
             {
@@ -202,8 +220,6 @@ if ($isFilter || $isSidebar): ?>
                 }
             }
             ?>
-
-
             <?
             $intSectionID = $APPLICATION->IncludeComponent(
                 "bitrix:catalog.section",
@@ -333,12 +349,10 @@ if ($isFilter || $isSidebar): ?>
                 $component
             );
             ?>
-
-
         <?
         $GLOBALS['CATALOG_CURRENT_SECTION_ID'] = $intSectionID;
 
-        if (ModuleManager::isModuleInstalled("sale"))
+        /*if (ModuleManager::isModuleInstalled("sale"))
         {
             if (!empty($arRecomData))
             {
@@ -467,6 +481,6 @@ if ($isFilter || $isSidebar): ?>
                     <?
                 }
             }
-        }
+        }*/
         ?>
     </div>
