@@ -37,15 +37,23 @@ if ($arResult['ACTION']['status']=='error') {
             </div>
         </div>
 
-        <div style="display: none;">
-            <?if (isset($arResult['RUBRICS'])):?>
-                <br/>
-                <?foreach($arResult['RUBRICS'] as $RID => $title):?>
-                <input type="checkbox" name="asd_rub[]" id="rub<?= $RID?>" value="<?= $RID?>" />
-                <label for="rub<?= $RID?>"><?= $title?></label><br/>
-                <?endforeach;?>
-            <?endif;?>
-        </div>
+        <?if (isset($arResult['RUBRICS'])){?>
+            <?
+            $i=1;
+            $checked = "checked";
+            ?>
+            <?foreach($arResult['RUBRICS'] as $RID => $title){?>
+                <div class="check">
+                    <input class="check__input" type="radio" name="asd_rub[]" id="rub<?= $RID?>" value="<?= $RID?>" <?=$checked?>>
+                    <label class="check__label" for="rub<?= $RID?>"><?= $title?> </label>
+                </div>
+            <?
+                $i++;
+                $checked = "";
+            ?>
+            <?}?>
+        <?}?>
+
     </form>
 </div>
 

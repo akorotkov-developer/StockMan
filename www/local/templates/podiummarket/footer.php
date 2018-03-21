@@ -132,6 +132,17 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                 <hr class="show-for-small-only">
             </div>
             <div class="small-12 medium-6 large-3 cell">
+                <?
+                if ($_GET["tst"] == "tst") {
+
+                }
+                ?>
+                <?
+                $Rubrics = GetRubrics();
+                foreach ($Rubrics as $rubric) {
+                    $footersubscribe[] = $rubric["ID"];
+                }
+                ?>
                 <?$APPLICATION->IncludeComponent(
                     "asd:subscribe.quick.form",
                     "footersubscribe",
@@ -147,10 +158,8 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                         "AJAX_OPTION_STYLE" => "Y",
                         "AJAX_OPTION_HISTORY" => "N",
                         "COMPONENT_TEMPLATE" => ".default",
-                        "RUBRICS" => array(
-                            0 => "1",
-                        ),
-                        "SHOW_RUBRICS" => "N",
+                        "RUBRICS" => $footersubscribe,
+                        "SHOW_RUBRICS" => "Y",
                         "INC_JQUERY" => "N",
                         "NOT_CONFIRM" => "N",
                         "FORMAT" => "text"

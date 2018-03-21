@@ -469,3 +469,19 @@ function GetPrevNextElements($ID_ElEMENT) {
     return $PrevNext;
 }
 /*-------------------------------------------------*/
+
+/*Получить список рубрик для подписок*/
+function GetRubrics() {
+    CModule::IncludeModule("subscribe");
+    // Вывод рубрик можно производить таким способом
+    $arOrder = Array("SORT"=>"ASC", "NAME"=>"ASC");
+    $arFilter = Array("ACTIVE"=>"Y", "LID"=>LANG);
+    $rsRubric = CRubric::GetList($arOrder, $arFilter);
+    $arRubrics = array();
+    while($arRubric = $rsRubric->GetNext())
+    {
+        $arRunrics[] = $arRubric;
+    }
+    return $arRunrics;
+}
+/*-----------------------------------*/
