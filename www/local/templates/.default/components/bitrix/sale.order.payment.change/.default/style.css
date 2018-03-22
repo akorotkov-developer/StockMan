@@ -245,18 +245,22 @@
 }
 
 .sale-paysystem-yandex-button-item {
-	padding: 0 22px;
-	height: 38px;
-	border: 0;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	background: #f59023;
-	font: bold 13px/35px "Helvetica Neue", Arial, Helvetica, sans-serif;
-	color: #fff;
-	-webkit-transition: background .3s ease;
-	-moz-transition: background .3s ease;
-	transition: background .3s ease;
+	display: inline-block!important;
+	vertical-align: middle!important;
+	margin: 0 0 1.5rem 0!important;
+	font-family: inherit!important;
+	padding: .625rem 1.125rem!important;
+	-webkit-appearance: none!important;
+	border: 1px solid transparent!important;
+	border-radius: 0!important;
+	-webkit-transition: background-color 0.25s ease-out,color 0.25s ease-out!important;
+	transition: background-color 0.25s ease-out,color 0.25s ease-out!important;
+	font-size: 0.9rem!important;
+	line-height: 1!important;
+	text-align: center!important;
+	cursor: pointer!important;
+	background-color: #222!important;
+	color: #fff!important;
 }
 
 .sale-paysystem-yandex-button-item:hover {

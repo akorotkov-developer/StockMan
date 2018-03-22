@@ -1,3 +1,68 @@
+.sale-order-list-change-payment {
+    color: #222!important;
+    text-decoration: underline!important;
+    font-size: 14px!important;
+}
+[type="submit"] {
+    text-decoration: none;
+    border-radius: 1.125rem!important;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 1.5rem 0;
+    font-family: inherit;
+    padding: .625rem 1.125rem;
+    -webkit-appearance: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    -webkit-transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    background-color: #222;
+    color: #fff;
+}
+.sale-paysystem-yandex-button-item {
+    text-decoration: none;
+    border-radius: 1.125rem!important;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 1.5rem 0;
+    font-family: inherit;
+    padding: .625rem 1.125rem;
+    -webkit-appearance: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    -webkit-transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    background-color: #222;
+    color: #fff;
+}
+.sale-paysystem-yandex-button-item:hover {
+    text-decoration: none;
+    border-radius: 1.125rem!important;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 1.5rem 0;
+    font-family: inherit;
+    padding: .625rem 1.125rem;
+    -webkit-appearance: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    -webkit-transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    background-color: #222;
+    color: #fff;
+}
 .product-item-scu-item-text {
     font-size: 16px;
     padding: .375rem;

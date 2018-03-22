@@ -69,13 +69,15 @@ else
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-12 sale-order-payment-change-pp-list">
-						<?
+					<div class="sale-order-payment-change-pp-list callout">
+                        <div class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-4" data-equalizer data-equalize-by-row="true">
+                        <?
 						foreach ($arResult['PAYSYSTEMS_LIST'] as $key => $paySystem)
 						{
 							?>
-							<div class="sale-order-payment-change-pp-company col-lg-3 col-md-4 col-sm-4 col-xs-6">
-								<div class="sale-order-payment-change-pp-company-graf-container">
+
+							<div class="sale-order-payment-change-pp-company cell">
+								<div class="check check_pay">
 									<input type="hidden"
 										class="sale-order-payment-change-pp-company-hidden"
 										name="PAY_SYSTEM_ID"
@@ -90,10 +92,7 @@ else
 
                                     <img class="payment-img" src="<?=htmlspecialcharsbx($paySystem['LOGOTIP'])?>">
 									<div class="sale-order-payment-change-pp-company-image"
-										style="
-											background-image: url(<?=htmlspecialcharsbx($paySystem['LOGOTIP'])?>);
-											background-image: -webkit-image-set(url(<?=htmlspecialcharsbx($paySystem['LOGOTIP'])?>) 1x, url(<?=htmlspecialcharsbx($paySystem['LOGOTIP'])?>) 2x);
-											">
+										style="">
 									</div>
 									<div class="sale-order-payment-change-pp-company-smalltitle">
 										<?=CUtil::JSEscape(htmlspecialcharsbx($paySystem['NAME']))?>
@@ -103,6 +102,7 @@ else
 							<?
 						}
 						?>
+                        </div>
 					</div>
 				</div>
 			</div>
