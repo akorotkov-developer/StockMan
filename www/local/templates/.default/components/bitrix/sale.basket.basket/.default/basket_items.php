@@ -35,7 +35,17 @@ foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader) {
 
 if ($normalCount > 0) {
     ?>
-    <div id="basket_items_list">
+
+
+    <?
+    if ($_GET["delayed"] == "Y") {
+        $displayBaske = "none";
+    } else {
+        $displayBaske = "block";
+    }
+    ?>
+
+    <div id="basket_items_list" style="display: <?=$displayBaske?>">
     <div class="callout" id="basket_items">
     <?
     $skipHeaders = array('PROPS', 'DELAY', 'DELETE', 'TYPE');
@@ -447,6 +457,7 @@ if ($normalCount > 0) {
         <a href="javascript:void(0)" onclick="checkOut();" class="button"><i class="fa fa-credit-card"></i> <?=GetMessage("SALE_ORDER")?></a>
     </div>
 </div>
+
 <?
 } else {
     ?>

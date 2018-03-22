@@ -132,8 +132,8 @@ if (strlen($arResult["ERROR_MESSAGE"]) <= 0)
 	?>
 		<form method="post" action="<?=POST_FORM_ACTION_URI?>" name="basket_form" id="basket_form">
             <div class="margin-bottom-6">
-                <a href="javascript:void(0)" id="basket_toolbar_button" class="button" onclick="showBasketItemsList()"><?=GetMessage("SALE_BASKET_ITEMS")?></a>
-                <a href="javascript:void(0)" id="basket_toolbar_button_delayed" class="button light-gray" onclick="showBasketItemsList(2)" <?=$delayHidden?>><?=GetMessage("SALE_BASKET_ITEMS_DELAYED")?></a>
+                <a href="javascript:void(0)" id="basket_toolbar_button" class="button <?if ($_GET["delayed"] == "Y") {echo "light-gray";}?><?=$button_color?>" onclick="showBasketItemsList()"><?=GetMessage("SALE_BASKET_ITEMS")?></a>
+                <a href="javascript:void(0)" id="basket_toolbar_button_delayed" class="button <?if ($_GET["delayed"] == "Y") {echo "";} else {echo "light-gray";}?>" onclick="showBasketItemsList(2)" <?=$delayHidden?>><?=GetMessage("SALE_BASKET_ITEMS_DELAYED")?></a>
                 <?/*<a href="javascript:void(0)" id="basket_toolbar_button_subscribed" class="button light-gray" onclick="showBasketItemsList(3)" <?=$subscribeHidden?>><?=GetMessage("SALE_BASKET_ITEMS_SUBSCRIBED")?></a>
                 <a href="javascript:void(0)" id="basket_toolbar_button_not_available" class="button light-gray" onclick="showBasketItemsList(4)" <?=$naHidden?>><?=GetMessage("SALE_BASKET_ITEMS_NOT_AVAILABLE")?></a>*/?>
             </div>

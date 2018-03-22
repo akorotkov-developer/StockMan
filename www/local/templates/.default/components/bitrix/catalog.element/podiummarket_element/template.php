@@ -228,6 +228,10 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                             }
                             ?>
                             <div id="<?=$itemIds['PRICE_ID']?>">
+                                <?
+                                $IDpriceforDiffered = $itemIds['PRICE_ID'];
+                                $priceforDiffered =  str_replace(" ","",$price['PRINT_RATIO_PRICE']);
+                                ?>
                                 <?=$price['PRINT_RATIO_PRICE']?>
                             </div>
                             <?
@@ -354,7 +358,34 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                                     <a class="button skirt__bag" id="<?= $itemIds['ADD_BASKET_LINK'] ?>"
                                        href="javascript:void(0);">Добавить в Корзину  </a>
                                 </div>
+                                <div class="cell medium-6"><a class="button skirt__heart" href="javascript:void(0)"
+                                        <? if (in_array($arResult["ID"],$arBasketItems )) echo 'in_wishlist '; ?> >Добавить в Избранное</a>
+                                </div>
+                                <script type="text/javascript">
+                                    function add2wish(p_id, pp_id, p, name, dpu, th){
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "/local/ajax/wishlist.php",
+                                            data: "p_id=" + p_id + "&pp_id=" + pp_id + "&p=" + p + "&name=" + name + "&dpu=" + dpu,
+                                            success: function(html){
+                                                $(th).addClass('in_wishlist');
+                                                $('#wishcount').html(html);
+                                            }
+                                        });
+                                    };
 
+                                    $('.skirt__heart').on('click', function() {
+                                        // действия, которые будут выполнены при наступлении события...
+                                        add2wish(
+                                            "251660",
+                                            "<?=$IDpriceforDiffered?>",
+                                            "<?=intval($priceforDiffered)?>",
+                                            "<?=$arResult["NAME"]?>",
+                                            "<?=$arResult["DETAIL_PAGE_URL"]?>",
+                                            $(this)
+                                        );
+                                    });
+                                </script>
                                 <?
                             }
 

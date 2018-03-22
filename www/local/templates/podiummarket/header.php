@@ -3,6 +3,8 @@ IncludeTemplateLangFile(__FILE__);
 CJSCore::Init(array("fx"));
 use Bitrix\Main\Page\Asset;
 use Bitrix\Main\Page\AssetLocation;
+use Bitrix\Main\Loader;
+Loader::includeModule("sale");
 ?>
     <!DOCTYPE html>
 <html class="no-js" lang="<?=LANGUAGE_ID?>">
@@ -100,6 +102,9 @@ use Bitrix\Main\Page\AssetLocation;
 
                     <?if($USER->IsAuthorized()){?>
                         <a class="header__enter hide-for-small-only" href="/personal/private/">Личный кабинет</a>
+                    <?}?>
+                        <a class="header__enter" href="/personal/cart/?delayed=Y"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/heart.svg" alt=""><span id="wishcount"><?=GetCountDeferred();?></span></a>
+                    <?if($USER->IsAuthorized()){?>
                         <a class="header__enter hide-for-small-only" href="<?echo $APPLICATION->GetCurPageParam("logout=yes", array(
                             "login",
                             "logout",

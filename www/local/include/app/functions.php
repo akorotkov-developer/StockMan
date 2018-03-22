@@ -485,3 +485,19 @@ function GetRubrics() {
     return $arRunrics;
 }
 /*-----------------------------------*/
+
+/*Получить кол-во отложенных товаров в корзине*/
+function GetCountDeferred() {
+    $delaydBasketItems = CSaleBasket::GetList(
+        array(),
+        array(
+            "FUSER_ID" => CSaleBasket::GetBasketUserID(),
+            "LID" => SITE_ID,
+            "ORDER_ID" => "NULL",
+            "DELAY" => "Y"
+        ),
+        array()
+    );
+    return $delaydBasketItems;
+}
+/*--------------------------------------------*/

@@ -10,7 +10,14 @@ $bDeleteColumn = false;
 $bWeightColumn = false;
 $bPropsColumn  = false;
 ?>
-<div id="basket_items_delayed" class="callout" style="display:none">
+<?
+if ($_GET["delayed"] == "Y") {
+    $display = "block";
+} else {
+    $display = "none";
+}
+?>
+<div id="basket_items_delayed" class="callout" style="display:<?=$display?>">
     <div id="delayed_items">
             <?
             foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader) {
