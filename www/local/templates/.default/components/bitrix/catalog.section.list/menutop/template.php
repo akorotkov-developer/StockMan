@@ -166,7 +166,32 @@ if (0 < $arResult["SECTIONS_COUNT"])
                                     </ul><a class="font-bold text-decoration-none" href="#">Все дизайнеры</a>
                                     */?>
                                 </div>
-                                <div class="small-6 medium-3 large-3 cell text-center">
+
+                                <?$bannermenusect = strtoupper(GetSectionCodeBySectionID(GetHomeCtalogSection()));?>
+                                <?
+                                $rs = CAdvBanner::GetList($by="s_id", $order="desc", array("TYPE_SID" => "BANNER_MENU_".$bannermenusect, "TYPE_SID_EXACT_MATCH" => "Y"), $if_filtered);
+                                while($ar = $rs->Fetch()) {
+                                    $dom = new DOMDocument;
+                                    $dom->loadHTML(CAdvBanner::GetHTML($ar));
+                                    foreach ($dom->getElementsByTagName('a') as $node) {
+                                        $arRes["LINK_BANNER"] = $node->getAttribute( 'href' );
+                                    }
+                                    foreach ($dom->getElementsByTagName('img') as $node) {
+                                        $arRes["IMG_BANNER"] = $node->getAttribute( 'src' );
+                                    }
+                                    ?>
+                                    <div class="margin-bottom-9">
+                                        <a href="<?=$arRes["LINK_BANNER"]?>" >
+                                            <img src="<?=$arRes["IMG_BANNER"]?>" alt="">
+                                        </a>
+                                        <?=$ar["CODE"];?>
+                                        <a class="anchor" href="<?=$arRes["LINK_BANNER"]?>">смотреть все    </a>
+                                    </div>
+                                    <?
+                                }
+                                ?>
+
+                                <?/*<div class="small-6 medium-3 large-3 cell text-center">
                                     <?
                                     foreach ($arResult['ROOT'] as $key) {
                                         foreach ($key["CHILD"] as $depthlevelfirst) {
@@ -183,7 +208,8 @@ if (0 < $arResult["SECTIONS_COUNT"])
                                         break;
                                     }
                                     ?>
-                                </div>
+                                </div>*/?>
+
                             </div>
                         </div>
                     </div>

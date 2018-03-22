@@ -3,7 +3,7 @@
     text-decoration: underline!important;
     font-size: 14px!important;
 }
-[type="submit"] {
+.btn-default {
     text-decoration: none;
     border-radius: 1.125rem!important;
     display: inline-block;
