@@ -959,3 +959,7 @@ if (isset($arResult["IPROPERTY_VALUES"]['SECTION_PAGE_TITLE']{1})) {
 $this->SetViewTarget('catalog_section_h1');?>
     <h1 class="margin-bottom-0"><?=$nameSection?></h1>
 <?$this->EndViewTarget();
+
+$this->SetViewTarget('catalog_section_count');?>
+    <div class="text-secondary margin-bottom-1"><?=$arResult['NAV_RESULT']->NavRecordCount?> <?=inclination($arResult['NAV_RESULT']->NavRecordCount,array('товар','товара','товаров'))?></div>
+<?$this->EndViewTarget();

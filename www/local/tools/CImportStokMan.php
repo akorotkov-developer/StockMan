@@ -67,6 +67,8 @@ class ImportStokMan {
         self::processingFile();
         self::processingFileOffers(self::$arOffersRazmerReplace, self::$arOffersXMLReplace, self::$arOffersBarCodeReplace, self::$strRazmer);
         self::processingFileImport();
+        self::processingDeActive();
+        self::processingActive();
     }
     public static function processingFile() {
         $urlFile = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME;
@@ -452,5 +454,82 @@ class ImportStokMan {
         if (count(self::$arPictureID) > 0) {
             self::processingPicturesUpdate(self::$arPictureProducts);
         }
+
+        self::processingDeActive();
+        self::processingActive();
+    }
+    public static function processingDeActive()
+    {
+        $arIdDeActive = array();
+        // не доступные, но активные
+        $arFilter = Array(
+            "ACTIVE" => "Y",
+            "IBLOCK_ID" => self::$IBLOCK_ID,
+            "=CATALOG_AVAILABLE" => "N"
+        );
+        $res = CIBlockElement::GetList(Array("ID" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID", ));
+        while ($ar_fields = $res->GetNext()) {
+            $arIdDeActive[] = $ar_fields["ID"] ;
+        }
+        foreach ($arIdDeActive as $id) {
+            $el = new CIBlockElement;
+            $arLoadProductArray = Array(
+                "ACTIVE"         => "N",
+            );
+            $el->Update($id, $arLoadProductArray);
+            unset($arLoadProductArray, $el);
+        }
+        // нет картинки
+        $arFilter = Array(
+            "ACTIVE" => "Y",
+            "IBLOCK_ID" => self::$IBLOCK_ID,
+            "!ID" => $arIdDeActive,
+            "DETAIL_PICTURE" => false,
+            "PROPERTY_MORE_PHOTO" => false
+        );
+        $arIdDeActive = array();
+        $res = CIBlockElement::GetList(Array("ID" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID"));
+        while ($ar_fields = $res->GetNext()) {
+            $arIdDeActive[] = $ar_fields["ID"] ;
+        }
+        // ДеАктивируем товары
+        foreach ($arIdDeActive as $id) {
+            $el = new CIBlockElement;
+            $arLoadProductArray = Array(
+                "ACTIVE"         => "N",
+            );
+            $el->Update($id, $arLoadProductArray);
+            unset($arLoadProductArray, $el);
+        }
+        unset($arIdActive);
+    }
+    public static function processingActive()
+    {
+        $arIdActive = array();
+        // доступные, но не активные
+        $arFilter = Array(
+            "ACTIVE" => "N",
+            "IBLOCK_ID" => self::$IBLOCK_ID,
+            "=CATALOG_AVAILABLE" => "Y",
+            array (
+                "LOGIC" => "OR",
+                array("!DETAIL_PICTURE" => false),
+                array("!PROPERTY_MORE_PHOTO" => false),
+            )
+        );
+        $res = CIBlockElement::GetList(Array("ID" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID", ));
+        while ($ar_fields = $res->GetNext()) {
+            $arIdActive[] = $ar_fields["ID"] ;
+        }
+        // Активируем товары
+        foreach ($arIdActive as $id) {
+            $el = new CIBlockElement;
+            $arLoadProductArray = Array(
+                "ACTIVE"         => "Y",
+            );
+            $el->Update($id, $arLoadProductArray);
+            unset($arLoadProductArray, $el);
+        }
+        unset($arIdActive);
     }
 }
