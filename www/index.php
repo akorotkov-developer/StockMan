@@ -57,8 +57,7 @@ $arFilterSection = array(
             1 => "",
         ),
         "FILTER_PROPERTY_CODE" => array(
-            0 => "",
-            1 => "",
+            ImportStokMan::$CODE_PROPERTYY_TSVET,
         ),
         "FILTER_PRICE_CODE" => array(
             0 => StockMan\Config::CATALOG_PRICE,
@@ -69,7 +68,7 @@ $arFilterSection = array(
             2 => "",
         ),
         "FILTER_OFFERS_PROPERTY_CODE" => array(
-            0 => "",
+            StockMan\Catalog\Config::RAZMER,
             1 => "",
         ),
         "USE_REVIEW" => "Y",

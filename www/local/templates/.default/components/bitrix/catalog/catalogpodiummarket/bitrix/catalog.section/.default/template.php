@@ -940,6 +940,18 @@ $this->setFrameMode(true);
 	}
 }
 
+
+if (isset($arResult["~DESCRIPTION"])) {
+    ?>
+    <div class="cell grid-x grid-padding-x">
+        <div class="cell small-12 medium-4 large-3 xlarge-2 text-center medium-text-left"></div>
+        <div class="cell small-12 medium-8 xlarge-10 large-9">
+            <?echo $arResult["~DESCRIPTION"];?>
+        </div>
+    </div>
+    <?
+}
+
 $nameSection = $arResult['NAME'];
 if (isset($arResult["IPROPERTY_VALUES"]['SECTION_PAGE_TITLE']{1})) {
     $nameSection = htmlspecialchars($arResult["IPROPERTY_VALUES"]['SECTION_PAGE_TITLE']);

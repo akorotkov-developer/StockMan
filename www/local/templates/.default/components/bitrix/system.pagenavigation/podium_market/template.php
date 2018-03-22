@@ -65,15 +65,15 @@ $strSelectPath = $arResult['sUrlPathParams'].($arResult["bSavePage"] ? '&PAGEN_'
                     );
                     if ($NavRecordGroup == $arResult["NavPageNomer"])
                     {
-                        ?><li class="current" title="<? echo GetMessage('nav_page_current_title'); ?>"><? echo $NavRecordGroupPrint; ?></li><?
+                        ?><li class="current <?if ($NavRecordGroup == 1){?>pagination__first<?}?> <?if ($NavRecordGroup == $arResult["nEndPage"]){?>pagination__last<?}?>" title="<? echo GetMessage('nav_page_current_title'); ?>"><? echo $NavRecordGroupPrint; ?></li><?
                     }
                     elseif ($NavRecordGroup == $arResult["NavPageCount"] && $arResult["bSavePage"] == false)
                     {
-                        ?><li class="pagination__first"><a href="<?=$arResult['sUrlPathParams']; ?>SIZEN_<?=$arResult["NavNum"]?>=<?=$arResult['NavPageSize']; ?>" title="<? echo $strTitle; ?>"><?=$NavRecordGroupPrint?></a></li><?
+                        ?><li class="<?if ($NavRecordGroup == 1){?>pagination__first<?}?>"><a href="<?=$arResult['sUrlPathParams']; ?>SIZEN_<?=$arResult["NavNum"]?>=<?=$arResult['NavPageSize']; ?>" title="<? echo $strTitle; ?>"><?=$NavRecordGroupPrint?></a></li><?
                     }
                     else
                     {
-                        ?><li class="pagination__last"><a href="<?=$arResult['sUrlPathParams']; ?>PAGEN_<?=$arResult["NavNum"]?>=<?=$NavRecordGroup?>&SIZEN_<?=$arResult["NavNum"]?>=<?=$arResult['NavPageSize']; ?>" title="<? echo $strTitle; ?>"><?=$NavRecordGroupPrint?></a></li><?
+                        ?><li class="<?if ($NavRecordGroup == $arResult["nEndPage"]){?>pagination__last<?}?>"><a href="<?=$arResult['sUrlPathParams']; ?>PAGEN_<?=$arResult["NavNum"]?>=<?=$NavRecordGroup?>&SIZEN_<?=$arResult["NavNum"]?>=<?=$arResult['NavPageSize']; ?>" title="<? echo $strTitle; ?>"><?=$NavRecordGroupPrint?></a></li><?
                     }
                     if (1 == ($arResult["NavPageCount"] - $NavRecordGroup) && 2 < ($arResult["NavPageCount"] - $arResult["nStartPage"]))
                     {
@@ -143,15 +143,15 @@ $strSelectPath = $arResult['sUrlPathParams'].($arResult["bSavePage"] ? '&PAGEN_'
                     );
                     if ($NavRecordGroup == $arResult["NavPageNomer"])
                     {
-                        ?><li class="current" title="<? echo GetMessage('nav_page_current_title'); ?>"><? echo $NavRecordGroup; ?></li><?
+                        ?><li class="current <?if ($NavRecordGroup == 1){?>pagination__first<?}?> <?if ($NavRecordGroup == $arResult["nEndPage"]){?>pagination__last<?}?>" title="<? echo GetMessage('nav_page_current_title'); ?>"><? echo $NavRecordGroup; ?></li><?
                     }
                     elseif ($NavRecordGroup == 1 && $arResult["bSavePage"] == false)
                     {
-                        ?><li  class="pagination__first"><a href="<?=$arResult['sUrlPathParams']; ?>SIZEN_<?=$arResult["NavNum"]?>=<?=$arResult['NavPageSize']; ?>" title="<? echo $strTitle; ?>"><?=$NavRecordGroup?></a></li><?
+                        ?><li class="<?if ($NavRecordGroup == 1){?>pagination__first<?}?>"><a href="<?=$arResult['sUrlPathParams']; ?>SIZEN_<?=$arResult["NavNum"]?>=<?=$arResult['NavPageSize']; ?>" title="<? echo $strTitle; ?>"><?=$NavRecordGroup?></a></li><?
                     }
                     else
                     {
-                        ?><li class="pagination__last"><a href="<?=$arResult['sUrlPathParams']; ?>PAGEN_<?=$arResult["NavNum"]?>=<?=$NavRecordGroup?>&SIZEN_<?=$arResult["NavNum"]?>=<?=$arResult['NavPageSize']; ?>" title="<? echo $strTitle; ?>"><?=$NavRecordGroup?></a></li><?
+                        ?><li class="<?if ($NavRecordGroup == $arResult["nEndPage"]){?>pagination__last<?}?>"><a href="<?=$arResult['sUrlPathParams']; ?>PAGEN_<?=$arResult["NavNum"]?>=<?=$NavRecordGroup?>&SIZEN_<?=$arResult["NavNum"]?>=<?=$arResult['NavPageSize']; ?>" title="<? echo $strTitle; ?>"><?=$NavRecordGroup?></a></li><?
                     }
                     if ($NavRecordGroup == 2 && $arResult["nStartPage"] > 3 && $arResult["nStartPage"] - $NavRecordGroup > 1)
                     {
