@@ -119,7 +119,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)
                     <div class="cell">
                         <div class="check">
                             <input class="check__input" name="license" type="checkbox" id="y1">
-                            <label class="check__label" for="y1">Я ознакомлен и принимаю условия &nbsp;<a href="shop-regular.html" title="">Соглашения об использовании сайта</a>, в том числе в части обработки и использования моих персональных данных</label>
+                            <label class="check__label" for="y1">Я ознакомлен и принимаю условия &nbsp;<a href="/soglasie/" target="_blank" title="">Соглашения об использовании сайта</a>, в том числе в части обработки и использования моих персональных данных</label>
                         </div>
                         <div class="check">
                             <input class="check__input" type="checkbox" name="REGISTER[UF_SUBSCRIBE]" checked id="y2">

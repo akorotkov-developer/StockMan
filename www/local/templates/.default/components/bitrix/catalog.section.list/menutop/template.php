@@ -19,7 +19,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
 {
 ?>
 
-    <div class="grid-container position-relative">
+    <div class="grid-container position-relative top-menu-on-site">
         <div class="grid-x directory" id="responsive-menu" data-toggler="js-open">
             <?
             foreach ($arResult['ROOT'] as $key) {

@@ -31,11 +31,13 @@ $this->EndViewTarget();
 
 
 <?
-$sect_id = GetSectionIDbyElementCODE($arResult["VARIABLES"]["ELEMENT_CODE"], $arResult["VARIABLES"]["SECTION_CODE"]);
-$parrenSectId = GetParrentCatalogForMenu($sect_id);
-?>
-<?SaveIdCatalogSection(GetParrentCatalogForMenu($parrenSectId))?>
-<?$_SESSION['CATLOG_SECTION'] = GetParrentCatalogForMenu($parrenSectId)?>
+if ($arResult["VARIABLES"]["ELEMENT_CODE"] and $arResult["VARIABLES"]["SECTION_CODE"]) {
+    $sect_id = GetSectionIDbyElementCODE($arResult["VARIABLES"]["ELEMENT_CODE"], $arResult["VARIABLES"]["SECTION_CODE"]);
+    $parrenSectId = GetParrentCatalogForMenu($sect_id);
+    ?>
+    <?SaveIdCatalogSection(GetParrentCatalogForMenu($parrenSectId))?>
+    <?$_SESSION['CATLOG_SECTION'] = GetParrentCatalogForMenu($parrenSectId)?>
+<?}?>
 
 
 

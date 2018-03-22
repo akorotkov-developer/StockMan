@@ -9,9 +9,9 @@ $APPLICATION->SetTitle("Контакты");
         123290, г. Москва, 1-ый Магистральный тупик, д. 11<br>
         ИНН 7717145242<br></p>
     <p>Телефон интернет-магазина:<br>
-        8 (495) 223-01-13,<br>
-        8 (800)-555-49-05<br>
-        Email: clients@podium-market.com<br>
+        <a href="tel:84952230113">8 (495) 223-01-13</a>,<br>
+        <a href="tel:88005554905">8 (800)-555-49-05</a><br>
+        Email: <a href="mailto:clients@podium-market.com">clients@podium-market.com</a><br>
     </p>
     <h2>Адреса магазинов</h2>
     <table class="shops-tb" border="0" cellpadding="10" cellspacing="1" style="width: 750px;">

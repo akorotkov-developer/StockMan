@@ -20,4 +20,9 @@ $APPLICATION->SetTitle("Страница не найдена");?>
             </div>
         </div>
     </div>
+    <style>
+        .top-menu-on-site:nth-child(2) {
+            display: none;
+        }
+    </style>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
