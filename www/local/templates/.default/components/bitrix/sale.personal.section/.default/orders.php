@@ -25,7 +25,7 @@ $APPLICATION->IncludeComponent(
 		"PATH_TO_PAYMENT" => $arParams["PATH_TO_PAYMENT"],
 		"SAVE_IN_SESSION" => $arParams["SAVE_IN_SESSION"],
 		"ORDERS_PER_PAGE" => $arParams["ORDERS_PER_PAGE"],
-		"SET_TITLE" =>$arParams["SET_TITLE"],
+		"SET_TITLE" =>"N",
 		"ID" => $arResult["VARIABLES"]["ID"],
 		"NAV_TEMPLATE" => $arParams["NAV_TEMPLATE"],
 		"ACTIVE_DATE_FORMAT" => $arParams["ACTIVE_DATE_FORMAT"],
@@ -41,5 +41,10 @@ $APPLICATION->IncludeComponent(
 	),
 	$component
 );
+if ($_GET["filter_history"] == "Y") {
+    $APPLICATION->SetTitle("Звершенные заказы");
+} else {
+    $APPLICATION->SetTitle("Текущие заказы");
+}
 ?>
 

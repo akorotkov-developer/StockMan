@@ -23,10 +23,13 @@ if ($arParams['SET_TITLE'] == 'Y')
 	"bitrix:main.profile",
 	"profile",
 	Array(
-		"SET_TITLE" =>$arParams["SET_TITLE"],
+		"SET_TITLE" =>"N",
 		"AJAX_MODE" => $arParams['AJAX_MODE_PRIVATE'],
 		"SEND_INFO" => $arParams["SEND_INFO_PRIVATE"],
 		"CHECK_RIGHTS" => $arParams['CHECK_RIGHTS_PRIVATE']
 	),
 	$component
 );?>
+<?
+$APPLICATION->SetTitle("Личные данные");
+?>
