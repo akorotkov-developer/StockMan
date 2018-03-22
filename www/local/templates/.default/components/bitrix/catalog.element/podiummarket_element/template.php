@@ -377,7 +377,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                                     $('.skirt__heart').on('click', function() {
                                         // действия, которые будут выполнены при наступлении события...
                                         add2wish(
-                                            "251660",
+                                            "<?=$arResult["ID"]?>",
                                             "<?=$IDpriceforDiffered?>",
                                             "<?=intval($priceforDiffered)?>",
                                             "<?=$arResult["NAME"]?>",

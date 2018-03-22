@@ -21,8 +21,10 @@ $APPLICATION->IncludeComponent(
 		"PATH_TO_DETAIL" => $arResult['PATH_TO_PROFILE_DETAIL'],
 		"PATH_TO_DELETE" => $arResult['PATH_TO_PROFILE_DELETE'],
 		"PER_PAGE" => $arParams["PROFILES_PER_PAGE"],
-		"SET_TITLE" =>$arParams["SET_TITLE"],
+		"SET_TITLE" =>"N",
 	),
 	$component
 );
+$APPLICATION->SetTitle("Профили заказов");
 ?>
+

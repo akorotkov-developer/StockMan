@@ -17,6 +17,7 @@ if(strlen($arResult["NAV_STRING"]) > 0)
 if (count($arResult["PROFILES"]))
 {
 	?>
+
     <div class="table-scroll">
         <table>
             <thead>

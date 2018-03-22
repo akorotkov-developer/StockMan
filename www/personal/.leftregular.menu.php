@@ -1,7 +1,7 @@
 <?
 $current =array();
 if ($_GET["CANCEL"] == "Y") {
-	$current = array("Отмененные заказы","/?CANCEL=Y",array("SELECT_Y"=>"Y",),array(),"");
+	$current = array("Отмененные заказы","",array("SELECT_Y"=>"Y",),array(),"");
 }
 $aMenuLinks = Array(
     $current,
