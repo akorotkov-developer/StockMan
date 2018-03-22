@@ -2032,6 +2032,7 @@ $(document).foundation();
     });
     $('.js-apply').click(function() {
       $(this).closest('.sort').removeClass('js-open');
+      $(this).closest('form').submit();
     });
     $('.js-select-all').click(function() {
       var $checkBoxes = $(this).closest('.sort').find('input');
