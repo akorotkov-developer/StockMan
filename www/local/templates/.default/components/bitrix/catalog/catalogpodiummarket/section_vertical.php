@@ -121,27 +121,34 @@ if ($isFilter || $isSidebar): ?>
             <div class="sort text-left">
                 <div class="sort__main">Сортировать</div>
                 <div class="sort__other sort__other_right">
-                    <div class="sort__over" id="sortbox">
-                        <div>
-                            <div class="check">
-                                <input class="check__input" type="checkbox" id="j1" value="name">
-                                <label class="check__label" for="j1">по названию</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="check">
-                                <input class="check__input" type="checkbox" id="j2" value="catalog_PRICE_3">
-                                <label class="check__label" for="j2">по возрастанию цены</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="check">
-                                <input class="check__input" type="checkbox" id="j3" value="timestamp_x">
-                                <label class="check__label" for="j3">по дате поступления</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="">Применить</a></div>
+                    <?$APPLICATION->IncludeComponent(
+                        "codeblogpro:sort.panel",
+                        "catalog",
+                        array(
+                            "CACHE_TIME" => "36000000",
+                            "CACHE_TYPE" => "A",
+                            "FIELDS_CODE" => array(
+                                0 => "show_counter",
+                                1 => "created"
+                            ),
+                            "IBLOCK_ID" => "10",
+                            "IBLOCK_TYPE" => "1c_catalog",
+                            "INCLUDE_SORT_TO_SESSION" => "Y",
+                            "ORDER_NAME" => "ORDER",
+                            "PRICE_CODE" => array(
+                                0 => "1",
+                            ),
+                            "PROPERTY_CODE" => array(
+                            ),
+                            "SORT_NAME" => "SORT",
+                            "SORT_ORDER" => array(
+                                0 => "asc,nulls",
+                                1 => "desc,nulls",
+                            ),
+                            "COMPONENT_TEMPLATE" => ".default"
+                        ),
+                        false
+                    );?>
                 </div>
             </div>
         </div>
