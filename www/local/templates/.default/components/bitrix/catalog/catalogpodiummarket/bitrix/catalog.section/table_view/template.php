@@ -316,6 +316,22 @@ $signedParams = $signer->sign(base64_encode(serialize($arResult['ORIGINAL_PARAME
 <?
 }
 
+if ($arResult['NAV_RESULT']->NavRecordCount > 0) {
+    $start = ($arResult['NAV_RESULT']->NavPageNomer == 1 ? '1' : ($arResult['NAV_RESULT']->NavPageNomer - 1) * $arResult['NAV_RESULT']->NavPageSize + 1);
+    $end = $arResult['NAV_RESULT']->NavPageNomer * $arResult['NAV_RESULT']->NavPageSize;
+    if ($end > $arResult['NAV_RESULT']->NavRecordCount) {
+        $end =  $arResult['NAV_RESULT']->NavRecordCount;
+    }
+    $this->SetViewTarget('catalog_search_info');?>
+    <div class="text-secondary margin-bottom-13">Результаты поиска <?=$start?>-<?=$end?> из <?=$arResult['NAV_RESULT']->NavRecordCount?></div>
+    <?$this->EndViewTarget();
+} else {
+    $this->SetViewTarget('catalog_search_info');?>
+    <div class="text-secondary margin-bottom-13"> Сожалеем, но ничего не найдено.</div>
+    <?$this->EndViewTarget();
+}
+
+
 $nameSection = $arResult['NAME'];
 if (isset($arResult["IPROPERTY_VALUES"]['SECTION_PAGE_TITLE']{1})) {
     $nameSection = htmlspecialchars($arResult["IPROPERTY_VALUES"]['SECTION_PAGE_TITLE']);
@@ -327,3 +343,4 @@ $this->SetViewTarget('catalog_section_h1');?>
 $this->SetViewTarget('catalog_section_count');?>
     <div class="text-secondary margin-bottom-1"><?=$arResult['NAV_RESULT']->NavRecordCount?> <?=inclination($arResult['NAV_RESULT']->NavRecordCount,array('товар','товара','товаров'))?></div>
 <?$this->EndViewTarget();
+

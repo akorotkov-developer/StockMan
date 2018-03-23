@@ -61,12 +61,12 @@ if (!empty($arElements) && is_array($arElements))
         array (
             "LOGIC" => "OR",
             array("!DETAIL_PICTURE" => false),
-            //array("!PROPERTY_MORE_PHOTO" => false),
+            array("!PROPERTY_MORE_PHOTO" => false),
         )
     );
     $arSectionSearch = array();
     $arIdSectionSearch = array();
-    if (isset($_COOKIE["CATALOG_SECTION"])) {
+    //if (isset($_COOKIE["CATALOG_SECTION"])) {
         $arIdSectionSearch[] = GetHomeCtalogSection();
         $rsParentSection = CIBlockSection::GetByID(GetHomeCtalogSection());
         if ($arParentSection = $rsParentSection->GetNext())
@@ -79,19 +79,17 @@ if (!empty($arElements) && is_array($arElements))
             }
         }
         $arSectionSearch = array(
-            "SECTION_ID" => $arIdSectionSearch
+            "=SECTION_ID" => $arIdSectionSearch
         );
         $searchFilter = array_merge($searchFilter, $arSectionSearch);
-    }
+    //}
 
     if (intval($_REQUEST["section_search_id"])>0) {
-
         $arSectionSearch = array(
-            "SECTION_ID" => intval($_REQUEST["section_search_id"])
+            "=SECTION_ID" => intval($_REQUEST["section_search_id"])
         );
         $searchFilter = array_merge($searchFilter, $arSectionSearch);
     }
-
 
 		$ar = $APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
@@ -209,11 +207,11 @@ if (!empty($arElements) && is_array($arElements))
 	);
 
 
-    if ($ar == 0 ){
+    /*if ($ar == 0 ){
         $this->SetViewTarget('catalog_search_section');
         $this->EndViewTarget();
         ?><div class="cell small-12 medium-8 xlarge-10 large-9">Сожалеем, но ничего не найдено.</div><?
-    } else {
+    } else {*/
         $arIdSection = array();
         $arSelect = Array("ID", "SECTION_ID");
         $arFilter = Array(
@@ -223,7 +221,7 @@ if (!empty($arElements) && is_array($arElements))
                 array("!DETAIL_PICTURE" => false),
                 array("!PROPERTY_MORE_PHOTO" => false),
             ));
-        $res = CIBlockElement::GetList(Array(), $arFilter, array("IBLOCK_SECTION_ID"), false, $arSelect);
+        $res = CIBlockElement::GetList(Array(), $searchFilter, array("IBLOCK_SECTION_ID"), false, $arSelect);
         while($ar_fields = $res->GetNext())
         {
             $arIdSection[] = $ar_fields["IBLOCK_SECTION_ID"];
@@ -244,7 +242,7 @@ if (!empty($arElements) && is_array($arElements))
             ?></ul><?
         }
         $this->EndViewTarget();
-    }
+    //}
 
 
     ?></div><?
