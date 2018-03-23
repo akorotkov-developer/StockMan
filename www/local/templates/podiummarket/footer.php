@@ -8,14 +8,17 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
     </div>
 <?}?>
 
-<?$APPLICATION->IncludeComponent("bitrix:system.auth.form","",Array(
-        "REGISTER_URL" => "register.php",
-        "FORGOT_PASSWORD_URL" => "",
-        "PROFILE_URL" => "profile.php",
-        "SHOW_ERRORS" => "Y",
-        "STORE_PASSWORD" => "N"
-    )
-);?>
+<?if(!$USER->IsAuthorized()){?>
+
+    <?$APPLICATION->IncludeComponent("bitrix:system.auth.form","",Array(
+            "REGISTER_URL" => "register.php",
+            "FORGOT_PASSWORD_URL" => "",
+            "PROFILE_URL" => "profile.php",
+            "SHOW_ERRORS" => "Y",
+            "STORE_PASSWORD" => "N"
+        )
+    );?>
+
 
     <div class="reveal" id="reg-popup" data-reveal data-deep-link="true">
         <?$APPLICATION->IncludeComponent("bitrix:main.register","",Array(
@@ -38,6 +41,8 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
             )
         );?>
     </div>
+
+<?}?>
 
     <?/*<div class="reveal" id="recover-popup" data-reveal data-deep-link="true">
         <?$APPLICATION->IncludeComponent( "bitrix:system.auth.forgotpasswd",
@@ -122,11 +127,11 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                 <div class="footer__block" data-toggler="js-open" id="foot4">
                     <div class="text-size-small margin-bottom-4">
                         Тел.:
-                        <a class="text-decoration-none" href="tel:88003331257">8 (800) 333-12-57</a>
+                        <a class="text-decoration-none" href="tel:88005554905">8 (800) 555-49-05</a>
                     </div>
                     <div class="text-size-small margin-bottom-11">
                         E-mail:
-                        <a class="text-decoration-none" href="mailto:mail@brendsalon.ru">mail@brendsalon.ru</a>
+                        <a class="text-decoration-none" href="mailto:clients@podium-market.com">clients@podium-market.com</a>
                     </div><a class="fa-stack text-asphalt soc" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"> </i></a><a class="fa-stack text-asphalt soc" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"> </i></a><a class="fa-stack text-asphalt soc" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"> </i></a>
                 </div>
                 <hr class="show-for-small-only">
