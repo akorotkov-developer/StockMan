@@ -8,14 +8,17 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
     </div>
 <?}?>
 
-<?$APPLICATION->IncludeComponent("bitrix:system.auth.form","",Array(
-        "REGISTER_URL" => "register.php",
-        "FORGOT_PASSWORD_URL" => "",
-        "PROFILE_URL" => "profile.php",
-        "SHOW_ERRORS" => "Y",
-        "STORE_PASSWORD" => "N"
-    )
-);?>
+<?if(!$USER->IsAuthorized()){?>
+
+    <?$APPLICATION->IncludeComponent("bitrix:system.auth.form","",Array(
+            "REGISTER_URL" => "register.php",
+            "FORGOT_PASSWORD_URL" => "",
+            "PROFILE_URL" => "profile.php",
+            "SHOW_ERRORS" => "Y",
+            "STORE_PASSWORD" => "N"
+        )
+    );?>
+
 
     <div class="reveal" id="reg-popup" data-reveal data-deep-link="true">
         <?$APPLICATION->IncludeComponent("bitrix:main.register","",Array(
@@ -38,6 +41,8 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
             )
         );?>
     </div>
+
+<?}?>
 
     <?/*<div class="reveal" id="recover-popup" data-reveal data-deep-link="true">
         <?$APPLICATION->IncludeComponent( "bitrix:system.auth.forgotpasswd",
