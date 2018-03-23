@@ -161,7 +161,7 @@ if ($isFilter || $isSidebar): ?>
                 <div class="sort__main">Сортировать</div>
                 <div class="sort__other sort__other_right">
                     <?$APPLICATION->IncludeComponent(
-                        "codeblogpro:sort.panel",
+                        "cetera:sort.panel",
                         "catalog",
                         array(
                             "CACHE_TIME" => "36000000",
