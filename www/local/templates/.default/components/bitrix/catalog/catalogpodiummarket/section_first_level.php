@@ -16,6 +16,7 @@ $this->setFrameMode(true);
 
 
 <?
+/*
 switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
     case "men":
         $pathname = "MEN";
@@ -29,30 +30,26 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
         $pathname = "KIDS";
         $sectionID = StockMan\Config::KIDS_ID;
         break;
-}
+}*/
 ?>
 
 
-<div class="sale margin-bottom-9">
-    <?
-    $rs = CAdvBanner::GetList($by="s_id", $order="desc", array("TYPE_SID" => "BANNER_MAIN_PAGE_FORSLIDER", "TYPE_SID_EXACT_MATCH" => "Y"), $if_filtered);
-    while($ar = $rs->Fetch()) {
-        $dom = new DOMDocument;
-        $dom->loadHTML(CAdvBanner::GetHTML($ar));
-        foreach ($dom->getElementsByTagName('a') as $node) {
-            $arRes["LINK_BANNER"] = $node->getAttribute( 'href' );
-        }
-        foreach ($dom->getElementsByTagName('img') as $node) {
-            $arRes["IMG_BANNER"] = $node->getAttribute( 'src' );
-        }
-        ?>
-        <a class="sale__slide" href="<?=$arRes["LINK_BANNER"]?>"  style="background-image:url(<?=$arRes["IMG_BANNER"]?>);" >
-            <div class="sale__mobile" style="background-image:url(<?=$arRes["IMG_BANNER"]?>?>);"></div>
-        </a>
-        <?
-    }
-    ?>
-</div>
+<?
+    $APPLICATION->IncludeComponent(
+        "cetera:super.component",
+        "cetera_banner_rotation",
+        Array(
+            "SOURCE" => "advert",
+            "TYPE" => 'BANNER_MAIN_PAGE_FORSLIDER',
+            "TARGETING" => "Y",
+            "NOINDEX" => "N",
+            "LIMIT" => "10",
+            "CACHE_TYPE" => "N",
+            "CACHE_TIME" => "0",
+            "STOP_ON_FOCUS" => "N"
+        )
+    );
+?>
 
 <?
 /*require_once($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/include_areas/top_slider_catalog.php');*/
@@ -128,7 +125,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
     <div class="grid-x grid-padding-x text-center">
         <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerdress",Array(
                 "TYPE" => "BANNER_MAIN_PAGE_DRESS",
-                "CACHE_TYPE" => "A",
+                "CACHE_TYPE" => "N",
                 "NOINDEX" => "Y",
                 "CACHE_TIME" => "3600"
             )
@@ -136,7 +133,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
 
         <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerbag",Array(
                 "TYPE" => "BANNER_MAIN_PAGE_BAGS",
-                "CACHE_TYPE" => "A",
+                "CACHE_TYPE" => "N",
                 "NOINDEX" => "Y",
                 "CACHE_TIME" => "3600"
             )
@@ -144,7 +141,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
 
         <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerprices",Array(
                 "TYPE" => "BANNER_MAIN_PAGE_OURPRICES",
-                "CACHE_TYPE" => "A",
+                "CACHE_TYPE" => "N",
                 "NOINDEX" => "Y",
                 "CACHE_TIME" => "3600"
             )
@@ -152,7 +149,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
 
         <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannerprint",Array(
                 "TYPE" => "BANNER_MAIN_PAGE_PRINT",
-                "CACHE_TYPE" => "A",
+                "CACHE_TYPE" => "N",
                 "NOINDEX" => "Y",
                 "CACHE_TIME" => "3600"
             )
@@ -160,7 +157,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
 
         <?$APPLICATION->IncludeComponent("bitrix:advertising.banner","bannercollectionjacket",Array(
                 "TYPE" => "BANNER_MAIN_PAGE_COLLECTION_JACKET",
-                "CACHE_TYPE" => "A",
+                "CACHE_TYPE" => "N",
                 "NOINDEX" => "Y",
                 "CACHE_TIME" => "3600"
             )
