@@ -3,7 +3,7 @@ IncludeTemplateLangFile(__FILE__);
 
 require($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/header.php');
 ?>
-<div class="content <?if (strpos($APPLICATION->GetCurPage(), '/faq/') !== false) {?> padding-top-5<?}?>">
+<div class="content padding-top-5">
     <?$APPLICATION->IncludeComponent("bitrix:breadcrumb","",
         Array(
             "START_FROM" => "0",
