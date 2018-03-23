@@ -99,11 +99,12 @@ Loader::includeModule("sale");
                             "SHOW_TOTAL_PRICE" => "N"
                         )
                     );?>
+                    <a class="header__enter" href="/personal/cart/?delayed=Y"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/heart.svg" alt=""><span id="wishcount"><?=GetCountDeferred();?></span></a>
 
                     <?if($USER->IsAuthorized()){?>
                         <a class="header__enter hide-for-small-only" href="/personal/private/">Личный кабинет</a>
                     <?}?>
-                        <a class="header__enter" href="/personal/cart/?delayed=Y"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/heart.svg" alt=""><span id="wishcount"><?=GetCountDeferred();?></span></a>
+
                     <?if($USER->IsAuthorized()){?>
                         <a class="header__enter hide-for-small-only" href="<?echo $APPLICATION->GetCurPageParam("logout=yes", array(
                             "login",
