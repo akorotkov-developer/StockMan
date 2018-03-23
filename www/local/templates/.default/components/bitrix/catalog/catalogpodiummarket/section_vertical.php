@@ -118,6 +118,45 @@ if ($isFilter || $isSidebar): ?>
         <?endif?>
         <?/*Сортировка*/?>
         <div class="cell small-12 medium-4 large-6 text-center medium-text-right">
+            <?$arDisplays = array("model", "dummy");
+            if(array_key_exists("display", $_REQUEST) || (array_key_exists("display", $_SESSION))){
+                if($_REQUEST["display"] && (in_array(trim($_REQUEST["display"]), $arDisplays))){
+                    $display = trim($_REQUEST["display"]);
+                    $_SESSION["display"]=trim($_REQUEST["display"]);
+                }
+                elseif($_SESSION["display"] && (in_array(trim($_SESSION["display"]), $arDisplays))){
+                    $display = $_SESSION["display"];
+                }
+                elseif($arSection["DISPLAY"]){
+                    $display = $arSection["DISPLAY"];
+                }
+                else{
+                    $display = 'dummy';
+                }
+            }
+            else{
+                $display = "dummy";
+            }
+            $temp = 'view';
+            $tempNew = 'dummy';
+            switch ($display) {
+                case 'dummy':
+                    $temp = 'view';
+                    $tempNew = 'model';
+                    break;
+                case 'model':
+                    $temp = 'model';
+                    $tempNew = 'dummy';
+                    break;
+            }
+
+            $arNameDisplay = array(
+                'model' => "На модели",
+                'dummy' => "На манекене"
+            );
+            $template = "table_".$temp;
+            ?>
+            <a class="text-secondary margin-right-7" href="<?=$APPLICATION->GetCurPageParam('display='.$tempNew, array('display'))?>"><?=$arNameDisplay[$tempNew]?></a>
             <div class="sort text-left">
                 <div class="sort__main">Сортировать</div>
                 <div class="sort__other sort__other_right">
@@ -230,7 +269,7 @@ if ($isFilter || $isSidebar): ?>
             <?
             $intSectionID = $APPLICATION->IncludeComponent(
                 "bitrix:catalog.section",
-                "table_view",
+                $template,
                 array(
                     "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
                     "IBLOCK_ID" => $arParams["IBLOCK_ID"],

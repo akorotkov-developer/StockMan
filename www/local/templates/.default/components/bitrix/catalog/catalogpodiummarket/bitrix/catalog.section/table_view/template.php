@@ -304,3 +304,26 @@ $signedParams = $signer->sign(base64_encode(serialize($arResult['ORIGINAL_PARAME
 		container: '<?=$containerName?>'
 	});
 </script>
+
+<?if (isset($arResult["~DESCRIPTION"])) {
+    ?>
+    <div class="cell grid-x grid-padding-x">
+        <div class="cell small-12 medium-4 large-3 xlarge-2 text-center medium-text-left"></div>
+        <div class="cell small-12 medium-8 xlarge-10 large-9">
+            <?echo $arResult["~DESCRIPTION"];?>
+        </div>
+    </div>
+<?
+}
+
+$nameSection = $arResult['NAME'];
+if (isset($arResult["IPROPERTY_VALUES"]['SECTION_PAGE_TITLE']{1})) {
+    $nameSection = htmlspecialchars($arResult["IPROPERTY_VALUES"]['SECTION_PAGE_TITLE']);
+}
+$this->SetViewTarget('catalog_section_h1');?>
+    <h1 class="margin-bottom-0"><?=$nameSection?></h1>
+<?$this->EndViewTarget();
+
+$this->SetViewTarget('catalog_section_count');?>
+    <div class="text-secondary margin-bottom-1"><?=$arResult['NAV_RESULT']->NavRecordCount?> <?=inclination($arResult['NAV_RESULT']->NavRecordCount,array('товар','товара','товаров'))?></div>
+<?$this->EndViewTarget();
