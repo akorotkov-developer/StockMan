@@ -4,6 +4,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.ph
 use Bitrix\Main\Loader;
 
 //Подключаем модуль sale
+Loader::includeModule("catalog");
 Loader::includeModule("sale");
 
 //Получаем корзину текущего пользователя
@@ -21,15 +22,17 @@ $arFields = array(
     "LID" => 's1',
     "DELAY" => "Y",
     "CAN_BUY" => "Y",
-    "NAME" => iconv("UTF-8","Windows-1251",$_POST['name']),
+    "NAME" => htmlspecialchars($_POST['name']),
     "MODULE" => "sale",
     "NOTES" => "",
     "DETAIL_PAGE_URL" => $_POST['dpu'],
     "FUSER_ID" => $fUserID
 );
+//Add2BasketByProductID(269766, 1 , array("DELAY" => "Y"), array());
 
 //Получаем количество отложеных товаров
-if (CSaleBasket::Add($arFields)) {
+//if (CSaleBasket::Add($arFields)) {
+if (Add2BasketByProductID($_POST['p_id'], 1 , array("DELAY" => "Y"), array())) {
     $arBasketItems = array();
     $dbBasketItems = CSaleBasket::GetList(
         array(
