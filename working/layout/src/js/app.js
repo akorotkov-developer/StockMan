@@ -2042,7 +2042,7 @@ $(document).foundation();
     /**
     * Поиск вариантов значений в фильтре
     */
-    $('.js-filter-values-search').on('keyup', function() {
+    $('.js-filter-values-search').on('input', function() {
         var $this = $(this),
             $filterValues = $this.siblings('.js-filter-values'),
             val = $this.val().toLowerCase();
