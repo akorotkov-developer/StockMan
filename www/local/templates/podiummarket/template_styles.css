@@ -18,6 +18,10 @@
         min-height: 480px;
     }
 }
+#wishcount {
+    position: relative;
+    left: -15px;
+}
 .sale-order-list-change-payment {
     color: #222!important;
     text-decoration: underline!important;
