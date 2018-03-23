@@ -21,7 +21,13 @@ $APPLICATION->SetTitle("Страница не найдена");?>
         </div>
     </div>
     <style>
-        .top-menu-on-site:nth-child(2) {
+        .position-relative:nth-child(2) {
+            display: none;
+        }
+        .top-menu-on-site:nth-child(1) {
+            display: none;
+        }
+        .grid-container .position-relative .top-menu-on-site {
             display: none;
         }
     </style>

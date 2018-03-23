@@ -129,7 +129,7 @@ $arFilterSection = array(
             3 => "",
         ),
         "LIST_OFFERS_PROPERTY_CODE" => array(
-            //0 => StockMan\Catalog\Config::RAZMER,
+            0 => StockMan\Catalog\Config::RAZMER,
         ),
         "LIST_OFFERS_LIMIT" => "10",
         "SECTION_BACKGROUND_IMAGE" => "UF_BACKGROUND_IMAGE",
