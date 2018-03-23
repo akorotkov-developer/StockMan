@@ -12,9 +12,9 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
-$arSearchable = [
-    'TSVET', 'BRAND'
-];
+$arSearchable = ['TSVET', 'BRAND'];
+
+$arExcluded = ['DISCOUNT'];
 
 $templateData = array(
 	'TEMPLATE_THEME' => $this->GetFolder().'/themes/'.$arParams['TEMPLATE_THEME'].'/colors.css',
@@ -131,6 +131,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                 if(
                     empty($arItem["VALUES"])
                     || isset($arItem["PRICE"])
+                    || in_array($arItem["CODE"], $arExcluded)
                 )
                     continue;
 
