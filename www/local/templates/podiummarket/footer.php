@@ -8,36 +8,29 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
     </div>
 <?}?>
 
-<?$APPLICATION->IncludeComponent("bitrix:system.auth.form","",Array(
-        "REGISTER_URL" => "register.php",
-        "FORGOT_PASSWORD_URL" => "",
-        "PROFILE_URL" => "profile.php",
-        "SHOW_ERRORS" => "Y",
-        "STORE_PASSWORD" => "N"
-    )
-);?>
+<?if(!$USER->IsAuthorized()){?>
+
+    <?$APPLICATION->IncludeComponent("bitrix:system.auth.form","",Array(
+            "REGISTER_URL" => "register.php",
+            "FORGOT_PASSWORD_URL" => "",
+            "PROFILE_URL" => "profile.php",
+            "SHOW_ERRORS" => "Y",
+            "STORE_PASSWORD" => "N"
+        )
+    );?>
+
 
     <div class="reveal" id="reg-popup" data-reveal data-deep-link="true">
-        <?$APPLICATION->IncludeComponent("bitrix:main.register","",Array(
-                "USER_PROPERTY_NAME" => "",
-                "SEF_MODE" => "Y",
-                "SHOW_FIELDS" => Array("NAME", "LAST_NAME", "SECOND_NAME", "PERSONAL_GENDER", "PERSONAL_BIRTHDAY", "PERSONAL_PHONE", "UF_SUBSCRIBE"),
-                "REQUIRED_FIELDS" => Array("NAME","PERSONAL_PHONE"),
-                "AUTH" => "Y",
-                "USE_BACKURL" => "Y",
-                "SUCCESS_PAGE" => "",
-                "SET_TITLE" => "N",
-                "USER_PROPERTY" => Array(),
-                "SEF_FOLDER" => "/",
-                "VARIABLE_ALIASES" => Array(),
-                "AJAX_OPTION_JUMP" => "N",
-                "AJAX_OPTION_STYLE" => "Y",
-                "AJAX_OPTION_HISTORY" => "N",
-                "AJAX_OPTION_ADDITIONAL" => "",
-                "AJAX_MODE" => "Y",
+        <?$APPLICATION->IncludeComponent("bitrix:main.include","",Array(
+                "AREA_FILE_SHOW" => "file",
+                "PATH" => StockMan\Config::STOCKMAN_TEMPLATE_PATH."/include_areas/register.php",
+                "AREA_FILE_RECURSIVE" => "Y",
+                "EDIT_TEMPLATE" => ""
             )
         );?>
     </div>
+
+<?}?>
 
     <?/*<div class="reveal" id="recover-popup" data-reveal data-deep-link="true">
         <?$APPLICATION->IncludeComponent( "bitrix:system.auth.forgotpasswd",
@@ -122,12 +115,12 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                 <div class="footer__block" data-toggler="js-open" id="foot4">
                     <div class="text-size-small margin-bottom-4">
                         Тел.:
-                        <a class="text-decoration-none" href="tel:88003331257">8 (800) 333-12-57</a>
+                        <a class="text-decoration-none" href="tel:88005554905">8 (800) 555-49-05</a>
                     </div>
                     <div class="text-size-small margin-bottom-11">
                         E-mail:
-                        <a class="text-decoration-none" href="mailto:mail@brendsalon.ru">mail@brendsalon.ru</a>
-                    </div><a class="fa-stack text-asphalt soc" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"> </i></a><a class="fa-stack text-asphalt soc" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"> </i></a><a class="fa-stack text-asphalt soc" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"> </i></a>
+                        <a class="text-decoration-none" href="mailto:clients@podium-market.com">clients@podium-market.com</a>
+                    </div><a class="fa-stack text-asphalt soc" href="https://www.instagram.com/podiummarket/" rel="nofollow" title="инстаграм"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"> </i></a><a class="fa-stack text-asphalt soc" href="https://vk.com/podiummarket1" title="вконтакте" rel="nofollow"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"> </i></a><a class="fa-stack text-asphalt soc" href="https://www.facebook.com/podiummarket" title="facebook" rel="nofollow"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"> </i></a>
                 </div>
                 <hr class="show-for-small-only">
             </div>

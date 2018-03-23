@@ -2,34 +2,27 @@
     die();
 }
 if (!empty($arResult['SORT']['PROPERTIES'])) { ?>
-    <a class="text-secondary margin-right-7" href="<?= $arResult['VIEW']['URL'] ?>"><?= $arResult['VIEW']['NAME'] ?></a>
-    <div class="sort text-left">
-        <div class="sort__main">Сортировать</div>
-            <div class="sort__other sort__other_right">
-                <form method="GET">
-                    <div class="sort__over" id="sortbox">
-                        <? foreach ($arResult['SORT']['PROPERTIES'] as $key => $property) {?>
-                            <? if ($property['ACTIVE']) { ?>
-                                <div>
-                                    <div class="check">
-                                        <input class="check__input" type="radio" id="jsort<?=$key?>" name="sort" value="<?= $property['CODE'] ?>" checked="checked" data-direction="<?=$property['DIRECTION']?>">
-                                        <label class="check__label" for="jsort<?=$key?>"><?= $property['NAME'] ?></label>
-                                    </div>
-                                </div>
-                            <? } else { ?>
-                                <div>
-                                    <div class="check">
-                                        <input class="check__input" type="radio" id="jsort<?=$key?>" name="sort" value="<?= $property['CODE'] ?>" data-direction="<?=$property['DIRECTION']?>">
-                                        <label class="check__label" for="jsort<?=$key?>"><?= $property['NAME'] ?></label>
-                                    </div>
-                                </div>
-                            <? }
-                        }?>
+    <form method="GET">
+        <div class="sort__over" id="sortbox">
+            <? foreach ($arResult['SORT']['PROPERTIES'] as $key => $property) {?>
+                <? if ($property['ACTIVE']) { ?>
+                    <div>
+                        <div class="check">
+                            <input class="check__input" type="radio" id="jsort<?=$key?>" name="sort" value="<?= $property['CODE'] ?>" checked="checked" data-direction="<?=$property['DIRECTION']?>">
+                            <label class="check__label" for="jsort<?=$key?>"><?= $property['NAME'] ?></label>
+                        </div>
                     </div>
-                    <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="javascript:void(0);">Применить</a></div>
-                </form>
-            </div>
+                <? } else { ?>
+                    <div>
+                        <div class="check">
+                            <input class="check__input" type="radio" id="jsort<?=$key?>" name="sort" value="<?= $property['CODE'] ?>" data-direction="<?=$property['DIRECTION']?>">
+                            <label class="check__label" for="jsort<?=$key?>"><?= $property['NAME'] ?></label>
+                        </div>
+                    </div>
+                <? }
+            }?>
         </div>
-    </div>
+        <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="javascript:void(0);">Применить</a></div>
+    </form>
     <?
-} ?>
+}

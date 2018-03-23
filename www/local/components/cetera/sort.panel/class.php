@@ -153,46 +153,12 @@ class CCeteraSortPanelComponent extends \CBitrixComponent
         $this->arResult = $result;
     }
 
-    protected function prepareViewResult()
-    {
-
-        $request = Application::getInstance()->getContext()->getRequest();
-
-        $view = $request->getQuery('view');
-
-        if (empty($view))
-        {
-            if (!empty($_SESSION['view']))
-                $view = $_SESSION['view'];
-            else  $view = $this->defaults['view'];
-        }
-        else $_SESSION['view'] = $view;
-
-        $GLOBALS['VIEW'] = $view;
-
-        if ($view == 'model')
-        {
-            $this->arResult['VIEW'] = [
-                'NAME' => Loc::getMessage('COMPONENT_SORT_PANEL_COMPONENT_VIEW_TYPES_MANN'),
-                'URL' => $GLOBALS['APPLICATION']->GetCurPageParam('view=mann', ['view'])
-            ];
-        }
-        else
-        {
-            $this->arResult['VIEW'] = [
-                'NAME' => Loc::getMessage('COMPONENT_SORT_PANEL_COMPONENT_VIEW_TYPES_MODEL'),
-                'URL' => $GLOBALS['APPLICATION']->GetCurPageParam('view=model', ['model'])
-            ];
-        }
-    }
-
     public function executeComponent()
     {
         try
         {
             $this->checkModules();
             $this->prepareSortResult();
-            $this->prepareViewResult();
 
             $this->includeComponentTemplate();
         }

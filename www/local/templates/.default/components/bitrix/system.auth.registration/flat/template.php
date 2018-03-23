@@ -9,191 +9,140 @@
 /**
  * Bitrix vars
  * @global CMain $APPLICATION
- * @var array $arParams
- * @var array $arResult
- * @var CBitrixComponentTemplate $this
+ * @global CUser $USER
+ * @param array $arParams
+ * @param array $arResult
+ * @param CBitrixComponentTemplate $this
  */
 
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-
-//one css for all system.auth.* forms
-$APPLICATION->SetAdditionalCSS("/bitrix/css/main/system.auth/flat/style.css");
+if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)
+    die();
 ?>
 
 
-
-<div class="grid-x grid-padding-x">
+<div class="grid-x grid-padding-x" xmlns="http://www.w3.org/1999/html">
     <div class="text-center cell small-12 medium-6 medium-offset-3 large-4 large-offset-4">
 
-        <div class="bx-authform">
-        <?
-        if(!empty($arParams["~AUTH_RESULT"])):
-            $text = str_replace(array("<br>", "<br />"), "\n", $arParams["~AUTH_RESULT"]["MESSAGE"]);
-        ?>
 
-        <?endif?>
+        <?if($USER->IsAuthorized()):?>
 
-        <?if($arResult["USE_EMAIL_CONFIRMATION"] === "Y" && is_array($arParams["AUTH_RESULT"]) &&  $arParams["AUTH_RESULT"]["TYPE"] === "OK"):?>
+            <p><?echo GetMessage("MAIN_REGISTER_AUTH")?></p>
 
         <?else:?>
+            <?
+            if ($_POST) {
+                if (count($arResult["ERRORS"]) > 0):
+                    foreach ($arResult["ERRORS"] as $key => $error)
+                        if (intval($key) == 0 && $key !== 0)
+                            $arResult["ERRORS"][$key] = str_replace("#FIELD_NAME#", "&quot;".GetMessage("REGISTER_FIELD_".$key)."&quot;", $error);
 
-        <?if($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):?>
+                    ShowError(implode("<br />", $arResult["ERRORS"]));
 
-        <?endif?>
-
-        <noindex>
-            <form method="post" action="<?=$arResult["AUTH_URL"]?>" name="bform" enctype="multipart/form-data">
-        <?if($arResult["BACKURL"] <> ''):?>
-                <input type="hidden" name="backurl" value="<?=$arResult["BACKURL"]?>" />
-        <?endif?>
-                <input type="hidden" name="AUTH_FORM" value="Y" />
-                <input type="hidden" name="TYPE" value="REGISTRATION" />
-
-
-
-                    <label>
-                        <input required type="text" name="USER_NAME" maxlength="255" value="<?=$arResult["USER_NAME"]?>" placeholder="<?=GetMessage("AUTH_NAME")?>"/>
-                    </label>
+                elseif($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):
+                    $successregister = true;
+                    ?>
+                    <p><?echo GetMessage("REGISTER_EMAIL_WILL_BE_SENT")?></p>
+                <?endif?>
+            <?}?>
 
 
+            <?if (!$successregister) {?>
+                <div class="cell" style="text-align: left">
+                    <form method="post" action="<?=POST_FORM_ACTION_URI?>" name="regform" enctype="multipart/form-data">
+                        <?
+                        if($arResult["BACKURL"] <> ''):
+                            ?>
+                            <input type="hidden" name="backurl" value="<?=$arResult["BACKURL"]?>" />
+                            <?
+                        endif;
+                        ?>
 
-                    <label >
-                        <input required type="text" name="USER_LAST_NAME" maxlength="255" value="<?=$arResult["USER_LAST_NAME"]?>" placeholder="<?=GetMessage("AUTH_LAST_NAME")?>" />
-                    </label>
+                        <label>
+                            <input type="text" name="REGISTER[NAME]" value="<?=$arResult["VALUES"]['NAME']?>" placeholder="Имя*" required>
+                        </label>
+                        <label>
+                            <input type="text" name="REGISTER[LAST_NAME]" value="<?=$arResult["VALUES"]['LAST_NAME']?>" placeholder="Фамилия">
+                        </label>
+                        <label>
+                            <input type="text" name="REGISTER[SECOND_NAME]" value="<?=$arResult["VALUES"]['SECOND_NAME']?>" placeholder="Отчество">
+                        </label>
 
+                        <div class="check">
+                            <input class="check__input" type="radio" name="REGISTER[PERSONAL_GENDER]" id="a111" checked="" value="M">
+                            <label class="check__label" for="a111"><?=GetMessage("USER_MALE")?></label>
+                        </div>
+                        <div class="check">
+                            <input class="check__input" type="radio" name="REGISTER[PERSONAL_GENDER]" id="a211" value="F">
+                            <label class="check__label" for="a211"><?=GetMessage("USER_FEMALE")?></label>
+                        </div>
 
+                        <div class="grid-x grid-padding-x">
+                            <div class="cell medium-9">
+                                <label>
+                                    <input type="tel"  name="REGISTER[LOGIN]" value="<?=$arResult["VALUES"]['LOGIN']?>" placeholder="Логин*" required>
+                                </label>
+                                <label>
+                                    <input type="email"  name="REGISTER[EMAIL]" value="<?=$arResult["VALUES"]['EMAIL']?>" placeholder="e-mail*" required>
+                                </label>
+                                <label>
+                                    <input type="tel"  name="REGISTER[PERSONAL_PHONE]" value="<?=$arResult["VALUES"]['PERSONAL_PHONE']?>" placeholder="Телефон*" required>
+                                </label>
+                                <label>
+                                    <input type="text" name="REGISTER[PERSONAL_BIRTHDAY]" value="<?=$arResult["VALUES"]['PERSONAL_BIRTHDAY']?>" placeholder="Дата рождения">
+                                </label>
+                                <label>
+                                    <input type="password" name="REGISTER[PASSWORD]" value="<?=$arResult["VALUES"]['PASSWORD']?>" placeholder="Пароль*" required>
+                                </label>
+                                <label>
+                                    <input type="password" name="REGISTER[CONFIRM_PASSWORD]" value="<?=$arResult["VALUES"]['CONFIRM_PASSWORD']?>" placeholder="Повторите пароль*" required>
+                                </label>
+                                <p class="help-text">Пароль должен быть не менее 6 символов</p>
+                                <p class="help-text">* - обязательные поля</p>
 
-                    <label >
-                        <input required type="text" name="USER_LOGIN" maxlength="255" value="<?=$arResult["USER_LOGIN"]?>" placeholder="<?=GetMessage("AUTH_LOGIN_MIN")?>"/>
-                    </label>
+                                <?/* CAPTCHA */
+                                if ($arResult["USE_CAPTCHA"] == "Y")
+                                {
+                                    ?>
+                                    <label>
+                                        <?=GetMessage("REGISTER_CAPTCHA_TITLE")?>
+                                        <input type="hidden" name="captcha_sid" value="<?=$arResult["CAPTCHA_CODE"]?>" />
+                                        <img src="/bitrix/tools/captcha.php?captcha_sid=<?=$arResult["CAPTCHA_CODE"]?>" width="180" height="40" alt="CAPTCHA" />
+                                    </label>
+                                    <label>
+                                        <?=GetMessage("REGISTER_CAPTCHA_PROMT")?>:<span class="starrequired">*</span>
+                                        <input type="text" name="captcha_word" maxlength="50" value="" required/>
+                                    </label>
+                                    <?
+                                }
+                                /* !CAPTCHA */
+                                ?>
+                            </div>
 
+                            <div class="cell" style="text-align: left;">
+                                <div class="check">
+                                    <input class="check__input" name="license" type="checkbox" id="y1">
+                                    <label class="check__label" for="y1">Я ознакомлен и принимаю условия &nbsp;<a href="/soglasie/" target="_blank" title="">Соглашения об использовании сайта</a>, в том числе в части обработки и использования моих персональных данных</label>
+                                </div>
+                                <div class="check">
+                                    <input class="check__input" type="checkbox" name="REGISTER[UF_SUBSCRIBE]" checked id="y2">
+                                    <label class="check__label" for="y2">Я хочу получать информацию об акция и скидках</label>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="grid-x align-center">
+                            <div class="cell large-7">
+                                <button class="button expanded" type="submit" disabled name="register_submit_button" value="<?=GetMessage("AUTH_REGISTER")?>" />
+                                <?=GetMessage("AUTH_REGISTER")?>
+                                <i class="fa fa-sign-in fa-lg"></i></button>
+                            </div>
+                        </div>
 
-
-
-        <?if($arResult["SECURE_AUTH"]):?>
-                        <div class="bx-authform-psw-protected" id="bx_auth_secure" style="display:none"><div class="bx-authform-psw-protected-desc"><span></span><?echo GetMessage("AUTH_SECURE_NOTE")?></div></div>
-
-        <script type="text/javascript">
-        document.getElementById('bx_auth_secure').style.display = '';
-        </script>
-        <?endif?>
-                <label>
-                        <input required type="password" name="USER_PASSWORD" maxlength="255" value="<?=$arResult["USER_PASSWORD"]?>" autocomplete="off" placeholder="<?=GetMessage("AUTH_PASSWORD_REQ")?>"/>
-                </label>
-
-
-
-
-
-        <?if($arResult["SECURE_AUTH"]):?>
-                        <div class="bx-authform-psw-protected" id="bx_auth_secure_conf" style="display:none"><div class="bx-authform-psw-protected-desc"><span></span><?echo GetMessage("AUTH_SECURE_NOTE")?></div></div>
-
-        <script type="text/javascript">
-        document.getElementById('bx_auth_secure_conf').style.display = '';
-        </script>
-        <?endif?>
-            <label>
-                  <input required type="password" name="USER_CONFIRM_PASSWORD" maxlength="255" value="<?=$arResult["USER_CONFIRM_PASSWORD"]?>" autocomplete="off" placeholder="<?=GetMessage("AUTH_CONFIRM")?>"/>
-            </label>
-
-
-
-                    <label>
-                        <input required type="text" name="USER_EMAIL" maxlength="255" value="<?=$arResult["USER_EMAIL"]?>" placeholder="<?=GetMessage("AUTH_EMAIL")?>"/>
-                    </label>
-
-
-        <?if($arResult["USER_PROPERTIES"]["SHOW"] == "Y"):?>
-            <?foreach ($arResult["USER_PROPERTIES"]["DATA"] as $FIELD_NAME => $arUserField):?>
-
-
-<label>
-    <?=$arUserField["EDIT_FORM_LABEL"]?>
-        <?
-        $APPLICATION->IncludeComponent(
-            "bitrix:system.field.edit",
-            $arUserField["USER_TYPE"]["USER_TYPE_ID"],
-            array(
-                "bVarsFromForm" => $arResult["bVarsFromForm"],
-                "arUserField" => $arUserField,
-                "form_name" => "bform"
-            ),
-            null,
-            array("HIDE_ICONS"=>"Y")
-        );
-        ?>
-</label>
-
-
-
-            <?endforeach;?>
-        <?endif;?>
-        <?if ($arResult["USE_CAPTCHA"] == "Y"):?>
-                <input type="hidden" name="captcha_sid" value="<?=$arResult["CAPTCHA_CODE"]?>" />
-
-
-                    <div class="bx-captcha"><img src="/bitrix/tools/captcha.php?captcha_sid=<?=$arResult["CAPTCHA_CODE"]?>" width="180" height="40" alt="CAPTCHA" /></div>
-                    <br>
-                    <label>
-                        <input type="text" name="captcha_word" maxlength="50" value="" autocomplete="off"/>
-                    </label>
-
-
-        <?endif?>
-                <div class="bx-authform-formgroup-container">
-                    <div class="bx-authform-label-container">
-                    </div>
-                    <div class="bx-authform-input-container">
-                        <?$APPLICATION->IncludeComponent("bitrix:main.userconsent.request", "",
-                            array(
-                                "ID" => COption::getOptionString("main", "new_user_agreement", ""),
-                                "IS_CHECKED" => "Y",
-                                "AUTO_SAVE" => "N",
-                                "IS_LOADED" => "Y",
-                                "ORIGINATOR_ID" => $arResult["AGREEMENT_ORIGINATOR_ID"],
-                                "ORIGIN_ID" => $arResult["AGREEMENT_ORIGIN_ID"],
-                                "INPUT_NAME" => $arResult["AGREEMENT_INPUT_NAME"],
-                                "REPLACE" => array(
-                                    "button_caption" => GetMessage("AUTH_REGISTER"),
-                                    "fields" => array(
-                                        rtrim(GetMessage("AUTH_NAME"), ":"),
-                                        rtrim(GetMessage("AUTH_LAST_NAME"), ":"),
-                                        rtrim(GetMessage("AUTH_LOGIN_MIN"), ":"),
-                                        rtrim(GetMessage("AUTH_PASSWORD_REQ"), ":"),
-                                        rtrim(GetMessage("AUTH_EMAIL"), ":"),
-                                    )
-                                ),
-                            )
-                        );?>
-                    </div>
+                    </form>
                 </div>
-
-                    <input type="submit" class="button" name="Register" value="Зарегистрироваться" />
-
-
-                <hr class="bxe-light">
-
-                <div class="bx-authform-description-container">
-                    <?echo $arResult["GROUP_POLICY"]["PASSWORD_REQUIREMENTS"];?>
-                </div>
-
-                <div class="bx-authform-description-container">
-                    <span class="bx-authform-starrequired">*</span><?=GetMessage("AUTH_REQ")?>
-                </div>
-
-                <div class="bx-authform-link-container">
-                    <a href="<?=$arResult["AUTH_AUTH_URL"]?>" rel="nofollow"><b><?=GetMessage("AUTH_AUTH")?></b></a>
-                </div>
-
-            </form>
-        </noindex>
-
-        <script type="text/javascript">
-        document.bform.USER_NAME.focus();
-        </script>
-
+            <?}?>
         <?endif?>
 
     </div>
 </div>
+
