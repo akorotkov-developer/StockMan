@@ -358,7 +358,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                                     <a class="button skirt__bag" id="<?= $itemIds['ADD_BASKET_LINK'] ?>"
                                        href="javascript:void(0);">Добавить в Корзину  </a>
                                 </div>
-                                <div class="cell medium-6"><a class="button skirt__heart" href="javascript:void(0)"
+                                <div class="cell medium-6"><a class="button skirt__heart x-add2basket-delay" id="x-add2basket-delay" href="javascript:void(0)"
                                         <? if (in_array($arResult["ID"],$arBasketItems )) echo 'in_wishlist '; ?> >Добавить в Избранное</a>
                                 </div>
                                 <script type="text/javascript">
@@ -374,10 +374,10 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                                         });
                                     };
 
-                                    $('.skirt__heart').on('click', function() {
+                                    $(document).find('.skirt__heart').on('click', function() {
                                         // действия, которые будут выполнены при наступлении события...
                                         add2wish(
-                                            "<?=$arResult["ID"]?>",
+                                            $(document).find('.x-add2basket-delay').attr('offer_id'),
                                             "<?=$IDpriceforDiffered?>",
                                             "<?=intval($priceforDiffered)?>",
                                             "<?=$arResult["NAME"]?>",

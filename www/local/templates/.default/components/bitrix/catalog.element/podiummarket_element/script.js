@@ -732,6 +732,7 @@
 				this.product.name = this.params.PRODUCT.NAME;
 				this.product.pict = this.params.PRODUCT.PICT;
 				this.product.id = this.params.PRODUCT.ID;
+
 				this.product.category = this.params.PRODUCT.CATEGORY;
 
 				if (this.params.PRODUCT.ADD_URL)
@@ -963,7 +964,6 @@
 							}
 						}
 					}
-
 					item = {
 						'id': this.offers[this.offerNum].ID,
 						'name': this.offers[this.offerNum].NAME,
@@ -2560,6 +2560,9 @@
 				BX.onCustomEvent('onCatalogElementChangeOffer', [eventData]);
 				eventData = null;
 			}
+
+
+            BX('x-add2basket-delay').setAttribute('offer_id', this.offers[this.offerNum].ID);
 		},
 
 		drawImages: function(images)

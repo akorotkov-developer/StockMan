@@ -110,41 +110,41 @@ class CCeteraSortPanelComponent extends \CBitrixComponent
         else $_SESSION['sort'] = $sort;
 
         $result['SORT']['PROPERTIES'] = [
-            [
+            'show_counter' => [
                 'CODE' => 'show_counter',
                 'NAME' => Loc::getMessage('COMPONENT_SORT_PANEL_COMPONENT_SORT_TYPES_POPULAR_VALUE'),
                 'ORDER' => 'desc,nulls'
             ],
-            [
+            'property_MINIMUM_PRICE' => [
                 'CODE' => 'property_MINIMUM_PRICE',
                 'NAME' => Loc::getMessage('COMPONENT_SORT_PANEL_COMPONENT_SORT_TYPES_PRICE_ASC'),
                 'ORDER' => 'asc,nulls'
             ],
-            [
-                'CODE' => 'property_MAXIMUM_PRICE',
+            'property_MAXIMUM_PRICE' => [
+                'CODE' => 'property_MINIMUM_PRICE',
                 'NAME' => Loc::getMessage('COMPONENT_SORT_PANEL_COMPONENT_SORT_TYPES_PRICE_DESC'),
                 'ORDER' => 'desc,nulls'
             ],
-            [
+            'created' => [
                 'CODE' => 'created',
                 'NAME' => Loc::getMessage('COMPONENT_SORT_PANEL_COMPONENT_SORT_TYPES_DATE_VALUE'),
                 'ORDER' => 'desc,nulls'
             ],
-            [
+            'property_DISCOUNT' => [
                 'CODE' => 'property_DISCOUNT',
                 'NAME' => Loc::getMessage('COMPONENT_SORT_PANEL_COMPONENT_SORT_TYPES_DISCOUNT'),
                 'ORDER' => 'desc,nulls'
             ],
         ];
 
-        $GLOBALS[$this->arParams['SORT_NAME']] = $sort;
-
         foreach ($result['SORT']['PROPERTIES'] as $key => $property)
         {
-            if ($sort == $property['CODE'])
+            if ($sort == $key)
             {
                 $result['SORT']['PROPERTIES'][$key]['ACTIVE'] = true;
+
                 $GLOBALS[$this->arParams['ORDER_NAME']] = $property['ORDER'];
+                $GLOBALS[$this->arParams['SORT_NAME']] = $property['CODE'];
 
                 break;
             }
