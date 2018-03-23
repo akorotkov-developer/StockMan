@@ -153,7 +153,6 @@ class StockManHandlers
                     $arProductID = array($ELEMENT_ID);
 
                 $minPrice = false;
-                $maxPrice = false;
                 //Get prices
                 $rsPrices = CPrice::GetList(
                     array(),
@@ -170,9 +169,6 @@ class StockManHandlers
 
                     if($minPrice === false || $minPrice > $PRICE)
                         $minPrice = $PRICE;
-
-                    if($maxPrice === false || $maxPrice < $PRICE)
-                        $maxPrice = $PRICE;
                 }
 
                 //Save found minimal price into property
@@ -182,8 +178,7 @@ class StockManHandlers
                         $ELEMENT_ID,
                         $IBLOCK_ID,
                         array(
-                            "MINIMUM_PRICE" => $minPrice,
-                            "MAXIMUM_PRICE" => $maxPrice,
+                            "MINIMUM_PRICE" => $minPrice
                         )
                     );
                 }
