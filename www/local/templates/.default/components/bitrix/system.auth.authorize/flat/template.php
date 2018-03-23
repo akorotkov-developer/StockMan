@@ -14,6 +14,13 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 //one css for all system.auth.* forms
 ?>
 
+<?
+$curpage = $APPLICATION->GetCurPage();
+if(strpos($curpage, "personal/account/") > 0) {
+    $APPLICATION->SetTitle("Внутренний счет");
+}
+?>
+
 <div class="grid-x grid-padding-x">
 <div class="text-center cell small-12 medium-6 medium-offset-3 large-4 large-offset-4">
 

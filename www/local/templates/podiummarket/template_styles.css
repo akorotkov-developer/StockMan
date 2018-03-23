@@ -1,3 +1,23 @@
+@media (max-width: 2000px)  and (min-width:1700px){
+    div[data-entity="items-row"] {
+        min-height: 520px;
+    }
+}
+@media (max-width: 1699px)  and (min-width:1300px) {
+    div[data-entity="items-row"] {
+        min-height: 410px;
+    }
+}
+@media (max-width: 1300px)  and (min-width:1270px) {
+    div[data-entity="items-row"] {
+        min-height: 380px;
+    }
+}
+@media (max-width: 1270px)  {
+    div[data-entity="items-row"] {
+        min-height: 480px;
+    }
+}
 .sale-order-list-change-payment {
     color: #222!important;
     text-decoration: underline!important;
