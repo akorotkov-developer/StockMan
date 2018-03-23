@@ -118,39 +118,35 @@ if ($isFilter || $isSidebar): ?>
         <?endif?>
         <?/*Сортировка*/?>
         <div class="cell small-12 medium-4 large-6 text-center medium-text-right">
-            <div class="sort text-left">
-                <div class="sort__main">Сортировать</div>
-                <div class="sort__other sort__other_right">
-                    <?$APPLICATION->IncludeComponent(
-                        "codeblogpro:sort.panel",
-                        "catalog",
-                        array(
-                            "CACHE_TIME" => "36000000",
-                            "CACHE_TYPE" => "A",
-                            "FIELDS_CODE" => array(
-                                0 => "show_counter",
-                                1 => "created"
-                            ),
-                            "IBLOCK_ID" => "10",
-                            "IBLOCK_TYPE" => "1c_catalog",
-                            "INCLUDE_SORT_TO_SESSION" => "Y",
-                            "ORDER_NAME" => "ORDER",
-                            "PRICE_CODE" => array(
-                                0 => "1",
-                            ),
-                            "PROPERTY_CODE" => array(
-                            ),
-                            "SORT_NAME" => "SORT",
-                            "SORT_ORDER" => array(
-                                0 => "asc,nulls",
-                                1 => "desc,nulls",
-                            ),
-                            "COMPONENT_TEMPLATE" => ".default"
-                        ),
-                        false
-                    );?>
-                </div>
-            </div>
+            <?$APPLICATION->IncludeComponent(
+                "cetera:sort.panel",
+                "catalog",
+                array(
+                    "CACHE_TIME" => "36000000",
+                    "CACHE_TYPE" => "A",
+                    "FIELDS_CODE" => array(
+                        0 => "show_counter",
+                        1 => "created"
+                    ),
+                    "IBLOCK_ID" => "10",
+                    "IBLOCK_TYPE" => "1c_catalog",
+                    "INCLUDE_SORT_TO_SESSION" => "Y",
+                    "ORDER_NAME" => "ORDER",
+                    "PRICE_CODE" => array(
+                        0 => "1",
+                    ),
+                    "PROPERTY_CODE" => array(
+                        0 => 'DISCOUNT'
+                    ),
+                    "SORT_NAME" => "SORT",
+                    "SORT_ORDER" => array(
+                        0 => "asc,nulls",
+                        1 => "desc,nulls",
+                    ),
+                    "COMPONENT_TEMPLATE" => ".default"
+                ),
+                false
+            );?>
         </div>
         <?/*Конец сортировки*/?>
     </div>
