@@ -2038,6 +2038,25 @@ $(document).foundation();
       var $checkBoxes = $(this).closest('.sort').find('input');
       $checkBoxes.prop('checked', !$checkBoxes.prop('checked'));
     });
+
+    /**
+    * Поиск вариантов значений в фильтре
+    */
+    $('.js-filter-values-search').on('keyup', function() {
+        var $this = $(this),
+            $filterValues = $this.siblings('.js-filter-values'),
+            val = $this.val();
+
+        $filterValues.each(function() {
+            var $this = $(this),
+                filterVal = $this.attr('data-value');
+
+            if (val == '' || filterVal.indexOf(val) == 0)
+                $this.removeClass('hidden');
+            else $this.addClass('hidden');
+        });
+    });
+
     $(document).mouseup(function(e) {
       var div = $(".sort.js-open");
       if (!div.is(e.target) && div.has(e.target).length === 0) {

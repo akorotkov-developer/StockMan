@@ -747,3 +747,7 @@ COLOR
 		display: none;
 	}
 }
+
+.hidden {
+    display: none;
+}

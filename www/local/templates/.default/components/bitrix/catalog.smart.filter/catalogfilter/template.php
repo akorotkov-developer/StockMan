@@ -12,6 +12,10 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
+$arSearchable = [
+    'TSVET', 'BRAND'
+];
+
 $templateData = array(
 	'TEMPLATE_THEME' => $this->GetFolder().'/themes/'.$arParams['TEMPLATE_THEME'].'/colors.css',
 	'TEMPLATE_CLASS' => 'bx-'.$arParams['TEMPLATE_THEME']
@@ -62,7 +66,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                         }
                     ?>
                     <div class="sort">
-                        <div class="sort__main"><?=$arItem["NAME"];?></div>
+                        <div class="sort__main"><?= GetMessage('PROPERTY_NAME_PRICE') ?></div>
                         <div class="sort__other">
                             <div class="sort__over">
                                 <div>От
@@ -141,7 +145,7 @@ if (isset($templateData['TEMPLATE_THEME']))
 
 
                 <div class="sort">
-                    <div class="sort__main"><?=$arItem["NAME"];?></div>
+                    <div class="sort__main"><?= GetMessage('PROPERTY_NAME_' . $arItem['CODE']) ?></div>
                     <div class="sort__other">
                     <?
                     $arCur = current($arItem["VALUES"]);
@@ -546,13 +550,16 @@ if (isset($templateData['TEMPLATE_THEME']))
 
                                     <?default://CHECKBOXES?>
                                         <div class="sort__over">
+                                            <? if (in_array($arItem['CODE'], $arSearchable)): ?>
+                                                <input class="js-filter-values-search" type="text" placeholder="Найдите <?= mb_strtolower(GetMessage('PROPERTY_NAME_' . $arItem['CODE'])) ?>">
+                                            <? endif; ?>
                                             <div>
                                                 Выделить
-                                                <a class="js-select-all">все    </a>
+                                                <a class="js-select-all">все</a>
                                             </div>
 
                                             <?foreach($arItem["VALUES"] as $val => $ar):?>
-                                                <div>
+                                                <div class="js-filter-values" data-value="<?=$ar["VALUE"]?>">
                                                     <div class="check">
                                                         <input
 

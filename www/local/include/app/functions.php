@@ -1,4 +1,14 @@
 <?php
+function cl() {
+    if ($GLOBALS['USER']->IsAdmin())
+    {
+        $args = func_get_args();
+        echo "<pre>";
+        foreach ($args as $ar)
+            print_r($ar);
+        echo "</pre>";
+    }
+}
 /**
  * Получаем DETAIL_PAGE_URL и TSVET - товара по торговому предложению
  * $arProductsId - массив id торговых предложений
