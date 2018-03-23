@@ -560,7 +560,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                             </div>
 
                                             <?foreach($arItem["VALUES"] as $val => $ar):?>
-                                                <div class="js-filter-values" data-value="<?=$ar["VALUE"]?>">
+                                                <div<?= in_array($arItem['CODE'], $arSearchable) ? ' class="js-filter-values"' : ''?> data-value="<?=$ar["VALUE"]?>">
                                                     <div class="check">
                                                         <input
 

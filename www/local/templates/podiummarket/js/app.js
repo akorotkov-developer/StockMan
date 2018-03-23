@@ -2045,11 +2045,11 @@ $(document).foundation();
     $('.js-filter-values-search').on('keyup', function() {
         var $this = $(this),
             $filterValues = $this.siblings('.js-filter-values'),
-            val = $this.val();
+            val = $this.val().toLowerCase();
 
         $filterValues.each(function() {
             var $this = $(this),
-                filterVal = $this.attr('data-value');
+                filterVal = $this.attr('data-value').toLowerCase();
 
             if (val == '' || filterVal.indexOf(val) == 0)
                 $this.removeClass('hidden');
