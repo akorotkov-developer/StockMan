@@ -42,7 +42,7 @@ $APPLICATION->IncludeComponent(
 	$component
 );
 if ($_GET["filter_history"] == "Y") {
-    $APPLICATION->SetTitle("Звершенные заказы");
+    $APPLICATION->SetTitle("Зaвершенные заказы");
 } else {
     $APPLICATION->SetTitle("Текущие заказы");
 }

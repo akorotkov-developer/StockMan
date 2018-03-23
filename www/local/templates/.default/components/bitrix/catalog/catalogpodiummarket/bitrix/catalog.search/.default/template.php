@@ -95,7 +95,7 @@ if (!empty($arElements) && is_array($arElements))
 
 		$ar = $APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
-		"search",
+		"table_view",
 		array(
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
