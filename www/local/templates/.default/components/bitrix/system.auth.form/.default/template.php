@@ -17,7 +17,6 @@ CJSCore::Init();
                     <h2 class="reveal__title">Войти</h2>
                     <div>
                         <div class="reveal__enter">Войти через</div>
-
                         <?if($arResult["AUTH_SERVICES"]):?>
                             <?
                             $APPLICATION->IncludeComponent("bitrix:socserv.auth.form", "icons",
@@ -115,7 +114,7 @@ CJSCore::Init();
 
                     <?if($arResult["AUTH_SERVICES"]):?>
                     <?
-                    $APPLICATION->IncludeComponent("bitrix:socserv.auth.form", "",
+                    $APPLICATION->IncludeComponent("bitrix:socserv.auth.form", "socservises",
                         array(
                             "AUTH_SERVICES"=>$arResult["AUTH_SERVICES"],
                             "AUTH_URL"=>$arResult["AUTH_URL"],
@@ -124,7 +123,7 @@ CJSCore::Init();
                             "SUFFIX"=>"form",
                         ),
                         $component,
-                        array("HIDE_ICONS"=>"Y")
+                        array("HIDE_ICONS"=>"N")
                     );
                     ?>
                     <?endif?>

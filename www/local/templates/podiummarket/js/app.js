@@ -2305,6 +2305,13 @@ $(document).foundation();
           $toggler.addClass(className);
           $linkThis.addClass('menu-base__link_active');
 
+          var elems = $(".menu-base__link");
+          var elemsTotal = elems.length;
+          for(var i=0; i<elemsTotal; ++i) {
+            $(elems[i]).removeClass('menu-base__link_active')
+          }
+          $(this).addClass('menu-base__link_active');
+
         }
         if (e.type == 'mouseleave' && $toggler.hasClass(className)) {
           toggleLeaveTimer = setTimeout(function() {
