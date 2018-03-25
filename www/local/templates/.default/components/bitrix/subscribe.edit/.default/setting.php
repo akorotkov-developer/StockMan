@@ -13,11 +13,25 @@
 		<p><?echo GetMessage("subscr_email")?><span class="starrequired">*</span><br />
 		<input type="text" name="EMAIL" value="<?=$arResult["SUBSCRIPTION"]["EMAIL"]!=""?$arResult["SUBSCRIPTION"]["EMAIL"]:$arResult["REQUEST"]["EMAIL"];?>" size="30" maxlength="255" /></p>
 		<p><?echo GetMessage("subscr_rub")?><span class="starrequired">*</span><br />
+            <?$i = 0;?>
 		<?foreach($arResult["RUBRICS"] as $itemID => $itemValue):?>
-			<label><input type="checkbox" name="RUB_ID[]" value="<?=$itemValue["ID"]?>"<?if($itemValue["CHECKED"]) echo " checked"?> /><?=$itemValue["NAME"]?></label><br />
-		<?endforeach;?></p>
+            <div class="check">
+                <input class="check__input" name="RUB_ID[]" type="checkbox" id="zz<?=$i?>" value="<?=$itemValue["ID"]?>"<?if($itemValue["CHECKED"]) echo " checked"?>>
+                <label class="check__label" for="zz<?=$i?>"><?=$itemValue["NAME"]?></label>
+            </div>
+		    <?$i++;?>
+        <?endforeach;?></p>
 		<p><?echo GetMessage("subscr_fmt")?><br />
-		<label><input type="radio" name="FORMAT" value="text"<?if($arResult["SUBSCRIPTION"]["FORMAT"] == "text") echo " checked"?> /><?echo GetMessage("subscr_text")?></label>&nbsp;/&nbsp;<label><input type="radio" name="FORMAT" value="html"<?if($arResult["SUBSCRIPTION"]["FORMAT"] == "html") echo " checked"?> />HTML</label></p>
+
+        <div class="check">
+            <input class="check__input" name="FORMAT" type="radio" id="r1" value="text"<?if($arResult["SUBSCRIPTION"]["FORMAT"] == "text") echo " checked"?>>
+            <label class="check__label" for="r1"><?echo GetMessage("subscr_text")?></label>
+        </div>
+        <div class="check">
+            <input class="check__input" name="FORMAT" type="radio" id="r2" value="html"<?if($arResult["SUBSCRIPTION"]["FORMAT"] == "html") echo " checked"?> >
+            <label class="check__label" for="r2">HTML</label>
+        </div>
+
 	</td>
 	<td width="60%">
 		<p><?echo GetMessage("subscr_settings_note1")?></p>

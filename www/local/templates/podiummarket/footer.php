@@ -153,7 +153,7 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                         "COMPONENT_TEMPLATE" => ".default",
                         "RUBRICS" => $footersubscribe,
                         "SHOW_RUBRICS" => "Y",
-                        "INC_JQUERY" => "N",
+                        "INC_JQUERY" => "Y",
                         "NOT_CONFIRM" => "N",
                         "FORMAT" => "text"
                     ),

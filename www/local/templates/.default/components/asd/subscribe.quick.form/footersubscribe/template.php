@@ -44,7 +44,7 @@ if ($arResult['ACTION']['status']=='error') {
             ?>
             <?foreach($arResult['RUBRICS'] as $RID => $title){?>
                 <div class="check">
-                    <input class="check__input" type="radio" name="asd_rub[]" id="rub<?= $RID?>" value="<?= $RID?>" <?=$checked?>>
+                    <input class="check__input" type="checkbox" name="asd_rub[]" id="rub<?= $RID?>" value="<?= $RID?>" <?=$checked?>>
                     <label class="check__label" for="rub<?= $RID?>"><?= $title?> </label>
                 </div>
             <?
