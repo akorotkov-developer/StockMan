@@ -318,7 +318,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		{
 			// safari mobile fix
 			result = result.replace(/<a href="\S*">(\S*)<\/a>/g, '$1');
-			
+
 			var res = BX.parseJSON(result), redirected = false;
 			if (res && res.order)
 			{
@@ -4783,6 +4783,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				title, label, itemNode;
 
 			logoNode = BX.create('DIV', {props: {className: 'bx-soa-pp-company-image'}});
+
 			logotype = this.getImageSources(item, 'PSA_LOGOTIP');
 			if (logotype && logotype.src_2x)
 			{
@@ -4796,7 +4797,15 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				logotype = logotype && logotype.src_1x || this.defaultPaySystemLogo;
 				logoNode.setAttribute('style', 'background-image: url(' + logotype + ');');
 			}
-			label = BX.create('DIV', {
+
+
+            var labelforPayments = BX.create('label', {
+                props: {className: 'my-label'},
+                attrs: {"for": 'ID_PAY_SYSTEM_ID_' + paySystemId},
+                text: ""
+            });
+
+			label =  BX.create('DIV', {
 				props: {className: 'bx-soa-pp-company-graf-container'},
 				children: [
 					BX.create('INPUT', {
@@ -4809,9 +4818,17 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 							checked: checked
 						}
 					}),
+                    labelforPayments,
 					logoNode
 				]
 			});
+
+
+
+
+
+
+
 
 			if (this.params.SHOW_PAY_SYSTEM_LIST_NAMES == 'Y')
 			{
@@ -4880,7 +4897,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					props: {className: 'bx-soa-pp-company-logo'},
 					children: [
 						BX.create('DIV', {
-							props: {className: 'bx-soa-pp-company-graf-container'},
+							props: {className: 'bx-soa-pp-company-graf-container8888888888888888888888'},
 							children: [logoNode]
 						})
 					]
@@ -4958,7 +4975,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				props: {className: 'bx-soa-pp-company-logo'},
 				children: [
 					BX.create('DIV', {
-						props: {className: 'bx-soa-pp-company-graf-container'},
+						props: {className: 'bx-soa-pp-company-graf-container8888888888888888888888'},
 						children: [
 							BX.create('INPUT', {
 								props: {
@@ -5257,7 +5274,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				props: {className: 'bx-soa-pp-company-logo'},
 				children: [
 					BX.create('DIV', {
-						props: {className: 'bx-soa-pp-company-graf-container'},
+						props: {className: 'bx-soa-pp-company-graf-container8888888888888888888888'},
 						children: [logoNode]
 					})
 				]
@@ -5447,11 +5464,22 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 							className: 'bx-soa-pp-company-checkbox',
 							value: deliveryId,
 							checked: checked
-						}
+						},
 					})
 				],
+
+
+
 				deliveryCached = this.deliveryCachedInfo[deliveryId],
 				logotype, label, title, itemNode, logoNode;
+
+
+            var labelforDelivery = BX.create('label', {
+                props: {className: 'my-label'},
+                attrs: {"for": "ID_DELIVERY_ID_" + deliveryId},
+                text: ""
+            });
+            labelNodes.push(labelforDelivery);
 
 			logoNode = BX.create('DIV', {props: {className: 'bx-soa-pp-company-image'}});
 			logotype = this.getImageSources(item, 'LOGOTIP');
@@ -5468,6 +5496,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				logoNode.setAttribute('style', 'background-image: url(' + logotype + ');');
 			}
 			labelNodes.push(logoNode);
+
+
+
+
 
 			if (item.PRICE >= 0 || typeof item.DELIVERY_DISCOUNT_PRICE !== 'undefined')
 			{

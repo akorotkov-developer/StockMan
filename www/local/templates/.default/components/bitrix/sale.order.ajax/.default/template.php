@@ -324,7 +324,10 @@ else
         <div class="grid-x grid-padding-x" id="bx-soa-order">
             <div class="cell small-12 medium-8 large-9">
                 <!--	MAIN BLOCK	-->
-
+                <div id="bx-soa-main-notifications">
+                    <div class="alert alert-danger" style="display:none"></div>
+                    <div data-type="informer" style="display:none"></div>
+                </div>
 
 				<!--	AUTH BLOCK	-->
 				<div id="bx-soa-auth" class="bx-soa-section bx-soa-auth" style="display:none">
