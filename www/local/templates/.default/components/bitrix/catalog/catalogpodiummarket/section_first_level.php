@@ -37,7 +37,7 @@ switch ($arResult["VARIABLES"]["SECTION_CODE_PATH"]) {
 <?
     $APPLICATION->IncludeComponent(
         "cetera:super.component",
-        "cetera_banner_rotation",
+        "cetera_banner_rotation_m",
         Array(
             "SOURCE" => "advert",
             "TYPE" => 'BANNER_MAIN_PAGE_FORSLIDER',
