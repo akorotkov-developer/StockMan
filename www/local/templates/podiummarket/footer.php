@@ -160,7 +160,7 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                     false
                 );?>
 
-                <a class="margin-right-4"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/visa-bordered.svg" alt=""></a><a class="margin-right-4"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/mastercard-bordered.svg" alt=""></a><a><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/mir-bordered.svg" alt=""></a>
+                <a style="cursor:context-menu;" class="margin-right-4"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/visa-bordered.svg" alt=""></a><a style="cursor:context-menu;" class="margin-right-4"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/mastercard-bordered.svg" alt=""></a><a style="cursor:context-menu;"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/mir-bordered.svg" alt=""></a>
             </div>
         </div>
     </footer>
