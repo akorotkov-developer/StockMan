@@ -1348,7 +1348,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                     );
                 }
 
-                if ($arResult['CATALOG'] && $arParams['USE_GIFTS_DETAIL'] == 'Y' && \Bitrix\Main\ModuleManager::isModuleInstalled('sale'))
+                /*if ($arResult['CATALOG'] && $arParams['USE_GIFTS_DETAIL'] == 'Y' && \Bitrix\Main\ModuleManager::isModuleInstalled('sale'))
                 {
                     ?>
                     <div data-entity="parent-container">
@@ -1453,9 +1453,9 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                         ?>
                     </div>
                     <?
-                }
+                }*/
 
-                if ($arResult['CATALOG'] && $arParams['USE_GIFTS_MAIN_PR_SECTION_LIST'] == 'Y' && \Bitrix\Main\ModuleManager::isModuleInstalled('sale'))
+                /*if ($arResult['CATALOG'] && $arParams['USE_GIFTS_MAIN_PR_SECTION_LIST'] == 'Y' && \Bitrix\Main\ModuleManager::isModuleInstalled('sale'))
                 {
                     ?>
                     <div data-entity="parent-container">
@@ -1554,7 +1554,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                         ?>
                     </div>
                     <?
-                }
+                }*/
                 ?>
             </div>
         </div>
