@@ -69,6 +69,49 @@ if (0 < $arResult["SECTIONS_COUNT"])
             <div class="small-12 medium-9 large-9 cell" id="menu">
                 <ul class="menu-base text-left medium-text-right">
                     <?
+                        $idMenuSectionNovinka = getMainMenuSectionNovinka($arParams['SECTION_ID']);
+                        if (intval($idMenuSectionNovinka) > 0) {
+                            $section_page_url = '/';
+                            $arFilterSectionMenuNovinka = array('ID' => $idMenuSectionNovinka);
+                            $rsSectionMenuNovinka = CIBlockSection::GetList(array('ID' => 'asc'), $arFilterSectionMenuNovinka, false, array('SECTION_PAGE_URL'));
+                            while ($arSectionMenuNovinka = $rsSectionMenuNovinka->GetNext()) {
+                                $section_page_url = $arSectionMenuNovinka['SECTION_PAGE_URL'];
+                            }
+
+                            $APPLICATION->IncludeComponent(
+                                "bitrix:catalog.smart.filter",
+                                "menu_novinki",
+                                array(
+                                    "COMPONENT_TEMPLATE" => ".default",
+                                    "IBLOCK_TYPE" => StockMan\Config::CATALOG_TYPE,
+                                    "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
+                                    "SECTION_ID" => $idMenuSectionNovinka,
+                                    "SECTION_CODE" => "",
+                                    "FILTER_NAME" => "arrFilterMenu",
+                                    "HIDE_NOT_AVAILABLE" => "N",
+                                    "TEMPLATE_THEME" => "blue",
+                                    "FILTER_VIEW_MODE" => "horizontal",
+                                    "DISPLAY_ELEMENT_COUNT" => "Y",
+                                    "SEF_MODE" => "Y",
+                                    "CACHE_TYPE" => $arParams['CACHE_TYPE'],
+                                    "CACHE_TIME" => $arParams['CACHE_TIME'],
+                                    "CACHE_GROUPS" => $arParams['CACHE_GROUPS'],
+                                    "SAVE_IN_SESSION" => "N",
+                                    "INSTANT_RELOAD" => "Y",
+                                    "PAGER_PARAMS_NAME" => "arrPager",
+                                    "PRICE_CODE" => array(),
+                                    "CONVERT_CURRENCY" => "N",
+                                    "XML_EXPORT" => "N",
+                                    "SECTION_TITLE" => "-",
+                                    "SECTION_DESCRIPTION" => "-",
+                                    "POPUP_POSITION" => "left",
+                                    "SECTION_PAGE_URL" => $section_page_url
+                                ),
+                                false,
+                                array('HIDE_ICONS' => 'Y')
+                            );
+                        }?>
+                    <?
                     foreach ($arResult['ROOT'] as $key) {
                         foreach ($key["CHILD"] as $depthlevelfirst) {
                             /*Если Меню не активное то обнуляем $activeItemFisrtLevel*/

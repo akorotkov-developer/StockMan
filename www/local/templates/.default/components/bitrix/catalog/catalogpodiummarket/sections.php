@@ -14,10 +14,11 @@
 
 $this->setFrameMode(true);
 ?>
-
-
-<?SaveIdCatalogSection($arResult['VARIABLES']['SECTION_ID'])?>
-<?$_SESSION['CATLOG_SECTION'] = $arResult['VARIABLES']['SECTION_ID']?>
+<?
+if ($APPLICATION->GetCurPage() != '/') {
+    SaveIdCatalogSection($arResult['VARIABLES']['SECTION_ID']);
+    $_SESSION['CATLOG_SECTION'] = $arResult['VARIABLES']['SECTION_ID'];
+}?>
 
     <div class="grid-container"><?
 $APPLICATION->IncludeComponent(

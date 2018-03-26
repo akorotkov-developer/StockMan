@@ -10,6 +10,27 @@ function cl() {
     }
 }
 /**
+ * Получить раздел для фильтра в главном меню "Новинки" == раздел "Одежда"
+ */
+if (!function_exists('getMainMenuSectionNovinka')) {
+    function getMainMenuSectionNovinka($idMainSection)
+    {
+        $idMenuSectionNovinka = 0;
+        switch ($idMainSection) {
+            case 23:
+                $idMenuSectionNovinka = 26;
+                break;
+            case 24:
+                $idMenuSectionNovinka = 111;
+                break;
+            case 25:
+                $idMenuSectionNovinka = 181;
+                break;
+        }
+        return $idMenuSectionNovinka;
+    }
+}
+/**
  * Получаем DETAIL_PAGE_URL и TSVET - товара по торговому предложению
  * $arProductsId - массив id торговых предложений
  * $arProductIdOffers - массив [#ID_Товар#] = #ID_торговоеПредложение#
