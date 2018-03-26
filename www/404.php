@@ -20,15 +20,34 @@ $APPLICATION->SetTitle("Страница не найдена");?>
             </div>
         </div>
     </div>
-    <style>
-        .position-relative:nth-child(2) {
-            display: none;
-        }
-        .top-menu-on-site:nth-child(1) {
-            display: none;
-        }
-        .grid-container .position-relative .top-menu-on-site {
-            display: none;
-        }
-    </style>
+<?
+    ob_start();
+    $homeCatalog = GetHomeCtalogSection();
+    $APPLICATION->IncludeComponent(
+        "bitrix:catalog.section.list",
+        "menutop",
+        Array(
+            "VIEW_MODE" => "LINE",
+            "SHOW_PARENT_NAME" => "Y",
+            "IBLOCK_TYPE" => StockMan\Config::CATALOG_TYPE,
+            "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
+            "SECTION_ID" => $homeCatalog, // GetIdSectionCatalog();
+            "SECTION_CODE" => "",
+            "SECTION_URL" => "",
+            "COUNT_ELEMENTS" => "Y",
+            "TOP_DEPTH" => "4",
+            "SECTION_FIELDS" => "",
+            "SECTION_USER_FIELDS" => "",
+            "ADD_SECTIONS_CHAIN" => "N",
+            "CACHE_TYPE" => "N",
+            "CACHE_TIME" => "3600",
+            "CACHE_NOTES" => "",
+            "CACHE_GROUPS" => "N",
+            "CURREN_SECTION_ID" => $homeCatalog
+        )
+    );
+    $top_menu = ob_get_contents();
+    ob_end_clean();
+    $APPLICATION->AddViewContent('top_menu', $top_menu);
+?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
