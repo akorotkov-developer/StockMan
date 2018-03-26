@@ -327,7 +327,8 @@ if ($arResult['NAV_RESULT']->NavRecordCount > 0) {
     <?$this->EndViewTarget();
 } else {
     $this->SetViewTarget('catalog_search_info');?>
-    <div class="text-secondary margin-bottom-13"> Сожалеем, но ничего не найдено.</div>
+    <div class="text-secondary margin-bottom-13">К сожалению ничего не найдено<br>
+        Пожалуйста воспользуйтесь каталогом.</div>
     <?$this->EndViewTarget();
 }
 
