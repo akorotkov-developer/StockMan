@@ -158,6 +158,7 @@ class StockManHandlers
                     array(),
                     array(
                         "PRODUCT_ID" => $arProductID,
+                        "CATALOG_GROUP_NAME" => StockMan\Config::CATALOG_PRICE
                     )
                 );
                 while($arPrice = $rsPrices->Fetch())
