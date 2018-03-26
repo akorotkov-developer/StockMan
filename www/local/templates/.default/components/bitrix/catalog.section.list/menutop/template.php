@@ -67,7 +67,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
                 );?>
             </div>
             <div class="small-12 medium-9 large-9 cell" id="menu">
-                <ul class="menu-base text-left medium-text-right">
+                <ul class="menu-base text-left medium-text-center">
                     <?
                         $idMenuSectionNovinka = getMainMenuSectionNovinka($arParams['SECTION_ID']);
                         if (intval($idMenuSectionNovinka) > 0) {

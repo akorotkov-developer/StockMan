@@ -549,17 +549,19 @@ use \Bitrix\Main\Localization\Loc;
 														{
 															?>
                                                             <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>" class="chose_size_link">
-                                                                <input class="checkbox-group__item" type="" id="" name="">
-                                                                <label class="checkbox-group__label" for=""><?=$value['NAME']?></label>
+                                                                <div class="checkbox-group__item sizeblock">
+                                                                    <?=$value['NAME']?>
+                                                                </div>
                                                             </a>
 															<?
 														}
 														else
 														{
 															?>
-                                                            <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>"  class="chose_size_link">
-                                                                <input class="checkbox-group__item" type="" id="" name="">
-                                                                <label class="checkbox-group__label" for=""><?=$value['NAME']?></label>
+                                                            <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>" class="chose_size_link">
+                                                                <div class="checkbox-group__item sizeblock">
+                                                                    <?=$value['NAME']?>
+                                                                </div>
                                                             </a>
 															<?
 														}
@@ -567,6 +569,7 @@ use \Bitrix\Main\Localization\Loc;
 													}
 													?>
 												</div>
+
 
 
 
