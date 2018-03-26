@@ -531,7 +531,7 @@ use \Bitrix\Main\Localization\Loc;
 									continue;
 								?>
 
-                                        <span class="margin-right-4"><?=$skuProperty['NAME']?></span>
+                                        <span class="margin-right-4 size_title"><?=$skuProperty['NAME']?></span>
 
 
 

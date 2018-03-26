@@ -21,6 +21,10 @@ a.chose_size_link {
 .dress__size {
 	padding-bottom: 45px;
 }
+.size_title {
+	position: relative;
+	top: 29px;
+}
 .dress:hover .dress__size {
 	display: block;
 	position: relative;
