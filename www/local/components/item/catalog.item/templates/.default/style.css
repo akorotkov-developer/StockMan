@@ -1,3 +1,6 @@
+.label.checkbox-group__label {
+	cursor: pointer!important;
+}
 .dress__title a{
 	text-decoration: none!important;
 }

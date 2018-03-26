@@ -22,6 +22,12 @@
     position: relative;
     left: -15px;
 }
+.chose_size_link {
+    cursor: pointer;
+}
+.label.checkbox-group__label {
+    cursor: pointer!important;
+}
 .sale-order-list-change-payment {
     color: #222!important;
     text-decoration: underline!important;

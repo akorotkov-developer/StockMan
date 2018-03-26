@@ -288,28 +288,40 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                                         <div class="small-12 medium-2 large-2 cell"><?=htmlspecialcharsEx($skuProperty['NAME'])?>:</div>
                                         <div class="cell large-10 medium-10" data-entity="sku-line-block">
                                             <div class="checkbox-group">
+                                            <?
+                                            if ($_GET["tst"] == "tst") {
+                                                echo "<pre>";
+                                                var_dump($arResult);
+                                                echo "</pre>";
+                                            }
+                                            ?>
 
                                                         <ul>
                                                             <?
+                                                            if ($_GET["size_cloth"]) {
+                                                                $size_cloth = $_GET["size_cloth"];
+                                                            }
                                                             $counOffer = 0;
                                                             foreach ($skuProperty['VALUES'] as &$value)
                                                             {
                                                                 $value['NAME'] = htmlspecialcharsbx($value['NAME']);
 
-
+                                                                    if ($size_cloth == $value['NAME']) $selected = "selected";
                                                                     ?>
-                                                                    <li class="product-item-scu-item-text-container" title="<?=$value['NAME']?>"
+
+                                                                    <li class="product-item-scu-item-text-container <?=$selected?>" title="<?=$value['NAME']?>"
                                                                         data-treevalue="<?=$propertyId?>_<?=$value['ID']?>"
                                                                         data-onevalue="<?=$value['ID']?>">
                                                                         <div class="product-item-scu-item-text-block">
                                                                             <?
                                                                             $article = GetArticulOfferByID($arResult['OFFERS'][$counOffer]["ID"]);
                                                                             ?>
-                                                                            <div class="product-item-scu-item-text" data-article="<?=$article["PROPERTY_CML2_ARTICLE_VALUE"];?>"><?=$value['NAME']?></div>
+                                                                            <div class="product-item-scu-item-text" data-article="<?=$article["PROPERTY_CML2_ARTICLE_VALUE"];?>" data-size="<?=$value['NAME']?>"><?=$value['NAME']?></div>
                                                                         </div>
                                                                     </li>
                                                                     <?
                                                                 $counOffer++;
+                                                                $selected = "";
                                                             }
                                                             ?>
                                                         </ul>
@@ -2072,7 +2084,9 @@ else
             'QUANTITY_FLOAT' => is_float($arResult['ITEM_MEASURE_RATIOS'][$arResult['ITEM_MEASURE_RATIO_SELECTED']]['RATIO']),
             'MAX_QUANTITY' => $arResult['CATALOG_QUANTITY'],
             'STEP_QUANTITY' => $arResult['ITEM_MEASURE_RATIOS'][$arResult['ITEM_MEASURE_RATIO_SELECTED']]['RATIO'],
-            'CATEGORY' => $arResult['CATEGORY_PATH']
+            'CATEGORY' => $arResult['CATEGORY_PATH'],
+//            'ACTIVE_OFFER_PROP' => $_GET["size_cloth"]
+            'CAOPROP' => 'Konkretnoe znachenie'
         ),
         'BASKET' => array(
             'ADD_PROPS' => $arParams['ADD_PROPERTIES_TO_BASKET'] === 'Y',
@@ -2119,6 +2133,15 @@ if ($arParams['DISPLAY_COMPARE'])
         });
 
         var <?=$obName?> = new JCCatalogElement(<?=CUtil::PhpToJSObject($jsParams, false, true)?>);
+
     </script>
+
+    <?if ($_GET["size_cloth"]) {?>
+        <script>
+            $( document ).ready(function() {
+                $('div[data-size="<?=$_GET["size_cloth"]?>"]').trigger('click');
+            });
+        </script>
+    <?}?>
 <?
 unset($actualItem, $itemIds, $jsParams);

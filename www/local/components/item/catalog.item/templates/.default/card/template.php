@@ -537,6 +537,7 @@ use \Bitrix\Main\Localization\Loc;
 
                                                 <div class="checkbox-group">
 													<?
+                                                    $i=0;
 													foreach ($skuProperty['VALUES'] as $value)
 													{
 														if (!isset($item['SKU_TREE_VALUES'][$propertyId][$value['ID']]))
@@ -547,17 +548,22 @@ use \Bitrix\Main\Localization\Loc;
 														if ($skuProperty['SHOW_MODE'] === 'PICT')
 														{
 															?>
-                                                            <input class="checkbox-group__item" type="radio" id="size1" name="size">
-                                                            <label class="checkbox-group__label" for="size1"><?=$value['NAME']?></label>
+                                                            <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>" class="chose_size_link">
+                                                                <input class="checkbox-group__item" type="" id="" name="">
+                                                                <label class="checkbox-group__label" for=""><?=$value['NAME']?></label>
+                                                            </a>
 															<?
 														}
 														else
 														{
 															?>
-                                                            <input class="checkbox-group__item" type="radio" id="size1" name="size">
-                                                            <label class="checkbox-group__label" for="size1"><?=$value['NAME']?></label>
+                                                            <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>"  class="chose_size_link">
+                                                                <input class="checkbox-group__item" type="" id="" name="">
+                                                                <label class="checkbox-group__label" for=""><?=$value['NAME']?></label>
+                                                            </a>
 															<?
 														}
+														$i++;
 													}
 													?>
 												</div>

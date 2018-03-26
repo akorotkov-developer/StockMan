@@ -1,3 +1,15 @@
+
+.product-item-scu-item-color-container.notallowed .product-item-scu-item-color-block:after, .product-item-scu-item-text-container.notallowed .product-item-scu-item-text-block:after {
+	 display: none;
+	 position: absolute;
+	 top: -2px;
+	 right: -2px;
+	 bottom: -2px;
+	 left: -2px;
+	 content: "";
+	 background: rgba(255, 255, 255, 0.75) url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…wyNS45OSBMMjUuNTI2LDI0LjU3MiBMMTQuMzkyMTI2OCwxMy4yMzIzMDI5IFoiLz48L3N2Zz4=) no-repeat center;
+	 background-size: 80% 80%;
+}
 /* Sidebar */
 .product-item-detail-info-section{padding:0 20px;}
 /*@media (max-width: 767px){

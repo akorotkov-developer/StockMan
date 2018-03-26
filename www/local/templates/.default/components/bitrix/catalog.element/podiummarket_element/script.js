@@ -2388,8 +2388,18 @@
 				strName = 'PROP_' + this.treeProps[i].ID;
 				arShowValues = this.getRowValues(arFilter, strName);
 
+                //Получаем GetПараметр
+/*                var regexp = /size_cloth=([^&]+)/i;
+                var GetValue = '';
+                if (!!regexp.exec(document.location.search))
+                    GetValue = regexp.exec(document.location.search)[1];*/
+				//console.log(GetValue);
+
 				if (!arShowValues)
 					break;
+
+                //current[strName] = arShowValues[GetValue];
+                console.log(current[strName]);
 
 				if (BX.util.in_array(current[strName], arShowValues))
 				{
@@ -2421,6 +2431,7 @@
 				{
 					arCanBuyValues = arShowValues;
 				}
+
 
 				this.updateRow(i, arFilter[strName], arShowValues, arCanBuyValues);
 			}
