@@ -1,6 +1,36 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("О компании");
+
+/*
+$dbProductDiscounts = CCatalogDiscount::GetList(
+    array("SORT" => "ASC"),
+    array(
+        //"+PRODUCT_ID" => $PRODUCT_ID,
+        "ACTIVE" => "Y",
+        //"!>ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),
+            "YYYY-MM-DD HH:MI:SS",
+           // CSite::GetDateFormat("FULL")),
+        //"!<ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),
+            "YYYY-MM-DD HH:MI:SS",
+            //CSite::GetDateFormat("FULL")),
+       // "COUPON" => ""
+    ),
+    false,
+    false,
+    array(
+        "ID", "SITE_ID", "ACTIVE", "ACTIVE_FROM", "ACTIVE_TO",
+        "RENEWAL", "NAME", "SORT", "MAX_DISCOUNT", "VALUE_TYPE",
+        "VALUE", "CURRENCY", "PRODUCT_ID"
+    )
+);
+while ($arProductDiscounts = $dbProductDiscounts->Fetch())
+{
+    echo "<pre>";
+    print_r($arProductDiscounts);
+    echo "</pre>";
+}*/
+
 ?>
     <p><strong>PODIUM market&reg;&nbsp;&mdash; магазин, где в одном месте собраны более пятисот российских и мировых брендов для настоящих ценителей качества и уникальных дизайнерских решений!</strong></p>
     <p>Мы существуем с 2012 года, но за это время мы открыли пять универмагов в Москве, один в Казани, один в Сургуте и один в Краснодаре, и это не только простая навигация по магазину, но и тематически оформленные корнеры, дружелюбные консультанты и профессиональные стилисты.</p>

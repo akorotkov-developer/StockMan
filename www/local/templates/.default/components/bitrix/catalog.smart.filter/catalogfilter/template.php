@@ -14,7 +14,7 @@ $this->setFrameMode(true);
 
 $arSearchable = ['TSVET', 'BRAND'];
 
-$arExcluded = ['DISCOUNT'];
+$arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
 
 $templateData = array(
 	'TEMPLATE_THEME' => $this->GetFolder().'/themes/'.$arParams['TEMPLATE_THEME'].'/colors.css',
@@ -40,10 +40,16 @@ if (isset($templateData['TEMPLATE_THEME']))
                 $key = $arItem["ENCODED_ID"];
 
                 //Фильтр для цены
-                if(isset($arItem["PRICE"])):
+                if(isset($arItem["PRICE"])){
                         if ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0)
                             continue;
 
+                        if (!isset($arItem["VALUES"]["MIN"]["HTML_VALUE"])) {
+                            $arItem["VALUES"]["MIN"]["HTML_VALUE"] = $arItem["VALUES"]["MIN"]["VALUE"];
+                        }
+                        if (!isset($arItem["VALUES"]["MAX"]["HTML_VALUE"])) {
+                            $arItem["VALUES"]["MAX"]["HTML_VALUE"] = $arItem["VALUES"]["MAX"]["VALUE"];
+                        }
                         $step_num = 4;
                         $step = ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"]) / $step_num;
                         $prices = array();
@@ -64,6 +70,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                             }
                             $prices[$step_num] = number_format($arItem["VALUES"]["MAX"]["VALUE"], $precision, ".", "");
                         }
+
                     ?>
                     <div class="sort">
                         <div class="sort__main"><?= GetMessage('PROPERTY_NAME_PRICE') ?></div>
@@ -71,31 +78,24 @@ if (isset($templateData['TEMPLATE_THEME']))
                             <div class="sort__over">
                                 <div>От
                                     <input
-                                            class="sort__input"
+                                            class="sort__input x-smart-filter-header-input"
                                             type="text"
                                             name="<?echo $arItem["VALUES"]["MIN"]["CONTROL_NAME"]?>"
                                             id="<?echo $arItem["VALUES"]["MIN"]["CONTROL_ID"]?>"
                                             value="<?echo $arItem["VALUES"]["MIN"]["HTML_VALUE"]?>"
-                                            onkeyup="smartFilter.keyup(this)"
                                     />
                                     До
                                     <input
-                                            class="sort__input"
+                                            class="sort__input x-smart-filter-header-input"
                                             type="text"
                                             name="<?echo $arItem["VALUES"]["MAX"]["CONTROL_NAME"]?>"
                                             id="<?echo $arItem["VALUES"]["MAX"]["CONTROL_ID"]?>"
                                             value="<?echo $arItem["VALUES"]["MAX"]["HTML_VALUE"]?>"
-                                            onkeyup="smartFilter.keyup(this)"
                                     />
                                 </div>
-                                <div>
-                                    <div class="check">
-                                        <input class="check__input" type="checkbox" id="f4">
-                                        <label class="check__label" for="f4">только товары со скидкой</label>
-                                    </div>
-                                </div>
+                                <?$APPLICATION->ShowViewContent('filter_prop_discaunt');?>
                             </div>
-                            <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                            <div class="sort__footer"><input type="submit"   name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                         </div>
                     </div>
                         <?
@@ -123,7 +123,29 @@ if (isset($templateData['TEMPLATE_THEME']))
                                 window['trackBar<?=$key?>'] = new BX.Iblock.SmartFilter(<?=CUtil::PhpToJSObject($arJsParams)?>);
                             });
                         </script>
-                <?endif;
+                <?}
+                if($arItem["CODE"] == StockMan\Catalog\Config::PROP_DISCOUNT){
+                    $this->SetViewTarget('filter_prop_discaunt');
+                    ?>
+                    <?foreach($arItem["VALUES"] as $val => $ar){?>
+                        <div<?= in_array($arItem['CODE'], $arSearchable) ? ' class="js-filter-values"' : ''?> data-value="<?=$ar["VALUE"]?>">
+                            <div class="check">
+                                <input
+
+                                        class="check__input x-smart-filter-header"
+                                        type="checkbox"
+                                        value="<? echo $ar["HTML_VALUE"] ?>"
+                                        name="<? echo $ar["CONTROL_NAME"] ?>"
+                                        id="<? echo $ar["CONTROL_ID"] ?>"
+                                    <? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
+                                        onclick="smartFilter.click(this)"
+                                />
+                                <label class="check__label" for="<? echo $ar["CONTROL_ID"] ?>"><?=$ar["VALUE"]?></label>
+                            </div>
+                        </div>
+                    <?}?>
+                    <?$this->EndViewTarget();
+                }
             }?>
 
             <?
@@ -143,8 +165,6 @@ if (isset($templateData['TEMPLATE_THEME']))
                 )
                     continue;
             ?>
-
-
                 <div class="sort">
                     <div class="sort__main"><?= GetMessage('PROPERTY_NAME_' . $arItem['CODE']) ?></div>
                     <div class="sort__other">
@@ -174,7 +194,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                 size="5"
                                                 onkeyup="smartFilter.keyup(this)"
                                         />
-                                        <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                                        <div class="sort__footer"><input type="submit"   name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                                     </div>
 
                                     <div class="col-xs-10 col-xs-offset-1 bx-ui-slider-track-container">
@@ -253,7 +273,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                     value="<?echo $arItem["VALUES"]["MAX"]["HTML_VALUE"]?>"
                                                     onkeyup="smartFilter.keyup(this)"
                                             />
-                                            <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                                            <div class="sort__footer"><input type="submit"   name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                                     </div>
                                     <?break;?>
 
@@ -268,7 +288,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                 <div>
                                                     <div class="check">
                                                         <input
-                                                                class="check__input"
+                                                                class="check__input x-smart-filter-header"
                                                                 type="checkbox"
                                                                 value="<? echo $ar["HTML_VALUE"] ?>"
                                                                 name="<? echo $ar["CONTROL_NAME"] ?>"
@@ -280,7 +300,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                     </div>
                                                 </div>
                                             <?endforeach?>
-                                            <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                                            <div class="sort__footer"><input type="submit"   name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                                         </div>
                                         <?break;?>
 
@@ -293,7 +313,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                         </div>
                                                 <?foreach ($arItem["VALUES"] as $val => $ar):?>
                                                     <input
-                                                            class="check__input"
+                                                            class="check__input x-smart-filter-header"
                                                             style="display: none"
                                                             type="checkbox"
                                                             name="<?=$ar["CONTROL_NAME"]?>"
@@ -313,7 +333,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                             endif;?></span>
                                                     </label>
                                                 <?endforeach?>
-                                                <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                                                <div class="sort__footer"><input type="submit"   name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
 
                                         <?break;?>
 
@@ -552,19 +572,21 @@ if (isset($templateData['TEMPLATE_THEME']))
                                     <?default://CHECKBOXES?>
                                         <div class="sort__over">
                                             <? if (in_array($arItem['CODE'], $arSearchable)): ?>
-                                                <input class="js-filter-values-search" type="text" placeholder="Найдите <?= mb_strtolower(GetMessage('PROPERTY_NAME_' . $arItem['CODE'])) ?>">
+                                                <input class="js-filter-values-search x-smart-filter-header-input" type="text" placeholder="Найдите <?= mb_strtolower(GetMessage('PROPERTY_NAME_' . $arItem['CODE'])) ?>">
                                             <? endif; ?>
+                                            <?if ($arItem['CODE'] != StockMan\Config::PROP_NOVINKA) {?>
                                             <div>
                                                 Выделить
                                                 <a class="js-select-all">все</a>
                                             </div>
+                                            <?}?>
 
                                             <?foreach($arItem["VALUES"] as $val => $ar):?>
                                                 <div<?= in_array($arItem['CODE'], $arSearchable) ? ' class="js-filter-values"' : ''?> data-value="<?=$ar["VALUE"]?>">
                                                     <div class="check">
                                                         <input
 
-                                                                class="check__input"
+                                                                class="check__input x-smart-filter-header"
                                                                 type="checkbox"
                                                                 value="<? echo $ar["HTML_VALUE"] ?>"
                                                                 name="<? echo $ar["CONTROL_NAME"] ?>"

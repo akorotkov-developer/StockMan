@@ -20,4 +20,6 @@ class Config
 
     //Торговые предложения
     const RAZMER = "RAZMER";
+    const DISCOUNT = "DISCOUNT";
+    const PROP_DISCOUNT = "PROP_DISCOUNT";
 }

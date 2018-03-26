@@ -12,234 +12,12 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
-$templateData = array(
-	'TEMPLATE_THEME' => $this->GetFolder().'/themes/'.$arParams['TEMPLATE_THEME'].'/colors.css',
-	'TEMPLATE_CLASS' => 'bx-'.$arParams['TEMPLATE_THEME']
-);
+$arSearchable = ['TSVET', 'BRAND'];
 
-if (isset($templateData['TEMPLATE_THEME']))
-{
-	$this->addExternalCss($templateData['TEMPLATE_THEME']);
-}
+$arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
 
 ?>
 <div class="header__sort">
-    <div class="sort">
-        <div class="sort__main">Цвет</div>
-        <div class="sort__other">
-            <div class="sort__over">
-                <form action="#">
-                    <input type="text" placeholder="Найдите цвет">
-                </form>
-                <div>
-                    Выделить
-                    <a class="js-select-all">все    </a>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="b1">
-                        <label class="check__label" for="b1">Белый</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="b2">
-                        <label class="check__label" for="b2">Красный</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="b3">
-                        <label class="check__label" for="b3">Фиолетовый</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="b4">
-                        <label class="check__label" for="b4">Красный</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="b5">
-                        <label class="check__label" for="b5">Белый</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="b6">
-                        <label class="check__label" for="b6">Красный</label>
-                    </div>
-                </div>
-            </div>
-            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
-        </div>
-    </div>
-    <div class="sort">
-        <div class="sort__main">Размер</div>
-        <div class="sort__other">
-            <div class="sort__over">
-                <div class="margin-bottom-3">Ваш российский размер</div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="c1">
-                        <label class="check__label" for="c1">38</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="c2">
-                        <label class="check__label" for="c2">40</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="c3">
-                        <label class="check__label" for="c3">44</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="c4">
-                        <label class="check__label" for="c4">45</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="c5">
-                        <label class="check__label" for="c5">47</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="c6">
-                        <label class="check__label" for="c6">50</label>
-                    </div>
-                </div>
-            </div>
-            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
-        </div>
-    </div>
-    <div class="sort">
-        <div class="sort__main">Бренд</div>
-        <div class="sort__other">
-            <div class="sort__over">
-                <form action="#">
-                    <input type="text" placeholder="Найдите бренд">
-                </form>
-                <div>
-                    Выделить
-                    <a class="js-select-all">все    </a>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="d1">
-                        <label class="check__label" for="d1">Аffari</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="d2">
-                        <label class="check__label" for="d2">Аlcott</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="d3">
-                        <label class="check__label" for="d3">Аffari</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="d4">
-                        <label class="check__label" for="d4">Аffari</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="d5">
-                        <label class="check__label" for="d5">Аffari</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="d6">
-                        <label class="check__label" for="d6">Аffari</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="d7">
-                        <label class="check__label" for="d7">Аffari</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="d8">
-                        <label class="check__label" for="d8">Аffari</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="d9">
-                        <label class="check__label" for="d9">Аffari</label>
-                    </div>
-                </div>
-            </div>
-            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
-        </div>
-    </div>
-    <div class="sort">
-        <div class="sort__main">Сезон</div>
-        <div class="sort__other">
-            <div class="sort__over">
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="e1">
-                        <label class="check__label" for="e1">демисезон</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="e2">
-                        <label class="check__label" for="e2">зима</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="e3">
-                        <label class="check__label" for="e3">лето</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="e4">
-                        <label class="check__label" for="e4">мульти</label>
-                    </div>
-                </div>
-            </div>
-            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
-        </div>
-    </div>
-    <div class="sort">
-        <div class="sort__main">Цена</div>
-        <div class="sort__other">
-            <div class="sort__over">
-                <div>От
-                    <input class="sort__input" type="text" placeholder="399">До
-                    <input class="sort__input" type="text" placeholder="6399">
-                </div>
-                <div>
-                    <div class="check">
-                        <input class="check__input" type="checkbox" id="f4">
-                        <label class="check__label" for="f4">только товары со скидкой</label>
-                    </div>
-                </div>
-            </div>
-            <div class="sort__footer"><a class="button margin-bottom-0 js-apply" href="#">Применить</a></div>
-        </div>
-    </div>
-
         <form name="<?echo $arResult["FILTER_NAME"]."_form"?>" action="<?echo $arResult["FORM_ACTION"]?>" method="get" class="smartfilter">
             <?foreach($arResult["HIDDEN"] as $arItem):?>
                 <input type="hidden" name="<?echo $arItem["CONTROL_NAME"]?>" id="<?echo $arItem["CONTROL_ID"]?>" value="<?echo $arItem["HTML_VALUE"]?>" />
@@ -249,7 +27,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                 $key = $arItem["ENCODED_ID"];
 
                 //Фильтр для цены
-                if(isset($arItem["PRICE"])):
+                if(isset($arItem["PRICE"])){
                         if ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0)
                             continue;
 
@@ -275,36 +53,31 @@ if (isset($templateData['TEMPLATE_THEME']))
                         }
                     ?>
                     <div class="sort">
-                        <div class="sort__main"><?=$arItem["NAME"];?></div>
+                        <div class="sort__main"><?= GetMessage('PROPERTY_NAME_PRICE') ?></div>
                         <div class="sort__other">
                             <div class="sort__over">
                                 <div>От
                                     <input
-                                            class="sort__input"
+                                            class="sort__input x-smart-filter-input"
                                             type="text"
                                             name="<?echo $arItem["VALUES"]["MIN"]["CONTROL_NAME"]?>"
-                                            id="<?echo $arItem["VALUES"]["MIN"]["CONTROL_ID"]?>"
+                                            id="h_<?echo $arItem["VALUES"]["MIN"]["CONTROL_ID"]?>"
                                             value="<?echo $arItem["VALUES"]["MIN"]["HTML_VALUE"]?>"
                                             onkeyup="smartFilter.keyup(this)"
                                     />
                                     До
                                     <input
-                                            class="sort__input"
+                                            class="sort__input x-smart-filter-input"
                                             type="text"
                                             name="<?echo $arItem["VALUES"]["MAX"]["CONTROL_NAME"]?>"
-                                            id="<?echo $arItem["VALUES"]["MAX"]["CONTROL_ID"]?>"
+                                            id="h_<?echo $arItem["VALUES"]["MAX"]["CONTROL_ID"]?>"
                                             value="<?echo $arItem["VALUES"]["MAX"]["HTML_VALUE"]?>"
                                             onkeyup="smartFilter.keyup(this)"
                                     />
                                 </div>
-                                <div>
-                                    <div class="check">
-                                        <input class="check__input" type="checkbox" id="f4">
-                                        <label class="check__label" for="f4">только товары со скидкой</label>
-                                    </div>
-                                </div>
+                                <?//$APPLICATION->ShowViewContent('filter_prop_discaunt');?>
                             </div>
-                            <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                            <div class="sort__footer"><input type="submit" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                         </div>
                     </div>
                         <?
@@ -332,7 +105,8 @@ if (isset($templateData['TEMPLATE_THEME']))
                                 window['trackBar<?=$key?>'] = new BX.Iblock.SmartFilter(<?=CUtil::PhpToJSObject($arJsParams)?>);
                             });
                         </script>
-                <?endif;
+                <?}
+
             }?>
 
             <?
@@ -340,6 +114,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                 if(
                     empty($arItem["VALUES"])
                     || isset($arItem["PRICE"])
+                    || in_array($arItem["CODE"], $arExcluded)
                 )
                     continue;
 
@@ -354,7 +129,7 @@ if (isset($templateData['TEMPLATE_THEME']))
 
 
                 <div class="sort">
-                    <div class="sort__main"><?=$arItem["NAME"];?></div>
+                    <div class="sort__main"><?= GetMessage('PROPERTY_NAME_' . $arItem['CODE']) ?></div>
                     <div class="sort__other">
                     <?
                     $arCur = current($arItem["VALUES"]);
@@ -382,7 +157,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                 size="5"
                                                 onkeyup="smartFilter.keyup(this)"
                                         />
-                                        <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                                        <div class="sort__footer"><input type="submit" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                                     </div>
 
                                     <div class="col-xs-10 col-xs-offset-1 bx-ui-slider-track-container">
@@ -461,7 +236,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                     value="<?echo $arItem["VALUES"]["MAX"]["HTML_VALUE"]?>"
                                                     onkeyup="smartFilter.keyup(this)"
                                             />
-                                            <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                                            <div class="sort__footer"><input type="submit" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                                     </div>
                                     <?break;?>
 
@@ -476,19 +251,19 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                 <div>
                                                     <div class="check">
                                                         <input
-                                                                class="check__input"
+                                                                class="check__input x-smart-filter"
                                                                 type="checkbox"
                                                                 value="<? echo $ar["HTML_VALUE"] ?>"
                                                                 name="<? echo $ar["CONTROL_NAME"] ?>"
-                                                                id="<? echo $ar["CONTROL_ID"] ?>"
+                                                                id="h_<? echo $ar["CONTROL_ID"] ?>"
                                                             <? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
                                                                 onclick="smartFilter.click(this)"
                                                         />
-                                                        <label class="check__label" for="<? echo $ar["CONTROL_ID"] ?>"><?=$ar["VALUE"]?></label>
+                                                        <label class="check__label" for="h_<? echo $ar["CONTROL_ID"] ?>"><?=$ar["VALUE"]?></label>
                                                     </div>
                                                 </div>
                                             <?endforeach?>
-                                            <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                                            <div class="sort__footer"><input type="submit" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                                         </div>
                                         <?break;?>
 
@@ -501,15 +276,15 @@ if (isset($templateData['TEMPLATE_THEME']))
                                         </div>
                                                 <?foreach ($arItem["VALUES"] as $val => $ar):?>
                                                     <input
-                                                            class="check__input"
+                                                            class="check__input x-smart-filter"
                                                             style="display: none"
                                                             type="checkbox"
                                                             name="<?=$ar["CONTROL_NAME"]?>"
-                                                            id="<?=$ar["CONTROL_ID"]?>"
+                                                            id="h_<?=$ar["CONTROL_ID"]?>"
                                                             value="<?=$ar["HTML_VALUE"]?>"
                                                         <? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
                                                     />
-                                                    <label for="<?=$ar["CONTROL_ID"]?>" data-role="label_<?=$ar["CONTROL_ID"]?>" class="check__label" onclick="smartFilter.keyup(BX('<?=CUtil::JSEscape($ar["CONTROL_ID"])?>')); BX.toggleClass(this, 'bx-active');">
+                                                    <label for="h_<?=$ar["CONTROL_ID"]?>" data-role="label_<?=$ar["CONTROL_ID"]?>" class="check__label" onclick="smartFilter.keyup(BX('<?=CUtil::JSEscape($ar["CONTROL_ID"])?>')); BX.toggleClass(this, 'bx-active');">
                                                                 <span class="bx-filter-param-btn bx-color-sl">
                                                                     <?if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])):?>
                                                                         <span class="bx-filter-btn-color-icon" style="background-image:url('<?=$ar["FILE"]["SRC"]?>');"></span>
@@ -521,7 +296,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                             endif;?></span>
                                                     </label>
                                                 <?endforeach?>
-                                                <div class="sort__footer"><input type="submit"  id="set_filter" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
+                                                <div class="sort__footer"><input type="submit" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
 
                                         <?break;?>
 
@@ -561,7 +336,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                                 style="display: none"
                                                                 type="radio"
                                                                 name="<?=$ar["CONTROL_NAME_ALT"]?>"
-                                                                id="<?=$ar["CONTROL_ID"]?>"
+                                                                id="h_<?=$ar["CONTROL_ID"]?>"
                                                                 value="<? echo $ar["HTML_VALUE_ALT"] ?>"
                                                             <? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
                                                         />
@@ -582,7 +357,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                                     $class.= " disabled";
                                                                 ?>
                                                                 <li>
-                                                                    <label for="<?=$ar["CONTROL_ID"]?>" class="bx-filter-param-label<?=$class?>" data-role="label_<?=$ar["CONTROL_ID"]?>" onclick="smartFilter.selectDropDownItem(this, '<?=CUtil::JSEscape($ar["CONTROL_ID"])?>')"><?=$ar["VALUE"]?></label>
+                                                                    <label for="h_<?=$ar["CONTROL_ID"]?>" class="bx-filter-param-label<?=$class?>" data-role="label_<?=$ar["CONTROL_ID"]?>" onclick="smartFilter.selectDropDownItem(this, '<?=CUtil::JSEscape($ar["CONTROL_ID"])?>')"><?=$ar["VALUE"]?></label>
                                                                 </li>
                                                             <?endforeach?>
                                                         </ul>
@@ -635,7 +410,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                             style="display: none"
                                                             type="radio"
                                                             name="<?=$ar["CONTROL_NAME_ALT"]?>"
-                                                            id="<?=$ar["CONTROL_ID"]?>"
+                                                            id="h_<?=$ar["CONTROL_ID"]?>"
                                                             value="<?=$ar["HTML_VALUE_ALT"]?>"
                                                         <? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
                                                     />
@@ -657,7 +432,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                                                 $class.= " disabled";
                                                             ?>
                                                             <li>
-                                                                <label for="<?=$ar["CONTROL_ID"]?>" data-role="label_<?=$ar["CONTROL_ID"]?>" class="bx-filter-param-label<?=$class?>" onclick="smartFilter.selectDropDownItem(this, '<?=CUtil::JSEscape($ar["CONTROL_ID"])?>')">
+                                                                <label for="h_<?=$ar["CONTROL_ID"]?>" data-role="label_<?=$ar["CONTROL_ID"]?>" class="bx-filter-param-label<?=$class?>" onclick="smartFilter.selectDropDownItem(this, '<?=CUtil::JSEscape($ar["CONTROL_ID"])?>')">
                                                                     <?if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])):?>
                                                                         <span class="bx-filter-btn-color-icon" style="background-image:url('<?=$ar["FILE"]["SRC"]?>');"></span>
                                                                     <?endif?>
@@ -693,13 +468,13 @@ if (isset($templateData['TEMPLATE_THEME']))
                                         </div>
                                         <?foreach($arItem["VALUES"] as $val => $ar):?>
                                             <div class="radio">
-                                                <label data-role="label_<?=$ar["CONTROL_ID"]?>" class="bx-filter-param-label" for="<? echo $ar["CONTROL_ID"] ?>">
+                                                <label data-role="label_<?=$ar["CONTROL_ID"]?>" class="bx-filter-param-label" for="h_<? echo $ar["CONTROL_ID"] ?>">
                                                                 <span class="bx-filter-input-checkbox <? echo $ar["DISABLED"] ? 'disabled': '' ?>">
                                                                     <input
                                                                             type="radio"
                                                                             value="<? echo $ar["HTML_VALUE_ALT"] ?>"
                                                                             name="<? echo $ar["CONTROL_NAME_ALT"] ?>"
-                                                                            id="<? echo $ar["CONTROL_ID"] ?>"
+                                                                            id="h_<? echo $ar["CONTROL_ID"] ?>"
                                                                         <? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
                                                                             onclick="smartFilter.click(this)"
                                                                     />
@@ -759,34 +534,37 @@ if (isset($templateData['TEMPLATE_THEME']))
 
                                     <?default://CHECKBOXES?>
                                         <div class="sort__over">
-                                            <div>
-                                                Выделить
-                                                <a class="js-select-all">все    </a>
-                                            </div>
+                                            <? if (in_array($arItem['CODE'], $arSearchable)): ?>
+                                                <input class="js-filter-values-search x-smart-filter-input" type="text" placeholder="Найдите <?= mb_strtolower(GetMessage('PROPERTY_NAME_' . $arItem['CODE'])) ?>">
+                                            <? endif; ?>
+                                            <?if ($arItem['CODE'] != StockMan\Config::PROP_NOVINKA) {?>
+                                                <div>
+                                                    Выделить
+                                                    <a class="js-select-all">все</a>
+                                                </div>
+                                            <?}?>
 
                                             <?foreach($arItem["VALUES"] as $val => $ar):?>
-                                                <div>
+                                                <div<?= in_array($arItem['CODE'], $arSearchable) ? ' class="js-filter-values"' : ''?> data-value="<?=$ar["VALUE"]?>">
                                                     <div class="check">
                                                         <input
 
-                                                                class="check__input"
+                                                                class="check__input x-smart-filter"
                                                                 type="checkbox"
                                                                 value="<? echo $ar["HTML_VALUE"] ?>"
                                                                 name="<? echo $ar["CONTROL_NAME"] ?>"
-                                                                id="<? echo $ar["CONTROL_ID"] ?>"
+                                                                id="h_<? echo $ar["CONTROL_ID"] ?>"
                                                             <? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
                                                                 onclick="smartFilter.click(this)"
                                                         />
-                                                        <label class="check__label" for="<? echo $ar["CONTROL_ID"] ?>"><?=$ar["VALUE"]?></label>
+                                                        <label class="check__label" for="h_<? echo $ar["CONTROL_ID"] ?>"><?=$ar["VALUE"]?></label>
                                                     </div>
                                                 </div>
                                             <?endforeach;?>
                                             <div class="sort__footer"><input type="submit" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                                         </div>
 
-
-
-                        <?}?>
+                    <?}?>
                     </div>
                 </div>
             <?}?>

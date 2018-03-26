@@ -46,4 +46,38 @@ $( document ).ready(function() {
         window.location.href = base + '?' + res;
         return false;
     }
+
+    $(document).on('change','.x-smart-filter-header', function() {
+        var $el = $(this),
+            nameEl = $el.prop('name'),
+            nameElHeader = '#h_' + nameEl;
+
+        if ($el.is(':checked')) {
+            $(document).find(nameElHeader).prop('checked', true);
+        } else {
+            $(document).find(nameElHeader).prop('checked', false);
+        }
+    });
+    $(document).on('change','.x-smart-filter', function() {
+        var $el = $(this),
+            nameEl = '#' + $el.prop('name');
+
+        if ($el.is(':checked')) {
+            $(document).find(nameEl).prop('checked', true);
+        } else {
+            $(document).find(nameEl).prop('checked', false);
+        }
+    });
+    $(document).on('change','.x-smart-filter-header-input', function() {
+        var $el = $(this),
+            val = $el.val(),
+            nameEl = '#h_' + $el.prop('name');
+        $(document).find(nameEl).val(val);
+    });
+    $(document).on('change','.x-smart-filter-input', function() {
+        var $el = $(this),
+            val = $el.val(),
+            nameEl = '#' + $el.prop('name');
+        $(document).find(nameEl).val(val);
+    });
 });

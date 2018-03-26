@@ -77,8 +77,8 @@ JCSmartFilter.prototype.reload = function(input)
 		{
 			if (this.sef)
 			{
-				var set_filter = BX('set_filter');
-				set_filter.disabled = true;
+				//var set_filter = BX('set_filter');
+				//set_filter.disabled = true;
 			}
 
 			this.curFilterinput = input;
