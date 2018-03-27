@@ -354,7 +354,7 @@ else
                         <div id="bx-soa-basket" data-visited="false" class="bx-soa-section bx-active">
                             <div class="bx-soa-section-title-container">
                                 <h2 class="bx-soa-section-title col-sm-9">
-                                    <span class="bx-soa-section-title-count"></span><?=$arParams['MESS_BASKET_BLOCK_NAME']?>
+                                    <span class="bx-soa-section-title-count basket-title"></span><?=$arParams['MESS_BASKET_BLOCK_NAME']?>
                                 </h2>
                                 <div class="col-xs-12 col-sm-3 text-right"><a href="javascript:void(0)" class="bx-soa-editstep"><?=$arParams['MESS_EDIT']?></a></div>
                             </div>
@@ -691,5 +691,13 @@ else
 		</script>
 		<?
 	}
+	?>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            console.log("click");
+            $('.basket-title').trigger('click');
+        });
+    </script>
+    <?
 }
 ?>

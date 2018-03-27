@@ -1,3 +1,12 @@
+/*Выберите свой город*/
+div[data-property-id-row="5"] {
+    display: none;
+}
+.bx-soa-reference {
+    display: none;
+}
+/*-------------------*/
+
 .bx-soa-pp-company-graf-container {
     position:relative;
     padding-left:25px;

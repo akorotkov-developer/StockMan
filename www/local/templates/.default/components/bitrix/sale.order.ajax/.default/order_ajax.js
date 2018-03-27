@@ -2173,6 +2173,18 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				);
 			}
 
+            if (currentSection.id.indexOf(firstSection.id) == 0) {
+                buttons.push(
+                    BX.create('A', {
+                        props: {
+                            href: '/personal/cart/',
+                            className: 'pull-left btn btn-default btn-md'
+                        },
+                        html: this.params.MESS_BACK,
+                    })
+                );
+			}
+
 			if (currentSection && currentSection.id.indexOf(lastSection.id) != '-1')
 				isLastNode = true;
 
