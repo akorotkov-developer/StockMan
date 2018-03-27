@@ -2034,20 +2034,18 @@ $(document).foundation();
       $(this).closest('.sort').removeClass('js-open');
       $(this).closest('form').submit();
     });
-    $('.js-select-all').click(function() {
-      var $checkBoxes = $(this).closest('.sort').find('input');
-      $checkBoxes.prop('checked', !$checkBoxes.prop('checked'));
+    $(document).on('click', '.js-select-all', function() {
+      var $checkBoxes = $(this).closest('.sort').find('input.check__input');
+        $checkBoxes.prop('checked', !$checkBoxes.prop('checked')).trigger('change');
     });
 
     /**
     * Поиск вариантов значений в фильтре
     */
-    $('.js-filter-values-search').on('input', function() {
+    $(document).on('input', '.js-filter-values-search', function() {
         var $this = $(this),
             $filterValues = $this.siblings('.js-filter-values'),
             val = $this.val().toLowerCase();
-
-        console.log(val);
 
         $filterValues.each(function() {
             var $this = $(this),

@@ -73,11 +73,28 @@ $( document ).ready(function() {
             val = $el.val(),
             nameEl = '#h_' + $el.prop('name');
         $(document).find(nameEl).val(val);
+        $(document).find(nameEl).trigger('input');
     });
     $(document).on('change','.x-smart-filter-input', function() {
         var $el = $(this),
             val = $el.val(),
             nameEl = '#' + $el.prop('name');
         $(document).find(nameEl).val(val);
+        $(document).find(nameEl).trigger('input');
     });
+
+
+    var $xBoxDiscaunt =  $(document).find('.x-box-discaunt').html();
+
+    $xBoxDiscaunt = $xBoxDiscaunt.replace('id="', 'id="h_');
+    $xBoxDiscaunt = $xBoxDiscaunt.replace('for="', 'for="h_');
+    $xBoxDiscaunt = $xBoxDiscaunt.replace('x-smart-filter-header', 'x-smart-filter');
+    $(document).find('.x-box-discaunt-header').html($xBoxDiscaunt);
+    /*$(document).find('.x-box-discaunt').find('.x-smart-filter-header').each(function() {
+
+    });
+        $xBoxDiscauntInput =  $(document).find('.x-box-discaunt').find('.x-smart-filter-header'),
+        idBoxDiscaunt = $xBoxDiscauntInput.prop('id');
+    console.log(idBoxDiscaunt);*/
+    //$(document).find('.x-box-discaunt-header').html($xBoxDiscaunt);
 });

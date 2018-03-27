@@ -128,7 +128,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                     $this->SetViewTarget('filter_prop_discaunt');
                     ?>
                     <?foreach($arItem["VALUES"] as $val => $ar){?>
-                        <div<?= in_array($arItem['CODE'], $arSearchable) ? ' class="js-filter-values"' : ''?> data-value="<?=$ar["VALUE"]?>">
+                        <div class="x-box-discaunt">
                             <div class="check">
                                 <input
 
@@ -572,7 +572,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                                     <?default://CHECKBOXES?>
                                         <div class="sort__over">
                                             <? if (in_array($arItem['CODE'], $arSearchable)): ?>
-                                                <input class="js-filter-values-search x-smart-filter-header-input" type="text" placeholder="Найдите <?= mb_strtolower(GetMessage('PROPERTY_NAME_' . $arItem['CODE'])) ?>">
+                                                <input class="js-filter-values-search x-smart-filter-header-input" id="search_<?=$arItem['CODE']?>" name="search_<?=$arItem['CODE']?>" type="text" placeholder="Найдите <?= mb_strtolower(GetMessage('PROPERTY_NAME_' . $arItem['CODE'])) ?>">
                                             <? endif; ?>
                                             <?if ($arItem['CODE'] != StockMan\Config::PROP_NOVINKA) {?>
                                             <div>
@@ -600,8 +600,6 @@ if (isset($templateData['TEMPLATE_THEME']))
                                             <?endforeach;?>
                                             <div class="sort__footer"><input type="submit" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
                                         </div>
-
-
 
                         <?}?>
                     </div>

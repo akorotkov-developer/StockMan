@@ -28,8 +28,15 @@ $arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
 
                 //Фильтр для цены
                 if(isset($arItem["PRICE"])){
-                        if ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0)
-                            continue;
+                    if ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0)
+                        continue;
+
+                    if (!isset($arItem["VALUES"]["MIN"]["HTML_VALUE"])) {
+                        $arItem["VALUES"]["MIN"]["HTML_VALUE"] = $arItem["VALUES"]["MIN"]["VALUE"];
+                    }
+                    if (!isset($arItem["VALUES"]["MAX"]["HTML_VALUE"])) {
+                        $arItem["VALUES"]["MAX"]["HTML_VALUE"] = $arItem["VALUES"]["MAX"]["VALUE"];
+                    }
 
                         $step_num = 4;
                         $step = ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"]) / $step_num;
@@ -75,6 +82,7 @@ $arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
                                             onkeyup="smartFilter.keyup(this)"
                                     />
                                 </div>
+                                <div class="x-box-discaunt-header"></div>
                                 <?//$APPLICATION->ShowViewContent('filter_prop_discaunt');?>
                             </div>
                             <div class="sort__footer"><input type="submit" name="set_filter" class="button margin-bottom-0 js-apply" value="Применить"></div>
@@ -535,7 +543,7 @@ $arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
                                     <?default://CHECKBOXES?>
                                         <div class="sort__over">
                                             <? if (in_array($arItem['CODE'], $arSearchable)): ?>
-                                                <input class="js-filter-values-search x-smart-filter-input" type="text" placeholder="Найдите <?= mb_strtolower(GetMessage('PROPERTY_NAME_' . $arItem['CODE'])) ?>">
+                                                <input class="js-filter-values-search x-smart-filter-input"  id="h_search_<?=$arItem['CODE']?>" name="search_<?=$arItem['CODE']?>" type="text" placeholder="Найдите <?= mb_strtolower(GetMessage('PROPERTY_NAME_' . $arItem['CODE'])) ?>">
                                             <? endif; ?>
                                             <?if ($arItem['CODE'] != StockMan\Config::PROP_NOVINKA) {?>
                                                 <div>
