@@ -544,12 +544,18 @@ use \Bitrix\Main\Localization\Loc;
 															continue;
 
 														$value['NAME'] = htmlspecialcharsbx($value['NAME']);
+                                                        $value['NAME'] = str_replace(" / ", "/",$value['NAME']);
 
+                                                        $strLen = strlen($value['NAME']);
+                                                        $classSize = '';
+                                                        if ($strLen >= 4) {
+                                                            $classSize = 'chose_size_link__w-' . $strLen;
+                                                        }
 														if ($skuProperty['SHOW_MODE'] === 'PICT')
 														{
 															?>
                                                             <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>" class="chose_size_link">
-                                                                <div class="checkbox-group__item sizeblock">
+                                                                <div class="checkbox-group__item sizeblock <?=$classSize?>">
                                                                     <?=$value['NAME']?>
                                                                 </div>
                                                             </a>
@@ -559,7 +565,7 @@ use \Bitrix\Main\Localization\Loc;
 														{
 															?>
                                                             <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>" class="chose_size_link">
-                                                                <div class="checkbox-group__item sizeblock">
+                                                                <div class="checkbox-group__item sizeblock <?=$classSize?>">
                                                                     <?=$value['NAME']?>
                                                                 </div>
                                                             </a>

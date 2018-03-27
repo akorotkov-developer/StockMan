@@ -108,11 +108,6 @@ $arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
                             "colorAvailableInactive" => 'colorAvailableInactive_'.$key,
                         );
                         ?>
-                        <script type="text/javascript">
-                            BX.ready(function(){
-                                window['trackBar<?=$key?>'] = new BX.Iblock.SmartFilter(<?=CUtil::PhpToJSObject($arJsParams)?>);
-                            });
-                        </script>
                 <?}
 
             }?>
@@ -214,12 +209,6 @@ $arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
                                         "colorAvailableInactive" => 'colorAvailableInactive_'.$key,
                                     );
                                     ?>
-                                    <script type="text/javascript">
-                                        BX.ready(function(){
-                                            window['trackBar<?=$key?>'] = new BX.Iblock.SmartFilter(<?=CUtil::PhpToJSObject($arJsParams)?>);
-                                        });
-                                    </script>
-
                                     <?break;?>
 
                                 <?

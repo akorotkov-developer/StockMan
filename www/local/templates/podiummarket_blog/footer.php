@@ -1,6 +1,9 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 IncludeTemplateLangFile(__FILE__);
 ?>
+<?if ($APPLICATION->GetCurPage() != '/blog/') {?>
+    </div>
+<?}?>
         </div>
     </div>
 </div>

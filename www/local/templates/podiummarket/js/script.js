@@ -84,17 +84,12 @@ $( document ).ready(function() {
     });
 
 
-    var $xBoxDiscaunt =  $(document).find('.x-box-discaunt').html();
+    if ($(document).find('.x-box-discaunt').length > 0) {
+        var $xBoxDiscaunt = $(document).find('.x-box-discaunt').html();
 
-    $xBoxDiscaunt = $xBoxDiscaunt.replace('id="', 'id="h_');
-    $xBoxDiscaunt = $xBoxDiscaunt.replace('for="', 'for="h_');
-    $xBoxDiscaunt = $xBoxDiscaunt.replace('x-smart-filter-header', 'x-smart-filter');
-    $(document).find('.x-box-discaunt-header').html($xBoxDiscaunt);
-    /*$(document).find('.x-box-discaunt').find('.x-smart-filter-header').each(function() {
-
-    });
-        $xBoxDiscauntInput =  $(document).find('.x-box-discaunt').find('.x-smart-filter-header'),
-        idBoxDiscaunt = $xBoxDiscauntInput.prop('id');
-    console.log(idBoxDiscaunt);*/
-    //$(document).find('.x-box-discaunt-header').html($xBoxDiscaunt);
+        $xBoxDiscaunt = $xBoxDiscaunt.replace('id="', 'id="h_');
+        $xBoxDiscaunt = $xBoxDiscaunt.replace('for="', 'for="h_');
+        $xBoxDiscaunt = $xBoxDiscaunt.replace('x-smart-filter-header', 'x-smart-filter');
+        $(document).find('.x-box-discaunt-header').html($xBoxDiscaunt);
+    }
 });

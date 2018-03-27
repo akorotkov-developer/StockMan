@@ -40,10 +40,14 @@ class StockManHandlers
 {
     function DoIBlockAfterSave($arg1, $arg2 = false)
     {
+        global $USER;
         $ELEMENT_ID = false;
         $IBLOCK_ID = false;
         $OFFERS_IBLOCK_ID = false;
         $OFFERS_PROPERTY_ID = false;
+
+        CModule::IncludeModule("catalog");
+        CModule::IncludeModule("sale");
         if (CModule::IncludeModule('currency'))
             $strDefaultCurrency = CCurrency::GetBaseCurrency();
 
@@ -151,10 +155,28 @@ class StockManHandlers
                 }
                 else
                     $arProductID = array($ELEMENT_ID);
-
                 $minPrice = false;
+
+                foreach ($arProductID as $id) {
+                    $arDiscounts = CCatalogDiscount::GetDiscountByProduct(
+                        $id,
+                        $USER->GetUserGroupArray(),
+                        "N",
+                        array(),
+                        's1'
+                    );
+                    $arPrice = CCatalogProduct::GetOptimalPrice($id, 1, $USER->GetUserGroupArray(), "N", array(), 's1', $arDiscounts);
+
+                    if (CModule::IncludeModule('currency') && $strDefaultCurrency != $arPrice["PRICE"]['CURRENCY'])
+                        $arPrice["DISCOUNT_PRICE"] = CCurrencyRates::ConvertCurrency($arPrice["DISCOUNT_PRICE"], $arPrice["PRICE"]["CURRENCY"], $strDefaultCurrency);
+
+                    $PRICE = $arPrice["DISCOUNT_PRICE"];
+
+                    if($minPrice === false || $minPrice > $PRICE)
+                        $minPrice = $PRICE;
+                }
                 //Get prices
-                $rsPrices = CPrice::GetList(
+                /*$rsPrices = CPrice::GetList(
                     array(),
                     array(
                         "PRODUCT_ID" => $arProductID,
@@ -170,7 +192,7 @@ class StockManHandlers
 
                     if($minPrice === false || $minPrice > $PRICE)
                         $minPrice = $PRICE;
-                }
+                }*/
 
                 //Save found minimal price into property
                 if($minPrice !== false)
