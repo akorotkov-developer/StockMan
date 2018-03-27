@@ -478,26 +478,39 @@ function GetArticulOfferByID($ITEM_ID) {
 /*--------------------------------------*/
 
 /*Получить предыдущий и следующий элементы каталога*/
-function GetPrevNextElements($ID_ElEMENT) {
+function GetPrevNextElements($ID_ElEMENT, $SECTION_ID) {
 
-    $IBLOCK_ID = StockMan\Config::CATALOG_ID;
-
-    $ID = $ID_ElEMENT;
-
-    $query = CIBlockElement::GetList(array('ID' => 'ASC'), array(
-        'IBLOCK_ID' => $IBLOCK_ID,
-        'ACTIVE' => 'Y',
-        'SECTION_GLOBAL_ACTIVE' => 'Y'),
-        false, array('nPageSize' => 1, 'nElementID' => $ID),
-        array('ID', 'DETAIL_PAGE_URL')
+    // сортировку берем из параметров компонента
+    $arSort = array(
+        "ASC",
+        "ASC"
+    );
+    // выбрать нужно id элемента, его имя и ссылку
+    $arSelect = array(
+        "ID",
+        "NAME",
+        "DETAIL_PAGE_URL"
+    );
+    // выбираем активные элементы из нужного инфоблока
+    $arFilter = array (
+        "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
+        "SECTION_ID" => $SECTION_ID,
+        "ACTIVE" => "Y",
+        "CHECK_PERMISSIONS" => "Y",
+    );
+    // выбирать будем по 1 соседу с каждой стороны от текущего
+    $arNavParams = array(
+        "nPageSize" => 1,
+        "nElementID" => $ID_ElEMENT,
     );
 
-    while($elem = $query->GetNextElement()){
-        $arFields = $elem->GetFields();
-        $PrevNext[] = $arFields['DETAIL_PAGE_URL'];
-    }
+    $arItems = Array();
+    $rsElement = CIBlockElement::GetList($arSort, $arFilter, false, $arNavParams, $arSelect);
+    $rsElement->SetUrlTemplates($arParams["DETAIL_URL"]);
+    while($obElement = $rsElement->GetNextElement())
+        $arItems[] = $obElement->GetFields();
 
-    return $PrevNext;
+    return $arItems;
 }
 /*-------------------------------------------------*/
 

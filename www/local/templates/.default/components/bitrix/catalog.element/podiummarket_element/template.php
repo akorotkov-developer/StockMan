@@ -166,12 +166,35 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
             <button class="close-button" data-close="" aria-label="Close modal" type="button"><span aria-hidden="true">x</span></button>
         </div>
         <?
-        $PrevNext = GetPrevNextElements($arResult["ID"]);
+        $PrevNext = GetPrevNextElements($arResult["ID"], $arResult["IBLOCK_SECTION_ID"]);
+
+        if (count($PrevNext) == 3) {
+            ?>
+            <div class="grid-x grid-padding-x">
+                <div class="cell small-6"><a href="<?=array_shift($PrevNext)['DETAIL_PAGE_URL']?>" class="skirt__prev">Back</a></div>
+                <div class="cell text-right small-6"><a href="<?=end($PrevNext)['DETAIL_PAGE_URL'];?>" class="skirt__next">Next</a></div>
+            </div>
+            <?
+        } else if (count($PrevNext) == 2) {
+            if (array_shift($PrevNext)['DETAIL_PAGE_URL'] == $arResult['DETAIL_PAGE_URL']) {
+                ?>
+                <div class="grid-x grid-padding-x">
+                    <div class="cell small-6"></div>
+                    <div class="cell text-right small-6"><a href="<?=end($PrevNext)['DETAIL_PAGE_URL'];?>" class="skirt__next">Next</a></div>
+                </div>
+                <?
+            } else {
+                ?>
+                <div class="grid-x grid-padding-x">
+                    <div class="cell small-6"><a href="<?=array_shift($PrevNext)['DETAIL_PAGE_URL']?>" class="skirt__prev">Back</a></div>
+                    <div class="cell small-6"></div>
+                </div>
+                <?
+            }
+        }
         ?>
-        <div class="grid-x grid-padding-x">
-            <div class="cell small-6"><a href="<?=array_shift($PrevNext)?>" class="skirt__prev">Back</a></div>
-            <div class="cell text-right small-6"><a href="<?=end($PrevNext);?>" class="skirt__next">Next</a></div>
-        </div>
+
+
 
 
 
@@ -180,6 +203,13 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                 <?
                 if (!empty($actualItem['MORE_PHOTO']))
                 {
+                    ?>
+                    <div class="skirt__slide" data-entity="image" data-id="<?=$arResult["DETAIL_PICTURE"]['ID']?>">
+                        <a class="skirt__inner" data-open="exampleModal1">
+                            <img src="<?=$arResult["DETAIL_PICTURE"]['SRC']?>" alt="<?=$alt?>" title="<?=$title?>" <?=($key == 0 ? ' itemprop="image"' : '')?>>
+                        </a>
+                    </div>
+                    <?
                     foreach ($actualItem['MORE_PHOTO'] as $key => $photo)
                     {
                         ?>
@@ -453,6 +483,16 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
             </div>
 
             <ul class="accordion" data-accordion="">
+                <?if ($arResult["DETAIL_TEXT"]) {?>
+                    <li class="accordion-item" data-accordion-item=""><a class="accordion-title" href="#">Комментарий стилиста</a>
+                        <div class="accordion-content" data-tab-content="">
+                            <div>
+                                <?=$arResult["DETAIL_TEXT"];?>
+                            </div>
+                        </div>
+                    </li>
+                <?}?>
+
                 <?if ($arResult["PROPERTIES"]["SOSTAV"]["VALUE"]) {?>
                     <li class="accordion-item is-active" data-accordion-item=""><a class="accordion-title" href="#">Детали</a>
                         <div class="accordion-content" data-tab-content="">
@@ -473,15 +513,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                         </div>
                     </li>
                 <?}?>
-                <?if ($arResult["DETAIL_TEXT"]) {?>
-                    <li class="accordion-item" data-accordion-item=""><a class="accordion-title" href="#">Детали</a>
-                        <div class="accordion-content" data-tab-content="">
-                            <div>
-                                <?=$arResult["DETAIL_TEXT"];?>
-                            </div>
-                        </div>
-                    </li>
-                <?}?>
+
                 <li class="accordion-item" data-accordion-item=""><a class="accordion-title" href="#">доставка, оплата и возврат</a>
                     <div class="accordion-content" data-tab-content="">
                         <div>
