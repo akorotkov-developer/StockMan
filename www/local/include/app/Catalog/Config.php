@@ -18,8 +18,12 @@ class Config
     const DELEVIRY_PAYS_BACKS = "DELEVIRY_PAYS_BACKS";
     const STILIST_COMMENTS = "STILIST_COMMENTS";
 
+    //Свойства каталога
+    const STIL = "STIL";
+
     //Торговые предложения
     const RAZMER = "RAZMER";
+    const ROSSIYSKIY_RAZMER = "ROSSIYSKIY_RAZMER";
     const DISCOUNT = "DISCOUNT";
     const PROP_DISCOUNT = "PROP_DISCOUNT";
 }

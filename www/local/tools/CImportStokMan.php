@@ -27,6 +27,7 @@ class ImportStokMan {
     public static $XML_ID_STIL = '9f4387df-5b34-11e7-80e0-00155d0f1c03';
     public static $XML_ID_TSVET = 'cf6449d9-5b32-11e7-80e0-00155d0f1c03';
     public static $XML_ID_RAZMER = 'ff296996-5b34-11e7-80e0-00155d0f1c03';
+    public static $XML_ID_RUS_RAZMER = 'c6bfc49e-5b32-11e7-80e0-00155d0f1c03';
 
     public static $CODE_PROPERTYY_TSVET = 'TSVET';
     public static $NAME_PROPERTYY_TSVET = 'Цвет';
@@ -42,10 +43,14 @@ class ImportStokMan {
     public static $arNewOffersName = array(); // Названия новых предложений
     public static $arNewOffersBaseEd = array(); // БазоваяЕдиница новых предложений
 
+    public static $arOffersRusRazmer = array(); // Добавление свойства Размер
+    public static $arOffersRusRazmerReplace = array(); // Добавление свойства Размер
+
     public static $arOffersRazmer = array(); // Добавление свойства Размер
     public static $arOffersRazmerReplace = array(); // Добавление свойства Размер
     public static $arOffersBarCodeReplace = array(); // Штрихкод
     public static $strRazmer = ''; // Размер
+    public static $strRusRazmer = ''; // Российский Размер
 
     public static $codePropertyXML_ID = 'property-xml-id-1c-80e0-00155d0f1c03';
     public static $strPropertyXML_ID = '
@@ -65,10 +70,10 @@ class ImportStokMan {
     );
     public static function processing() {
         self::processingFile();
-        self::processingFileOffers(self::$arOffersRazmerReplace, self::$arOffersXMLReplace, self::$arOffersBarCodeReplace, self::$strRazmer);
+        self::processingFileOffers(self::$arOffersRazmerReplace, self::$arOffersRusRazmerReplace, self::$arOffersXMLReplace, self::$arOffersBarCodeReplace, self::$strRazmer, self::$strRusRazmer);
         self::processingFileImport();
-        self::processingDeActive();
-        self::processingActive();
+        //self::processingDeActive();
+        //self::processingActive();
     }
     public static function processingFile() {
         $urlFile = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME;
@@ -132,6 +137,7 @@ class ImportStokMan {
         $xml = new SimpleXMLElement($strXML);
         foreach($xml->Каталог->Товары->Товар as $obProduct) {
             $strRazmerOffers = '';
+            $strRusRazmerOffers = '';
             $arPropAll = array();
             foreach ($obProduct->ЗначенияСвойств->ЗначенияСвойства as $obProperty) {
                 $idProp = (string)$obProperty->Ид;
@@ -140,6 +146,9 @@ class ImportStokMan {
                 }
                 elseif ($idProp == self::$XML_ID_RAZMER) {
                     $strRazmerOffers = $obProperty;
+                }
+                elseif ($idProp == self::$XML_ID_RUS_RAZMER) {
+                    $strRusRazmerOffers = $obProperty;
                 }
             }
 
@@ -156,6 +165,8 @@ class ImportStokMan {
                 $codeOffer = CUtil::translit(strtolower($strCodeProp), "ru", self::$translateParams);
             }
             self::$arOffersRazmer[$id] = $strRazmerOffers;
+            self::$arOffersRusRazmer[$id] = $strRusRazmerOffers;
+
             self::$arOffersBarCodeReplace[$id] = (string)$obProduct->Штрихкод;
 
             self::$arNewOffersArticles[$id] = (string)$obProduct->Артикул;
@@ -170,6 +181,7 @@ class ImportStokMan {
             foreach ($offers as $offer) {
                 self::$arOffersXMLReplace[$offer] = $key . self::$STR_DELIMITER_OFFERS . '#' . $offer;
                 self::$arOffersRazmerReplace[$offer] = self::$arOffersRazmer[$offer];
+                self::$arOffersRusRazmerReplace[$offer] = self::$arOffersRusRazmer[$offer];
             }
         }
 
@@ -177,15 +189,19 @@ class ImportStokMan {
             if ((string)$obPropety->Ид == self::$XML_ID_RAZMER) {
                 self::$strRazmer = $obPropety;
             }
+            elseif ((string)$obPropety->Ид == self::$XML_ID_RUS_RAZMER) {
+                self::$strRusRazmer = $obPropety;
+            }
         }
         unset($urlFile,$xml,$arProductsXMLOffers,$arImportProducts,$arPropertys);
     }
 
-    public static function processingFileOffers($arOffersRazmerReplace, $arOffersXMLReplace, $arOffersBarCodeReplace, $strRazmer)
+    public static function processingFileOffers($arOffersRazmerReplace, $arOffersRusRazmerReplace, $arOffersXMLReplace, $arOffersBarCodeReplace, $strRazmer, $strRusRazmer)
     {
         $arTemp = $arOffersXMLReplace;
 
         $arRazmerValueRemove = array();
+        $arRusRazmerValueRemove = array();
         $propertyValueToRemove = array();
         foreach ($strRazmer->ВариантыЗначений->Справочник as $obPropetyV) {
             if (strpos((string)$obPropetyV->Значение, 'Объект') !== false) {
@@ -200,13 +216,27 @@ class ImportStokMan {
         foreach ($propertyValueToRemove as $code) {
             unset($code[0]);
         }
+        foreach ($strRusRazmer->ВариантыЗначений->Справочник as $obPropetyV) {
+            if (strpos((string)$obPropetyV->Значение, 'Объект') !== false) {
+                $arRusRazmerValueRemove[] = (string)$obPropetyV->ИдЗначения;
+                $propertyValueToRemove[] = $obPropetyV;
+            }
+            if (strpos((string)$obPropetyV->Значение, '<>') !== false) {
+                $arRusRazmerValueRemove[] = (string)$obPropetyV->ИдЗначения;
+                $propertyValueToRemove[] = $obPropetyV;
+            }
+        }
+        foreach ($propertyValueToRemove as $code) {
+            unset($code[0]);
+        }
         $urlFileOffers = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME_OFFERS;
         $urlFileDataOffers = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_OFFERS;
         $xml = simplexml_load_file($urlFileOffers);
         $strXML = $xml->asXML();
         $xml = new SimpleXMLElement($strXML);
 
-        $xml->Классификатор->Свойства = $strRazmer->asXML();
+        $strAllRazmer = $strRazmer->asXML() . $strRusRazmer->asXML();
+        $xml->Классификатор->Свойства = $strAllRazmer;
 
         $arStores = array();
         foreach ($xml->ПакетПредложений->Склады->Склад as $obStore) {
@@ -221,6 +251,7 @@ class ImportStokMan {
             $id = (string)$obOffer->Ид;
             $obOffer->Ид = $arOffersXMLReplace[$id];
             $obOffer->Штрихкод = $arOffersBarCodeReplace[$id];
+
             $val = (string)$arOffersRazmerReplace[$id]->Значение;
             if (isset($val{1})) {
                 if (!in_array($val,$arRazmerValueRemove)) {
@@ -233,6 +264,20 @@ class ImportStokMan {
                 <Значение>' . $id . '</Значение>
             ';
             $obOffer->ЗначенияСвойств->ЗначенияСвойства[] = $strProdPropertyXML;
+
+            $val = (string)$arOffersRusRazmerReplace[$id]->Значение;
+            if (isset($val{1})) {
+                if (!in_array($val,$arRusRazmerValueRemove)) {
+                    $obOffer->ЗначенияСвойств = (string)($arOffersRusRazmerReplace[$id]->asXML());
+                }
+            }
+
+            $strProdPropertyXML = '
+                <Ид>' . self::$codePropertyXML_ID . '</Ид>
+                <Значение>' . $id . '</Значение>
+            ';
+            $obOffer->ЗначенияСвойств->ЗначенияСвойства[] = $strProdPropertyXML;
+
             unset($arTemp[$id]);
         }
         foreach ($arTemp as $key => $val) {
@@ -290,6 +335,7 @@ class ImportStokMan {
         $urlFile = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME;
         $xml = simplexml_load_file($urlFile);
         $elementsToRemove = array();
+        $elementsToRemoveAllRazmer = array();
         foreach ($xml->Каталог->Товары->Товар as $obProduct) {
             $id = (string)$obProduct->Ид;
             if (!in_array($id, $arProductsXML)) {
@@ -303,8 +349,14 @@ class ImportStokMan {
             foreach ($obProduct->ЗначенияСвойств->ЗначенияСвойства as $obProperty) {
                 $idProp = (string)$obProperty->Ид;
                 if ($idProp == self::$XML_ID_RAZMER) {
-                    $dom = dom_import_simplexml($obProperty);
-                    $dom->parentNode->removeChild($dom);
+                    $elementsToRemoveAllRazmer[] = $obProperty;
+                    //$dom = dom_import_simplexml($obProperty);
+                    //$dom->parentNode->removeChild($dom);
+                }
+                elseif ($idProp == self::$XML_ID_RUS_RAZMER) {
+                    $elementsToRemoveAllRazmer[] = $obProperty;
+                    //$dom = dom_import_simplexml($obProperty);
+                    //$dom->parentNode->removeChild($dom);
                 }
             }
             $strProdPropertyXML = '
@@ -316,16 +368,26 @@ class ImportStokMan {
         foreach ($elementsToRemove as $code) {
             unset($code[0]);
         }
+        foreach ($elementsToRemoveAllRazmer as $code) {
+            unset($code[0]);
+        }
 
         $arValueRemove = array();
         $strXML = $xml->asXML();
         $xml = new SimpleXMLElement($strXML);
         $propertyValueToRemove = array();
+        $propertyValueToRemoveAllRazmer = array();
         foreach ($xml->Классификатор->Свойства->Свойство as $obPropety) {
             // удалем свойство Размер
             if ((string)$obPropety->Ид == self::$XML_ID_RAZMER) {
-                $dom = dom_import_simplexml($obPropety);
-                $dom->parentNode->removeChild($dom);
+                $propertyValueToRemoveAllRazmer[] = $obPropety;
+                //$dom = dom_import_simplexml($obPropety);
+                //$dom->parentNode->removeChild($dom);
+            }
+            elseif ((string)$obPropety->Ид == self::$XML_ID_RUS_RAZMER) {
+                $propertyValueToRemoveAllRazmer[] = $obPropety;
+                //$dom = dom_import_simplexml($obPropety);
+                //$dom->parentNode->removeChild($dom);
             }
 
             $idProp = (string)$obPropety->Ид;
@@ -343,6 +405,9 @@ class ImportStokMan {
         $xml->Классификатор->Свойства->Свойство[] = self::$strPropertyXML_ID;
 
         foreach ($propertyValueToRemove as $code) {
+            unset($code[0]);
+        }
+        foreach ($propertyValueToRemoveAllRazmer as $code) {
             unset($code[0]);
         }
         foreach ($xml->Каталог->Товары->Товар as $obProduct) {
@@ -368,7 +433,7 @@ class ImportStokMan {
         fwrite($f_hdl, $strXML);
         fclose($f_hdl);
 
-        unset($xml, $urlFile, $elementsToRemove, $strXML, $f_hdl, $urlFileDataOffers);
+        unset($xml, $urlFile, $elementsToRemove, $strXML, $f_hdl, $urlFileDataOffers,$propertyValueToRemove, $propertyValueToRemoveAllRazmer);
     }
     public static function getArrayPictures()
     {
