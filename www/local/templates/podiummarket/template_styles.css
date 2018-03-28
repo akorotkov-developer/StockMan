@@ -18,6 +18,15 @@
         min-height: 480px;
     }
 }
+.fit.text-center a {
+    text-decoration: none;
+}
+.fit {
+    vertical-align: top;
+}
+.fit__text.active {
+    font-weight: bold;
+}
 #wishcount {
     position: relative;
     left: -15px;

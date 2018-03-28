@@ -158,35 +158,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 }
 ?>
 
-<?
-echo "<pre>";
-print_r($arResult["PROPERTIES"]["STIL"]);
-echo "</pre>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-// выбранные элементы будут сгруппированы по дате активности
-$arFilter = Array(
-    "IBLOCK_ID"=>$arParams["IBLOCK_ID"],
-    "!ID" => $arResult["ID"],
-    "ACTIVE"=>"Y",
-    "CATALOG_AVAILABLE" => "Y",
-    "=PROPERTY_STIL"=>'ad40fe88-e96b-11e7-8119-00155d0f0d45'
-);
-$res = CIBlockElement::GetList(Array("SORT"=>"ASC"), $arFilter, false, array("nTopCount"=>10), array("ID", "IBLOCK_ID", "PROPERTY_STIL"));
-while($ar_fields = $res->GetNext())
-{
-    echo "<pre>";
-    print_r($ar_fields);
-    echo "</pre>";
-}
-?>
+
     <div class="skirt" id="<?=$itemIds['ID']?>" itemscope itemtype="http://schema.org/Product">
 
         <div class="full reveal reveal_my" id="exampleModal1" data-reveal="">
@@ -402,14 +374,26 @@ while($ar_fields = $res->GetNext())
                 $tsvet = getDetailInfoProduct($arResult["ID"]);
                 ?>
                 <div class="small-12 medium-2 large-2 cell">Цвет:</div>
-                <div class="cell large-4 medium-4">
-                    <div class="fit text-center">
+                <div class="cell large-8 medium-8" >
+                    <div class="fit text-center" >
                         <input class="fit__input" type="radio" id="col1" name="col">
                         <label class="fit__label" for="col1">
-                            <div class="fit__text"><?=$tsvet[""]["prop"]["val"];?></div>
+                            <img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" alt="" style="width: 33px">
+                            <div class="fit__text active"><?=$tsvet[""]["prop"]["val"];?></div>
                         </label>
                     </div>
+
+                    <?foreach ($arResult["PRODUCTS_LIST_STILE"] as $item) {?>
+                        <div class="fit text-center" >
+                            <a href="<?=$item["DETAIL_PAGE_URL"]?>">
+                                <img src="<?=$item["PIC"]?>" alt="">
+                                <div class="fit__text"><?=$item["TSVET"]?></div>
+                            </a>
+                        </div>
+                    <?}?>
                 </div>
+
+
             </div>
 
 
