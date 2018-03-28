@@ -18,7 +18,7 @@
             <div class="check">
                 <input class="check__input" name="RUB_ID[]" type="checkbox" id="zz<?=$i?>" value="<?=$itemValue["ID"]?>"<?if($itemValue["CHECKED"]) echo " checked"?>>
                 <label class="check__label" for="zz<?=$i?>"><?=$itemValue["NAME"]?></label>
-            </div>
+            </div><br>
 		    <?$i++;?>
         <?endforeach;?></p>
 		<p><?echo GetMessage("subscr_fmt")?><br />
