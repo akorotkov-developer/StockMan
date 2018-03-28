@@ -5837,12 +5837,12 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				pickUpContainer.innerHTML = html;
 
-				if (this.params.SHOW_STORES_IMAGES == 'Y')
+				/*if (this.params.SHOW_STORES_IMAGES == 'Y')
 				{
 					BX.bind(pickUpContainer.querySelector('.bx-soa-pickup-preview-img'), 'click', BX.delegate(function(e){
 						this.popupShow(e, logotype && logotype.src_orig || imgSrc);
 					}, this));
-				}
+				}*/
 			}
 		},
 
@@ -6186,11 +6186,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 						src: imgSrc,
 						className: 'bx-soa-pickup-l-item-img'
 					},
-					events: {
+					/*events: {
 						click: BX.delegate(function(e){
 							this.popupShow(e, logotype && logotype.src_orig || imgSrc);
 						}, this)
-					}
+					}*/
 				});
 			}
 			else
