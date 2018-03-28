@@ -5,9 +5,9 @@
             $arBannerTemp = unserialize($arBanner["FIELDS"]["TEMPLATE"]);
             if ($arBannerTemp['NAME'] == 'bootstrap') {
                 $url = $arBannerTemp["PROPS"][0]["LINK_URL"];
-                $url = CAdvBanner::PrepareHTML($url, $arResult['BANNERS'][0]["FIELDS"]);
-                $url = CAdvBanner::GetRedirectURL($url, $arResult['BANNERS'][0]["FIELDS"]);
-                $arPic = unserialize($arResult['BANNERS'][0]["FIELDS"]["TEMPLATE_FILES"]);
+                $url = CAdvBanner::PrepareHTML($url, $arBanner["FIELDS"]);
+                $url = CAdvBanner::GetRedirectURL($url, $arBanner["FIELDS"]);
+                $arPic = unserialize($arBanner["FIELDS"]["TEMPLATE_FILES"]);
 
                 $img = CFile::GetPath($arPic[0]["IMG"]);
                 $imgMobile = $img;
