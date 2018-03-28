@@ -13,7 +13,6 @@ if(strlen($arResult["NAV_STRING"]) > 0)
 	<p><?=$arResult["NAV_STRING"]?></p>
 	<?
 }
-
 if (count($arResult["PROFILES"]))
 {
 	?>
