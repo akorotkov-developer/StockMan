@@ -13,10 +13,6 @@ class Config
     //Site ID
     const SITE_ID = "s1";
 
-    //Слайдер
-    const SLIDER_ID = 8;
-    const SLIDER_TYPE = "news";
-
     //ID Каталога
     const CATALOG_ID = 10;
     const HIGHLOAD_COUNTRY_ID = 98;
@@ -29,6 +25,11 @@ class Config
     const WOMEN_ID = 219;
     const MEN_ID = 218;
     const KIDS_ID = 220;
+
+    //ID подписок
+    const SUB_MEN = 9;
+    const SUB_WOMEN = 6;
+    const SUB_KIDS = 3;
 
     const CATALOG_PRICE = "Розничная ПМ";
 
