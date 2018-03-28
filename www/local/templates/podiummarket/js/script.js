@@ -125,4 +125,7 @@ $( document ).ready(function() {
         });
     });
 
+    $(".close-button").on('click', function() {
+        $(".directory").toggleClass("js-open");
+    });
 });

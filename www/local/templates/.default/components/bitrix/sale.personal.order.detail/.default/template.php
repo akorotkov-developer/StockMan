@@ -795,12 +795,13 @@ else
         </h5>
 
         <div class="callout">
+
         <?
 /*        echo "<pre>";
-        var_dump($arResult['BASKET'][66]["PRODUCT_ID"]);
+        var_dump($arResult['BASKET']['207']['PRODUCT_ID']);
         echo "</pre>";*/
-/*        $fsdk = getDetailInfoProduct(false, $arResult['BASKET'][66]["PRODUCT_ID"]);
-        var_dump($fsdk);*/
+        //$fsdk = getDetailInfoProduct(false, $arResult['BASKET'][66]["PRODUCT_ID"]);
+        //var_dump($fsdk);
         ?>
 
             <?
