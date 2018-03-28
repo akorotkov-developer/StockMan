@@ -23,11 +23,11 @@
         <?endforeach;?></p>
 		<p><?echo GetMessage("subscr_fmt")?><br />
 
-        <div class="check">
+        <div class="check" style="display: none">
             <input class="check__input" name="FORMAT" type="radio" id="r1" value="text"<?if($arResult["SUBSCRIPTION"]["FORMAT"] == "text") echo " checked"?>>
             <label class="check__label" for="r1"><?echo GetMessage("subscr_text")?></label>
         </div>
-        <div class="check">
+        <div class="check" style="display: none">
             <input class="check__input" name="FORMAT" type="radio" id="r2" value="html"<?if($arResult["SUBSCRIPTION"]["FORMAT"] == "html") echo " checked"?> >
             <label class="check__label" for="r2">HTML</label>
         </div>

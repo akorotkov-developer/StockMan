@@ -155,7 +155,7 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                         "SHOW_RUBRICS" => "Y",
                         "INC_JQUERY" => "Y",
                         "NOT_CONFIRM" => "N",
-                        "FORMAT" => "text"
+                        "FORMAT" => "html"
                     ),
                     false
                 );?>

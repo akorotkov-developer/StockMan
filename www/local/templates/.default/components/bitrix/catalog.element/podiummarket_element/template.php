@@ -158,7 +158,35 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 }
 ?>
 
-
+<?
+echo "<pre>";
+print_r($arResult["PROPERTIES"]["STIL"]);
+echo "</pre>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+// выбранные элементы будут сгруппированы по дате активности
+$arFilter = Array(
+    "IBLOCK_ID"=>$arParams["IBLOCK_ID"],
+    "!ID" => $arResult["ID"],
+    "ACTIVE"=>"Y",
+    "CATALOG_AVAILABLE" => "Y",
+    "=PROPERTY_STIL"=>'ad40fe88-e96b-11e7-8119-00155d0f0d45'
+);
+$res = CIBlockElement::GetList(Array("SORT"=>"ASC"), $arFilter, false, array("nTopCount"=>10), array("ID", "IBLOCK_ID", "PROPERTY_STIL"));
+while($ar_fields = $res->GetNext())
+{
+    echo "<pre>";
+    print_r($ar_fields);
+    echo "</pre>";
+}
+?>
     <div class="skirt" id="<?=$itemIds['ID']?>" itemscope itemtype="http://schema.org/Product">
 
         <div class="full reveal reveal_my" id="exampleModal1" data-reveal="">

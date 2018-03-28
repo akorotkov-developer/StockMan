@@ -28,8 +28,16 @@ class Config
 
     //ID подписок
     const SUB_MEN = 9;
+    const SUB_MEN_NEW = 10;
+    const SUB_MEN_ACTIONS = 11;
+
     const SUB_WOMEN = 6;
+    const SUB_WOMEN_NEW = 7;
+    const SUB_WOMEN_ACTIONS = 8;
+
     const SUB_KIDS = 3;
+    const SUB_KIDS_NEW = 4;
+    const SUB_KIDS_ACTIONS = 5;
 
     const CATALOG_PRICE = "Розничная ПМ";
 

@@ -92,4 +92,37 @@ $( document ).ready(function() {
         $xBoxDiscaunt = $xBoxDiscaunt.replace('x-smart-filter-header', 'x-smart-filter');
         $(document).find('.x-box-discaunt-header').html($xBoxDiscaunt);
     }
+
+
+
+    $('.check_men').on('click', function() {
+        $(".check_men").each(function (index, el){
+            if ($(el).attr("checked") == "checked") {
+                $(el).removeAttr("checked")
+            } else {
+                $(el).attr("checked","checked");
+            }
+        });
+    });
+
+    $('.check_women').on('click', function() {
+        $(".check_women").each(function (index, el){
+            if ($(el).attr("checked") == "checked") {
+                $(el).removeAttr("checked")
+            } else {
+                $(el).attr("checked","checked");
+            }
+        });
+    });
+
+    $('.check_kids').on('click', function() {
+        $(".check_kids").each(function (index, el){
+            if ($(el).attr("checked") == "checked") {
+                $(el).removeAttr("checked")
+            } else {
+                $(el).attr("checked","checked");
+            }
+        });
+    });
+
 });
