@@ -72,8 +72,8 @@ class ImportStokMan {
         self::processingFile();
         self::processingFileOffers(self::$arOffersRazmerReplace, self::$arOffersRusRazmerReplace, self::$arOffersXMLReplace, self::$arOffersBarCodeReplace, self::$strRazmer, self::$strRusRazmer);
         self::processingFileImport();
-        //self::processingDeActive();
-        //self::processingActive();
+        self::processingDeActive();
+        self::processingActive();
     }
     public static function processingFile() {
         $urlFile = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME;
