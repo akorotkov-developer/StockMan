@@ -546,6 +546,21 @@ function GetCountDeferred() {
 }
 /*--------------------------------------------*/
 
+
+/*Получить ссылку на детальную страницу в корзине*/
+function getDetailPageUrlinBasket($PRODUCT_ID) {
+    $intElementID = $PRODUCT_ID; // ID предложения
+    $mxResult = CCatalogSku::GetProductInfo($intElementID);
+
+
+    $res = CIBlockElement::GetByID($mxResult["ID"]);
+    if($ar_res = $res->GetNext()) {
+        $detailpage = $ar_res['DETAIL_PAGE_URL'];
+    }
+    return $detailpage;
+}
+/*-----------------------------------------------*/
+
 /*Получить цвет*/
 function getColorProduct($PRODUCT_ID) {
     //Получаем ID Товара
@@ -559,7 +574,7 @@ function getColorProduct($PRODUCT_ID) {
         'PROPERTY_TSVET',
     );
 
-    $arFilter = Array("IBLOCK_ID" => StockMan\Config::CATALOG_ID, "=ID" => $mxResult);
+    $arFilter = Array("IBLOCK_ID" => StockMan\Config::CATALOG_ID, "=ID" => $mxResult["ID"]);
 
     $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
     while($rs = $res->Fetch())

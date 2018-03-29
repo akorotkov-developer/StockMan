@@ -1,3 +1,6 @@
+.product_picture a{
+	text-decoration: none;
+}
 .payment-options-methods-row {
 	padding-left: 11px!important;
 }

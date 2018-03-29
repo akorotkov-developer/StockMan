@@ -704,9 +704,8 @@ else
                                 ?>
                                 <div class="grid-x grid-padding-x">
 
-
                                     <div class="cell small-3 medium-2 large-2">
-                                        <a href="<?=htmlspecialcharsbx($basketItem['DETAIL_PAGE_URL'])?>">
+                                        <a href="<?=getDetailPageUrlinBasket($basketItem["PRODUCT_ID"])?>">
                                             <?
                                             if (strlen($basketItem['PICTURE']['SRC']))
                                             {
@@ -722,7 +721,7 @@ else
                                     </div>
 
                                     <div class="cell small-9 medium-5 large-5">
-                                        <h5><a class="text-insta text-decoration-none text-size-xlarge" href="<?=htmlspecialcharsbx($basketItem['DETAIL_PAGE_URL'])?>"><?=htmlspecialcharsbx($basketItem['NAME'])?></a></h5>
+                                        <h5><a class="text-insta text-decoration-none text-size-xlarge" href="<?=getDetailPageUrlinBasket($basketItem["PRODUCT_ID"])?>"><?=htmlspecialcharsbx($basketItem['NAME'])?></a></h5>
 
                                         <div class="grid-x grid-padding-x">
                                             <?
@@ -739,6 +738,14 @@ else
                                                     </div>
                                                     <?
                                                 }
+                                                ?>
+                                                    <div class="large-3 medium-12 small-5 cell">
+                                                        Цвет:
+                                                    </div>
+                                                    <div class="large-9 medium-12 small-7 cell">
+                                                        <?=getColorProduct($basketItem["PRODUCT_ID"]);?>
+                                                    </div>
+                                                <?
                                             }
                                             ?>
                                         </div>
@@ -803,24 +810,27 @@ else
                 ?>
 
                 <div class="grid-x grid-padding-x">
-                    <div class="cell small-3 medium-2 large-2">
 
-                        <?
-                        if (strlen($basketItem['PICTURE']['SRC']))
-                        {
-                            $imageSrc = $basketItem['PICTURE']['SRC'];
-                        }
-                        else
-                        {
-                            $imageSrc = $this->GetFolder().'/images/no_photo.png';
-                        }
-                        ?>
-                        <img class="margin-bottom-6" src="<?=$imageSrc?>" alt="товар">
+                        <div class="cell small-3 medium-2 large-2">
 
-                    </div>
+                            <?
+                            if (strlen($basketItem['PICTURE']['SRC']))
+                            {
+                                $imageSrc = $basketItem['PICTURE']['SRC'];
+                            }
+                            else
+                            {
+                                $imageSrc = $this->GetFolder().'/images/no_photo.png';
+                            }
+                            ?>
+                            <ahref="<?=getDetailPageUrlinBasket($basketItem["PRODUCT_ID"])?>">
+                                <img class="margin-bottom-6" src="<?=$imageSrc?>" alt="товар">
+                            </a>
+                        </div>
+
                     <div class="cell small-9 medium-5 large-5">
-                        <h5>
-                            <?=htmlspecialcharsbx($basketItem['NAME'])?>
+                        <h5 class="product_picture" >
+                            <a href="<?=getDetailPageUrlinBasket($basketItem["PRODUCT_ID"]);?>"><?=htmlspecialcharsbx($basketItem['NAME'])?></a>
                         </h5>
                         <div class="grid-x grid-padding-x">
                             <?
