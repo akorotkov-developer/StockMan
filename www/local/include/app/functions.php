@@ -611,3 +611,16 @@ function getColorProduct($PRODUCT_ID) {
     return ($HLinfo["UF_NAME"]);
 }
 /*-------------*/
+
+/*Уменьшить картинку*/
+function ResizeImage($ID, $width, $height) {
+    $resize = CFile::ResizeImageGet(
+        $ID,
+        Array('width'=>$width,
+            'height'=>$height),
+        BX_RESIZE_IMAGE_PROPORTIONAL,
+        true
+    );
+    return $resize["src"];
+}
+/*------------------*/

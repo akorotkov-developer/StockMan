@@ -31,11 +31,11 @@ use \Bitrix\Main\Localization\Loc;
 
         <div class="dress__img" data-equalizer-watch>
             <a href="<?=$item['DETAIL_PAGE_URL']?>">
-                <img src="<?=$item['PREVIEW_PICTURE']['SRC']?>" alt="">
+                <img src="<?=ResizeImage($item['PREVIEW_PICTURE']["ID"], 285, 427)?>" alt="">
                 <?
                 if ($item['SECOND_PICT'])
                 {
-                    $bgImage = !empty($item['PREVIEW_PICTURE_SECOND']) ? $item['PREVIEW_PICTURE_SECOND']['SRC'] : $item['PREVIEW_PICTURE']['SRC'];
+                    $bgImage = !empty($item['PREVIEW_PICTURE_SECOND']) ? ResizeImage($item['PREVIEW_PICTURE_SECOND']["ID"], 285, 427)  : ResizeImage($item['PREVIEW_PICTURE']["ID"], 285, 427);
                     ?>
                     <img src="<?=$bgImage?>" alt="">
                     <?
