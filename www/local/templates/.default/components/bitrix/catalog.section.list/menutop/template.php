@@ -126,9 +126,27 @@ if (0 < $arResult["SECTIONS_COUNT"])
                             }
                             if (intval($WrokCatalog->GetElmentCountBySectionID($depthlevelfirst['ID']))==0) {$displaynone = "style='display:none;'";}
                             ?>
-                            <li class="menu-base__item" <?=$displaynone;?>><a class="menu-base__link <?=$activeItemFisrtLevel;?>" <?=$data_toogle;?> href="<?=$depthlevelfirst['SECTION_PAGE_URL']?>"><img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH.$depthlevelfirst['UF_PICTURE']?>" alt=""><?=$depthlevelfirst["NAME"];?></a></li>
+                            <?
+                            if (!$data_toogle) {
+                                $href = "href='".$depthlevelfirst['SECTION_PAGE_URL']."'";
+                            }
+                            ?>
+                            <li class="menu-base__item" <?=$displaynone;?>>
+                                <a class="menu-base__link <?=$activeItemFisrtLevel;?>" <?=$data_toogle;?> <?=$href?>>
+                                    <img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH.$depthlevelfirst['UF_PICTURE']?>" alt="">
+                                    <?=$depthlevelfirst["NAME"];?>
+                                    <?
+                                    if(!$href) {
+                                        ?>
+                                        <i class="fa fa-chevron-right show-for-small-only"></i>
+                                        <?
+                                    }
+                                    ?>
+                                </a>
+                            </li>
                             <?
                             $displaynone = '';
+                            $data_toogle = false;
                         }
                         ?>
                         <li class="menu-base__item"><a class="menu-base__link" href="#"><img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/sale.svg" alt="">Sale</a></li>
