@@ -545,3 +545,54 @@ function GetCountDeferred() {
     return $delaydBasketItems;
 }
 /*--------------------------------------------*/
+
+/*Получить цвет*/
+function getColorProduct($PRODUCT_ID) {
+    //Получаем ID Товара
+    $intElementID = $PRODUCT_ID; // ID предложения
+    $mxResult = CCatalogSku::GetProductInfo($intElementID);
+
+    $arSelect = Array(
+        'ID',
+        'NAME',
+        'IBLOCK_ID',
+        'PROPERTY_TSVET',
+    );
+
+    $arFilter = Array("IBLOCK_ID" => StockMan\Config::CATALOG_ID, "=ID" => $mxResult);
+
+    $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
+    while($rs = $res->Fetch())
+    {
+        $list = $rs; //Список элементов
+
+    }
+
+
+    CModule::IncludeModule('highloadblock'); //модуль highload инфоблоков
+    $rsData = \Bitrix\Highloadblock\HighloadBlockTable::getList(array('filter'=>array('ID'=>92)));
+    if ( !($hldata = $rsData->fetch()) ){
+
+    }
+    else{
+        $hlentity = \Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hldata);
+        $hlDataClass = $hldata['NAME'].'Table';
+        $res = $hlDataClass::getList(array(
+                'filter' => array(
+                    'UF_XML_ID' => $list["PROPERTY_TSVET_VALUE"],
+                ),
+                'select' => array("*"),
+                'order' => array(
+                    'UF_NAME' => 'asc'
+                ),
+            )
+        );
+        if ($row = $res->fetch()) {
+            $HLinfo =$row;
+        }
+
+    }
+
+    return ($HLinfo["UF_NAME"]);
+}
+/*-------------*/

@@ -795,21 +795,13 @@ else
         </h5>
 
         <div class="callout">
-
-        <?
-/*        echo "<pre>";
-        var_dump($arResult['BASKET']['207']['PRODUCT_ID']);
-        echo "</pre>";*/
-        //$fsdk = getDetailInfoProduct(false, $arResult['BASKET'][66]["PRODUCT_ID"]);
-        //var_dump($fsdk);
-        ?>
-
             <?
             $countproducts = 0;
 
             foreach ($arResult['BASKET'] as $basketItem)
             {
                 ?>
+
                 <div class="grid-x grid-padding-x">
                     <div class="cell small-3 medium-2 large-2">
 
@@ -847,6 +839,13 @@ else
                                 }
                             }
                             ?>
+                            <div class="large-3 medium-12 small-5 cell">
+                                Цвет:
+                            </div>
+                            <div class="large-9 medium-12 small-7 cell">
+                                <?=getColorProduct($basketItem["PRODUCT_ID"]);?>
+                            </div>
+
                         </div>
                     </div>
 

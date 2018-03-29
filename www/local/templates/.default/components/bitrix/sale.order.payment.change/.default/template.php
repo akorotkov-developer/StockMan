@@ -90,7 +90,7 @@ else
 
 									?>
 
-                                    <img class="payment-img" src="<?=htmlspecialcharsbx($paySystem['LOGOTIP'])?>">
+                                    <img class="payment-img" src="<?=htmlspecialcharsbx($paySystem['LOGOTIP'])?>" style="background-image: url('<?=htmlspecialcharsbx($paySystem['LOGOTIP'])?>');">
 									<div class="sale-order-payment-change-pp-company-image"
 										style="">
 									</div>
