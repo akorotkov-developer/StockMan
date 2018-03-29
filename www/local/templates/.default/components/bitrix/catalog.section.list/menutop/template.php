@@ -228,9 +228,12 @@ if (0 < $arResult["SECTIONS_COUNT"])
                                     */?>
                                 </div>
 
+
+
+
                                 <?$bannermenusect = strtoupper(GetSectionCodeBySectionID(GetHomeCtalogSection()));?>
                                 <?
-                                $rs = CAdvBanner::GetList($by="s_id", $order="desc", array("TYPE_SID" => "BANNER_MENU_".$bannermenusect, "TYPE_SID_EXACT_MATCH" => "Y"), $if_filtered);
+                                $rs = CAdvBanner::GetList($by="s_id", $order="desc", array("TYPE_SID" => "BANNER_MENU_".$bannermenusect, "TYPE_SID_EXACT_MATCH" => "Y"), $if_filtered, "N");
                                 while($ar = $rs->Fetch()) {
                                     $dom = new DOMDocument;
                                     $dom->loadHTML(CAdvBanner::GetHTML($ar));
@@ -246,7 +249,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
                                             <img src="<?=$arRes["IMG_BANNER"]?>" alt="">
                                         </a>
                                         <?=$ar["CODE"];?>
-                                        <a class="anchor" href="<?=$arRes["LINK_BANNER"]?>">смотреть все    </a>
+                                        <?/*<a class="anchor" href="<?=$arRes["LINK_BANNER"]?>">смотреть все    </a>*/?>
                                     </div>
                                     <?
                                 }

@@ -379,31 +379,13 @@ if ($ElementID > 0)
                 <h2 class="text-transform-none">Подпишись на нашу рассылку, получи скидку 300&#160;р.    </h2>
             </div>
             <div class="cell large-6">
-                <?$APPLICATION->IncludeComponent(
-                    "asd:subscribe.quick.form",
-                    "catalog_element",
-                    array(
-                        "AJAX_MODE" => "N",
-                        "SHOW_HIDDEN" => "Y",
-                        "ALLOW_ANONYMOUS" => "Y",
-                        "SHOW_AUTH_LINKS" => "Y",
-                        "CACHE_TYPE" => "A",
-                        "CACHE_TIME" => "3600",
-                        "SET_TITLE" => "Y",
-                        "AJAX_OPTION_JUMP" => "N",
-                        "AJAX_OPTION_STYLE" => "Y",
-                        "AJAX_OPTION_HISTORY" => "N",
-                        "COMPONENT_TEMPLATE" => ".default",
-                        "RUBRICS" => array(
-                            0 => "1",
-                        ),
-                        "SHOW_RUBRICS" => "N",
-                        "INC_JQUERY" => "N",
-                        "NOT_CONFIRM" => "N",
-                        "FORMAT" => "text"
-                    ),
-                    false
-                );?>
+                <div id="subscribe_result"></div>
+                <div id="subscribe_result_error" style="color: red;"></div>
+
+                    <label>Введите ваш email адрес:</label><br>
+                    <input class="mail text-center" name="email" type="email" value="" placeholder="укажите свой адрес электронной почты">
+                    <input type="button" name="send" value="Отправить" style="display: none">
+
             </div>
         </div>
     </div>
@@ -452,3 +434,25 @@ if ($ElementID > 0)
 	}
 }
 ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        /*Подписка на рассылку*/
+        $('input[name="email"]').keypress(function(e){
+            if(e.keyCode==13) {
+                $.getJSON('/local/ajax/subscribe.php', {
+                    email: $('input[name="email"]').val(),
+                    arrubbrics: <?=GetHomeCtalogSection();?>
+                }, function (data) {
+                    if (data.status == 'ok') {
+                        $("#subscribe_result").html("На ваш почтовый адрес отправлено письмо с подтверждением подписки.");
+                        $("#subscribe_result_error").html("");
+                    } else {
+                        $("#subscribe_result_error").html(data.msg);
+                        $("#subscribe_result").html("");
+                    }
+                });
+            }
+        });
+
+    });
+</script>
