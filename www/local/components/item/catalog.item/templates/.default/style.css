@@ -14,16 +14,16 @@ a.chose_size_link {
 	float: left;
 }
 .checkbox-group {
-	width: 65%;
+/*	width: 65%;
 	position: relative;
-	top: 51px;
+	top: 51px;*/
 }
 .dress__size {
-	padding-bottom: 45px;
+	/*padding-bottom: 45px;*/
 }
 .size_title {
-	position: relative;
-	top: 29px;
+/*	position: relative;
+	top: 29px;*/
 }
 .dress:hover .dress__size {
 	display: block;

@@ -108,7 +108,7 @@ if ($normalCount > 0) {
                             } ?></h5>
 
                             <? /*<div class="text-secondary margin-bottom-3">Полосатое платье-рубашка</div>*/ ?>
-                            <div class="rid-x grid-padding-x">
+                            <div class="grid-x grid-padding-x">
                                 <?
                                 if ($bPropsColumn) {
                                     foreach ($arItem["PROPS"] as $val) {
@@ -125,7 +125,7 @@ if ($normalCount > 0) {
                                                 continue;
                                         }
 
-                                        echo htmlspecialcharsbx($val["NAME"]) . ":&nbsp;<span>" . $val["VALUE"] . "</span><br/>";
+                                        /*echo htmlspecialcharsbx($val["NAME"]) . ":&nbsp;<span>" . $val["VALUE"] . "</span><br/>";*/
                                     }
                                 }
                                 ?>

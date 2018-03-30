@@ -531,37 +531,44 @@ use \Bitrix\Main\Localization\Loc;
 									continue;
 								?>
 
-                                        <span class="margin-right-4"><?=$skuProperty['NAME']?></span>
+                                <div class="grid-container margin-top-15">
+                                    <div class="grid-x grid-padding-x">
 
+                                        <div class="cell small-12 medium-4">
+                                            <span><?=$skuProperty['NAME']?></span>
+                                        </div>
 
+                                        <div class="cell small-12 medium-8">
+                                            <div class="checkbox-group">
+                                                <?
+                                                foreach ($skuProperty['VALUES'] as $value)
+                                                {
+                                                    if (!isset($item['SKU_TREE_VALUES'][$propertyId][$value['ID']]))
+                                                        continue;
 
-                                                <div class="checkbox-group">
-													<?
-													foreach ($skuProperty['VALUES'] as $value)
-													{
-														if (!isset($item['SKU_TREE_VALUES'][$propertyId][$value['ID']]))
-															continue;
+                                                    $value['NAME'] = htmlspecialcharsbx($value['NAME']);
 
-														$value['NAME'] = htmlspecialcharsbx($value['NAME']);
+                                                    if ($skuProperty['SHOW_MODE'] === 'PICT')
+                                                    {
+                                                        ?>
+                                                        <input class="checkbox-group__item" type="radio" id="size1" name="size">
+                                                        <label class="checkbox-group__label" for="size1"><?=$value['NAME']?></label>
+                                                        <?
+                                                    }
+                                                    else
+                                                    {
+                                                        ?>
+                                                        <input class="checkbox-group__item" type="radio" id="size1" name="size">
+                                                        <label class="checkbox-group__label" for="size1"><?=$value['NAME']?></label>
+                                                        <?
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
 
-														if ($skuProperty['SHOW_MODE'] === 'PICT')
-														{
-															?>
-                                                            <input class="checkbox-group__item" type="radio" id="size1" name="size">
-                                                            <label class="checkbox-group__label" for="size1"><?=$value['NAME']?></label>
-															<?
-														}
-														else
-														{
-															?>
-                                                            <input class="checkbox-group__item" type="radio" id="size1" name="size">
-                                                            <label class="checkbox-group__label" for="size1"><?=$value['NAME']?></label>
-															<?
-														}
-													}
-													?>
-												</div>
-
+                                    </div>
+                                </div>
 
 
 

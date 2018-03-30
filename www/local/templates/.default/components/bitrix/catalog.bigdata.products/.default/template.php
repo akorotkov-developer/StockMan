@@ -103,52 +103,29 @@ if (!empty($arResult['ITEMS']))
 				);
 				if ('TEXT' == $arProp['SHOW_MODE'])
 				{
-					$skuTemplate[$iblockId][$propId]['SCROLL']['START'] = '<div class="bx_item_detail_size full" id="#ITEM#_prop_'.$propId.'_cont">'.
-						'<span class="bx_item_section_name_gray">'.htmlspecialcharsbx($arProp['NAME']).'</span>'.
-						'<div class="bx_size_scroller_container"><div class="bx_size"><ul id="#ITEM#_prop_'.$propId.'_list" style="width: #WIDTH#;">';;
-					$skuTemplate[$iblockId][$propId]['SCROLL']['FINISH'] = '</ul></div>'.
-						'<div class="bx_slide_left" id="#ITEM#_prop_'.$propId.'_left" data-treevalue="'.$propId.'" style=""></div>'.
-						'<div class="bx_slide_right" id="#ITEM#_prop_'.$propId.'_right" data-treevalue="'.$propId.'" style=""></div>'.
-						'</div></div>';
+					$skuTemplate[$iblockId][$propId]['SCROLL']['START'] = '';
+					$skuTemplate[$iblockId][$propId]['SCROLL']['FINISH'] = '';
 
-					$skuTemplate[$iblockId][$propId]['FULL']['START'] = '<div class="bx_item_detail_size" id="#ITEM#_prop_'.$propId.'_cont">'.
-						'<span class="bx_item_section_name_gray">'.htmlspecialcharsbx($arProp['NAME']).'</span>'.
-						'<div class="bx_size_scroller_container"><div class="bx_size"><ul id="#ITEM#_prop_'.$propId.'_list" style="width: #WIDTH#;">';;
-					$skuTemplate[$iblockId][$propId]['FULL']['FINISH'] = '</ul></div>'.
-						'<div class="bx_slide_left" id="#ITEM#_prop_'.$propId.'_left" data-treevalue="'.$propId.'" style="display: none;"></div>'.
-						'<div class="bx_slide_right" id="#ITEM#_prop_'.$propId.'_right" data-treevalue="'.$propId.'" style="display: none;"></div>'.
-						'</div></div>';
+					$skuTemplate[$iblockId][$propId]['FULL']['START'] = '';
+					$skuTemplate[$iblockId][$propId]['FULL']['FINISH'] = '';
 					foreach ($arProp['VALUES'] as $value)
 					{
 						$value['NAME'] = htmlspecialcharsbx($value['NAME']);
-						$skuTemplate[$iblockId][$propId]['ITEMS'][$value['ID']] = '<li data-treevalue="'.$propId.'_'.$value['ID'].
-							'" data-onevalue="'.$value['ID'].'" style="width: #WIDTH#;" title="'.$value['NAME'].'"><i></i><span class="cnt">'.$value['NAME'].'</span></li>';
+						$skuTemplate[$iblockId][$propId]['ITEMS'][$value['ID']] = $value['NAME'];
 					}
 					unset($value);
 				}
 				elseif ('PICT' == $arProp['SHOW_MODE'])
 				{
-					$skuTemplate[$iblockId][$propId]['SCROLL']['START'] = '<div class="bx_item_detail_scu full" id="#ITEM#_prop_'.$propId.'_cont">'.
-						'<span class="bx_item_section_name_gray">'.htmlspecialcharsbx($arProp['NAME']).'</span>'.
-						'<div class="bx_scu_scroller_container"><div class="bx_scu"><ul id="#ITEM#_prop_'.$propId.'_list" style="width: #WIDTH#;">';
-					$skuTemplate[$iblockId][$propId]['SCROLL']['FINISH'] = '</ul></div>'.
-						'<div class="bx_slide_left" id="#ITEM#_prop_'.$propId.'_left" data-treevalue="'.$propId.'" style=""></div>'.
-						'<div class="bx_slide_right" id="#ITEM#_prop_'.$propId.'_right" data-treevalue="'.$propId.'" style=""></div>'.
-						'</div></div>';
+					$skuTemplate[$iblockId][$propId]['SCROLL']['START'] = '';
+					$skuTemplate[$iblockId][$propId]['SCROLL']['FINISH'] = '';
 
-					$skuTemplate[$iblockId][$propId]['FULL']['START'] = '<div class="bx_item_detail_scu" id="#ITEM#_prop_'.$propId.'_cont">'.
-						'<span class="bx_item_section_name_gray">'.htmlspecialcharsbx($arProp['NAME']).'</span>'.
-						'<div class="bx_scu_scroller_container"><div class="bx_scu"><ul id="#ITEM#_prop_'.$propId.'_list" style="width: #WIDTH#;">';
-					$skuTemplate[$iblockId][$propId]['FULL']['FINISH'] = '</ul></div>'.
-						'<div class="bx_slide_left" id="#ITEM#_prop_'.$propId.'_left" data-treevalue="'.$propId.'" style="display: none;"></div>'.
-						'<div class="bx_slide_right" id="#ITEM#_prop_'.$propId.'_right" data-treevalue="'.$propId.'" style="display: none;"></div>'.
-						'</div></div>';
+					$skuTemplate[$iblockId][$propId]['FULL']['START'] = '';
+					$skuTemplate[$iblockId][$propId]['FULL']['FINISH'] = '';
 					foreach ($arProp['VALUES'] as $value)
 					{
 						$value['NAME'] = htmlspecialcharsbx($value['NAME']);
-						$skuTemplate[$iblockId][$propId]['ITEMS'][$value['ID']] = '<li data-treevalue="'.$propId.'_'.$value['ID'].
-							'" data-onevalue="'.$value['ID'].'" style="width: #WIDTH#; padding-top: #WIDTH#;"><i title="'.$value['NAME'].'"></i>'.
-							'<span class="cnt"><span class="cnt_item" style="background-image:url(\''.$value['PICT']['SRC'].'\');" title="'.$value['NAME'].'"></span></span></li>';
+						$skuTemplate[$iblockId][$propId]['ITEMS'][$value['ID']] = $value['NAME'];
 					}
 					unset($value);
 				}
@@ -225,6 +202,63 @@ if (!empty($arResult['ITEMS']))
                                     ?>
                                     . -
                                 </div>
+
+
+    <?/*ВЫВОД РАЗМЕРА*/?>
+	<?if (!empty($arItem['OFFERS']) && isset($skuTemplate[$arItem['IBLOCK_ID']]))
+	{
+	$arSkuProps = array();
+	?>
+        <div class="dress__size">
+            <div class="grid-container margin-top-15">
+                   <div class="grid-x grid-padding-x">
+                        <div class="cell small-12 medium-4">
+                            <span>Размер</span>
+                        </div>
+
+                        <div class="cell small-12 medium-8">
+                             <div class="checkbox-group">
+                                <?
+                                foreach ($skuTemplate[$arItem['IBLOCK_ID']] as $propId => $propTemplate)
+                                {
+                                    if (!isset($arItem['SKU_TREE_VALUES'][$propId]))
+                                        continue;
+                                    $valueCount = count($arItem['SKU_TREE_VALUES'][$propId]);
+                                    if ($valueCount > 5)
+                                    {
+                                        $fullWidth = ($valueCount*20).'%';
+                                        $itemWidth = (100/$valueCount).'%';
+                                        $rowTemplate = $propTemplate['SCROLL'];
+                                    }
+                                    else
+                                    {
+                                        $fullWidth = '100%';
+                                        $itemWidth = '20%';
+                                        $rowTemplate = $propTemplate['FULL'];
+                                    }
+                                    unset($valueCount);
+
+
+
+                                    foreach ($propTemplate['ITEMS'] as $value => $valueItem)
+                                    {
+                                        if (!isset($arItem['SKU_TREE_VALUES'][$propId][$value]))
+                                            continue;
+                                        echo '<input class="checkbox-group__item" type="radio" id="size1" name="size"><label class="checkbox-group__label" for="size1">';
+                                        echo str_replace(array('#ITEM#_prop_', '#WIDTH#'), array($arItemIDs['PROP'], $itemWidth), $valueItem);
+                                        echo str_replace('#ITEM#_prop_', $arItemIDs['PROP'], $rowTemplate['FINISH']), '</label>';
+                                    }
+                                    unset($value, $valueItem);
+                                }
+                                ?>
+                             </div>
+                        </div>
+
+                   </div>
+             </div>
+        </div>
+
+    <?}?>
 
  <!--                               <div class="dress__size"><span class="margin-right-4">Размер</span>
                                     <div class="checkbox-group">

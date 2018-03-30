@@ -531,51 +531,58 @@ use \Bitrix\Main\Localization\Loc;
 									continue;
 								?>
 
+                            <div class="grid-container margin-top-15">
+                                <div class="grid-x grid-padding-x">
+
+                                    <div class="cell small-12 medium-4">
                                         <span class="margin-right-4 size_title"><?=$skuProperty['NAME']?></span>
+                                    </div>
 
+                                    <div class="cell small-12 medium-8">
+                                        <div class="checkbox-group">
+                                            <?
+                                            $i=0;
+                                            foreach ($skuProperty['VALUES'] as $value)
+                                            {
+                                                if (!isset($item['SKU_TREE_VALUES'][$propertyId][$value['ID']]))
+                                                    continue;
 
+                                                $value['NAME'] = htmlspecialcharsbx($value['NAME']);
+                                                $value['NAME'] = str_replace(" / ", "/",$value['NAME']);
 
-                                                <div class="checkbox-group">
-													<?
-                                                    $i=0;
-													foreach ($skuProperty['VALUES'] as $value)
-													{
-														if (!isset($item['SKU_TREE_VALUES'][$propertyId][$value['ID']]))
-															continue;
+                                                $strLen = strlen($value['NAME']);
+                                                $classSize = '';
+                                                if ($strLen >= 4) {
+                                                    $classSize = 'chose_size_link__w-' . $strLen;
+                                                }
+                                                if ($skuProperty['SHOW_MODE'] === 'PICT')
+                                                {
+                                                    ?>
+                                                    <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>" class="chose_size_link">
+                                                        <div class="checkbox-group__item sizeblock <?=$classSize?>">
+                                                            <?=$value['NAME']?>
+                                                        </div>
+                                                    </a>
+                                                    <?
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                    <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>" class="chose_size_link">
+                                                        <div class="checkbox-group__item sizeblock <?=$classSize?>">
+                                                            <?=$value['NAME']?>
+                                                        </div>
+                                                    </a>
+                                                    <?
+                                                }
+                                                $i++;
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
 
-														$value['NAME'] = htmlspecialcharsbx($value['NAME']);
-                                                        $value['NAME'] = str_replace(" / ", "/",$value['NAME']);
-
-                                                        $strLen = strlen($value['NAME']);
-                                                        $classSize = '';
-                                                        if ($strLen >= 4) {
-                                                            $classSize = 'chose_size_link__w-' . $strLen;
-                                                        }
-														if ($skuProperty['SHOW_MODE'] === 'PICT')
-														{
-															?>
-                                                            <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>" class="chose_size_link">
-                                                                <div class="checkbox-group__item sizeblock <?=$classSize?>">
-                                                                    <?=$value['NAME']?>
-                                                                </div>
-                                                            </a>
-															<?
-														}
-														else
-														{
-															?>
-                                                            <a href="<?=$item['DETAIL_PAGE_URL']?>?size_cloth=<?=$value['NAME']?>" class="chose_size_link">
-                                                                <div class="checkbox-group__item sizeblock <?=$classSize?>">
-                                                                    <?=$value['NAME']?>
-                                                                </div>
-                                                            </a>
-															<?
-														}
-														$i++;
-													}
-													?>
-												</div>
-
+                                </div>
+                            </div>
 
 
 
