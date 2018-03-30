@@ -525,20 +525,14 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                         </div>
                     </li>
                 <?}?>
-
+                <?$DELIVERY_PAYMENT_RETURN = \Ceteralabs\UserVars::GetVar('DELIVERY_PAYMENT_RETURN');
+                if (isset($DELIVERY_PAYMENT_RETURN["VALUE"]{1})) {?>
                 <li class="accordion-item" data-accordion-item=""><a class="accordion-title" href="#">доставка, оплата и возврат</a>
                     <div class="accordion-content" data-tab-content="">
-                        <div>
-                            <?$APPLICATION->IncludeComponent("bitrix:main.include","",Array(
-                                    "AREA_FILE_SHOW" => "file",
-                                    "PATH" => StockMan\Config::STOCKMAN_TEMPLATE_PATH."/include_areas/deliveryandpay.php",
-                                    "AREA_FILE_RECURSIVE" => "Y",
-                                    "EDIT_TEMPLATE" => ""
-                                )
-                            );?>
-                        </div>
+                        <div><?=$DELIVERY_PAYMENT_RETURN["VALUE"]?></div>
                     </div>
                 </li>
+                <?}?>
             </ul>
             <div class="text-size-xsmall text-right">Поделиться<a class="fa fa-facebook share" href="#"></a><a class="fa fa-twitter share" href="#"></a><a class="fa fa-vk share" href="#"></a><a class="fa fa-pinterest share" href="#"></a></div>
         </div>

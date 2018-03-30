@@ -17,9 +17,9 @@
 				</a>
  */?>
         <div class="girl__slide">
-            <?/*<a href="https://www.instagram.com/p/<?=$post->node->shortcode?>" target="_blank">*/?>
+            <a href="https://www.instagram.com/p/<?=$post->node->shortcode?>" target="_blank">
                 <img src="<?=$post->node->thumbnail_src?>" alt="">
-            <?//</a>?>
+            </a>
         </div>
         <?}?>
     </div>

@@ -211,3 +211,8 @@ li.product-item-scu-item-text-container.selected div.product-item-scu-item-text-
 .popup-window-content img {
     max-height: 200px!important;
 }
+
+.footer {
+    padding-bottom: 26px;
+    padding-top: 40px;
+}

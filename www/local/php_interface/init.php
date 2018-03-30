@@ -12,5 +12,5 @@ require(__DIR__ . "/../include/vendor/autoload.php");
  * инициализация приложения
  */
 StockMan\Application::init();
-
+\Bitrix\Main\Loader::includeModule('ceteralabs.uservars');
 ?>
