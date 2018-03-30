@@ -29,7 +29,7 @@ $APPLICATION->SetTitle("Корзина");
     "SET_TITLE" => "Y",
     "AJAX_OPTION_ADDITIONAL" => "",
     "OFFERS_PROPS" => array(
-        "TSVET",
+        "TSVET_OFFER",
         "RAZMER"
     ),
     ),

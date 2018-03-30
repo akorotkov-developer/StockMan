@@ -72,8 +72,6 @@ class ImportStokMan {
         self::processingFile();
         self::processingFileOffers(self::$arOffersRazmerReplace, self::$arOffersRusRazmerReplace, self::$arOffersXMLReplace, self::$arOffersBarCodeReplace, self::$strRazmer, self::$strRusRazmer);
         self::processingFileImport();
-        self::processingDeActive();
-        self::processingActive();
     }
     public static function processingFile() {
         $urlFile = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME;
@@ -536,14 +534,18 @@ class ImportStokMan {
         while ($ar_fields = $res->GetNext()) {
             $arIdDeActive[] = $ar_fields["ID"] ;
         }
+        $i = 0;
         foreach ($arIdDeActive as $id) {
             $el = new CIBlockElement;
             $arLoadProductArray = Array(
                 "ACTIVE"         => "N",
             );
             $el->Update($id, $arLoadProductArray);
+            $i++;
             unset($arLoadProductArray, $el);
         }
+
+        mail('v.mokin@ceteralabs.com','не доступные, но активные',$i);
         // нет картинки
         $arFilter = Array(
             "ACTIVE" => "Y",
@@ -557,6 +559,7 @@ class ImportStokMan {
         while ($ar_fields = $res->GetNext()) {
             $arIdDeActive[] = $ar_fields["ID"] ;
         }
+        $i = 0;
         // ДеАктивируем товары
         foreach ($arIdDeActive as $id) {
             $el = new CIBlockElement;
@@ -564,8 +567,10 @@ class ImportStokMan {
                 "ACTIVE"         => "N",
             );
             $el->Update($id, $arLoadProductArray);
+            $i++;
             unset($arLoadProductArray, $el);
         }
+        mail('v.mokin@ceteralabs.com','ДеАктивируем товары',$i);
         unset($arIdActive);
     }
     public static function processingActive()
@@ -586,6 +591,7 @@ class ImportStokMan {
         while ($ar_fields = $res->GetNext()) {
             $arIdActive[] = $ar_fields["ID"] ;
         }
+        $i = 0;
         // Активируем товары
         foreach ($arIdActive as $id) {
             $el = new CIBlockElement;
@@ -593,8 +599,67 @@ class ImportStokMan {
                 "ACTIVE"         => "Y",
             );
             $el->Update($id, $arLoadProductArray);
+            $i++;
             unset($arLoadProductArray, $el);
         }
+
+
+        mail('v.mokin@ceteralabs.com','Активируем товары',$i);
+        /*$arTsvetOffers = array();
+        $arFilter = Array(
+            "ACTIVE" => "Y",
+            "IBLOCK_ID" => self::$IBLOCK_OFFERS_ID,
+            "=CATALOG_AVAILABLE" => "Y",
+            "PROPERTY_CML2_LINK" => $arIdActive
+        );
+        $res = CIBlockElement::GetList(Array("ID" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID"));
+        while ($ar_fields = $res->GetNext()) {
+            $arTsvetOffers[] = $ar_fields["ID"] ;
+        }
+        $i = 0;
+        foreach ($arTsvetOffers as $id) {
+            $tsvet = getTsvetProduct($id);
+            if (isset($tsvet{1})) {
+                CIBlockElement::SetPropertyValuesEx(
+                    $id,
+                    self::$IBLOCK_OFFERS_ID,
+                    array(
+                        "TSVET_OFFER" => $tsvet
+                    )
+                );
+            }
+            $i++;
+        }
+        mail('v.mokin@ceteralabs.com',1,$i);
+        unset($arTsvetOffers);*/
         unset($arIdActive);
+    }
+    public static function processingTsvetOffers()
+    {
+        /*$arTsvetOffers = array();
+        $arFilter = Array(
+            "ACTIVE" => "Y",
+            "IBLOCK_ID" => self::$IBLOCK_OFFERS_ID,
+            "=CATALOG_AVAILABLE" => "Y",
+            "PROPERTY_CML2_LINK" =>
+        );
+        $res = CIBlockElement::GetList(Array("ID" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID"));
+        while ($ar_fields = $res->GetNext()) {
+            $arTsvetOffers[] = $ar_fields["ID"] ;
+        }
+        // Активируем товары
+        foreach ($arTsvetOffers as $id) {
+            $tsvet = getTsvetProduct($id);
+            if (isset($tsvet{1})) {
+                CIBlockElement::SetPropertyValuesEx(
+                    $id,
+                    self::$IBLOCK_OFFERS_ID,
+                    array(
+                        "TSVET_OFFER" => $tsvet
+                    )
+                );
+            }
+        }
+        unset($arTsvetOffers);*/
     }
 }

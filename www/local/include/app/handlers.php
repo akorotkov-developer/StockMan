@@ -36,8 +36,24 @@ AddEventHandler("iblock", "OnAfterIBlockElementAdd", Array("StockManHandlers",  
 AddEventHandler("catalog", "OnPriceAdd",  Array("StockManHandlers", "DoIBlockAfterSave"));
 AddEventHandler("catalog", "OnPriceUpdate",  Array("StockManHandlers", "DoIBlockAfterSave"));
 
+AddEventHandler("sale", "OnBeforeBasketAdd",  Array("StockManHandlers", "OnBeforeBasketUpdateHandler"));
+
 class StockManHandlers
 {
+    function OnBeforeBasketUpdateHandler(&$arFields)
+    {
+        $id = $arFields["PRODUCT_ID"];
+        $tsvet = getTsvetProduct($id);
+        if (isset($tsvet{1})) {
+            $arTsvet = array(
+                "CODE" => "TSVET_OFFER",
+                "VALUE" => $tsvet,
+                "SORT" => 0,
+                "NAME" => "Цвет"
+            );
+            $arFields["PROPS"][]  = $arTsvet;
+        }
+    }
     function DoIBlockAfterSave($arg1, $arg2 = false)
     {
         global $USER;

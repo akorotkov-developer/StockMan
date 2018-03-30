@@ -57,8 +57,7 @@ $arFilterSection = array(
             1 => "",
         ),
         "FILTER_PROPERTY_CODE" => array(
-            ImportStokMan::$CODE_PROPERTYY_TSVET,
-            StockMan\Catalog\Config::STIL,
+            ImportStokMan::$CODE_PROPERTYY_TSVET
         ),
         "FILTER_PRICE_CODE" => array(
             0 => StockMan\Config::CATALOG_PRICE,
@@ -132,13 +131,15 @@ $arFilterSection = array(
         ),
         "LIST_OFFERS_PROPERTY_CODE" => array(
             0 => StockMan\Catalog\Config::RAZMER,
+            "TSVET_OFFER"
         ),
         "LIST_OFFERS_LIMIT" => "10",
         "SECTION_BACKGROUND_IMAGE" => "UF_BACKGROUND_IMAGE",
         "DETAIL_PROPERTY_CODE" => array(
               "SOSTAV",
               "OSNOVNAYA_STRANA_PROISKHOZHDENIYA",
-              "SEZON_SVOYSTVO"
+              "SEZON_SVOYSTVO",
+              StockMan\Catalog\Config::STIL,
         ),
         "DETAIL_META_KEYWORDS" => "-",
         "DETAIL_META_DESCRIPTION" => "-",
@@ -189,7 +190,8 @@ $arFilterSection = array(
         "PRODUCT_DISPLAY_MODE" => "Y",
         "OFFER_ADD_PICT_PROP" => "MORE_PHOTO",
         "OFFER_TREE_PROPS" => array(
-            0 => StockMan\Catalog\Config::RAZMER,
+            StockMan\Catalog\Config::RAZMER,
+            "TSVET_OFFER"
             //1 => "SIZES_CLOTHES",
             //2 => "COLOR_REF",
             //3 => "",
