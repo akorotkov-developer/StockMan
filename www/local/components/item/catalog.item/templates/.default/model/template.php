@@ -26,7 +26,8 @@ use \Bitrix\Main\Localization\Loc;
                 <?
                 if ($item['SECOND_PICT'])
                 {
-                    $bgImage = !empty($item['PREVIEW_PICTURE_SECOND']) ? $item['PREVIEW_PICTURE_SECOND']['SRC'] : $item['PREVIEW_PICTURE']['SRC'];
+
+                    $bgImage = !empty($item['PREVIEW_PICTURE_SECOND']) ? ResizeImage($item['PREVIEW_PICTURE_SECOND']["ID"], 285, 427) : ResizeImage($item['PREVIEW_PICTURE_SECOND']["ID"], 285, 427);
                     ?>
                     <img src="<?=$bgImage?>" alt="">
                     <?
@@ -35,7 +36,7 @@ use \Bitrix\Main\Localization\Loc;
                 if ((isset($item["PROPERTIES"]["MORE_PHOTO"]["VALUE"][1])) and(intval($item["PROPERTIES"]["MORE_PHOTO"]["VALUE"][1])>0)) {
                     $arPic = CFile::GetFileArray($item["PROPERTIES"]["MORE_PHOTO"]["VALUE"][1]);
                     $width = 285;
-                    $height = 400;
+                    $height = 427;
                     $arPicModel = $arPic["SRC"];
                     if ($arPic) {
                         if ($arPic["WIDTH"] <= $width) {
