@@ -220,5 +220,5 @@ $arFilterNovinkiAll = array_merge($arFilterSection, $arFilterNovinki);
     false
 );?>
 <?
-//require_once($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/include_areas/instagram_block.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/include_areas/instagram_block.php');
 ?>
