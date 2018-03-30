@@ -34,14 +34,7 @@ $aMenuLinks = Array(
         Array(),
         Array(),
         ""
-    ),
-    Array(
-        "Гарантия",
-        "/help/guaranty/",
-        Array(),
-        Array(),
-        ""
-    ),
+    )
 
 );
 ?>
