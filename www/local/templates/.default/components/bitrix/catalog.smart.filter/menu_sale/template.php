@@ -17,11 +17,10 @@ $arSearchable = ['TSVET', 'BRAND'];
 $arExcluded = ['DISCOUNT'];
 
 ?>
-
     <?
     foreach($arResult["ITEMS"] as $key=>$arItem)
     {
-        if ($arItem['CODE'] == StockMan\Config::PROP_NOVINKA) {
+        if ($arItem['CODE'] == StockMan\Catalog\Config::PROP_DISCOUNT) {
             $HTML_VALUE_ALT = false;
             $HTML_VALUE = '';
             foreach($arItem["VALUES"] as $keyVal=>$arItemVal)
@@ -32,14 +31,13 @@ $arExcluded = ['DISCOUNT'];
             $strFilter = 'arFilterSection_'. $arItem['ID'] . '_' . $HTML_VALUE_ALT . '=' . $HTML_VALUE;
 
             $url = $arParams['SECTION_PAGE_URL'] . '?'. $strFilter . '&set_filter=Применить';
-            if ($HTML_VALUE_ALT !== false) { ?>
-                <li class="menu-base__item">
-                    <a class="menu-base__link" href="<?= $url ?>">
-                        <img class="show-for-small-only"
-                             src="<?= StockMan\Config::STOCKMAN_TEMPLATE_PATH ?>/images/new.svg" alt="Новинки"> Новинки
-                    </a>
-                </li>
-                <?
+            if ($HTML_VALUE_ALT !== false) {
+            ?>
+            <li class="menu-base__item">
+                <a class="menu-base__link" href="<?=$url?>">
+                    <img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/sale.svg" alt="Sale">Sale</a>
+            </li>
+            <?
             }
         }
     }
