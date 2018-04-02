@@ -118,6 +118,7 @@ $arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
                     empty($arItem["VALUES"])
                     || isset($arItem["PRICE"])
                     || in_array($arItem["CODE"], $arExcluded)
+                    || !$arItem["CODE"]
                 )
                     continue;
 

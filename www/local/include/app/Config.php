@@ -84,6 +84,8 @@ class Config
     //какой период считать новинкой
     const PROP_PERIOD_NOVINKA = '-2 week';
 
+    const PROP_STYLIST_COMMENTS = 'STYLIST_COMMENTS';
+
     public function getFilterNovinka($strData){
         return array(
             "!PROPERTY_" . self::PROP_NOVINKA => false

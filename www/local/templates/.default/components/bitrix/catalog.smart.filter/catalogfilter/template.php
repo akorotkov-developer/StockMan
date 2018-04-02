@@ -154,9 +154,9 @@ if (isset($templateData['TEMPLATE_THEME']))
                     empty($arItem["VALUES"])
                     || isset($arItem["PRICE"])
                     || in_array($arItem["CODE"], $arExcluded)
+                    || !$arItem["CODE"]
                 )
                     continue;
-
                 if (
                     $arItem["DISPLAY_TYPE"] == "A"
                     && (

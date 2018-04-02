@@ -117,6 +117,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
                     <?
                     foreach ($arResult['ROOT'] as $key) {
                         foreach ($key["CHILD"] as $depthlevelfirst) {
+                            $href = "href='".$depthlevelfirst['SECTION_PAGE_URL']."'";
                             /*Если Меню не активное то обнуляем $activeItemFisrtLevel*/
                             $activeItemFisrtLevel= "menu-base__link_active";
                             if (!in_array(intval($depthlevelfirst["ID"]), $arResult["TREE_OF_SECTIONS"])) {
@@ -135,16 +136,14 @@ if (0 < $arResult["SECTIONS_COUNT"])
                             }
                             ?>
                             <li class="menu-base__item" <?=$displaynone;?>>
-                                <a class="menu-base__link <?=$activeItemFisrtLevel;?>" <?=$data_toogle;?> <?=$href?>>
+                                <a class="menu-base__link hide-for-small-only <?=$activeItemFisrtLevel;?> " <?=$data_toogle;?> <?=$href?>>
                                     <img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH.$depthlevelfirst['UF_PICTURE']?>" alt="">
                                     <?=$depthlevelfirst["NAME"];?>
-                                    <?
-                                    if(!$href) {
-                                        ?>
-                                        <i class="fa fa-chevron-right show-for-small-only"></i>
-                                        <?
-                                    }
-                                    ?>
+                                </a>
+                                <a class="menu-base__link show-for-small-only <?=$activeItemFisrtLevel;?>" <?=$data_toogle;?> >
+                                    <img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH.$depthlevelfirst['UF_PICTURE']?>" alt="">
+                                    <?=$depthlevelfirst["NAME"];?>
+                                    <i class="fa fa-chevron-right show-for-small-only"></i>
                                 </a>
                             </li>
                             <?

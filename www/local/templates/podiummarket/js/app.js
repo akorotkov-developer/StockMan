@@ -2035,7 +2035,7 @@ $(document).foundation();
       $(this).closest('form').submit();
     });
     $(document).on('click', '.js-select-all', function() {
-      var $checkBoxes = $(this).closest('.sort').find('input.check__input');
+      var $checkBoxes = $(this).closest('.sort').find('.js-filter-values').find('input.check__input');
         $checkBoxes.prop('checked', !$checkBoxes.prop('checked')).trigger('change');
     });
 
@@ -2047,13 +2047,22 @@ $(document).foundation();
             $filterValues = $this.siblings('.js-filter-values'),
             val = $this.val().toLowerCase();
 
+        var $checkBoxes = $filterValues.find('input');
+        $checkBoxes.prop('checked', false).trigger('change');
+
         $filterValues.each(function() {
             var $this = $(this),
                 filterVal = $this.attr('data-value').toLowerCase();
 
-            if (val == '' || filterVal.indexOf(val) == 0)
+            if (val == '' || filterVal.indexOf(val) == 0) {
                 $this.removeClass('hidden');
-            else $this.addClass('hidden');
+                $this.find('input').addClass('check__input');
+            }
+            else
+            {
+              $this.find('input').removeClass('check__input');
+              $this.addClass('hidden');
+            }
         });
     });
 

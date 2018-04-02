@@ -140,6 +140,7 @@ $arFilterSection = array(
               "OSNOVNAYA_STRANA_PROISKHOZHDENIYA",
               "SEZON_SVOYSTVO",
               StockMan\Catalog\Config::STIL,
+                //StockMan\Config::PROP_STYLIST_COMMENTS,
         ),
         "DETAIL_META_KEYWORDS" => "-",
         "DETAIL_META_DESCRIPTION" => "-",

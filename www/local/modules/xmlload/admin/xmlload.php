@@ -170,6 +170,7 @@ if((file_exists($urlFile))and(file_exists($urlFileOffers))) {
                                                 startOffers();
                                             } else {
                                                 setTimeLastUpdateCatalogXml();
+                                                updateProducts();
                                             }
 
                                         }
@@ -203,6 +204,14 @@ if((file_exists($urlFile))and(file_exists($urlFileOffers))) {
 
                             function setTimeLastUpdateCatalogXml() {
                                 var path = '/local/modules/xmlload/admin/xmlload_last_update.php';
+                                $.ajax({
+                                    url: path,
+                                    cache: false
+                                });
+                            }
+
+                            function updateProducts() {
+                                var path = '/local/modules/xmlload/admin/xmlload_update_products.php';
                                 $.ajax({
                                     url: path,
                                     cache: false

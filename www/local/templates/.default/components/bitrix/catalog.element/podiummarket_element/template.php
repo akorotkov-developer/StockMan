@@ -495,7 +495,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
             </div>
 
             <ul class="accordion" data-accordion="">
-                <?if ($arResult["DETAIL_TEXT"]) {?>
+                <?/*if ($arResult["DETAIL_TEXT"]) {?>
                     <li class="accordion-item" data-accordion-item=""><a class="accordion-title" href="#">Комментарий стилиста</a>
                         <div class="accordion-content" data-tab-content="">
                             <div>
@@ -503,10 +503,24 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                             </div>
                         </div>
                     </li>
-                <?}?>
+                <?}*/?>
 
+                <?
+                $classActive = ' is-active';
+                if (isset($arResult["PROPERTIES"][StockMan\Config::PROP_STYLIST_COMMENTS]["~VALUE"]["TEXT"]{1})) {?>
+                    <li class="accordion-item  <?=$classActive?>" data-accordion-item="">
+                        <a class="accordion-title" href="#">Комментарий стилиста</a>
+                        <div class="accordion-content" data-tab-content="">
+                            <div>
+                                <?=$arResult["PROPERTIES"][StockMan\Config::PROP_STYLIST_COMMENTS]["~VALUE"]["TEXT"];?>
+                            </div>
+                        </div>
+                    </li>
+                <?
+                    $classActive = ' ';
+                }?>
                 <?if ($arResult["PROPERTIES"]["SOSTAV"]["VALUE"]) {?>
-                    <li class="accordion-item is-active" data-accordion-item=""><a class="accordion-title" href="#">Детали</a>
+                    <li class="accordion-item <?=$classActive?>" data-accordion-item=""><a class="accordion-title" href="#">Детали</a>
                         <div class="accordion-content" data-tab-content="">
                             <div>
                                 <?
@@ -524,15 +538,19 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                             </div>
                         </div>
                     </li>
-                <?}?>
+                <?
+                    $classActive = ' ';
+                }?>
                 <?$DELIVERY_PAYMENT_RETURN = \Ceteralabs\UserVars::GetVar('DELIVERY_PAYMENT_RETURN');
                 if (isset($DELIVERY_PAYMENT_RETURN["VALUE"]{1})) {?>
-                <li class="accordion-item" data-accordion-item=""><a class="accordion-title" href="#">доставка, оплата и возврат</a>
+                <li class="accordion-item <?=$classActive?>" data-accordion-item=""><a class="accordion-title" href="#">доставка, оплата и возврат</a>
                     <div class="accordion-content" data-tab-content="">
                         <div><?=$DELIVERY_PAYMENT_RETURN["VALUE"]?></div>
                     </div>
                 </li>
-                <?}?>
+                <?
+                    $classActive = ' ';
+                }?>
             </ul>
             <div class="text-size-xsmall text-right">Поделиться<a class="fa fa-facebook share" href="#"></a><a class="fa fa-twitter share" href="#"></a><a class="fa fa-vk share" href="#"></a><a class="fa fa-pinterest share" href="#"></a></div>
         </div>

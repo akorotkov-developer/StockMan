@@ -38,7 +38,6 @@ class ImportStokMan {
     public static $arProductsXML = array(); // XML - всех Карточек
     public static $arProductsXMLCode = array(); // XML - всех Карточек
     public static $arOffersXMLReplace = array(); // Замена Xml на Торговое предложение
-
     public static $arNewOffersArticles = array(); // Артикулы новых предложений
     public static $arNewOffersName = array(); // Названия новых предложений
     public static $arNewOffersBaseEd = array(); // БазоваяЕдиница новых предложений
@@ -98,6 +97,7 @@ class ImportStokMan {
         }
 
         $strXML = $xml->asXML();
+        unset($xml);
         $xml = new SimpleXMLElement($strXML);
 
         $arPropertys = array();
@@ -132,6 +132,7 @@ class ImportStokMan {
         }
 
         $strXML = $xml->asXML();
+        unset($xml);
         $xml = new SimpleXMLElement($strXML);
         foreach($xml->Каталог->Товары->Товар as $obProduct) {
             $strRazmerOffers = '';
@@ -155,6 +156,7 @@ class ImportStokMan {
 
             $tsvet = $arPropertys[self::$XML_ID_TSVET][$arPropAll[self::$XML_ID_TSVET]];
             $stil = $arPropertys[self::$XML_ID_STIL][$arPropAll[self::$XML_ID_STIL]];
+
             if (isset($stil{1}) and isset($tsvet{1})) {
                 $strCodeProp = $stil . '-' . $tsvet;
                 $codeOffer = CUtil::translit(strtolower($strCodeProp), "ru", self::$translateParams);
@@ -231,6 +233,7 @@ class ImportStokMan {
         $urlFileDataOffers = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_OFFERS;
         $xml = simplexml_load_file($urlFileOffers);
         $strXML = $xml->asXML();
+        unset($xml);
         $xml = new SimpleXMLElement($strXML);
 
         $strAllRazmer = $strRazmer->asXML() . $strRusRazmer->asXML();
@@ -323,6 +326,7 @@ class ImportStokMan {
         fclose($f_hdl);
 
         unset($urlFileOffers,$urlFileDataOffers,$xml,$strXML,$f_hdl);
+        unset($arOffersRazmerReplace, $arOffersRusRazmerReplace, $arOffersXMLReplace, $arOffersBarCodeReplace, $strRazmer, $strRusRazmer);
     }
 
     public static function processingFileImport()
@@ -372,6 +376,7 @@ class ImportStokMan {
 
         $arValueRemove = array();
         $strXML = $xml->asXML();
+        unset($xml);
         $xml = new SimpleXMLElement($strXML);
         $propertyValueToRemove = array();
         $propertyValueToRemoveAllRazmer = array();
@@ -517,22 +522,33 @@ class ImportStokMan {
         if (count(self::$arPictureID) > 0) {
             self::processingPicturesUpdate(self::$arPictureProducts);
         }
-
-        self::processingDeActive();
-        self::processingActive();
     }
     public static function processingDeActive()
     {
         $arIdDeActive = array();
-        // не доступные, но активные
         $arFilter = Array(
             "ACTIVE" => "Y",
             "IBLOCK_ID" => self::$IBLOCK_ID,
-            "=CATALOG_AVAILABLE" => "N"
+            array (
+                "LOGIC" => "OR",
+                array(
+                    "=CATALOG_AVAILABLE" => "N"
+                ),
+                array(
+                    "=SECTION_ID" => array(
+                        self::$IBLOCK_SECTION_ERROR_ID,
+                        self::$IBLOCK_SECTION_ID,
+                    )
+                ),
+                array(
+                    "DETAIL_PICTURE" => false,
+                    "PROPERTY_MORE_PHOTO" => false
+                )
+            )
         );
-        $res = CIBlockElement::GetList(Array("ID" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID", ));
+        $res = CIBlockElement::GetList(Array("ID" => "ASC"), $arFilter, false, false, array("ID"));
         while ($ar_fields = $res->GetNext()) {
-            $arIdDeActive[] = $ar_fields["ID"] ;
+            $arIdDeActive[] = $ar_fields["ID"];
         }
         $i = 0;
         foreach ($arIdDeActive as $id) {
@@ -541,37 +557,10 @@ class ImportStokMan {
                 "ACTIVE"         => "N",
             );
             $el->Update($id, $arLoadProductArray);
-            $i++;
             unset($arLoadProductArray, $el);
-        }
-
-        mail('v.mokin@ceteralabs.com','не доступные, но активные',$i);
-        // нет картинки
-        $arFilter = Array(
-            "ACTIVE" => "Y",
-            "IBLOCK_ID" => self::$IBLOCK_ID,
-            "!ID" => $arIdDeActive,
-            "DETAIL_PICTURE" => false,
-            "PROPERTY_MORE_PHOTO" => false
-        );
-        $arIdDeActive = array();
-        $res = CIBlockElement::GetList(Array("ID" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID"));
-        while ($ar_fields = $res->GetNext()) {
-            $arIdDeActive[] = $ar_fields["ID"] ;
-        }
-        $i = 0;
-        // ДеАктивируем товары
-        foreach ($arIdDeActive as $id) {
-            $el = new CIBlockElement;
-            $arLoadProductArray = Array(
-                "ACTIVE"         => "N",
-            );
-            $el->Update($id, $arLoadProductArray);
             $i++;
-            unset($arLoadProductArray, $el);
         }
-        mail('v.mokin@ceteralabs.com','ДеАктивируем товары',$i);
-        unset($arIdActive);
+        unset($arFilter, $res, $arIdDeActive);
     }
     public static function processingActive()
     {
@@ -579,8 +568,12 @@ class ImportStokMan {
         // доступные, но не активные
         $arFilter = Array(
             "ACTIVE" => "N",
-            "IBLOCK_ID" => self::$IBLOCK_ID,
+            "IBLOCK_ID" => ImportStokMan::$IBLOCK_ID,
             "=CATALOG_AVAILABLE" => "Y",
+            "!SECTION_ID" => array(
+                ImportStokMan::$IBLOCK_SECTION_ERROR_ID,
+                ImportStokMan::$IBLOCK_SECTION_ID,
+            ),
             array (
                 "LOGIC" => "OR",
                 array("!DETAIL_PICTURE" => false),
@@ -591,7 +584,7 @@ class ImportStokMan {
         while ($ar_fields = $res->GetNext()) {
             $arIdActive[] = $ar_fields["ID"] ;
         }
-        $i = 0;
+        $i= 0;
         // Активируем товары
         foreach ($arIdActive as $id) {
             $el = new CIBlockElement;
@@ -599,67 +592,9 @@ class ImportStokMan {
                 "ACTIVE"         => "Y",
             );
             $el->Update($id, $arLoadProductArray);
-            $i++;
             unset($arLoadProductArray, $el);
-        }
-
-
-        mail('v.mokin@ceteralabs.com','Активируем товары',$i);
-        /*$arTsvetOffers = array();
-        $arFilter = Array(
-            "ACTIVE" => "Y",
-            "IBLOCK_ID" => self::$IBLOCK_OFFERS_ID,
-            "=CATALOG_AVAILABLE" => "Y",
-            "PROPERTY_CML2_LINK" => $arIdActive
-        );
-        $res = CIBlockElement::GetList(Array("ID" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID"));
-        while ($ar_fields = $res->GetNext()) {
-            $arTsvetOffers[] = $ar_fields["ID"] ;
-        }
-        $i = 0;
-        foreach ($arTsvetOffers as $id) {
-            $tsvet = getTsvetProduct($id);
-            if (isset($tsvet{1})) {
-                CIBlockElement::SetPropertyValuesEx(
-                    $id,
-                    self::$IBLOCK_OFFERS_ID,
-                    array(
-                        "TSVET_OFFER" => $tsvet
-                    )
-                );
-            }
             $i++;
         }
-        mail('v.mokin@ceteralabs.com',1,$i);
-        unset($arTsvetOffers);*/
-        unset($arIdActive);
-    }
-    public static function processingTsvetOffers()
-    {
-        /*$arTsvetOffers = array();
-        $arFilter = Array(
-            "ACTIVE" => "Y",
-            "IBLOCK_ID" => self::$IBLOCK_OFFERS_ID,
-            "=CATALOG_AVAILABLE" => "Y",
-            "PROPERTY_CML2_LINK" =>
-        );
-        $res = CIBlockElement::GetList(Array("ID" => "ASC"), $arFilter, false, false, array("ID", "IBLOCK_ID"));
-        while ($ar_fields = $res->GetNext()) {
-            $arTsvetOffers[] = $ar_fields["ID"] ;
-        }
-        // Активируем товары
-        foreach ($arTsvetOffers as $id) {
-            $tsvet = getTsvetProduct($id);
-            if (isset($tsvet{1})) {
-                CIBlockElement::SetPropertyValuesEx(
-                    $id,
-                    self::$IBLOCK_OFFERS_ID,
-                    array(
-                        "TSVET_OFFER" => $tsvet
-                    )
-                );
-            }
-        }
-        unset($arTsvetOffers);*/
+        unset($arFilter, $res, $arIdActive);
     }
 }
