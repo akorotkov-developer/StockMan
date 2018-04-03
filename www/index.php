@@ -3,8 +3,8 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
 ?>
 <?
-global  $arFilterSection;
-$arFilterSection = array(
+global  $sFS;
+$sFS = array(
     "!SECTION_ID" => array(
         ImportStokMan::$IBLOCK_SECTION_ERROR_ID,
         ImportStokMan::$IBLOCK_SECTION_ID,
@@ -50,7 +50,7 @@ $arFilterSection = array(
         "DETAIL_DISPLAY_NAME" => "Y",
         "USE_ELEMENT_COUNTER" => "Y",
         "USE_FILTER" => "Y",
-        "FILTER_NAME" => "arFilterSection",
+        "FILTER_NAME" => "sFS",
         "FILTER_VIEW_MODE" => "VERTICAL",
         "FILTER_FIELD_CODE" => array(
             0 => "",
