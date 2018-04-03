@@ -310,12 +310,12 @@ class StockManHandlers
                     $idDetailPicture = intval($ar_fields["DETAIL_PICTURE"]);
                 }
 
+                $arPropuct = CCatalogProduct::GetByID($idProduct);
                 if ((!in_array(ImportStokMan::$IBLOCK_SECTION_ERROR_ID, $arIdSection)) and (!in_array(ImportStokMan::$IBLOCK_SECTION_ID, $arIdSection))) {
                     // не был новинкой
                     if ($arPropertyWasNovinka == 0) {
                         // есть картинка
                         if (($idDetailPicture > 0) or (count($arPropertyMorePhoto) > 0)) {
-                            $arPropuct = CCatalogProduct::GetByID($idProduct);
                             if ($arPropuct["AVAILABLE"] == "Y") {
                                 $strData = time();
                                 CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], $strData, StockMan\Config::PROP_NOVINKA_DATE);
@@ -331,8 +331,7 @@ class StockManHandlers
                         CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], false, StockMan\Config::PROP_NOVINKA);
                     }
                 }
-
-                if (($idDetailPicture == 0) and (count($arPropertyMorePhoto) == 0)) {
+                if ((($idDetailPicture == 0) and (count($arPropertyMorePhoto) == 0))or($arPropuct["AVAILABLE"] != "Y")) {
                     $deActive = true;
                 }
 

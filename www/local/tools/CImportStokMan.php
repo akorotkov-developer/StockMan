@@ -319,7 +319,7 @@ class ImportStokMan {
 
         $xml->Классификатор->Свойства->Свойство[] = self::$strPropertyXML_ID;
         $strXML = $xml->asXML();
-
+        unset($xml);
         $strXML = html_entity_decode($strXML, ENT_NOQUOTES, 'UTF-8');
         $f_hdl = fopen($urlFileDataOffers, 'w');
         fwrite($f_hdl, $strXML);
@@ -427,7 +427,7 @@ class ImportStokMan {
         }
 
         $strXML = $xml->asXML();
-
+        unset($xml, $elementsToRemove, $propertyValueToRemove, $propertyValueToRemoveAllRazmer);
         $urlFileDataOffers = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_IMPORT;
 
         $strXML = html_entity_decode($strXML, ENT_NOQUOTES, 'UTF-8');
@@ -436,7 +436,7 @@ class ImportStokMan {
         fwrite($f_hdl, $strXML);
         fclose($f_hdl);
 
-        unset($xml, $urlFile, $elementsToRemove, $strXML, $f_hdl, $urlFileDataOffers,$propertyValueToRemove, $propertyValueToRemoveAllRazmer);
+        unset($urlFile, $strXML, $f_hdl, $urlFileDataOffers);
     }
     public static function getArrayPictures()
     {

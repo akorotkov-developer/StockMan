@@ -2035,7 +2035,7 @@ $(document).foundation();
       $(this).closest('form').submit();
     });
     $(document).on('click', '.js-select-all', function() {
-      var $checkBoxes = $(this).closest('.sort').find('.js-filter-values').find('input.check__input');
+      var $checkBoxes = $(this).closest('.sort').find('input.check__input');
         $checkBoxes.prop('checked', !$checkBoxes.prop('checked')).trigger('change');
     });
 
