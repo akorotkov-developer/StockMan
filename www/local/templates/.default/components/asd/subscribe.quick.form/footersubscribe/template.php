@@ -38,33 +38,32 @@ if ($arResult['ACTION']['status']=='error') {
         </div>
 
         <?if (isset($arResult['RUBRICS'])){?>
-            <div class="check">
-                <input class="check__input check_men" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_MEN?>" value="<?=StockMan\Config::SUB_MEN?>" checked>
-                <label class="check__label" for="rub<?=StockMan\Config::SUB_MEN?>">Мужчинам</label>
-            </div>
-            <div class="check" style="display:none">
-                <input class="check__input check_men" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_MEN_ACTIONS?>" value="<?=StockMan\Config::SUB_MEN_ACTIONS?>" checked>
-                <label class="check__label" for="rub<?=StockMan\Config::SUB_MEN_ACTIONS?>">Мужчинам Скидки</label>
-            </div>
-            <div class="check" style="display:none">
-                <input class="check__input check_men" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_MEN_NEW?>" value="<?=StockMan\Config::SUB_MEN_NEW?>" checked>
-                <label class="check__label" for="rub<?=StockMan\Config::SUB_MEN_NEW?>">Мужчинам Новинки</label>
-            </div>
-
 
             <div class="check">
-                <input class="check__input check_women" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_WOMEN?>" value="<?=StockMan\Config::SUB_WOMEN?>" >
+                <input class="check__input check_women" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_WOMEN?>" value="<?=StockMan\Config::SUB_WOMEN?>" checked>
                 <label class="check__label" for="rub<?=StockMan\Config::SUB_WOMEN?>">Женщинам</label>
             </div>
             <div class="check" style="display:none">
-                <input class="check__input check_women" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_WOMEN_ACTIONS?>" value="<?=StockMan\Config::SUB_WOMEN_ACTIONS?>" >
+                <input class="check__input check_women" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_WOMEN_ACTIONS?>" value="<?=StockMan\Config::SUB_WOMEN_ACTIONS?>" checked>
                 <label class="check__label" for="rub<?=StockMan\Config::SUB_WOMEN_ACTIONS?>">Женщинам Скидки</label>
             </div>
             <div class="check" style="display:none">
-                <input class="check__input check_women" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_WOMEN_NEW?>" value="<?=StockMan\Config::SUB_WOMEN_NEW?>" >
+                <input class="check__input check_women" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_WOMEN_NEW?>" value="<?=StockMan\Config::SUB_WOMEN_NEW?>" checked>
                 <label class="check__label" for="rub<?=StockMan\Config::SUB_WOMEN_NEW?>">Женщинам Новинки</label>
             </div>
 
+            <div class="check">
+                <input class="check__input check_men" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_MEN?>" value="<?=StockMan\Config::SUB_MEN?>" >
+                <label class="check__label" for="rub<?=StockMan\Config::SUB_MEN?>">Мужчинам</label>
+            </div>
+            <div class="check" style="display:none">
+                <input class="check__input check_men" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_MEN_ACTIONS?>" value="<?=StockMan\Config::SUB_MEN_ACTIONS?>" >
+                <label class="check__label" for="rub<?=StockMan\Config::SUB_MEN_ACTIONS?>">Мужчинам Скидки</label>
+            </div>
+            <div class="check" style="display:none">
+                <input class="check__input check_men" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_MEN_NEW?>" value="<?=StockMan\Config::SUB_MEN_NEW?>" >
+                <label class="check__label" for="rub<?=StockMan\Config::SUB_MEN_NEW?>">Мужчинам Новинки</label>
+            </div>
 
             <div class="check">
                 <input class="check__input check_kids" type="checkbox" name="asd_rub[]" id="rub<?=StockMan\Config::SUB_KIDS?>" value="<?=StockMan\Config::SUB_KIDS?>" >

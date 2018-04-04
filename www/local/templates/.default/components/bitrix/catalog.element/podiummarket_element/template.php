@@ -291,6 +291,29 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 
             <div class="grid-x" id="<?=$itemIds['TREE_ID']?>">
                 <?
+                $tsvet = getDetailInfoProduct($arResult["ID"]);
+                ?>
+                <div class="small-12 medium-2 large-2 cell">Цвет:</div>
+                <div class="cell large-8 medium-8" >
+                    <div class="fit text-center" >
+                        <input class="fit__input" type="radio" id="col1" name="col">
+                        <label class="fit__label" for="col1">
+                            <img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" alt="" style="width: 33px">
+                            <div class="fit__text active"><?=$tsvet[""]["prop"]["val"];?></div>
+                        </label>
+                    </div>
+
+                    <?foreach ($arResult["PRODUCTS_LIST_STILE"] as $item) {?>
+                        <div class="fit text-center" >
+                            <a href="<?=$item["DETAIL_PAGE_URL"]?>">
+                                <img src="<?=$item["PIC"]?>" alt="">
+                                <div class="fit__text"><?=$item["TSVET"]?></div>
+                            </a>
+                        </div>
+                    <?}?>
+                </div>
+
+                <?
                 foreach ($arParams['PRODUCT_INFO_BLOCK_ORDER'] as $blockName)
                 {
                     switch ($blockName) {
@@ -369,29 +392,6 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                     }
                 }
                 ?>
-
-                <?
-                $tsvet = getDetailInfoProduct($arResult["ID"]);
-                ?>
-                <div class="small-12 medium-2 large-2 cell">Цвет:</div>
-                <div class="cell large-8 medium-8" >
-                    <div class="fit text-center" >
-                        <input class="fit__input" type="radio" id="col1" name="col">
-                        <label class="fit__label" for="col1">
-                            <img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" alt="" style="width: 33px">
-                            <div class="fit__text active"><?=$tsvet[""]["prop"]["val"];?></div>
-                        </label>
-                    </div>
-
-                    <?foreach ($arResult["PRODUCTS_LIST_STILE"] as $item) {?>
-                        <div class="fit text-center" >
-                            <a href="<?=$item["DETAIL_PAGE_URL"]?>">
-                                <img src="<?=$item["PIC"]?>" alt="">
-                                <div class="fit__text"><?=$item["TSVET"]?></div>
-                            </a>
-                        </div>
-                    <?}?>
-                </div>
 
 
             </div>
