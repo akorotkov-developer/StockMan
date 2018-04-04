@@ -27,7 +27,9 @@ if ($APPLICATION->GetCurPage() == "/") {
     if (($isSearch)and($isMain)) {
        ?><div class="content content_medium"><?
     } else {
-        ?><div class="content <?$APPLICATION->ShowViewContent('catalog_element');?> padding-top-<?if (count($arPage) == 1) {?>0<?} else {?>5<?}?> <?if (($isMain)or(count($arPage) == 1)) {?>padding-bottom-0<?}?>"><?
+        ?>
+        <div class="content <?$APPLICATION->ShowViewContent('catalog_element');?> padding-top-<?if (count($arPage) == 1) {?>0<?} else {?>5<?}?> <?if (($isMain)or(count($arPage) == 1)) {?>padding-bottom-0<?}?>"><?
+
     }
 ?>
 <?

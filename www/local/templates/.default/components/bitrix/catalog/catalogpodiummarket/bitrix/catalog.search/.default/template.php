@@ -47,7 +47,7 @@ $this->setFrameMode(true);
         );?>
     </div>
 </div>
-<div class="content">
+<div class="content content_main">
     <div class="grid-x grid-padding-x">
         <div class="cell small-12 medium-4 large-3 xlarge-2 text-center medium-text-left">
             <?$APPLICATION->ShowViewContent('catalog_search_section');?>

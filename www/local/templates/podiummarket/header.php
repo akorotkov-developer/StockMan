@@ -35,7 +35,7 @@ Loader::includeModule("sale");
         <header class="header sticky" data-sticky data-margin-top="0" data-sticky-on="large">
             <?$APPLICATION->ShowViewContent('catalog_section_header_filter');?>
             <div class="grid-x grid-padding-x">
-                <div class="cell text-center background-insta header__hat"><a class="header__tel" href="tel:88003011129">8 (800) 301-11-29 (бесплатный, многоканальный)</a></div>
+                <div class="cell text-center background-insta header__hat"><a class="header__tel" href="tel:88005554905">8 (800) 555-49-05 (бесплатный, многоканальный)</a></div>
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:menu",
                     "header__gender",
