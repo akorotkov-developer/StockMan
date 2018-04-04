@@ -233,6 +233,13 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					}, this)
 				});
 			}
+
+            if ( !$("#bx-soa-basket").hasClass("bx-step-completed") && !$("#bx-soa-region").hasClass("bx-step-completed")
+                && !$("#bx-soa-delivery").hasClass("bx-step-completed")&& !$("#bx-soa-paysystem").hasClass("bx-step-completed")
+				&& !$("#bx-soa-properties").hasClass("bx-step-completed")) {
+
+                location.reload();
+            }
 		},
 
 		getData: function(action, actionData)

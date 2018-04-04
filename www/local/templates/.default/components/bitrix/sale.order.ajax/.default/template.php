@@ -694,7 +694,6 @@ else
 	?>
     <script type="text/javascript">
         $( document ).ready(function() {
-            console.log("click");
             $('.basket-title').trigger('click');
         });
     </script>
