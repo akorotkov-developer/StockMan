@@ -31,7 +31,7 @@ if(is_array($arResult["STORES"]) && !empty($arResult["STORES"])) {
         if ($arResult["MAP"] == 0) {
             $APPLICATION->IncludeComponent("bitrix:map.yandex.view", ".default", array(
                 "INIT_MAP_TYPE" => "MAP",
-                "MAP_DATA" => serialize(array("yandex_lat" => $gpsN, "yandex_lon" => $gpsS, "yandex_scale" => 12, "PLACEMARKS" => $arPlacemarks)),
+                "MAP_DATA" => serialize(array("yandex_lat" => $gpsN, "yandex_lon" => $gpsS, "yandex_scale" => 13, "PLACEMARKS" => $arPlacemarks)),
                 "MAP_WIDTH" => "100%",
                 "MAP_HEIGHT" => "500",
                 "CONTROLS" => array(
@@ -77,7 +77,7 @@ if(is_array($arResult["STORES"]) && !empty($arResult["STORES"])) {
     </div>
     <div class="grid-x grid-padding-x"><?
         foreach($arResult["STORES"] as $pid=>$arProperty){?>
-            <div class="cell medium-6">
+            <div class="cell medium-6 margin-bottom-6">
                 <div class="grid-x grid-padding-x">
                     <? if(isset($arProperty["DETAIL_IMG"]["SRC"])){?>
                         <div class="cell large-5 large-text-right text-center">
