@@ -213,7 +213,7 @@ if (!empty($arResult['ITEMS']))
             <div class="grid-container margin-top-15">
                    <div class="grid-x grid-padding-x">
                         <div class="cell small-12 medium-4">
-                            <span>Размер</span>
+                            <span class="margin-right-4 size_title">Размер</span>
                         </div>
 
                         <div class="cell small-12 medium-8">
@@ -244,9 +244,16 @@ if (!empty($arResult['ITEMS']))
                                     {
                                         if (!isset($arItem['SKU_TREE_VALUES'][$propId][$value]))
                                             continue;
-                                        echo '<input class="checkbox-group__item" type="radio" id="size1" name="size"><label class="checkbox-group__label" for="size1">';
+                                        ?>
+
+
+
+                                        <?
+                                        echo ' <a href="/men/muzhskaya-obuv/botinki/polubotinki-30679-41193-41193-gioseppo-temno-siniy/?size_cloth=41" class="chose_size_link">
+                                                        <div class="checkbox-group__item sizeblock ">';
                                         echo str_replace(array('#ITEM#_prop_', '#WIDTH#'), array($arItemIDs['PROP'], $itemWidth), $valueItem);
-                                        echo str_replace('#ITEM#_prop_', $arItemIDs['PROP'], $rowTemplate['FINISH']), '</label>';
+                                        echo str_replace('#ITEM#_prop_', $arItemIDs['PROP'], $rowTemplate['FINISH']), '</div>
+                                                    </a>';
                                     }
                                     unset($value, $valueItem);
                                 }

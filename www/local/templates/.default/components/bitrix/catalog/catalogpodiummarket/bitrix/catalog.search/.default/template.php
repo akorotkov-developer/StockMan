@@ -252,6 +252,11 @@ elseif (is_array($arElements))
     ?>
     <div class="cell small-12 medium-8 xlarge-10 large-9"><?echo GetMessage("CT_BCSE_NOT_FOUND");?></div>
     </div>
+    <style>
+        .content_main {
+            min-height: auto!important;
+        }
+    </style>
 <?
     $this->SetViewTarget('catalog_search_info');?>
     <div class="text-secondary margin-bottom-13"><?echo GetMessage("CT_BCSE_NOT_FOUND")?></div>
