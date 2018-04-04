@@ -16,11 +16,13 @@ Disallow: /*login=
 Disallow: /*logout=
 Disallow: /*auth=
 Disallow: /*display=
+Disallow: /*size_cloth=
 Disallow: /*sort=
 Disallow: /*bitrix_*=
 Disallow: /*backurl=*
 Disallow: /*back_url*
 Disallow: /*PAGEN_*
+Disallow: /*SIZEN_*
 Host: podium-market.com
 
 User-agent: *
@@ -41,9 +43,11 @@ Disallow: /*login=
 Disallow: /*logout=
 Disallow: /*auth=
 Disallow: /*display=
+Disallow: /*size_cloth=
 Disallow: /*sort=
 Disallow: /*bitrix_*=
 Disallow: /*backurl=*
 Disallow: /*back_url*
 Disallow: /*PAGEN_*
+Disallow: /*SIZEN_*
 Sitemap: https://podium-market.com/sitemap.xml

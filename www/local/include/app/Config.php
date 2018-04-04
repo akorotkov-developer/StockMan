@@ -91,4 +91,6 @@ class Config
             "!PROPERTY_" . self::PROP_NOVINKA => false
         );
     }
+
+    public static $arIdStore = array(2, 4);
 }
