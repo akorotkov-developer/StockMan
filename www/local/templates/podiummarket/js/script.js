@@ -133,8 +133,6 @@ $( document ).ready(function() {
         });
     }
 
-
-
     /*Расшарить в соц.сетях*/
     $('.btn-vk').on('click', function() {
         // действия, которые будут выполнены при наступлении события...
@@ -149,4 +147,17 @@ $( document ).ready(function() {
         $('.b-share-icon_twitter').trigger('click');
     });
     /*---------------------*/
+
+    /*Увеличить подложку меню*/
+    $('.menu-base__item').on('click', function() {
+        var element, selector;
+        element = $(this).find(".menu-base__link.hide-for-small-only").attr('data-toggle');
+        if (element) {
+            selector = "#"+element;
+            if ($(selector).find(".trousers").height() > 376) {
+                $(".menu-base.text-left.medium-text-center").height($(selector).find(".trousers").height());
+            }
+        }
+    });
+    /*-----------------------*/
 });

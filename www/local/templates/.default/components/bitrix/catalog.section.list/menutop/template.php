@@ -30,6 +30,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
                     } else {
                         ?>
                         <div class="subheader" data-toggler="js-open" id="subheader<?=$depthlevelfirst['ID']?>">
+                        <button class="close-button close-button-childe show-for-small-only" aria-label="Close alert" type="button"><span aria-hidden="true" data-toggle="responsive-menu">×</span></button>
                         <button class="subheader__back" data-toggle="subheader<?=$depthlevelfirst['ID']?>"><i class="fa fa-chevron-left"></i>Назад</button>
                         <ul class="trousers">
                         <?

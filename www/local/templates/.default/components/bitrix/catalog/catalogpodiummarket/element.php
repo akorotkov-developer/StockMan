@@ -397,7 +397,7 @@ if ($ElementID > 0)
 
 
 	<?
-	if($arParams["USE_ALSO_BUY"] == "Y" && ModuleManager::isModuleInstalled("sale") && !empty($arRecomData))
+	/*if($arParams["USE_ALSO_BUY"] == "Y" && ModuleManager::isModuleInstalled("sale") && !empty($arRecomData))
 	{
 		?><?$APPLICATION->IncludeComponent("bitrix:sale.recommended.products", ".default", array(
 			"ID" => $ElementID,
@@ -431,7 +431,8 @@ if ($ElementID > 0)
 		array("HIDE_ICONS" => "Y")
 	);
 		?><?
-	}
+	}*/?>
+<?
 }
 ?>
 <script type="text/javascript">

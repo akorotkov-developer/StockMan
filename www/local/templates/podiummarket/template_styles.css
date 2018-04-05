@@ -48,6 +48,18 @@
         display: none;
     }
 }
+.close-button-childe {
+    top: 0rem!important;
+}
+.product-item-scu-item-text-container {
+    min-width: 33px;
+}
+.product-item-scu-item-text-container {
+    padding: 5px 0px!important;
+}
+.product-item-scu-item-text-block {
+    padding: 0px!important;
+}
 .product-item-scu-item-text {
     min-width: 30px;
 }
