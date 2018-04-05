@@ -103,7 +103,7 @@ if ($_GET["delayed"] == "Y") {
                                 <? /*<div class="text-secondary margin-bottom-3">Полосатое платье-рубашка</div>*/ ?>
                                 <div class="rid-x grid-padding-x">
                                     <?
-                                    if ($bPropsColumn) {
+                                    /*if ($bPropsColumn) {
                                         foreach ($arItem["PROPS"] as $val) {
 
                                             if (is_array($arItem["SKU_DATA"])) {
@@ -120,7 +120,7 @@ if ($_GET["delayed"] == "Y") {
 
                                             echo htmlspecialcharsbx($val["NAME"]) . ":&nbsp;<span>" . $val["VALUE"] . "</span><br/>";
                                         }
-                                    }
+                                    }*/
                                     ?>
                                 </div>
                                 <?
