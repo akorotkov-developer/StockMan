@@ -52,12 +52,7 @@ class ImportStokMan {
     public static $strRusRazmer = ''; // Российский Размер
 
     public static $codePropertyXML_ID = 'property-xml-id-1c-80e0-00155d0f1c03';
-    public static $strPropertyXML_ID = '
-                <Ид>property-xml-id-1c-80e0-00155d0f1c03</Ид>
-				<Наименование>XML_ID из 1С</Наименование>
-				<ТипЗначений>Строка</ТипЗначений>
-			';
-    public static $strPropertyXML_ID1 = '<Свойство><Ид>property-xml-id-1c-80e0-00155d0f1c03</Ид><Наименование>XML_ID из 1С</Наименование><ТипЗначений>Строка</ТипЗначений></Свойство>';
+    public static $strPropertyXML_ID = '<Ид>property-xml-id-1c-80e0-00155d0f1c03</Ид><Наименование>XML_ID из 1С</Наименование><ТипЗначений>Строка</ТипЗначений>';
 
     public static $translateParams = array(
         "max_len" => "200",
@@ -95,10 +90,12 @@ class ImportStokMan {
         foreach ($propertyValueToRemove as $code) {
             unset($code[0]);
         }
+        unset($propertyValueToRemove);
 
         $strXML = $xml->asXML();
         unset($xml);
         $xml = new SimpleXMLElement($strXML);
+        unset($strXML);
 
         $arPropertys = array();
         foreach ($xml->Классификатор->Свойства->Свойство as $obPropety) {
@@ -134,6 +131,7 @@ class ImportStokMan {
         $strXML = $xml->asXML();
         unset($xml);
         $xml = new SimpleXMLElement($strXML);
+        unset($strXML);
         foreach($xml->Каталог->Товары->Товар as $obProduct) {
             $strRazmerOffers = '';
             $strRusRazmerOffers = '';
@@ -235,6 +233,7 @@ class ImportStokMan {
         $strXML = $xml->asXML();
         unset($xml);
         $xml = new SimpleXMLElement($strXML);
+        unset($strXML);
 
         $strAllRazmer = $strRazmer->asXML() . $strRusRazmer->asXML();
         $xml->Классификатор->Свойства = $strAllRazmer;
@@ -253,80 +252,84 @@ class ImportStokMan {
             $obOffer->Ид = $arOffersXMLReplace[$id];
             $obOffer->Штрихкод = $arOffersBarCodeReplace[$id];
 
+            $strPropertyOffer = '';
             $val = (string)$arOffersRazmerReplace[$id]->Значение;
             if (isset($val{1})) {
                 if (!in_array($val,$arRazmerValueRemove)) {
-                    $obOffer->ЗначенияСвойств = (string)($arOffersRazmerReplace[$id]->asXML());
+                    $strPropertyOffer .= (string)($arOffersRazmerReplace[$id]->asXML());
                 }
             }
-
-            $strProdPropertyXML = '
-                <Ид>' . self::$codePropertyXML_ID . '</Ид>
-                <Значение>' . $id . '</Значение>
-            ';
-            $obOffer->ЗначенияСвойств->ЗначенияСвойства[] = $strProdPropertyXML;
 
             $val = (string)$arOffersRusRazmerReplace[$id]->Значение;
             if (isset($val{1})) {
                 if (!in_array($val,$arRusRazmerValueRemove)) {
-                    $obOffer->ЗначенияСвойств = (string)($arOffersRusRazmerReplace[$id]->asXML());
+                    $strPropertyOffer .= (string)($arOffersRusRazmerReplace[$id]->asXML());
                 }
             }
+            $strProdPropertyXML = '<Ид>' . self::$codePropertyXML_ID . '</Ид><Значение>' . $id . '</Значение>';
 
-            $strProdPropertyXML = '
-                <Ид>' . self::$codePropertyXML_ID . '</Ид>
-                <Значение>' . $id . '</Значение>
-            ';
-            $obOffer->ЗначенияСвойств->ЗначенияСвойства[] = $strProdPropertyXML;
+            $strPropertyOffer .= '<ЗначенияСвойства>' . $strProdPropertyXML . '</ЗначенияСвойства>';
 
-            unset($arTemp[$id]);
+            $obOffer->ЗначенияСвойств = $strPropertyOffer;
+
+            unset($arTemp[$id],$strPropertyOffer, $strProdPropertyXML);
         }
         foreach ($arTemp as $key => $val) {
-            $strNewOffersXML = '
-                <Ид>' . $val . '</Ид>
-                <Артикул>' . self::$arNewOffersArticles[$key] . '</Артикул>
-                <Штрихкод>' .  self::$arOffersBarCodeReplace[$key] . '</Штрихкод>
-                <Наименование>' .  self::$arNewOffersName[$key] . '</Наименование>
-                <ЗначенияСвойств>
-                    <ЗначенияСвойства>
-                         <Ид>' . self::$codePropertyXML_ID . '</Ид>
-                         <Значение>' . $key . '</Значение>
-                    </ЗначенияСвойства>
-                </ЗначенияСвойств>                
-				<Количество>0</Количество>
-            ';
+            $strNewOffersXML = '<Ид>' . $val . '</Ид>';
+            $strNewOffersXML .= '<Артикул>' . self::$arNewOffersArticles[$key] . '</Артикул>';
+            $strNewOffersXML .= '<Штрихкод>' .  self::$arOffersBarCodeReplace[$key] . '</Штрихкод>';
+            $strNewOffersXML .= '<Наименование>' .  self::$arNewOffersName[$key] . '</Наименование>';
+            $strNewOffersXML .= '<Количество>0</Количество>';
+
+            $strPropertyOffer = '';
+            $val = (string)$arOffersRazmerReplace[$key]->Значение;
+            if (isset($val{1})) {
+                if (!in_array($val,$arRazmerValueRemove)) {
+                    $strPropertyOffer .= (string)($arOffersRazmerReplace[$key]->asXML());
+                }
+            }
+            $val = (string)$arOffersRusRazmerReplace[$key]->Значение;
+            if (isset($val{1})) {
+                if (!in_array($val,$arRusRazmerValueRemove)) {
+                    $strPropertyOffer .= (string)($arOffersRusRazmerReplace[$key]->asXML());
+                }
+            }
+            $strProdPropertyXML = '<Ид>' . self::$codePropertyXML_ID . '</Ид><Значение>' . $key . '</Значение>';
+
+            $strPropertyOffer .= '<ЗначенияСвойства>' . $strProdPropertyXML . '</ЗначенияСвойства>';
+            $strNewOffersXML .= '<ЗначенияСвойств>' . $strPropertyOffer . '</ЗначенияСвойств>';
+
             $strNewOffersXML .=  '<Цены>';
             foreach ($arPrices as $keyP => $currency) {
-                $strNewOffersXML .=  '
-					<Цена>
-						<Представление> 0 ' . $currency .' за шт</Представление>
-						<ИдТипаЦены>' . $keyP .'</ИдТипаЦены>
-						<ЦенаЗаЕдиницу>0</ЦенаЗаЕдиницу>
-						<Валюта>' . $currency .'</Валюта>
-						<Коэффициент>1</Коэффициент>
-					</Цена>
-					';
+                $strNewOffersXML .=  '<Цена>';
+                $strNewOffersXML .=  '<Представление> 0 ' . $currency . ' за шт</Представление>';
+                $strNewOffersXML .=  '<ИдТипаЦены>' . $keyP .'</ИдТипаЦены>';
+                $strNewOffersXML .=  '<ЦенаЗаЕдиницу>0</ЦенаЗаЕдиницу>';
+                $strNewOffersXML .=  '<Валюта>' . $currency .'</Валюта>';
+                $strNewOffersXML .=  '<Коэффициент>1</Коэффициент>';
+                $strNewOffersXML .=  '</Цена>';
             }
             $strNewOffersXML .=  '</Цены>';
             foreach ($arStores as $keyS) {
-                $strNewOffersXML .=  '
-				<Склад ИдСклада="' . $keyS .'" КоличествоНаСкладе="0"/>
-				';
+                $strNewOffersXML .=  '<Склад ИдСклада="' . $keyS .'" КоличествоНаСкладе="0"/>';
             }
             $strNewOffersXML .= self::$arNewOffersBaseEd[$key]->asXML();
             $xml->ПакетПредложений->Предложения->Предложение[] = $strNewOffersXML;
+            unset($strNewOffersXML,$arStores,$arPrices,$strPropertyOffer, $val, $strProdPropertyXML);
         }
+
+        unset($arTemp);
 
         $xml->Классификатор->Свойства->Свойство[] = self::$strPropertyXML_ID;
         $strXML = $xml->asXML();
-        unset($xml);
+        unset($urlFileOffers,$xml,$arOffersRazmerReplace, $arOffersRusRazmerReplace, $arOffersXMLReplace, $arOffersBarCodeReplace, $strRazmer, $strRusRazmer);
+
         $strXML = html_entity_decode($strXML, ENT_NOQUOTES, 'UTF-8');
         $f_hdl = fopen($urlFileDataOffers, 'w');
         fwrite($f_hdl, $strXML);
         fclose($f_hdl);
 
-        unset($urlFileOffers,$urlFileDataOffers,$xml,$strXML,$f_hdl);
-        unset($arOffersRazmerReplace, $arOffersRusRazmerReplace, $arOffersXMLReplace, $arOffersBarCodeReplace, $strRazmer, $strRusRazmer);
+        unset($urlFileDataOffers,$strXML,$f_hdl);
     }
 
     public static function processingFileImport()
@@ -352,13 +355,9 @@ class ImportStokMan {
                 $idProp = (string)$obProperty->Ид;
                 if ($idProp == self::$XML_ID_RAZMER) {
                     $elementsToRemoveAllRazmer[] = $obProperty;
-                    //$dom = dom_import_simplexml($obProperty);
-                    //$dom->parentNode->removeChild($dom);
                 }
                 elseif ($idProp == self::$XML_ID_RUS_RAZMER) {
                     $elementsToRemoveAllRazmer[] = $obProperty;
-                    //$dom = dom_import_simplexml($obProperty);
-                    //$dom->parentNode->removeChild($dom);
                 }
             }
             $strProdPropertyXML = '
@@ -378,6 +377,7 @@ class ImportStokMan {
         $strXML = $xml->asXML();
         unset($xml);
         $xml = new SimpleXMLElement($strXML);
+        unset($strXML);
         $propertyValueToRemove = array();
         $propertyValueToRemoveAllRazmer = array();
         foreach ($xml->Классификатор->Свойства->Свойство as $obPropety) {
@@ -413,6 +413,8 @@ class ImportStokMan {
         foreach ($propertyValueToRemoveAllRazmer as $code) {
             unset($code[0]);
         }
+        unset($propertyValueToRemove,$propertyValueToRemoveAllRazmer);
+
         foreach ($xml->Каталог->Товары->Товар as $obProduct) {
             $propertyValueproductToRemove = array();
             foreach ($obProduct->ЗначенияСвойств->ЗначенияСвойства as $obProperty) {
