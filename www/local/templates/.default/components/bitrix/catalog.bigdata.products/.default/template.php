@@ -176,7 +176,7 @@ if (!empty($arResult['ITEMS']))
                                     {
                                         if (isset($arItem['OFFERS']) && !empty($arItem['OFFERS']))
                                         {
-                                            echo GetMessage(
+                                            $price = GetMessage(
                                                 'CVP_TPL_MESS_PRICE_SIMPLE_MODE',
                                                 array(
                                                     '#PRICE#' => $arItem['MIN_PRICE']['PRINT_DISCOUNT_VALUE'],
@@ -189,6 +189,9 @@ if (!empty($arResult['ITEMS']))
                                                     )
                                                 )
                                             );
+                                            $price = str_replace("за", "", $price);
+                                            $price = str_replace("от", "", $price);
+                                            echo $price;
                                         }
                                         else
                                         {
@@ -200,7 +203,6 @@ if (!empty($arResult['ITEMS']))
                                         }
                                     }
                                     ?>
-                                    . -
                                 </div>
 
 

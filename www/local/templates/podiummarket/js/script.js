@@ -134,4 +134,19 @@ $( document ).ready(function() {
     }
 
 
+
+    /*Расшарить в соц.сетях*/
+    $('.btn-vk').on('click', function() {
+        // действия, которые будут выполнены при наступлении события...
+        $('.b-share-icon_vkontakte').trigger('click');
+    });
+    $('.btn-facebook').on('click', function() {
+        // действия, которые будут выполнены при наступлении события...
+        $('.b-share-icon_facebook').trigger('click');
+    });
+    $('.btn-twitter').on('click', function() {
+        // действия, которые будут выполнены при наступлении события...
+        $('.b-share-icon_twitter').trigger('click');
+    });
+    /*---------------------*/
 });

@@ -33,13 +33,13 @@ $aMenuLinks = Array(
         Array(),
         ""
     ),
-    Array(
+/*    Array(
         "Профили заказов",
         "/personal/profiles/",
         Array(),
         Array(),
         ""
-    ),
+    ),*/
 	Array(
 		"Корзина",
 		"/personal/cart/",

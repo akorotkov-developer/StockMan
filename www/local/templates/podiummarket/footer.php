@@ -120,7 +120,18 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                     <div class="text-size-small margin-bottom-11">
                         E-mail:
                         <a class="text-decoration-none" href="mailto:clients@podium-market.com">clients@podium-market.com</a>
-                    </div><a class="fa-stack text-asphalt soc" href="https://www.instagram.com/podiummarket/" rel="nofollow" title="инстаграм"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"> </i></a><a class="fa-stack text-asphalt soc" href="https://vk.com/podiummarket1" title="вконтакте" rel="nofollow"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"> </i></a><a class="fa-stack text-asphalt soc" href="https://www.facebook.com/podiummarket" title="facebook" rel="nofollow"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"> </i></a>
+                    </div>
+                    <a class="fa-stack text-asphalt soc" href="https://www.instagram.com/podiummarket/" rel="nofollow" title="инстаграм">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-instagram fa-stack-1x fa-inverse"> </i>
+                    </a>
+                    <a class="fa-stack text-asphalt soc" href="https://vk.com/podiummarket1" title="вконтакте" rel="nofollow">
+                        <i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"> </i>
+                    </a>
+                    <a class="fa-stack text-asphalt soc" href="https://www.facebook.com/podiummarket" title="facebook" rel="nofollow">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-facebook fa-stack-1x fa-inverse"> </i>
+                    </a>
                 </div>
                 <hr class="show-for-small-only">
             </div>
@@ -163,7 +174,25 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
                 <a style="cursor:context-menu;" class="margin-right-4"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/visa-bordered.svg" alt=""></a><a style="cursor:context-menu;" class="margin-right-4"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/mastercard-bordered.svg" alt=""></a><a style="cursor:context-menu;"><img src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/mir-bordered.svg" alt=""></a>
             </div>
         </div>
+
+        <div style="display: none;">
+            <?$APPLICATION->IncludeComponent(
+                "bitrix:sp-artgroup.share",
+                ".default",
+                array(
+                    "COMPONENT_TEMPLATE" => ".default",
+                    "SERVICES" => array(
+                        0 => "vkontakte",
+                        1 => "facebook",
+                        2 => "twitter",
+                    ),
+                ),
+                false
+            );?>
+        </div>
     </footer>
+
+
 
     <script src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/js/app.js" type="text/javascript"></script>
 

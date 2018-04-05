@@ -294,7 +294,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                 $tsvet = getDetailInfoProduct($arResult["ID"]);
                 ?>
                 <div class="small-12 medium-2 large-2 cell">Цвет:</div>
-                <div class="cell large-8 medium-8" >
+                <div class="cell large-10 medium-10" >
                     <div class="fit text-center" >
                         <input class="fit__input" type="radio" id="col1" name="col">
                         <label class="fit__label" for="col1">
@@ -552,7 +552,12 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                     $classActive = ' ';
                 }?>
             </ul>
-            <div class="text-size-xsmall text-right">Поделиться<a class="fa fa-facebook share" href="#"></a><a class="fa fa-twitter share" href="#"></a><a class="fa fa-vk share" href="#"></a><a class="fa fa-pinterest share" href="#"></a></div>
+            <div class="text-size-xsmall text-right">
+                <a class="fa fa-facebook share btn-facebook"></a>
+                <a class="fa fa-twitter share btn-twitter"></a>
+                <a class="fa fa-vk share btn-vk"></a>
+                <!--<a class="fa fa-pinterest share btn-pinterest"></a>-->
+            </div>
         </div>
 
 
@@ -2191,6 +2196,8 @@ if ($arParams['DISPLAY_COMPARE'])
         var <?=$obName?> = new JCCatalogElement(<?=CUtil::PhpToJSObject($jsParams, false, true)?>);
 
     </script>
+
+
 
     <?if ($_GET["size_cloth"]) {?>
         <script>
