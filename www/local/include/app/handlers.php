@@ -377,6 +377,42 @@ class StockManHandlers
 
                 self::$handlerDisallow = false;
             }
+            if ($arFields['IBLOCK_ID'] == ImportStokMan::$IBLOCK_OFFERS_ID) {
+                $deActive = false;
+                $idProduct = $arFields['ID'];
+                $arPropuct = CCatalogProduct::GetByID($idProduct);
+                $active = '';
+                if ($arPropuct["AVAILABLE"] == "N") {
+                    if (!isset($arFields["ACTIVE"])) {
+                        $res = CIBlockElement::GetByID($idProduct);
+                        if($ar_res = $res->GetNext()) {
+                            $active = $ar_res['ACTIVE'];
+                        }
+                    } else {
+                        $active = $arFields["ACTIVE"];
+                    }
+                    if ($active == "Y") {
+                        $deActive = true;
+                    }
+                }
+
+                if (self::$handlerDisallow)
+                    return;
+
+                self::$handlerDisallow = true;  //обновлено
+
+                if ($deActive) {
+                    $arLoadProductArrayActive = array(
+                        "ACTIVE" => "N"
+                    );
+                    $el = new CIBlockElement;
+                    if(!$el->Update($idProduct, $arLoadProductArrayActive)) {
+                        AddMessage2Log("Error: ".$el->LAST_ERROR);
+                    };
+                }
+
+                self::$handlerDisallow = false;
+            }
         }
     }
 
