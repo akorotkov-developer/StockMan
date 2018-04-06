@@ -30,6 +30,31 @@ Loader::includeModule("sale");
         <title><?$APPLICATION->ShowTitle()?></title>
     </head>
 <body>
+<?
+if ($APPLICATION->GetCurPage() == '/') {
+    $CATALOG_SECTION = intval($APPLICATION->get_cookie('CATALOG_SECTION'));
+    if (intval($CATALOG_SECTION) == 0) {
+        $CATALOG_SECTION = GetHomeCtalogSection();
+        $APPLICATION->set_cookie('CATALOG_SECTION', $CATALOG_SECTION, time() + 60 * 60 * 24 * 3, "/", $_SERVER['SERVER_NAME']);
+    }
+
+    if (intval($CATALOG_SECTION) > 0) {
+        $SECTION_PAGE_URL = '';
+        $arFilter = array(
+            'IBLOCK_ID' => StockMan\Config::CATALOG_ID,
+            "ID" => intval($CATALOG_SECTION)
+        );
+        $rsSections = CIBlockSection::GetList(array('ID' => 'ASC'), $arFilter, false, array("ID","SECTION_PAGE_URL"), array("nTopCount" => 1));
+        while ($arSection = $rsSections->GetNext()) {
+            $SECTION_PAGE_URL = $arSection["SECTION_PAGE_URL"];
+        }
+
+        if ($SECTION_PAGE_URL != '') {
+            LocalRedirect($SECTION_PAGE_URL);
+        }
+    }
+}
+?>
 <?$APPLICATION->ShowPanel();?>
     <div data-sticky-container>
         <header class="header sticky" data-sticky data-margin-top="0" data-sticky-on="large">
