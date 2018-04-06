@@ -253,6 +253,13 @@ if ($isFilter || $isSidebar): ?>
                         $_SESSION["order"] = ToUpper($sort_order);
                         $sort = $_SESSION["sort"];
                         $sort_order = $_SESSION["order"];
+
+                        $sort2 = $arParams["ELEMENT_SORT_FIELD2"];
+                        $sort_order2 = $arParams["ELEMENT_SORT_ORDER2"];
+                        if ($sort == 'PROPERTY_NOVINKA') {
+                            $sort2 = 'PROPERTY_'.StockMan\Config::PROP_NOVINKA_DATE;
+                            $sort_order2 = "desc";
+                        }
                         ?>
                     </div>
                     <?/*$APPLICATION->IncludeComponent(
@@ -370,8 +377,8 @@ if ($isFilter || $isSidebar): ?>
                     "IBLOCK_ID" => $arParams["IBLOCK_ID"],
                     "ELEMENT_SORT_FIELD" => $sort,
                     "ELEMENT_SORT_ORDER" => $sort_order,
-                    "ELEMENT_SORT_FIELD2" => $arParams["ELEMENT_SORT_FIELD2"],
-                    "ELEMENT_SORT_ORDER2" => $arParams["ELEMENT_SORT_ORDER2"],
+                    "ELEMENT_SORT_FIELD2" => $sort2,
+                    "ELEMENT_SORT_ORDER2" => $sort_order2,
                     "PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
                     "PROPERTY_CODE_MOBILE" => $arParams["LIST_PROPERTY_CODE_MOBILE"],
                     "META_KEYWORDS" => $arParams["LIST_META_KEYWORDS"],
