@@ -232,7 +232,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
             if ($arParams['DISPLAY_NAME'] === 'Y')
             {
                 ?>
-                <h1 class="margin-bottom-0"><?=$arResult['~NAME']?></h1>
+                <h1 class="margin-bottom-0"><?=$name?></h1>
                 <?
             }
             ?>

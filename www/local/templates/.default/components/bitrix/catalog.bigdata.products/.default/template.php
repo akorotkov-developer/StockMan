@@ -168,7 +168,19 @@ if (!empty($arResult['ITEMS']))
                                         <?}?>
                                     </a>
                                 </div>
-                                <div class="dress__title"><?=$arItem["NAME"];?></div>
+                                <?
+                                $strTitle = (
+                                isset($arItem["IPROPERTY_VALUES"]["ELEMENT_PREVIEW_PICTURE_FILE_TITLE"]) && '' != isset($arItem["IPROPERTY_VALUES"]["ELEMENT_PREVIEW_PICTURE_FILE_TITLE"])
+                                    ? $arItem["IPROPERTY_VALUES"]["ELEMENT_PREVIEW_PICTURE_FILE_TITLE"]
+                                    : $arItem['NAME']
+                                );
+                                $productTitle = (
+                                isset($arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'])&& $arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'] != ''
+                                    ? $arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE']
+                                    : $arItem['NAME']
+                                );
+                                ?>
+                                <div class="dress__title"><?=$productTitle;?></div>
 
                                 <div class="text-size-large margin-bottom-4">
                                     <?
