@@ -160,7 +160,102 @@ if ($isFilter || $isSidebar): ?>
             <div class="sort text-left">
                 <div class="sort__main">Сортировать</div>
                 <div class="sort__other sort__other_right">
-                    <?$APPLICATION->IncludeComponent(
+                    <?$sort = $arParams["ELEMENT_SORT_FIELD"];
+                    $sort_order = $arParams["ELEMENT_SORT_ORDER"];
+
+                    $sort2 = $arParams["ELEMENT_SORT_FIELD2"];
+                    $sort_order2 = $arParams["ELEMENT_SORT_ORDER2"];
+
+                    $arAvailableSort = array();
+                    $arSorts = array(
+                        "SHOWS",
+                        "PRICE",
+                        "NOVINKA"
+                    );
+
+                    if(in_array("SHOWS", $arSorts)){
+                        $arAvailableSort["SHOWS"] = array("SHOWS", "asc");
+                    }
+                    if(in_array("NOVINKA", $arSorts)){
+                        $arAvailableSort["NOVINKA"] = array("PROPERTY_".StockMan\Config::PROP_NOVINKA, "asc");
+                    }
+                    if(in_array("PRICE", $arSorts)){
+                        $arAvailableSort["PRICE"] = array("PROPERTY_MINIMUM_PRICE", "asc");
+                    }
+                    if((array_key_exists("sort", $_REQUEST) && array_key_exists(ToUpper($_REQUEST["sort"]), $arAvailableSort)) || (array_key_exists("sort", $_SESSION) && array_key_exists(ToUpper($_SESSION["sort"]), $arAvailableSort)) || $arParams["ELEMENT_SORT_FIELD"]){
+                        if($_REQUEST["sort"]){
+                            $sort = ToUpper($_REQUEST["sort"]);
+                        }
+                        elseif($_SESSION["sort"]){
+                            $sort = ToUpper($_SESSION["sort"]);
+                        }
+                        else{
+                            $sort = ToUpper($arParams["ELEMENT_SORT_FIELD"]);
+                        }
+                    }
+
+                    $sort_order=$arAvailableSort[$sort][1];
+                    if((array_key_exists("order", $_REQUEST) && in_array(ToLower($_REQUEST["order"]), Array("asc", "desc"))) || (array_key_exists("order", $_REQUEST) && in_array(ToLower($_REQUEST["order"]), Array("asc", "desc")) ) || $arParams["ELEMENT_SORT_ORDER"]){
+                        if($_REQUEST["order"]){
+                            $sort_order = $_REQUEST["order"];
+                            $_SESSION["order"] = $_REQUEST["order"];
+                        }
+                        elseif($_SESSION["order"]){
+                            $sort_order = $_SESSION["order"];
+                        }
+                        else{
+                            $sort_order = ToLower($arParams["ELEMENT_SORT_ORDER"]);
+                        }
+                    }
+                    if ($sort == 'NOVINKA') {
+                        $sort_order = "desc";
+                    }
+                    ?>
+                    <style>
+                        .no-text-decoration {
+                            text-decoration: none;
+                        }
+                    </style>
+                    <div class="sort__over">
+                        <?
+                            foreach($arAvailableSort as $key => $val){
+                            $newSort = $sort_order == 'desc' ? 'asc' : 'desc';
+                            $keyM = $key;
+                            if ($key == 'PRICE') {
+                                $keyM = $key . '_' . ToUpper($newSort);
+                            }
+                            if ($key == 'NOVINKA') {
+                                $newSort = "desc";
+                            }
+                            if ($key == 'SHOWS') {
+                                $newSort = "desc";
+                            }
+                            $amountSort = $sort_order;?>
+                            <div>
+                                <a class="<?=((($sort == $key)and($sort_order == $newSort)) ? '' : 'no-text-decoration')?>" rel="nofollow"
+                                   href="<?=$APPLICATION->GetCurPageParam('sort='.$key.'&order='.$newSort, 	array('sort', 'order'))?>"
+                                ><?=GetMessage('SECT_SORT_'.$keyM)?></a>
+                            </div>
+                            <?
+                            if ($key == 'PRICE') {
+                                $newSort = $sort_order == 'desc' ? 'desc' : 'asc';
+                                $keyM = $key . '_' . ToUpper($newSort);
+                                $amountSort = $sort_order;?>
+                                <div>
+                                    <a class="<?=((($sort == $key)and($sort_order == $newSort)) ? '' : 'no-text-decoration')?> margin-bottom-0" rel="nofollow"
+                                       href="<?=$APPLICATION->GetCurPageParam('sort='.$key.'&order='.$newSort, 	array('sort', 'order'))?>"
+                                    ><?=GetMessage('SECT_SORT_'.$keyM)?></a>
+                                </div>
+                            <?}?>
+                        <?}?>
+                        <?
+                        $_SESSION["sort"] = ToUpper($arAvailableSort[$sort][0]);
+                        $_SESSION["order"] = ToUpper($sort_order);
+                        $sort = $_SESSION["sort"];
+                        $sort_order = $_SESSION["order"];
+                        ?>
+                    </div>
+                    <?/*$APPLICATION->IncludeComponent(
                         "cetera:sort.panel",
                         "catalog",
                         array(
@@ -187,7 +282,7 @@ if ($isFilter || $isSidebar): ?>
                             "COMPONENT_TEMPLATE" => ".default"
                         ),
                         false
-                    );?>
+                    );*/?>
                 </div>
             </div>
         </div>
@@ -273,8 +368,8 @@ if ($isFilter || $isSidebar): ?>
                 array(
                     "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
                     "IBLOCK_ID" => $arParams["IBLOCK_ID"],
-                    "ELEMENT_SORT_FIELD" => $GLOBALS['SORT'],
-                    "ELEMENT_SORT_ORDER" => $GLOBALS['ORDER'],
+                    "ELEMENT_SORT_FIELD" => $sort,
+                    "ELEMENT_SORT_ORDER" => $sort_order,
                     "ELEMENT_SORT_FIELD2" => $arParams["ELEMENT_SORT_FIELD2"],
                     "ELEMENT_SORT_ORDER2" => $arParams["ELEMENT_SORT_ORDER2"],
                     "PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
