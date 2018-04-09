@@ -31,7 +31,7 @@ Loader::includeModule("sale");
     </head>
 <body>
 <?
-if ($APPLICATION->GetCurPage() == '/') {
+if (($APPLICATION->GetCurPage() == '/')and(!isset($_REQUEST["q"]))) {
     $CATALOG_SECTION = intval($APPLICATION->get_cookie('CATALOG_SECTION_PM'));
     /*if (intval($CATALOG_SECTION) == 0) {
         $CATALOG_SECTION = GetHomeCtalogSection();
