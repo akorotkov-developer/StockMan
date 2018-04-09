@@ -48,6 +48,9 @@
         display: none;
     }
 }
+.checkbox-group {
+    padding-left: 15px!important;
+}
 .close-button-childe {
     top: 0rem!important;
 }
