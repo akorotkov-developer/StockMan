@@ -32,11 +32,11 @@ Loader::includeModule("sale");
 <body>
 <?
 if ($APPLICATION->GetCurPage() == '/') {
-    $CATALOG_SECTION = intval($APPLICATION->get_cookie('CATALOG_SECTION'));
-    if (intval($CATALOG_SECTION) == 0) {
+    $CATALOG_SECTION = intval($APPLICATION->get_cookie('CATALOG_SECTION_PM'));
+    /*if (intval($CATALOG_SECTION) == 0) {
         $CATALOG_SECTION = GetHomeCtalogSection();
-        $APPLICATION->set_cookie('CATALOG_SECTION', $CATALOG_SECTION, time() + 60 * 60 * 24 * 3, "/", $_SERVER['SERVER_NAME']);
-    }
+        $APPLICATION->set_cookie('CATALOG_SECTION_PM', $CATALOG_SECTION, time() + 60 * 60 * 24 * 3, "/", $_SERVER['SERVER_NAME']);
+    }*/
 
     if (intval($CATALOG_SECTION) > 0) {
         $SECTION_PAGE_URL = '';

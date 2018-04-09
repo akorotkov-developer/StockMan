@@ -115,12 +115,12 @@ function SaveIdCatalogSection($ID_SECTION) {
     global $APPLICATION;
     //$APPLICATION->set_cookie("CATALOG_SECTION", $ID_SECTION, time()+60*60*24*30*12*2);
 
-    $APPLICATION->set_cookie('CATALOG_SECTION', $ID_SECTION, time() + 60 * 60 * 24 * 3, "/", $_SERVER['SERVER_NAME']);
+    $APPLICATION->set_cookie('CATALOG_SECTION_PM', $ID_SECTION, time() + 60 * 60 * 24 * 3, "/", $_SERVER['SERVER_NAME']);
     $_SESSION['CATLOG_SECTION'] = $ID_SECTION;
 }
 function GetHomeCtalogSection() {
     global $APPLICATION;
-    //$CATALOG_SECTION = $APPLICATION->get_cookie("CATALOG_SECTION");
+    //$CATALOG_SECTION = $APPLICATION->get_cookie("CATALOG_SECTION_PM");
     $CATALOG_SECTION = $_SESSION['CATLOG_SECTION'];
     if (!$CATALOG_SECTION) {
         return StockMan\Config::CATALOG_HOME_SECTION_ID;
