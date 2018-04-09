@@ -2040,21 +2040,21 @@ $(document).foundation();
     });
 
     /**
-    * Поиск вариантов значений в фильтре
-    */
+     * Поиск вариантов значений в фильтре
+     */
     $('.js-filter-values-search').on('input', function() {
+      var $this = $(this),
+        $filterValues = $this.siblings('.js-filter-values'),
+        val = $this.val().toLowerCase();
+
+      $filterValues.each(function() {
         var $this = $(this),
-            $filterValues = $this.siblings('.js-filter-values'),
-            val = $this.val().toLowerCase();
+          filterVal = $this.attr('data-value').toLowerCase();
 
-        $filterValues.each(function() {
-            var $this = $(this),
-                filterVal = $this.attr('data-value').toLowerCase();
-
-            if (val == '' || filterVal.indexOf(val) == 0)
-                $this.removeClass('hidden');
-            else $this.addClass('hidden');
-        });
+        if (val == '' || filterVal.indexOf(val) == 0)
+          $this.removeClass('hidden');
+        else $this.addClass('hidden');
+      });
     });
 
     $(document).mouseup(function(e) {
@@ -2162,7 +2162,7 @@ $(document).foundation();
       $('.pants .slick-dots li').each(function(index) {
 
 
-         $(this).find('button').attr('style', 'background-image:url(' + imgUrl[index] + ');');
+        $(this).find('button').attr('style', 'background-image:url(' + imgUrl[index] + ');');
 
       });
       var heightDots = $('.pants .slick-dots').height();
@@ -2199,7 +2199,24 @@ $(document).foundation();
       }]
     });
 
+    var slidesInnerHtml = $('.skirt__slider').html();
+    var numSlides = $('.skirt__slide').length;
+    if (numSlides != 1) {
 
+
+      var numIllusionSlides = 80;
+      var multiplyNum = numIllusionSlides / numSlides;
+      if (multiplyNum > 1) {
+        for (var i = 0; i < Math.ceil(multiplyNum); i++) {
+          $(slidesInnerHtml).appendTo('.skirt__slider');
+        }
+
+      }
+    }
+    else {
+        $(".skirt__slider").addClass('js-one');
+        $('.skirt__next,.skirt__prev').hide();
+    }
 
     $(".skirt__slider").slick({
       infinite: true,
@@ -2237,6 +2254,8 @@ $(document).foundation();
     $('.skirt__next').click(function() {
       $('.skirt__slider').slick('slickNext');
     });
+
+    $('.slirt__slider').slick('slickGoTo', numIllusionSlides / 2);
     //end of .skirt__slider
     $(".x-carousel-services").slick({
       infinite: true,

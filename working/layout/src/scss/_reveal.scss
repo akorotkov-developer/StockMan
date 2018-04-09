@@ -1,13 +1,15 @@
 .reveal {
   outline: none;
+
   &-overlay {
     right: rem-calc(17);
   }
+
   &_my {
     transition: 0.3s;
     padding: rem-calc(34);
     display: block !important;
-    left: rem-calc(-2000) !important;
+    left: rem-calc(-3000) !important;
 
     &[aria-hidden="false"] {
       left: rem-calc(0) !important;
@@ -16,7 +18,6 @@
 
   &__title {
     font-size: rem-calc(33);
-
   }
 
   &__enter {
@@ -28,9 +29,11 @@
   @include breakpoint(small only) {
     padding-left: rem-calc(15);
     padding-right: rem-calc(15);
+
     &__title {
       font-size: rem-calc(25);
     }
+
     &_my {
       padding: rem-calc(17);
     }
