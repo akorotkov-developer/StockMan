@@ -2204,7 +2204,7 @@ $(document).foundation();
     if (numSlides != 1) {
 
 
-      var numIllusionSlides = 80;
+      var numIllusionSlides = 10;
       var multiplyNum = numIllusionSlides / numSlides;
       if (multiplyNum > 1) {
         for (var i = 0; i < Math.ceil(multiplyNum); i++) {

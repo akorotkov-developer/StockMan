@@ -77,7 +77,7 @@
   }
 
   &__slider.js-one {
-  
+
     .slick-track {
       align-items: flex-start;
       justify-content: flex-start;
@@ -168,7 +168,19 @@
   &__wrapper {
     width: 113%;
   }
+  @media (max-width: 1840px)
+  {
+    .slick-prev {
+left: rem-calc(50);
+    }
+    .slick-next {
+      right:rem-calc(1050);
+    }
+  }
   @media (max-width: 1620px) {
+    .slick-next {
+      right:rem-calc(1150);
+    }
     .slick-current + .slick-slide img {
       filter: blur(3px);
     }
