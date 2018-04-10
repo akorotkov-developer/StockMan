@@ -159,5 +159,15 @@ $( document ).ready(function() {
             }
         }
     });
+/*menu-base text-left medium-text-center*/
+    $('.subheader__back').on('click', function() {
+        var element;
+        element = $(".menu-base.text-left.medium-text-center");
+        if (element) {
+            if (element.height() > 376) {
+                $(".menu-base.text-left.medium-text-center").height(376);
+            }
+        }
+    });
     /*-----------------------*/
 });
