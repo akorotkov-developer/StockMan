@@ -64,8 +64,29 @@ div[data-property-id-row="5"] {
 
 
 .bx-soa-pp-desc-container {
+    /*display: none;*/
+}
+
+.bx-soa-pp-company .bxe-light {
     display: none;
 }
+.bx-soa-pp-company div .bx-soa-pp-company-subTitle {
+    display: none;
+}
+.bx-soa-pp-company div .bx-soa-pp-company-logo:nth-child(2) {
+    display: none;
+}
+.bx-soa-pp-company div .bx-soa-pp-company-block {
+    display: none;
+}
+.bx-soa-pp-inner-ps .bx-soa-pp-company-logo .bx-soa-pp-company-graf-container {
+    border: 0px;
+}
+.bx-soa-pp-desc-container .bx-soa-pp-company {
+    background: #fff!important;
+}
+
+
 .bx-soa-coupon {
     display: none;
 }
@@ -1263,7 +1284,41 @@ table tbody tr:nth-child(even) {
 .col-sm-7.bx-soa-pp-item-container {
     clear: both;
 }
-.bx-soa-pp-desc-container {padding-top: 7px;clear: both;}
+@media all and (min-width:1100px) {
+    label[for='PAY_CURRENT_ACCOUNT'] {
+        position: relative;
+        top: -100px;
+        left: -47px;
+    }
+}
+@media all and (max-width:1100px) and (min-width: 1000px) {
+    label[for='PAY_CURRENT_ACCOUNT'] {
+        position: relative;
+        top: -90px;
+        left: -47px;
+    }
+}
+@media all and (max-width:1000px) and (min-width: 900px) {
+    label[for='PAY_CURRENT_ACCOUNT'] {
+        position: relative;
+        top: -75px;
+        left: -49px;
+    }
+}
+@media all and (max-width:900px) {
+    label[for='PAY_CURRENT_ACCOUNT'] {
+        position: relative;
+        top: -46px;
+        left: -49px;
+    }
+}
+
+.bx-soa-pp-desc-container {
+    padding-top: 7px;
+    clear: both;
+    padding-left: 10px;
+}
+
 .bx-soa-pp-desc-container .bx-soa-pp-company {
     background: #f8fafc;
     border: 1px solid #d5dadc;

@@ -4835,12 +4835,14 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 							className: 'bx-soa-pp-company-checkbox',
 							value: paySystemId,
 							checked: checked
-						}
+						},
 					}),
                     labelforPayments,
 					logoNode
 				]
 			});
+
+
 
 
 
@@ -4916,7 +4918,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					props: {className: 'bx-soa-pp-company-logo'},
 					children: [
 						BX.create('DIV', {
-							props: {className: 'bx-soa-pp-company-graf-container8888888888888888888888'},
+							props: {className: 'bx-soa-pp-company-graf-container'},
 							children: [logoNode]
 						})
 					]
@@ -4990,14 +4992,21 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				logoNode.setAttribute('style', 'background-image: url(' + logotype + ');');
 			}
 
+            var labelforinnerps = BX.create('label', {
+                props: {className: 'my-label'},
+                attrs: {"for": 'PAY_CURRENT_ACCOUNT'},
+                text: ""
+            });
+
 			label = BX.create('DIV', {
 				props: {className: 'bx-soa-pp-company-logo'},
 				children: [
 					BX.create('DIV', {
-						props: {className: 'bx-soa-pp-company-graf-container8888888888888888888888'},
+						props: {className: 'bx-soa-pp-company-graf-container'},
 						children: [
 							BX.create('INPUT', {
 								props: {
+									id: 'PAY_CURRENT_ACCOUNT',
 									type: 'checkbox',
 									className: 'bx-soa-pp-company-checkbox',
 									name: 'PAY_CURRENT_ACCOUNT',
@@ -5005,6 +5014,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 									checked: isSelected
 								}
 							}),
+                            labelforinnerps,
 							logoNode
 						],
 						events: {
@@ -5034,9 +5044,19 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				+ '</b><br>' + (accountOnly ? BX.message('SOA_PAY_ACCOUNT3') : '');
 			innerPsDesc = BX.create('DIV', {props: {className: 'bx-soa-pp-company-desc'}, html: htmlString});
 
+
+
+
+
+
 			return BX.create('DIV', {
 				props: {className: 'bx-soa-pp-inner-ps' + (isSelected ? ' bx-selected' : '')},
-				children: [hiddenInput, subTitle, label, title, innerPsDesc]
+				children: [
+					hiddenInput,
+					subTitle,
+					label,
+					title,
+					innerPsDesc]
 			});
 		},
 
@@ -5293,7 +5313,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				props: {className: 'bx-soa-pp-company-logo'},
 				children: [
 					BX.create('DIV', {
-						props: {className: 'bx-soa-pp-company-graf-container8888888888888888888888'},
+						props: {className: 'bx-soa-pp-company-graf-container'},
 						children: [logoNode]
 					})
 				]
