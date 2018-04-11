@@ -20,6 +20,15 @@ use \Bitrix\Main\Localization\Loc;
  * @var string $buttonSizeClass
  * @var CatalogSectionComponent $component
  */
+$flagOldPrice = false;
+$newPrice = intval($price['RATIO_PRICE']);
+$oldPrice = intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"]);
+$oldPricePrint = $actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["PRINT_VALUE"];
+if (intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"])) {
+    if (($newPrice < $oldPrice)and($newPrice > 0)) {
+        $flagOldPrice = true;
+    }
+}
 ?>
         <div class="dress__img" data-equalizer-watch>
             <a href="<?=$item['DETAIL_PAGE_URL']?>">
@@ -141,7 +150,11 @@ use \Bitrix\Main\Localization\Loc;
 								}
 							}
 							?>
-						</span>
+						</span><?
+                        if ($flagOldPrice) {
+                            ?><div><del class="text-dark-gray"><?=$oldPricePrint?></del></div><?
+                        }
+                        ?>
 					</div>
 					<?
 					break;

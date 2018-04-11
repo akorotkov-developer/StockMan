@@ -127,7 +127,6 @@ class ImportStokMan {
                 unset($code[0]);
             }
         }
-
         $strXML = $xml->asXML();
         unset($xml);
         $xml = new SimpleXMLElement($strXML);
@@ -277,7 +276,7 @@ class ImportStokMan {
         foreach ($arTemp as $key => $val) {
             $strNewOffersXML = '<Ид>' . $val . '</Ид>';
             $strNewOffersXML .= '<Артикул>' . self::$arNewOffersArticles[$key] . '</Артикул>';
-            $strNewOffersXML .= '<Штрихкод>' .  self::$arOffersBarCodeReplace[$key] . '</Штрихкод>';
+            $strNewOffersXML .= '<Штрихкод>' .  $arOffersBarCodeReplace[$key] . '</Штрихкод>';
             $strNewOffersXML .= '<Наименование>' .  self::$arNewOffersName[$key] . '</Наименование>';
             $strNewOffersXML .= '<Количество>0</Количество>';
 
@@ -330,6 +329,16 @@ class ImportStokMan {
         fclose($f_hdl);
 
         unset($urlFileDataOffers,$strXML,$f_hdl);
+
+        self::$arOffersRazmerReplace = array();
+        self::$arOffersRusRazmerReplace = array();
+        self::$arOffersXMLReplace = array();
+        self::$arOffersBarCodeReplace = array();
+        self::$strRazmer = '';
+        self::$strRusRazmer = array();
+        self::$arNewOffersArticles = array();
+        self::$arNewOffersName = array();
+        self::$arNewOffersBaseEd = '';
     }
 
     public static function processingFileImport()
@@ -422,6 +431,14 @@ class ImportStokMan {
                 if (in_array((string)$obProperty->Значение,$arValueRemove[$idProp])) {
                     $propertyValueproductToRemove[] =  $obProperty;
                 }
+
+
+                if (strpos((string)$obProperty->Значение, 'Объект') !== false) {
+                    $propertyValueproductToRemove[] =  $obProperty;
+                }
+                if (strpos((string)$obProperty->Значение, '<>') !== false) {
+                    $propertyValueproductToRemove[] =  $obProperty;
+                }
             }
             foreach ($propertyValueproductToRemove as $code) {
                 unset($code[0]);
@@ -438,7 +455,9 @@ class ImportStokMan {
         fwrite($f_hdl, $strXML);
         fclose($f_hdl);
 
-        unset($urlFile, $strXML, $f_hdl, $urlFileDataOffers);
+        unset($urlFile, $strXML, $f_hdl, $urlFileDataOffers, $arProductsXMLCode, $arProductsXML, $elementsToRemoveAllRazmer, $propertyValueproductToRemove);
+        self::$arProductsXML = array();
+        self::$arProductsXMLCode = array();
     }
     public static function getArrayPictures()
     {

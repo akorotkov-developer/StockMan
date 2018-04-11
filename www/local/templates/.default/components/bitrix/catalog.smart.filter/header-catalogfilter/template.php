@@ -27,7 +27,7 @@ $arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
                 $key = $arItem["ENCODED_ID"];
 
                 //Фильтр для цены
-                if(isset($arItem["PRICE"])){
+                if((isset($arItem["PRICE"]))and($arItem["ID"] != 7)){
                     if ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0)
                         continue;
 

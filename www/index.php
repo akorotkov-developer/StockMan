@@ -82,7 +82,8 @@ $sFS = array(
         "SHOW_LINK_TO_FORUM" => "Y",
         "USE_COMPARE" => "N",
         "PRICE_CODE" => array(
-            0 => StockMan\Config::CATALOG_PRICE,
+            StockMan\Config::CATALOG_PRICE,
+            StockMan\Config::CATALOG_PRICE_B,
         ),
         "USE_PRICE_COUNT" => "N",
         "SHOW_PRICE_COUNT" => "1",

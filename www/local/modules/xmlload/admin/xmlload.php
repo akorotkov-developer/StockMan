@@ -14,6 +14,7 @@ ini_set('post_max_size', '500M');
 ini_set('upload_max_filesize', '400M');
 ini_set('max_execution_time', '3000');
 ini_set('max_input_time', '6000');
+//ini_set("memory_limit", "1024M");
 
 CJSCore::Init(array("fx",'ajax', 'window', 'jquery'));
 
@@ -223,8 +224,6 @@ if((file_exists($urlFile))and(file_exists($urlFileOffers))) {
                 </script> <?
             }
             ?>
-
-
             <div class="xml-main" style="display: none"></div>
             <div class="xml-log"></div>
             <div class="xml-timer"></div>

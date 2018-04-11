@@ -75,7 +75,7 @@ function GetSectionIDbyElementCODE($ELEMENT_CODE, $SECTION_CODE){
     $id = CIBlockFindTools::GetElementID("", $ELEMENT_CODE, "", $SECTION_CODE, "");
 
     $arSelect = Array("ID", "NAME", "IBLOCK_SECTION_ID");
-    $arFilter = Array("IBLOCK_ID"=>StockMan\Config::CATALOG_ID, "ID"=>$id, "ACTIVE"=>"Y");
+    $arFilter = Array("IBLOCK_ID"=>StockMan\Config::CATALOG_ID, "ID"=>$id, /*"ACTIVE"=>"Y"*/);
     $res = CIBlockElement::GetList(Array("PROPERTY_rating"=>"DESC"), $arFilter, false, Array("nPageSize"=>50), $arSelect);
 
     $ob = $res->GetNextElement();

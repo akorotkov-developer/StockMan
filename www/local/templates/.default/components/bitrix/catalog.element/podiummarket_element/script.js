@@ -2399,7 +2399,7 @@
 					break;
 
                 //current[strName] = arShowValues[GetValue];
-                console.log(current[strName]);
+                //console.log(current[strName]);
 
 				if (BX.util.in_array(current[strName], arShowValues))
 				{
@@ -2431,7 +2431,6 @@
 				{
 					arCanBuyValues = arShowValues;
 				}
-
 
 				this.updateRow(i, arFilter[strName], arShowValues, arCanBuyValues);
 			}
@@ -2843,6 +2842,7 @@
 
 			price = this.currentPrices[this.currentPriceSelected];
 
+			console.log(this.currentPrices);
 			if (this.isGift)
 			{
 				price.PRICE = 0;

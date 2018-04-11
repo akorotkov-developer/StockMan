@@ -21,6 +21,9 @@ class Config
     const CATALOG_HOME_SECTION_ID = 23;
     const CATALOG_TYPE = "1c_catalog";
 
+    const HB_ID_BRANDS = 111;
+    const PROP_CODE_BRANDS = 'MARKA';
+
     //ID разделов для слайдера баннеров
     const WOMEN_ID = 219;
     const MEN_ID = 218;
@@ -40,6 +43,7 @@ class Config
     const SUB_KIDS_ACTIONS = 5;
 
     const CATALOG_PRICE = "Розничная ПМ";
+    const CATALOG_PRICE_B = "ПРЦ ПМ";
 
     /*----------Меню--------*/
     const INDEX_CATALOG_SECTION_ID_1 = 0;

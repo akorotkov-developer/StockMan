@@ -20,6 +20,16 @@ use \Bitrix\Main\Localization\Loc;
  * @var string $buttonSizeClass
  * @var CatalogSectionComponent $component
  */
+
+$flagOldPrice = false;
+$newPrice = intval($price['RATIO_PRICE']);
+$oldPrice = intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"]);
+$oldPricePrint = $actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["PRINT_VALUE"];
+if (intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"])) {
+    if (($newPrice < $oldPrice)and($newPrice > 0)) {
+        $flagOldPrice = true;
+    }
+}
 ?>
 
 
@@ -107,7 +117,6 @@ use \Bitrix\Main\Localization\Loc;
 			switch ($blockName)
 			{
 				case 'price': ?>
-
 					<div class="text-size-large margin-bottom-4" data-entity="price-block">
 						<?
 						if ($arParams['SHOW_OLD_PRICE'] === 'Y')
@@ -141,10 +150,12 @@ use \Bitrix\Main\Localization\Loc;
 								}
 							}
 							?>
-						</span>
-					</div>
-					<?
-					break;
+						</span><?
+                        if ($flagOldPrice) {
+                            ?><div><del class="text-dark-gray"><?=$oldPricePrint?></del></div><?
+                        }
+					?></div>
+					<?break;
 
 				case 'quantityLimit':
 					if ($arParams['SHOW_MAX_QUANTITY'] !== 'N')

@@ -115,6 +115,8 @@ if (0 < $arResult["SECTIONS_COUNT"])
                                 array('HIDE_ICONS' => 'Y')
                             );
                         }?>
+
+                    <li class="menu-base__item"><a class="menu-base__link" href="/brands/"> <img class="show-for-small-only" src="<?=StockMan\Config::STOCKMAN_TEMPLATE_PATH?>/images/brands.svg" alt="">Бренды</a></li>
                     <?
                     foreach ($arResult['ROOT'] as $key) {
                         foreach ($key["CHILD"] as $depthlevelfirst) {

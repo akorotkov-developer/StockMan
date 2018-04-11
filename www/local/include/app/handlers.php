@@ -30,11 +30,14 @@ AddEventHandler("main", "OnEpilog", Array("StockManHandlers", "ShowError404"));
 
 AddEventHandler("search", "BeforeIndex", Array("StockManHandlers", "BeforeIndexHandler"));
 
-AddEventHandler("iblock", "OnAfterIBlockElementUpdate",  Array("StockManHandlers", "DoIBlockAfterSave"));
-AddEventHandler("iblock", "OnAfterIBlockElementAdd", Array("StockManHandlers",  "DoIBlockAfterSave"));
+//AddEventHandler("iblock", "OnAfterIBlockElementUpdate",  Array("StockManHandlers", "DoIBlockAfterSave"));
+//AddEventHandler("iblock", "OnAfterIBlockElementAdd", Array("StockManHandlers",  "DoIBlockAfterSave"));
 AddEventHandler("catalog", "OnPriceAdd",  Array("StockManHandlers", "DoIBlockAfterSave"));
 AddEventHandler("catalog", "OnPriceUpdate",  Array("StockManHandlers", "DoIBlockAfterSave"));
+
 AddEventHandler("catalog", "OnBeforeCatalogStoreUpdate",  Array("StockManHandlers", "OnBeforeCatalogStoreUpdateHandler"));
+
+AddEventHandler("catalog", "OnSuccessCatalogImport1C",  Array("StockManHandlers", "OnSuccessCatalogImport1CHandler"));
 
 
 AddEventHandler("sale", "OnBeforeBasketAdd",  Array("StockManHandlers", "OnBeforeBasketUpdateHandler"));
@@ -42,6 +45,130 @@ AddEventHandler("sale", "OnBeforeBasketAdd",  Array("StockManHandlers", "OnBefor
 class StockManHandlers
 {
     protected static $handlerDisallow = false;
+
+
+    function OnSuccessCatalogImport1CHandler( $arParams, $arFields ) {
+        $pos = strpos($arFields, 'data_offers.xml');
+        if ($pos !== false) {
+            $flag = false;
+            $arIdDeActive = array();
+            $arFilter = Array(
+                "IBLOCK_ID" => StockMan\Config::CATALOG_OFFERS,
+                "ACTIVE"=>"Y",
+                "CATALOG_AVAILABLE" => "N"
+            );
+            $res = CIBlockElement::GetList(Array("SORT"=>"ASC", "PROPERTY_PRIORITY"=>"ASC"), $arFilter, false, false, array("ID"));
+            while($ar_fields = $res->GetNext()) {
+                $arIdDeActive[] = $ar_fields["ID"];
+            }
+            if (count($arIdDeActive) > 0) {
+                $flag = true;
+            }
+            if ($flag) {
+                $arLoadProductArrayActive = array(
+                    "ACTIVE" => "N"
+                );
+                foreach ($arIdDeActive as $idProduct) {
+                    $el = new CIBlockElement;
+                    if (!$el->Update($idProduct, $arLoadProductArrayActive)) {
+                        //AddMessage2Log("Error: " . $el->LAST_ERROR);
+                    };
+                    unset($el);
+                }
+                unset($arIdDeActive,$arLoadProductArrayActive);
+            }
+            $connection = \Bitrix\Main\Application::getConnection();
+            $connection->dropTable('b_xml_tree');
+
+            $flag = false;
+            $arIdDeActive = array();
+            $arFilter = Array(
+                "ACTIVE" => "Y",
+                "IBLOCK_ID" => ImportStokMan::$IBLOCK_ID,
+                array(
+                    "LOGIC" => "OR",
+                    array(
+                        "DETAIL_PICTURE" => false,
+                        "PROPERTY_MORE_PHOTO" => false,
+                    ),
+                    array(
+                        "SECTION_ID" => array(
+                            ImportStokMan::$IBLOCK_SECTION_ERROR_ID,
+                            ImportStokMan::$IBLOCK_SECTION_ID,
+                        )
+                    ),
+                    array(
+                        "!CATALOG_AVAILABLE"=>"Y",
+                    )
+                )
+            );
+            $res = CIBlockElement::GetList(Array("ID"=>"ASC"), $arFilter, false, false, array("ID"));
+            while($ar_fields = $res->GetNext()) {
+                $arIdDeActive[] = $ar_fields["ID"];
+            }
+            if (count($arIdDeActive) > 0) {
+                $flag = true;
+            }
+            if ($flag) {
+                $arLoadProductArrayActive = array(
+                    "ACTIVE" => "N"
+                );
+                foreach ($arIdDeActive as $idProduct) {
+                    CIBlockElement::SetPropertyValues($idProduct, ImportStokMan::$IBLOCK_ID, false, StockMan\Config::PROP_NOVINKA);
+
+                    $el = new CIBlockElement;
+                    if (!$el->Update($idProduct, $arLoadProductArrayActive)) {
+                        //AddMessage2Log("Error: " . $el->LAST_ERROR);
+                    };
+                    unset($el);
+                }
+                unset($arIdDeActive,$arLoadProductArrayActive);
+            }
+            $IblockID = StockMan\Config::CATALOG_ID;
+            $strData = time();
+
+// проставляем свойство "Новинка"
+            $arFilter = Array(
+                "IBLOCK_ID"         =>  $IblockID,
+                "CATALOG_AVAILABLE" =>  "Y",
+                "ACTIVE" =>  "Y",
+                "PROPERTY_" . StockMan\Config::PROP_WAS_NOVINKA => false,
+                "!PROPERTY_" . StockMan\Config::PROP_NOVINKA => false,
+                array (
+                    "LOGIC" => "OR",
+                    array("!DETAIL_PICTURE" => false),
+                    array("!PROPERTY_MORE_PHOTO" => false),
+                )
+            );
+            $res = CIBlockElement::GetList(Array("ID"=>"ASC"), $arFilter, false, false, array("ID"));
+            while($ar_fields = $res->GetNext()) {
+                $idProduct = $ar_fields["ID"];
+                CIBlockElement::SetPropertyValues($idProduct, $IblockID, $strData, StockMan\Config::PROP_NOVINKA_DATE);
+                CIBlockElement::SetPropertyValues($idProduct, $IblockID, StockMan\Config::PROP_NOVINKA_VAL, StockMan\Config::PROP_NOVINKA);
+                CIBlockElement::SetPropertyValues($idProduct, $IblockID, StockMan\Config::PROP_WAS_NOVINKA_VAL, StockMan\Config::PROP_WAS_NOVINKA);
+            }
+
+// убираем свойство "Новинка"
+            $strData = strtotime(StockMan\Config::PROP_PERIOD_NOVINKA);
+            $arFilter = Array(
+                "IBLOCK_ID"         =>  $IblockID,
+                "!PROPERTY_" . StockMan\Config::PROP_NOVINKA => false,
+                "!PROPERTY_" . StockMan\Config::PROP_NOVINKA_DATE => '',
+                array (
+                    "LOGIC" => "OR",
+                    array("DETAIL_PICTURE" => false),
+                    array("!CATALOG_AVAILABLE" => false),
+                    array("<PROPERTY_" . StockMan\Config::PROP_NOVINKA_DATE => $strData),
+                )
+            );
+            $res = CIBlockElement::GetList(Array("ID"=>"ASC"), $arFilter, false, false, array("ID"));
+            while($ar_fields = $res->GetNext()) {
+                $idProduct = $ar_fields["ID"];
+                CIBlockElement::SetPropertyValues($idProduct, $IblockID, '', StockMan\Config::PROP_NOVINKA_DATE);
+                CIBlockElement::SetPropertyValues($idProduct, $IblockID, false, StockMan\Config::PROP_NOVINKA);
+            }
+        }
+    }
 
     function OnBeforeCatalogStoreUpdateHandler( $id, &$arFields ) {
         $nameStore = array();
@@ -65,6 +192,7 @@ class StockManHandlers
             $arFields["PROPS"][]  = $arTsvet;
         }
     }
+
     function DoIBlockAfterSave($arg1, $arg2 = false)
     {
         global $USER;
@@ -201,6 +329,27 @@ class StockManHandlers
 
                     if($minPrice === false || $minPrice > $PRICE)
                         $minPrice = $PRICE;
+
+                    $arPriceOld = 0;
+                    $db_res = CPrice::GetList(
+                        array(),
+                        array(
+                            "PRODUCT_ID" => $id,
+                            "CATALOG_GROUP_ID" => 7,
+                        )
+                    );
+                    if ($ar_res = $db_res->Fetch())
+                    {
+                        $arPriceOld = intval($ar_res['PRICE']);
+                    }
+                    $valDiscount = '10000000';
+                    CIBlockElement::SetPropertyValues($id, $OFFERS_IBLOCK_ID, $valDiscount, StockMan\Catalog\Config::VALUE_DISCOUNT);
+                    CIBlockElement::SetPropertyValues($id, $OFFERS_IBLOCK_ID, false, StockMan\Catalog\Config::PROP_DISCOUNT);
+                    if (($PRICE>0)and($arPriceOld>0)and($arPriceOld>$PRICE)) {
+                        $valDiscount = $arPriceOld - $PRICE;
+                        CIBlockElement::SetPropertyValues($id, $OFFERS_IBLOCK_ID, 30, StockMan\Catalog\Config::PROP_DISCOUNT);
+                        CIBlockElement::SetPropertyValues($id, $OFFERS_IBLOCK_ID, $valDiscount, StockMan\Catalog\Config::VALUE_DISCOUNT);
+                    }
                 }
                 //Get prices
                 /*$rsPrices = CPrice::GetList(
@@ -264,7 +413,7 @@ class StockManHandlers
     function OnAfterIBlockElementUpdateHandler($arFields)
     {
         if ($_SERVER['PHP_SELF'] == '/bitrix/admin/1c_exchange.php') {
-            if ($arFields['IBLOCK_ID'] == ImportStokMan::$IBLOCK_ID) {
+            /*if ($arFields['IBLOCK_ID'] == ImportStokMan::$IBLOCK_ID) {
                 $deActive = false;
                 $idProduct = $arFields['ID'];
 
@@ -371,48 +520,12 @@ class StockManHandlers
                     $arLoadProductArray = array_merge($arLoadProductArray, $arLoadProductArrayCode, $arLoadProductArrayActive);
                     $el = new CIBlockElement;
                     if(!$el->Update($idProduct, $arLoadProductArray)) {
-                        AddMessage2Log("Error: ".$el->LAST_ERROR);
+                        //AddMessage2Log("Error: ".$el->LAST_ERROR);
                     };
                 }
 
                 self::$handlerDisallow = false;
-            }
-            if ($arFields['IBLOCK_ID'] == ImportStokMan::$IBLOCK_OFFERS_ID) {
-                $deActive = false;
-                $idProduct = $arFields['ID'];
-                $arPropuct = CCatalogProduct::GetByID($idProduct);
-                $active = '';
-                if ($arPropuct["AVAILABLE"] == "N") {
-                    if (!isset($arFields["ACTIVE"])) {
-                        $res = CIBlockElement::GetByID($idProduct);
-                        if($ar_res = $res->GetNext()) {
-                            $active = $ar_res['ACTIVE'];
-                        }
-                    } else {
-                        $active = $arFields["ACTIVE"];
-                    }
-                    if ($active == "Y") {
-                        $deActive = true;
-                    }
-                }
-
-                if (self::$handlerDisallow)
-                    return;
-
-                self::$handlerDisallow = true;  //обновлено
-
-                if ($deActive) {
-                    $arLoadProductArrayActive = array(
-                        "ACTIVE" => "N"
-                    );
-                    $el = new CIBlockElement;
-                    if(!$el->Update($idProduct, $arLoadProductArrayActive)) {
-                        AddMessage2Log("Error: ".$el->LAST_ERROR);
-                    };
-                }
-
-                self::$handlerDisallow = false;
-            }
+            }*/
         }
     }
 

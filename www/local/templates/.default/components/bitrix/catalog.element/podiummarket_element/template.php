@@ -156,6 +156,24 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
         $labelPositionClass .= isset($positionClassMap[$pos]) ? ' '.$positionClassMap[$pos] : '';
     }
 }
+
+$actualItem = $arResult["OFFERS"][0];
+
+$flagOldPrice = false;
+$newPrice = intval($price['RATIO_PRICE']);
+$oldPrice = intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"]);
+$oldPricePrint = $actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["PRINT_VALUE"];
+if (intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"])) {
+    if (($newPrice < $oldPrice)and($newPrice > 0)) {
+        $flagOldPrice = true;
+    }
+}
+if ($_REQUEST["rt"]=="rt") {
+    echo "<pre>";
+    //print_r($arResult);
+    echo "</pre>";
+}
+
 ?>
 
 
@@ -262,7 +280,11 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
                                 $IDpriceforDiffered = $itemIds['PRICE_ID'];
                                 $priceforDiffered =  str_replace(" ","",$price['PRINT_RATIO_PRICE']);
                                 ?>
-                                <?=$price['PRINT_RATIO_PRICE']?>
+                                <?=$price['PRINT_RATIO_PRICE']?><?
+                                if ($flagOldPrice) {
+                                    ?><div><del class="text-dark-gray"><?=$oldPricePrint?></del></div><?
+                                }
+                                ?>
                             </div>
                             <?
                             if ($arParams['SHOW_OLD_PRICE'] === 'Y')

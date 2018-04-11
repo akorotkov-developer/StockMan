@@ -40,7 +40,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                 $key = $arItem["ENCODED_ID"];
 
                 //Фильтр для цены
-                if(isset($arItem["PRICE"])){
+                    if((isset($arItem["PRICE"]))and($arItem["ID"] != 7)){
                         if ($arItem["VALUES"]["MAX"]["VALUE"] - $arItem["VALUES"]["MIN"]["VALUE"] <= 0)
                             continue;
 
@@ -124,6 +124,7 @@ if (isset($templateData['TEMPLATE_THEME']))
                             });
                         </script>
                 <?}
+
                 if($arItem["CODE"] == StockMan\Catalog\Config::PROP_DISCOUNT){
                     $this->SetViewTarget('filter_prop_discaunt');
                     ?>

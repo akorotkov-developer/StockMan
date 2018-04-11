@@ -26,4 +26,5 @@ class Config
     const ROSSIYSKIY_RAZMER = "ROSSIYSKIY_RAZMER";
     const DISCOUNT = "DISCOUNT";
     const PROP_DISCOUNT = "PROP_DISCOUNT";
+    const VALUE_DISCOUNT = "VALUE_DISCOUNT";
 }

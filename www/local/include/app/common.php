@@ -32,6 +32,30 @@ function writeLog()
 
   file_put_contents($_SERVER['DOCUMENT_ROOT'] . $logFileName, "\n--------------------------" . date('Y-m-d H:i:s ') . microtime() . "-----------------------\n Backtrace: " . implode(' → ', $backtracePath) . "\n" . $data, FILE_APPEND);
 }
+function writeLogImport()
+{
+  $logFileName = '/local/logs/Import_' . date("Y_m_d") . '.log';
+
+  $backtrace = debug_backtrace();
+  $backtracePath = array();
+  foreach($backtrace as $k => $bt)
+  {
+    if($k > 2)
+      break;
+    $backtracePath[] = substr($bt['file'], strlen($_SERVER['DOCUMENT_ROOT'])) . ':' . $bt['line'];
+  }
+
+  $data = func_get_args();
+  if(count($data) == 0)
+    return;
+  elseif(count($data) == 1)
+    $data = current($data);
+
+  if(!is_string($data) && !is_numeric($data))
+    $data = var_export($data, 1);
+
+  file_put_contents($_SERVER['DOCUMENT_ROOT'] . $logFileName, "\n--------------------------" . date('Y-m-d H:i:s ') . microtime() . "-----------------------\n Backtrace: " . implode(' → ', $backtracePath) . "\n" . $data, FILE_APPEND);
+}
 
 /* склонение существительных
  *  inclination($arResult["NUM_PRODUCTS"],array('товар','товара','товаров'))
