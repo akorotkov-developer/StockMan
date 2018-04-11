@@ -574,7 +574,11 @@ if ($_REQUEST["rt"]=="rt") {
                     $classActive = ' ';
                 }?>
             </ul>
+
+
             <div class="text-size-xsmall text-right">
+                </a>
+                Поделиться
                 <a class="fa fa-facebook share btn-facebook"></a>
                 <a class="fa fa-twitter share btn-twitter"></a>
                 <a class="fa fa-vk share btn-vk"></a>
