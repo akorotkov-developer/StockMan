@@ -84,6 +84,7 @@ try{
         $end_time = microtime(true);
 
         if ($result) {
+            unlink($urlFile);
             writeLogImport("Ок - " . round(($end_time-$start_time),5));
 
             $start_time = microtime(true);
@@ -91,6 +92,7 @@ try{
             $end_time = microtime(true);
 
             if ($result) {
+                unlink($urlFileOffers);
                 writeLogImport("Ок Offers - " . round(($end_time-$start_time),5));
             } else {
                 $exit_code = 4;
