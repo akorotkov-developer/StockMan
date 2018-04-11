@@ -2150,7 +2150,7 @@ $(document).foundation();
     });
     //begin of .skirt__slider
 
-
+ if ($('.skirt__slider').length) {
     var imgUrl = [];
     $('.skirt__inner').each(function(index) {
       imgUrl.push($(this).find('img').prop('src'));
@@ -2256,6 +2256,7 @@ $(document).foundation();
     });
 
     $('.slirt__slider').slick('slickGoTo', numIllusionSlides / 2);
+  }
     //end of .skirt__slider
     $(".x-carousel-services").slick({
       infinite: true,
