@@ -180,7 +180,13 @@ $( document ).ready(function() {
         }
     });
 
-    $("a.accordion-title[role='tab']").on('click', function() {
-        $('.slick-list.draggable').outerHeight( $('.skirt__info').outerHeight() + 20);
-    });
+    if ($("a.accordion-title[role='tab']").length > 0) {
+        $("a.accordion-title[role='tab']").on('click', function () {
+            //$('.slick-list.draggable').outerHeight($('.skirt__info').outerHeight() - 30);
+            $('.slick-list.draggable').animate({ "height": $('.skirt__info').outerHeight() - 30 }, 500 );
+        });
+        setTimeout(function(){
+            $('.slick-list.draggable').outerHeight($('.skirt__info').outerHeight() + 50);
+        }, 100);
+    }
 });
