@@ -257,47 +257,23 @@ if (0 < $arResult["SECTIONS_COUNT"])
                                 </div>
                                 <div class="small-6 medium-4 large-3 cell">
                                     <?
-                                    $section_page_url = '/';
-                                    $arFilterSectionMenuBrends = array(
-                                        "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
-                                        'ID' => $depthlevelfirst['ID']
-                                    );
-                                    $rsSectionMenuBrends = CIBlockSection::GetList(array('ID' => 'asc'), $arFilterSectionMenuBrends, false, array('SECTION_PAGE_URL'));
-                                    while ($arSectionMenuBrends = $rsSectionMenuBrends->GetNext()) {
-                                        $section_page_url = $arSectionMenuBrends['SECTION_PAGE_URL'];
-                                    }
-
                                     $APPLICATION->IncludeComponent(
-                                        "bitrix:catalog.smart.filter",
-                                        "menu_brend",
-                                        array(
+                                        "bitrix:highloadblock.list",
+                                        "topmenu",
+                                        Array(
+                                            "AR_FILTER" => $depthlevelfirst['ID'],
                                             "COMPONENT_TEMPLATE" => ".default",
-                                            "IBLOCK_TYPE" => StockMan\Config::CATALOG_TYPE,
-                                            "IBLOCK_ID" => StockMan\Config::CATALOG_ID,
-                                            "SECTION_ID" => $depthlevelfirst['ID'],
-                                            "SECTION_CODE" => "",
-                                            "FILTER_NAME" => "arrFilterMenu",
-                                            "HIDE_NOT_AVAILABLE" => "N",
-                                            "TEMPLATE_THEME" => "blue",
-                                            "FILTER_VIEW_MODE" => "horizontal",
-                                            "DISPLAY_ELEMENT_COUNT" => "Y",
-                                            "SEF_MODE" => "Y",
-                                            "CACHE_TYPE" => $arParams['CACHE_TYPE'],
-                                            "CACHE_TIME" => $arParams['CACHE_TIME'],
-                                            "CACHE_GROUPS" => $arParams['CACHE_GROUPS'],
-                                            "SAVE_IN_SESSION" => "N",
-                                            "INSTANT_RELOAD" => "Y",
-                                            "PAGER_PARAMS_NAME" => "arrPager",
-                                            "PRICE_CODE" => array(),
-                                            "CONVERT_CURRENCY" => "N",
-                                            "XML_EXPORT" => "N",
-                                            "SECTION_TITLE" => "-",
-                                            "SECTION_DESCRIPTION" => "-",
-                                            "POPUP_POSITION" => "left",
-                                            "SECTION_PAGE_URL" => $section_page_url
+                                            "BLOCK_ID" => StockMan\Config::HB_ID_BRANDS,
+                                            "DETAIL_URL" => "/brands/#ID#/",
+                                            "ROWS_PER_PAGE" =>2000,
+                                            "CACHE_TYPE" => "A",
+                                            "CACHE_TIME" => "3600",
+                                            "NAV_TEMPLATE" => "round",
+                                            "sort_id" => "UF_SORT",
+                                            "sort_type" => "ASC",
                                         ),
                                         false,
-                                        array('HIDE_ICONS' => 'Y')
+                                        array("HIDE_ICONS" => "Y")
                                     );?>
                                     <?/*<h5>По дизайнерам</h5>
                                     <ul>
