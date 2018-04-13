@@ -189,4 +189,17 @@ $( document ).ready(function() {
             $('.slick-list.draggable').outerHeight($('.skirt__info').outerHeight() + 50);
         }, 100);
     }
+
+    /*Максимальная высота для блоков*/
+    var mh = 0;
+    $("div[data-entity='items-row']").each(function () {
+        var h_block = parseInt($(this).height());
+        if(h_block > mh) {
+            mh = h_block;
+        };
+    });
+    $("div[data-entity='items-row']").each(function() {
+        $(this).height(mh);
+    });
+    /*------------------------------*/
 });
