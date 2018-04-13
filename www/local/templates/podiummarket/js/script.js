@@ -136,15 +136,15 @@ $( document ).ready(function() {
     /*Расшарить в соц.сетях*/
     $('.btn-vk').on('click', function() {
         // действия, которые будут выполнены при наступлении события...
-        $('.b-share-icon_vkontakte').trigger('click');
+        $(document).find('.b-share-btn__vkontakte').find('.b-share-icon_vkontakte').trigger('click');
     });
     $('.btn-facebook').on('click', function() {
         // действия, которые будут выполнены при наступлении события...
-        $('.b-share-icon_facebook').trigger('click');
-    });
+        $(document).find('.b-share-btn__facebook').find('.b-share-icon_facebook').trigger('click');
+});
     $('.btn-twitter').on('click', function() {
         // действия, которые будут выполнены при наступлении события...
-        $('.b-share-icon_twitter').trigger('click');
+        $(document).find('.b-share-btn__twitter').find('.b-share-icon_twitter').trigger('click');
     });
     /*---------------------*/
 

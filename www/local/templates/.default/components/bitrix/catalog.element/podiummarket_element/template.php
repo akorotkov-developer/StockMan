@@ -217,9 +217,9 @@ if ($_REQUEST["rt"]=="rt") {
 
         <?
         /*Картинка для поделиться в соц. сетях*/
-        $this->SetViewTarget("sidebar");
+        $this->SetViewTarget("socnetimage");
             echo $arResult["DETAIL_PICTURE"]['SRC'];
-        $this->EndViewTarget("sidebar");
+        $this->EndViewTarget("socnetimage");
         /*------------------------------------*/
         ?>
         <div class="skirt__wrapper">
