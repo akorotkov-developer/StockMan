@@ -39,7 +39,21 @@ if ($arResult["VARIABLES"]["ELEMENT_CODE"] and $arResult["VARIABLES"]["SECTION_C
     <?$_SESSION['CATLOG_SECTION'] = GetParrentCatalogForMenu($parrenSectId)?>
 <?}?>
 
-
+<div style="display: none;">
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:sp-artgroup.share",
+        ".default",
+        array(
+            "COMPONENT_TEMPLATE" => ".default",
+            "SERVICES" => array(
+                0 => "vkontakte",
+                1 => "facebook",
+                2 => "twitter",
+            ),
+        ),
+        false
+    );?>
+</div>
 
 <?
 if (isset($arParams['USE_COMMON_SETTINGS_BASKET_POPUP']) && $arParams['USE_COMMON_SETTINGS_BASKET_POPUP'] == 'Y')

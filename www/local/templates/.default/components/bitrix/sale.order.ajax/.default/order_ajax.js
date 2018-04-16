@@ -4948,7 +4948,8 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			}
 
 			if (innerPs && extPs)
-				delimiter = BX.create('HR', {props: {className: 'bxe-light'}});
+                delimiter = BX.create('HR', {props: {className: 'bxe-light'}});
+
 
 			paySystemInfoContainer.appendChild(
 				BX.create('DIV', {
@@ -4956,13 +4957,15 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					children: [innerPs, delimiter, extPs]
 				})
 			);
+
 			paySystemNode.appendChild(paySystemInfoContainer);
 		},
 
 		getInnerPaySystem: function()
 		{
-			if (!this.result.CURRENT_BUDGET_FORMATED || !this.result.PAY_CURRENT_ACCOUNT || !this.result.INNER_PAY_SYSTEM)
+			if (!this.result.CURRENT_BUDGET_FORMATED || !this.result.PAY_CURRENT_ACCOUNT || !this.result.INNER_PAY_SYSTEM) {
 				return;
+            }
 
 			var accountOnly = this.params.ONLY_FULL_PAY_FROM_ACCOUNT && (this.params.ONLY_FULL_PAY_FROM_ACCOUNT == 'Y'),
 				isSelected = this.result.PAY_CURRENT_ACCOUNT && (this.result.PAY_CURRENT_ACCOUNT == 'Y'),

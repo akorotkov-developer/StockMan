@@ -74,7 +74,8 @@ a.chose_size_link {
     float: left;
 }
 .sizeblock {
-    width: 29px;
+    min-width: 29px;
+    width: auto;
     height: 28px;
     /* color: #222; */
     /* z-index: 1000; */

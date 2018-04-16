@@ -1318,11 +1318,15 @@ table tbody tr:nth-child(even) {
     clear: both;
     padding-left: 10px;
 }
-
-.bx-soa-pp-desc-container .bx-soa-pp-company {
-    background: #f8fafc;
+.bx-soa-pp-inner-ps {
     border: 1px solid #d5dadc;
     padding: 7px 15px;
+    margin-left: -9px;
+}
+.bx-soa-pp-desc-container .bx-soa-pp-company {
+/*    background: #f8fafc;
+    border: 1px solid #d5dadc;
+    padding: 7px 15px;*/
 }
 .bx-soa-pp-company-logo {padding-top: 6px;}
 .bx-soa-pp-company-graf-container {

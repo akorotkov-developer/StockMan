@@ -16,6 +16,7 @@ Loader::includeModule("sale");
         <meta name="copyright" content="Создание сайтов - Cetera Labs, www.cetera.ru, 2016">
         <meta name="author" content="Cetera Labs, http://www.cetera.ru/, создание сайтов, поддержка сайтов, продвижение сайтов">
         <meta name="cmsmagazine" content="f21b68cb09efe1a7161ca2caaacaf749">
+        <meta property="og:image" content="<?$APPLICATION->ShowViewContent('socnetimage');?>"/>
         <?
         Asset::getInstance()->addString('<style type="text/css">' . Asset::fixCssIncludes(file_get_contents(
                 $_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/css/style.css'), StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/css/style.css'

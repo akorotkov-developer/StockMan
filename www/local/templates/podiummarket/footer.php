@@ -175,21 +175,7 @@ if (strpos($APPLICATION->GetCurPage(), "personal/order/make") > 0) {
             </div>
         </div>
 
-        <div style="display: none;">
-            <?$APPLICATION->IncludeComponent(
-                "bitrix:sp-artgroup.share",
-                ".default",
-                array(
-                    "COMPONENT_TEMPLATE" => ".default",
-                    "SERVICES" => array(
-                        0 => "vkontakte",
-                        1 => "facebook",
-                        2 => "twitter",
-                    ),
-                ),
-                false
-            );?>
-        </div>
+
     </footer>
 
 

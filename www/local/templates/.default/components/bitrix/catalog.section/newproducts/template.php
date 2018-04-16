@@ -42,9 +42,10 @@ if (!empty($arResult['ITEMS']))
                         <div class="margin-bottom-3">
                             <img src='<? echo $arItem['P_PICTURE']['SRC']; ?>' alt="<? echo $imgTitle; ?>">
                         </div>
-                        <div class="dress__title"><?=$arItem["DISPLAY_PROPERTIES"][StockMan\Config::BREND]["DISPLAY_VALUE"];?></div>
-                        <div class="text-secondary"><?=$productTitle;?></div>
-                        <div class="text-size-large"><?=$minPrice["PRINT_DISCOUNT_VALUE"]?> - </div>
+                        <?/*<div class="dress__title"><?=$arItem["DISPLAY_PROPERTIES"][StockMan\Config::BREND]["DISPLAY_VALUE"];?></div>*/?>
+                        <div class="dress__title"><?=$productTitle;?></div>
+                        <?/*<div class="text-secondary"><?=$productTitle;?></div>*/?>
+                        <div class="text-size-large"><?=$minPrice["PRINT_DISCOUNT_VALUE"]?></div>
                     </a>
                 </div>
             <?

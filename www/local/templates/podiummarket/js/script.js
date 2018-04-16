@@ -136,15 +136,15 @@ $( document ).ready(function() {
     /*Расшарить в соц.сетях*/
     $('.btn-vk').on('click', function() {
         // действия, которые будут выполнены при наступлении события...
-        $('.b-share-icon_vkontakte').trigger('click');
+        $(document).find('.b-share-btn__vkontakte').find('.b-share-icon_vkontakte').trigger('click');
     });
     $('.btn-facebook').on('click', function() {
         // действия, которые будут выполнены при наступлении события...
-        $('.b-share-icon_facebook').trigger('click');
-    });
+        $(document).find('.b-share-btn__facebook').find('.b-share-icon_facebook').trigger('click');
+});
     $('.btn-twitter').on('click', function() {
         // действия, которые будут выполнены при наступлении события...
-        $('.b-share-icon_twitter').trigger('click');
+        $(document).find('.b-share-btn__twitter').find('.b-share-icon_twitter').trigger('click');
     });
     /*---------------------*/
 
@@ -159,7 +159,7 @@ $( document ).ready(function() {
             }
         }
     });
-/*menu-base text-left medium-text-center*/
+    /*menu-base text-left medium-text-center*/
     $('.subheader__back').on('click', function() {
         var element;
         element = $(".menu-base.text-left.medium-text-center");
@@ -169,5 +169,37 @@ $( document ).ready(function() {
             }
         }
     });
-    /*-----------------------*/
+    /*----------------------------------------*/
+    $('.subheader__back').on('click', function() {
+        var element;
+        element = $(".menu-base.text-left.medium-text-center");
+        if (element) {
+            if (element.height() > 376) {
+                $(".menu-base.text-left.medium-text-center").height(376);
+            }
+        }
+    });
+
+    if ($("a.accordion-title[role='tab']").length > 0) {
+        $("a.accordion-title[role='tab']").on('click', function () {
+            //$('.slick-list.draggable').outerHeight($('.skirt__info').outerHeight() - 30);
+            $('.slick-list.draggable').animate({ "height": $('.skirt__info').outerHeight() - 30 }, 500 );
+        });
+        setTimeout(function(){
+            $('.slick-list.draggable').outerHeight($('.skirt__info').outerHeight() + 50);
+        }, 100);
+    }
+
+    /*Максимальная высота для блоков*/
+    var mh = 0;
+    $("div[data-entity='items-row']").each(function () {
+        var h_block = parseInt($(this).height());
+        if(h_block > mh) {
+            mh = h_block;
+        };
+    });
+    $("div[data-entity='items-row']").each(function() {
+        $(this).height(mh);
+    });
+    /*------------------------------*/
 });

@@ -215,7 +215,13 @@ if ($_REQUEST["rt"]=="rt") {
 
 
 
-
+        <?
+        /*Картинка для поделиться в соц. сетях*/
+        $this->SetViewTarget("socnetimage");
+            echo $arResult["DETAIL_PICTURE"]['SRC'];
+        $this->EndViewTarget("socnetimage");
+        /*------------------------------------*/
+        ?>
         <div class="skirt__wrapper">
             <div class="skirt__slider text-center">
                 <?
@@ -574,7 +580,11 @@ if ($_REQUEST["rt"]=="rt") {
                     $classActive = ' ';
                 }?>
             </ul>
+
+
             <div class="text-size-xsmall text-right">
+                </a>
+                Поделиться
                 <a class="fa fa-facebook share btn-facebook"></a>
                 <a class="fa fa-twitter share btn-twitter"></a>
                 <a class="fa fa-vk share btn-vk"></a>
