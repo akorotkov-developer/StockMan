@@ -1,5 +1,22 @@
 ;
 $(document).foundation();
+//begin of fix .dress height when hover on it
+$(window).on('load', function() {
+  $('.dress').mouseenter(function() {
+
+    var currentHeightProduct = $(this).closest('.cell').height();
+
+    $(this).closest('.cell').height(currentHeightProduct);
+    $(this).addClass('js-hover');
+
+  }).mouseleave(function() {
+
+    $(this).closest('.cell').attr('style', '');
+    $(this).removeClass('js-hover');
+  });
+
+});
+//end of fix .dress height when hover on it
 //begin of yandex api
 (function(global) {
   function setupAsync(e) {
@@ -2150,113 +2167,112 @@ $(document).foundation();
     });
     //begin of .skirt__slider
 
- if ($('.skirt__slider').length) {
-    var imgUrl = [];
-    $('.skirt__inner').each(function(index) {
-      imgUrl.push($(this).find('img').prop('src'));
+    if ($('.skirt__slider').length) {
+      var imgUrl = [];
+      $('.skirt__inner').each(function(index) {
+        imgUrl.push($(this).find('img').prop('src'));
 
-      $('.pants').append('<div><img src="' + imgUrl[index] + '" alt="" /></div>');
-
-    });
-    $('.pants').on('init', function(event, slick) {
-      $('.pants .slick-dots li').each(function(index) {
-
-
-        $(this).find('button').attr('style', 'background-image:url(' + imgUrl[index] + ');');
+        $('.pants').append('<div><img src="' + imgUrl[index] + '" alt="" /></div>');
 
       });
-      var heightDots = $('.pants .slick-dots').height();
-      $('.pants .slick-next').css('top', heightDots + 100);
-    });
-    $(".pants").slick({
-      infinite: true,
-      dots: true,
-      arrows: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 5000,
-      autoplayHoverPause: true,
-      fade: true,
-      swipeToSlide: false,
-      prevArrow: '<i class="slick-prev "> </i>',
-      nextArrow: '<i class="slick-next "> </i>',
-      responsive: [{
-        breakpoint: 1200,
-        settings: {
+      $('.pants').on('init', function(event, slick) {
+        $('.pants .slick-dots li').each(function(index) {
+
+
+          $(this).find('button').attr('style', 'background-image:url(' + imgUrl[index] + ');');
+
+        });
+        var heightDots = $('.pants .slick-dots').height();
+        $('.pants .slick-next').css('top', heightDots + 100);
+      });
+      $(".pants").slick({
+        infinite: true,
+        dots: true,
+        arrows: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        autoplayHoverPause: true,
+        fade: true,
+        swipeToSlide: false,
+        prevArrow: '<i class="slick-prev "> </i>',
+        nextArrow: '<i class="slick-next "> </i>',
+        responsive: [{
+          breakpoint: 1200,
+          settings: {
+
+          }
+        }, {
+          breakpoint: 800,
+          settings: {
+
+          }
+        }, {
+          breakpoint: 480,
+          settings: {
+
+          }
+        }]
+      });
+
+      var slidesInnerHtml = $('.skirt__slider').html();
+      var numSlides = $('.skirt__slide').length;
+      if (numSlides != 1) {
+
+
+        var numIllusionSlides = 10;
+        var multiplyNum = numIllusionSlides / numSlides;
+        if (multiplyNum > 1) {
+          for (var i = 0; i < Math.ceil(multiplyNum); i++) {
+            $(slidesInnerHtml).appendTo('.skirt__slider');
+          }
 
         }
-      }, {
-        breakpoint: 800,
-        settings: {
-
-        }
-      }, {
-        breakpoint: 480,
-        settings: {
-
-        }
-      }]
-    });
-
-    var slidesInnerHtml = $('.skirt__slider').html();
-    var numSlides = $('.skirt__slide').length;
-    if (numSlides != 1) {
-
-
-      var numIllusionSlides = 10;
-      var multiplyNum = numIllusionSlides / numSlides;
-      if (multiplyNum > 1) {
-        for (var i = 0; i < Math.ceil(multiplyNum); i++) {
-          $(slidesInnerHtml).appendTo('.skirt__slider');
-        }
-
-      }
-    }
-    else {
+      } else {
         $(".skirt__slider").addClass('js-one');
         $('.skirt__next,.skirt__prev').hide();
+      }
+
+      $(".skirt__slider").slick({
+        infinite: true,
+        dots: false,
+        arrows: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        autoplayHoverPause: true,
+        fade: false,
+        swipeToSlide: true,
+        prevArrow: '<i class="slick-prev "> </i>',
+        nextArrow: '<i class="slick-next "> </i>',
+        responsive: [{
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 4,
+          }
+        }, {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 2,
+          }
+        }, {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+          }
+        }]
+      });
+      $('.skirt__prev').click(function() {
+        $('.skirt__slider').slick('slickPrev');
+      });
+      $('.skirt__next').click(function() {
+        $('.skirt__slider').slick('slickNext');
+      });
+
+      $('.slirt__slider').slick('slickGoTo', numIllusionSlides / 2);
     }
-
-    $(".skirt__slider").slick({
-      infinite: true,
-      dots: false,
-      arrows: true,
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 5000,
-      autoplayHoverPause: true,
-      fade: false,
-      swipeToSlide: true,
-      prevArrow: '<i class="slick-prev "> </i>',
-      nextArrow: '<i class="slick-next "> </i>',
-      responsive: [{
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 4,
-        }
-      }, {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 2,
-        }
-      }, {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        }
-      }]
-    });
-    $('.skirt__prev').click(function() {
-      $('.skirt__slider').slick('slickPrev');
-    });
-    $('.skirt__next').click(function() {
-      $('.skirt__slider').slick('slickNext');
-    });
-
-    $('.slirt__slider').slick('slickGoTo', numIllusionSlides / 2);
-  }
     //end of .skirt__slider
     $(".x-carousel-services").slick({
       infinite: true,

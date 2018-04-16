@@ -7,7 +7,7 @@
   padding-top: rem-calc(10);
   padding-bottom: rem-calc(20);
 
-  &:hover {
+  &.js-hover {
     border-color: $asphalt;
     position: absolute;
     padding-left: rem-calc(15);
