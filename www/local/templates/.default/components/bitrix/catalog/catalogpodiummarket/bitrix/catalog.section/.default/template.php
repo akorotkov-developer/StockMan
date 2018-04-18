@@ -1007,7 +1007,6 @@ if (!empty($arResult['SKU_PROPS']))
 	}
 }
 
-
 if (isset($arResult["~DESCRIPTION"])) {
     ?>
     <div class="cell grid-x grid-padding-x">

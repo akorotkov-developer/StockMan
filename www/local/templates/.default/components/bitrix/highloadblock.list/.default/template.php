@@ -24,7 +24,7 @@ foreach ($arResult['rows'] as $key => $val) {
     <div class="grid-x grid-padding-x large-up-4 margin-bottom-20 medium-up-2"><?
     foreach ($val as $brand) {
         ?><div class="cell margin-bottom-3">
-            <a class="brand brand_none" href="<?=$brand["ID"]?>"><?=$brand["name"]?></a>
+            <a class="brand brand_none" href="/brands/<?=$brand["ID"]?>/"><?=$brand["name"]?></a>
         </div><?
     }
     ?></div><?

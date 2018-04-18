@@ -4,9 +4,11 @@ ErrorDocument 404 /404.php
 <IfModule mod_php5.c>
   php_flag allow_call_time_pass_reference 1
   php_flag session.use_trans_sid off
-	php_value post_max_size 256M
+	php_value post_max_size 512M
+	php_value upload_max_filesize 512M
 	php_value max_input_time 600
-	php_value max_execution_time 6000
+	php_value max_execution_time 0
+	php_value max_file_uploads 512
   #php_value display_errors 1
 
   #php_value mbstring.func_overload 2

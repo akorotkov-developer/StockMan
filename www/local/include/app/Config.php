@@ -43,7 +43,9 @@ class Config
     const SUB_KIDS_ACTIONS = 5;
 
     const CATALOG_PRICE = "Розничная ПМ";
+    const CATALOG_PRICE_ID = 2;
     const CATALOG_PRICE_B = "ПРЦ ПМ";
+    const CATALOG_PRICE_B_ID = 7;
 
     /*----------Меню--------*/
     const INDEX_CATALOG_SECTION_ID_1 = 0;

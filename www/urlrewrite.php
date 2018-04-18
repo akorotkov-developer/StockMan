@@ -1,5 +1,12 @@
 <?php
 $arUrlRewrite=array (
+   0 => array(
+        "CONDITION" => "#^/brands/([0-9]+)/#",
+        "RULE" => "ROW_ID=\\1",
+        "ID" => "",
+        "PATH" => "/brands/detail.php",
+        'SORT' => 5,
+    ),
   1 => 
   array (
     'CONDITION' => '#^/personal/#',
@@ -8,30 +15,30 @@ $arUrlRewrite=array (
     'PATH' => '/personal/index.php',
     'SORT' => 10,
   ),
-4 =>
-    array (
-        'CONDITION' => '#^/faq/#',
-        'RULE' => '',
-        'ID' => 'bitrix:news',
-        'PATH' => '/faq/index.php',
-        'SORT' => 20,
-    ),
-    3 =>
-        array (
-            'CONDITION' => '#^/store/#',
-            'RULE' => '',
-            'ID' => 'bitrix:catalog.store',
-            'PATH' => '/store/index.php',
-            'SORT' => 30,
-        ),
-    5 =>
-        array (
-            'CONDITION' => '#^/blog/#',
-            'RULE' => '',
-            'ID' => 'bitrix:news',
-            'PATH' => '/blog/index.php',
-            'SORT' => 40,
-        ),
+  4 => 
+  array (
+    'CONDITION' => '#^/faq/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/faq/index.php',
+    'SORT' => 20,
+  ),
+  3 => 
+  array (
+    'CONDITION' => '#^/store/#',
+    'RULE' => '',
+    'ID' => 'bitrix:catalog.store',
+    'PATH' => '/store/index.php',
+    'SORT' => 30,
+  ),
+  5 => 
+  array (
+    'CONDITION' => '#^/blog/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/blog/index.php',
+    'SORT' => 40,
+  ),
   2 => 
   array (
     'CONDITION' => '#^/#',
@@ -40,7 +47,7 @@ $arUrlRewrite=array (
     'PATH' => '/index.php',
     'SORT' => 50,
   ),
-  0 => 
+  6 =>
   array (
     'CONDITION' => '#^/bitrix/services/ymarket/#',
     'RULE' => '',
