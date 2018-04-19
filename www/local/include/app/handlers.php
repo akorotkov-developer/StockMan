@@ -593,6 +593,8 @@ class StockManHandlers
 
             $connection = \Bitrix\Main\Application::getConnection();
             $connection->dropTable('b_xml_tree');
+
+            mail('v.mokin@ceteralabs.com','Выгрузка закончена','');
         }
     }
 

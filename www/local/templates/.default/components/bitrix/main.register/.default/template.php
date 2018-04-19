@@ -87,7 +87,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)
                                     <input type="email"  name="REGISTER[EMAIL]" value="<?=$arResult["VALUES"]['EMAIL']?>" placeholder="e-mail*" required>
                                 </label>
                                 <label>
-                                    <input type="tel"  name="REGISTER[PERSONAL_PHONE]" value="<?=$arResult["VALUES"]['PERSONAL_PHONE']?>" placeholder="Телефон*" required>
+                                    <input type="tel"  class="x-mask-phone" name="REGISTER[PERSONAL_PHONE]" value="<?=$arResult["VALUES"]['PERSONAL_PHONE']?>" placeholder="Телефон*" required>
                                 </label>
                                 <label>
                                     <input type="text" name="REGISTER[PERSONAL_BIRTHDAY]" value="<?=$arResult["VALUES"]['PERSONAL_BIRTHDAY']?>" placeholder="Дата рождения">

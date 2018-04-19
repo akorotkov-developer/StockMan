@@ -1,10 +1,17 @@
 $( document ).ready(function() {
-    /*При клике на размер менять артикул*/
+    $(document).find(".x-mask-phone").mask("+7(999) 999-9999");
+
+    /*При клике на размер менять артикул и старую цену*/
     $('.product-item-scu-item-text-block').on('click', function() {
         $("#ID-article").text("ID "+ $(this).find('.product-item-scu-item-text').attr('data-article'));
     });
+
+    $('.product-item-scu-item-text-block').on('click', function() {
+        $("#old-price").html('<del class="text-dark-gray">' + $(this).find('.product-item-scu-item-text').attr('data-oldPrice') + '</del>');
+        $("#current-price").html($(this).find('.product-item-scu-item-text').attr('current-price'));
+    });
     /*----------------------------------*/
-    $(this).find('.product-item-scu-item-text').attr('data-article')
+    $(this).find('.product-item-scu-item-text').attr('data-article');
 
     var flag = 0;
     $('.js-apply').click(clickCheckbox);
