@@ -10,6 +10,20 @@ function cl() {
     }
 }
 /**
+ * Пересоздать фасетный индекс через API - для элемента
+ */
+if (!function_exists('updateElementIndexStockMan')) {
+    function updateElementIndexStockMan($idProduct)
+    {
+        $mxResult = CCatalogSku::GetProductInfo($idProduct);
+        if (is_array($mxResult))
+        {
+            $idProduct = $mxResult['ID'];
+        }
+        \Bitrix\Iblock\PropertyIndex\Manager::updateElementIndex(ImportStokMan::$IBLOCK_ID, $idProduct);
+    }
+}
+/**
  * Получить раздел для фильтра в главном меню "Новинки" == раздел "Одежда"
  */
 if (!function_exists('getMainMenuSectionNovinka')) {

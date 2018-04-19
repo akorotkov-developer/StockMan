@@ -136,7 +136,7 @@ class StockManHandlers
                     $arIdSection[] = $ar_group["ID"];
                 }
             }
-            if ((in_array(ImportStokMan::$IBLOCK_SECTION_ERROR_ID, $arIdSection)) or (in_array(ImportStokMan::$IBLOCK_SECTION_ID, $arIdSection))) {
+            /*if ((in_array(ImportStokMan::$IBLOCK_SECTION_ERROR_ID, $arIdSection)) or (in_array(ImportStokMan::$IBLOCK_SECTION_ID, $arIdSection))) {
                 CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], '', StockMan\Config::PROP_NOVINKA_DATE);
                 CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], false, StockMan\Config::PROP_NOVINKA);
                 CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], false, StockMan\Config::PROP_WAS_NOVINKA);
@@ -146,36 +146,55 @@ class StockManHandlers
                 self::$handlerDisallow = true; //отключаем
                 $el = new CIBlockElement;
                 $el->Update($idProduct, $arLoadProduct);
-            } else {
-                $arPropertyStil = array();
-                $resStil = CIBlockElement::GetProperty($arFields['IBLOCK_ID'], $arFields["ID"], "sort", "asc", array("CODE" => StockMan\Catalog\Config::STIL));
-                if ($obStil = $resStil->GetNext()) {
-                    $arPropertyStil = $obStil;
-                }
-
-                $DVStil = CIBlockFormatProperties::GetDisplayValue($arFields, $arPropertyStil);
-
-                $arPropertyTsvet = array();
-                $resTsvet = CIBlockElement::GetProperty($arFields['IBLOCK_ID'], $arFields["ID"], "sort", "asc", array("CODE" => ImportStokMan::$CODE_PROPERTYY_TSVET));
-                if ($obTsvet = $resTsvet->GetNext()) {
-                    $arPropertyTsvet = $obTsvet;
-                }
-
-                $DVTsvet = CIBlockFormatProperties::GetDisplayValue($arFields, $arPropertyTsvet);
-
-                if ((isset($DVStil['DISPLAY_VALUE']{1}))and(isset($DVTsvet['DISPLAY_VALUE']{1}))) {
-                    $name = $DVStil['DISPLAY_VALUE'];
-                    $nameCode = $DVStil['DISPLAY_VALUE'] . ' ' . $DVTsvet['DISPLAY_VALUE'];
-                    $arLoadProductArrayCode = Array(
-                        "NAME" => $name,
-                        "CODE" => CUtil::translit($nameCode, "ru", ImportStokMan::$translateParams)
-                    );
-
-                    self::$handlerDisallow = true; //отключаем
-                    $el = new CIBlockElement;
-                    $el->Update($idProduct, $arLoadProductArrayCode);
-                }
+            } else {*/
+            $arLoadProduct = array();
+            $flagS = false;
+            if ((in_array(ImportStokMan::$IBLOCK_SECTION_ERROR_ID, $arIdSection)) or (in_array(ImportStokMan::$IBLOCK_SECTION_ID, $arIdSection))) {
+                CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], '', StockMan\Config::PROP_NOVINKA_DATE);
+                CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], false, StockMan\Config::PROP_NOVINKA);
+                CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], false, StockMan\Config::PROP_WAS_NOVINKA);
+                $arLoadProduct = array(
+                    "ACTIVE" => "N"
+                );
+                $flagS = true;
             }
+            $arPropertyStil = array();
+            $resStil = CIBlockElement::GetProperty($arFields['IBLOCK_ID'], $arFields["ID"], "sort", "asc", array("CODE" => StockMan\Catalog\Config::STIL));
+            if ($obStil = $resStil->GetNext()) {
+                $arPropertyStil = $obStil;
+            }
+
+            $DVStil = CIBlockFormatProperties::GetDisplayValue($arFields, $arPropertyStil);
+
+            $arPropertyTsvet = array();
+            $resTsvet = CIBlockElement::GetProperty($arFields['IBLOCK_ID'], $arFields["ID"], "sort", "asc", array("CODE" => ImportStokMan::$CODE_PROPERTYY_TSVET));
+            if ($obTsvet = $resTsvet->GetNext()) {
+                $arPropertyTsvet = $obTsvet;
+            }
+
+            $DVTsvet = CIBlockFormatProperties::GetDisplayValue($arFields, $arPropertyTsvet);
+
+            if ((isset($DVStil['DISPLAY_VALUE']{1})) and (isset($DVTsvet['DISPLAY_VALUE']{1}))) {
+                $name = $DVStil['DISPLAY_VALUE'];
+                $nameCode = $DVStil['DISPLAY_VALUE'] . ' ' . $DVTsvet['DISPLAY_VALUE'];
+                $arLoadProductArrayCode = Array(
+                    "NAME" => $name,
+                    "CODE" => CUtil::translit($nameCode, "ru", ImportStokMan::$translateParams)
+                );
+
+                self::$handlerDisallow = true; //отключаем
+                $el = new CIBlockElement;
+                $el->Update($idProduct, array_merge($arLoadProductArrayCode, $arLoadProduct));
+
+                updateElementIndexStockMan($idProduct);
+            } elseif ($flagS) {
+                self::$handlerDisallow = true; //отключаем
+                $el = new CIBlockElement;
+                $el->Update($idProduct, $arLoadProduct);
+
+                updateElementIndexStockMan($idProduct);
+            }
+            //}
             self::$handlerDisallow = false;
         }
     }
@@ -201,6 +220,8 @@ class StockManHandlers
                 \CIBlockElement::SetPropertyValues($idProduct, $arFields['IBLOCK_ID'], false, StockMan\Config::PROP_WAS_NOVINKA);
 
                 $arFields["ACTIVE"] = "N";
+
+                updateElementIndexStockMan($idProduct);
             }
         }
     }
@@ -268,6 +289,8 @@ class StockManHandlers
 
                 $el = new CIBlockElement;
                 $el->Update($arFields["ID"], $arLoadProductArray);
+
+                \Bitrix\Iblock\PropertyIndex\Manager::updateElementIndex(ImportStokMan::$IBLOCK_ID, $arFields["ID"]);
             }
         }
     }
@@ -301,12 +324,40 @@ class StockManHandlers
                     $el = new CIBlockElement;
                     $el->Update($idProduct, $arLoadProduct);
                     unset($el);
+
+                    updateElementIndexStockMan($idProduct);
                 }
                 unset($arIdDeActive,$arLoadProduct);
             }
         }
         $pos = strpos($arFields, 'data_offers.xml');
         if ($pos !== false) {
+            $arIdNoPrice = array();
+            $arFilter = Array(
+                "IBLOCK_ID" => StockMan\Config::CATALOG_OFFERS,
+                "ACTIVE"=>"Y",
+                //"CATALOG_AVAILABLE" => "Y",
+                "PROPERTY_CML2_LINK.ACTIVE" => "Y",
+                "CATALOG_PRICE_".StockMan\Config::CATALOG_PRICE_ID => false,
+            );
+            $res = CIBlockElement::GetList(Array("SORT"=>"ASC", "PROPERTY_PRIORITY"=>"ASC"), $arFilter, false, false, array("ID"));
+            while($ar_fields = $res->GetNext()) {
+                $arIdNoPrice[] = $ar_fields["ID"];
+            }
+            unset($res,$ar_fields);
+            if (count($arIdNoPrice) > 0) {
+                $arLoadProductArrayActive = array(
+                    "ACTIVE" => "N"
+                );
+                foreach ($arIdNoPrice as $idProduct) {
+                    $el = new CIBlockElement;
+                    $el->Update($idProduct, $arLoadProductArrayActive);
+                    unset($el);
+                    updateElementIndexStockMan($idProduct);
+                }
+                unset($arLoadProductArrayActive);
+            }
+            unset($arIdNoPrice);
             // деактивируем - недоступные или без картинок
             $arIdDeActive = array();
             $arFilter = Array(
@@ -341,6 +392,7 @@ class StockManHandlers
                     $el = new CIBlockElement;
                     $el->Update($idProduct, $arLoadProductArrayActive);
                     unset($el);
+                    updateElementIndexStockMan($idProduct);
                 }
                 unset($arLoadProductArrayActive);
             }
@@ -379,6 +431,7 @@ class StockManHandlers
                     $el = new CIBlockElement;
                     $el->Update($idProduct, $arLoadProductArrayActive);
                     unset($el);
+                    updateElementIndexStockMan($idProduct);
                 }
                 unset($arLoadProductArrayActive);
             }
@@ -406,6 +459,7 @@ class StockManHandlers
                     $el = new CIBlockElement;
                     $el->Update($idProduct, $arLoadProductArrayActive);
                     unset($el);
+                    updateElementIndexStockMan($idProduct);
                 }
                 unset($arLoadProductArrayActive);
             }
@@ -421,7 +475,7 @@ class StockManHandlers
                 "CATALOG_AVAILABLE" =>  "Y",
                 "ACTIVE" =>  "Y",
                 "PROPERTY_" . StockMan\Config::PROP_WAS_NOVINKA => false,
-                "!PROPERTY_" . StockMan\Config::PROP_NOVINKA => false,
+                "PROPERTY_" . StockMan\Config::PROP_NOVINKA => false,
                 array (
                     "LOGIC" => "OR",
                     array("!DETAIL_PICTURE" => false),
@@ -442,6 +496,7 @@ class StockManHandlers
                     CIBlockElement::SetPropertyValues($idProduct, $IblockID, $strData, StockMan\Config::PROP_NOVINKA_DATE);
                     CIBlockElement::SetPropertyValues($idProduct, $IblockID, StockMan\Config::PROP_NOVINKA_VAL, StockMan\Config::PROP_NOVINKA);
                     CIBlockElement::SetPropertyValues($idProduct, $IblockID, StockMan\Config::PROP_WAS_NOVINKA_VAL, StockMan\Config::PROP_WAS_NOVINKA);
+                    updateElementIndexStockMan($idProduct);
                 }
             }
             unset($arIdNovinka);
@@ -479,6 +534,7 @@ class StockManHandlers
                 foreach ($arIdNoNovinka as $idProduct) {
                     CIBlockElement::SetPropertyValues($idProduct, $IblockID, '', StockMan\Config::PROP_NOVINKA_DATE);
                     CIBlockElement::SetPropertyValues($idProduct, $IblockID, false, StockMan\Config::PROP_NOVINKA);
+                    updateElementIndexStockMan($idProduct);
                 }
             }
             unset($arIdNoNovinka);
@@ -502,6 +558,7 @@ class StockManHandlers
                     //$valDiscount = '10000000';
                     //CIBlockElement::SetPropertyValues($idProduct, StockMan\Config::CATALOG_OFFERS, $valDiscount, StockMan\Catalog\Config::VALUE_DISCOUNT);
                     CIBlockElement::SetPropertyValues($idProduct, StockMan\Config::CATALOG_OFFERS, false, StockMan\Catalog\Config::PROP_DISCOUNT);
+                    updateElementIndexStockMan($idProduct);
                 }
             }
 
@@ -519,15 +576,17 @@ class StockManHandlers
             while($ar_fields = $res->GetNext()) {
                 $Price = intval($ar_fields["CATALOG_PRICE_".StockMan\Config::CATALOG_PRICE_ID]);
                 $PriceOld = intval($ar_fields["CATALOG_PRICE_".StockMan\Config::CATALOG_PRICE_B_ID]);
-                $id = $ar_fields["ID"];
+                $idProduct = $ar_fields["ID"];
                 if (($Price>0)and($PriceOld>0)and($PriceOld>$Price)) {
                     //$valDiscount = $PriceOld - $Price;
-                    CIBlockElement::SetPropertyValues($id, StockMan\Config::CATALOG_OFFERS, 30, StockMan\Catalog\Config::PROP_DISCOUNT);
+                    CIBlockElement::SetPropertyValues($idProduct, StockMan\Config::CATALOG_OFFERS, 30, StockMan\Catalog\Config::PROP_DISCOUNT);
                     //CIBlockElement::SetPropertyValues($id, StockMan\Config::CATALOG_OFFERS, $valDiscount, StockMan\Catalog\Config::VALUE_DISCOUNT);
+                    updateElementIndexStockMan($idProduct);
                 } elseif ($Price>0) {
                     // $valDiscount = '10000000';
                     //CIBlockElement::SetPropertyValues($id, StockMan\Config::CATALOG_OFFERS, $valDiscount, StockMan\Catalog\Config::VALUE_DISCOUNT);
-                    CIBlockElement::SetPropertyValues($id, StockMan\Config::CATALOG_OFFERS, false, StockMan\Catalog\Config::PROP_DISCOUNT);
+                    CIBlockElement::SetPropertyValues($idProduct, StockMan\Config::CATALOG_OFFERS, false, StockMan\Catalog\Config::PROP_DISCOUNT);
+                    updateElementIndexStockMan($idProduct);
                 }
             }
             unset($res,$ar_fields);
