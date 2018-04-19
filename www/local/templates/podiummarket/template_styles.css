@@ -48,6 +48,9 @@
         display: none;
     }
 }
+label.checkbox-group__label {
+    min-width: 29px;
+}
 .checkbox-group {
     padding-left: 15px!important;
 }

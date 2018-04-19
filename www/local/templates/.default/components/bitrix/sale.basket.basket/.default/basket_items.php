@@ -4,6 +4,7 @@
 /** @var array $arUrls */
 /** @var array $arHeaders */
 use Bitrix\Sale\DiscountCouponsManager;
+use Bitrix\Sale;
 
 if (!empty($arResult["ERROR_MESSAGE"]))
 	ShowError($arResult["ERROR_MESSAGE"]);
@@ -43,6 +44,10 @@ if ($normalCount > 0) {
     } else {
         $displayBaske = "block";
     }
+    ?>
+
+    <?
+
     ?>
 
     <div id="basket_items_list" style="display: <?=$displayBaske?>">

@@ -211,7 +211,9 @@ if (!empty($arResult['ITEMS']))
                                         }
                                         if ('Y' == $arParams['SHOW_OLD_PRICE'] && $arItem['MIN_PRICE']['DISCOUNT_VALUE'] < $arItem['MIN_PRICE']['VALUE'])
                                         {
-                                            ?> <? echo $arItem['MIN_PRICE']['PRINT_VALUE']; ?><?
+                                            ?> <?
+                                            echo $arItem['MIN_PRICE']['PRINT_VALUE'];
+                                            ?><?
                                         }
                                     }
                                     ?>

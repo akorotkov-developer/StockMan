@@ -390,7 +390,7 @@ if ($ElementID > 0)
 
         <div class="grid-x grid-padding-x align-center text-center">
             <div class="cell">
-                <h2 class="text-transform-none">Подпишись на нашу рассылку, получи скидку 300&#160;р.    </h2>
+                <h2 class="text-transform-none">Подпишись на нашу рассылку.   </h2>
             </div>
             <div class="cell large-6">
                 <div id="subscribe_result"></div>

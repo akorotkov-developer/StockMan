@@ -157,25 +157,52 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
     }
 }
 
-$actualItem = $arResult["OFFERS"][0];
 
+
+foreach ($arResult["OFFERS"] as $arOffer) {
+    $actualItem =  $arOffer;
+/*    $flagOldPrice = false;
+    $currentPrice[] = $actualItem["PRICES"][StockMan\Config::CATALOG_PRICE]["PRINT_VALUE"];
+    $newPrice = intval($price['RATIO_PRICE']);
+    $oldPrice = intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"]);
+    $aroldPricePrint[] = $actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["PRINT_VALUE"];*/
+
+
+    $arprices[$arOffer["PROPERTIES"]["RAZMER"]["VALUE"]]["CURRENT_PRICE"] = $actualItem["PRICES"][StockMan\Config::CATALOG_PRICE]["PRINT_VALUE"];
+    $arprices[$arOffer["PROPERTIES"]["RAZMER"]["VALUE"]]["OLD_PRICE"] = $actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["PRINT_VALUE"];
+    $arprices[$arOffer["PROPERTIES"]["RAZMER"]["VALUE"]]["ARTICUL"] = $arOffer["PROPERTIES"]["CML2_ARTICLE"]["VALUE"];
+}
+
+$actualItem = $arResult["OFFERS"][0];
 $flagOldPrice = false;
 $newPrice = intval($price['RATIO_PRICE']);
-$oldPrice = intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"]);
+$old_Price = intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"]);
 $oldPricePrint = $actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["PRINT_VALUE"];
 if (intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"])) {
-    if (($newPrice < $oldPrice)and($newPrice > 0)) {
+    if (($newPrice < $old_Price)and($newPrice > 0)) {
         $flagOldPrice = true;
     }
 }
-if ($_REQUEST["rt"]=="rt") {
-    echo "<pre>";
-    //print_r($arResult);
-    echo "</pre>";
-}
 
 ?>
-
+    <div class="price">
+        <?
+        /*$intIBlockID = 11;
+        $mxResult = CCatalogSKU::GetInfoByProductIBlock(
+            $intIBlockID
+        );
+        if (is_array($mxResult))
+        {
+            $rsOffers = CIBlockElement::GetList(array("PRICE"=>"ASC"),array('IBLOCK_ID' => $mxResult['IBLOCK_ID'], 'PROPERTY_'.$mxResult['SKU_PROPERTY_ID'] => 254983));
+            while ($arOffer = $rsOffers->GetNext())
+            {
+                $ar_price = GetCatalogProductPrice($arOffer["ID"], 7);
+                echo "<p>от ".$ar_price["PRICE"]." руб. </p>" ;
+                break;
+            }
+        }*/
+        ?>
+    </div>
 
     <div class="skirt" id="<?=$itemIds['ID']?>" itemscope itemtype="http://schema.org/Product">
 
@@ -218,7 +245,7 @@ if ($_REQUEST["rt"]=="rt") {
         <?
         /*Картинка для поделиться в соц. сетях*/
         $this->SetViewTarget("socnetimage");
-            echo $arResult["DETAIL_PICTURE"]['SRC'];
+        echo $arResult["DETAIL_PICTURE"]['SRC'];
         $this->EndViewTarget("socnetimage");
         /*------------------------------------*/
         ?>
@@ -281,7 +308,24 @@ if ($_REQUEST["rt"]=="rt") {
                                 <?
                             }
                             ?>
-                            <div id="<?=$itemIds['PRICE_ID']?>">
+                            <div>
+                                <?
+                                $IDpriceforDiffered = $itemIds['PRICE_ID'];
+                                $priceforDiffered =  str_replace(" ","",$price['PRINT_RATIO_PRICE']);
+                                ?>
+                                <div id="current-price">
+                                    <?=$price['PRINT_RATIO_PRICE']?>
+                                </div>
+                                <?
+                                if ($flagOldPrice) {?>
+                                    <div id="old-price">
+                                        <del class="text-dark-gray">
+                                            <?=$oldPricePrint?>
+                                        </del>
+                                    </div>
+                                <?}?>
+                            </div>
+                            <div id="<?=$itemIds['PRICE_ID']?>" class="currentPriceHide" style="display: none;">
                                 <?
                                 $IDpriceforDiffered = $itemIds['PRICE_ID'];
                                 $priceforDiffered =  str_replace(" ","",$price['PRINT_RATIO_PRICE']);
@@ -350,68 +394,79 @@ if ($_REQUEST["rt"]=="rt") {
                             {
                                 ?>
 
-                                    <?
-                                    foreach ($arResult['SKU_PROPS'] as $skuProperty)
-                                    {
-                                        if (!isset($arResult['OFFERS_PROP'][$skuProperty['CODE']]))
-                                            continue;
+                                <?
+                                foreach ($arResult['SKU_PROPS'] as $skuProperty)
+                                {
+                                    if (!isset($arResult['OFFERS_PROP'][$skuProperty['CODE']]))
+                                        continue;
 
-                                        $propertyId = $skuProperty['ID'];
-                                        $skuProps[] = array(
-                                            'ID' => $propertyId,
-                                            'SHOW_MODE' => $skuProperty['SHOW_MODE'],
-                                            'VALUES' => $skuProperty['VALUES'],
-                                            'VALUES_COUNT' => $skuProperty['VALUES_COUNT']
-                                        );
-                                        ?>
-
-
-                                        <div class="small-12 medium-2 large-2 cell"><?=htmlspecialcharsEx($skuProperty['NAME'])?>:</div>
-                                        <div class="cell large-10 medium-10" data-entity="sku-line-block">
-                                            <div class="checkbox-group">
-                                            <?
-                                            if ($_GET["tst"] == "tst") {
-                                                echo "<pre>";
-                                                var_dump($arResult);
-                                                echo "</pre>";
-                                            }
-                                            ?>
-
-                                                        <ul>
-                                                            <?
-                                                            if ($_GET["size_cloth"]) {
-                                                                $size_cloth = $_GET["size_cloth"];
-                                                            }
-                                                            $counOffer = 0;
-                                                            foreach ($skuProperty['VALUES'] as &$value)
-                                                            {
-                                                                $value['NAME'] = htmlspecialcharsbx($value['NAME']);
-
-                                                                    if ($size_cloth == $value['NAME']) $selected = "selected";
-                                                                    ?>
-
-                                                                    <li class="product-item-scu-item-text-container <?=$selected?>" title="<?=$value['NAME']?>"
-                                                                        data-treevalue="<?=$propertyId?>_<?=$value['ID']?>"
-                                                                        data-onevalue="<?=$value['ID']?>">
-                                                                        <div class="product-item-scu-item-text-block">
-                                                                            <?
-                                                                            $article = GetArticulOfferByID($arResult['OFFERS'][$counOffer]["ID"]);
-                                                                            ?>
-                                                                            <div class="product-item-scu-item-text" data-article="<?=$article["PROPERTY_CML2_ARTICLE_VALUE"];?>" data-size="<?=$value['NAME']?>"><?=$value['NAME']?></div>
-                                                                        </div>
-                                                                    </li>
-                                                                    <?
-                                                                $counOffer++;
-                                                                $selected = "";
-                                                            }
-                                                            ?>
-                                                        </ul>
-
-                                                </div>
-                                        </div>
-                                        <?
-                                    }
+                                    $propertyId = $skuProperty['ID'];
+                                    $skuProps[] = array(
+                                        'ID' => $propertyId,
+                                        'SHOW_MODE' => $skuProperty['SHOW_MODE'],
+                                        'VALUES' => $skuProperty['VALUES'],
+                                        'VALUES_COUNT' => $skuProperty['VALUES_COUNT']
+                                    );
                                     ?>
+
+
+                                    <div class="small-12 medium-2 large-2 cell"><?=htmlspecialcharsEx($skuProperty['NAME'])?>:</div>
+                                    <div class="cell large-10 medium-10" data-entity="sku-line-block">
+                                        <div class="checkbox-group">
+
+                                            <ul>
+                                                <?
+                                                if ($_GET["size_cloth"]) {
+                                                    $size_cloth = $_GET["size_cloth"];
+                                                }
+                                                $counOffer = 0;
+                                                $offervalue = false;
+                                                foreach ($skuProperty['VALUES'] as &$value)
+                                                {
+                                                    $value['NAME'] = htmlspecialcharsbx($value['NAME']);
+
+                                                    if ($size_cloth == $value['NAME']) $selected = "selected";
+                                                    ?>
+
+                                                    <li class="product-item-scu-item-text-container <?=$selected?>" title="<?=$value['NAME']?>"
+                                                        data-treevalue="<?=$propertyId?>_<?=$value['ID']?>"
+                                                        data-onevalue="<?=$value['ID']?>">
+                                                        <div class="product-item-scu-item-text-block">
+                                                            <?
+                                                            $article = GetArticulOfferByID($arResult['OFFERS'][$counOffer]["ID"]);
+                                                            ?>
+                                                            <?
+
+                                                            $currentPrice = $arprices[$value["XML_ID"]]["CURRENT_PRICE"];
+                                                            $oldPrice = $arprices[$value["XML_ID"]]["OLD_PRICE"];
+                                                            $article = $arprices[$value["XML_ID"]]["ARTICUL"];
+                                                            ?>
+                                                            <div class="product-item-scu-item-text"
+                                                                 data-article="<?=$article?>"
+                                                                 data-size="<?=$value['NAME']?>"
+                                                                 current-price="<?=$currentPrice?>"
+                                                                 data-oldPrice="<?=$oldPrice?>">
+                                                                <?=$value['NAME']?>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <?
+                                                    if (!$offervalue) {
+                                                        $offervalue = $value['NAME'];
+                                                    }
+                                                    ?>
+                                                    <?
+                                                    $counOffer++;
+                                                    $selected = "";
+                                                }
+                                                ?>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                    <?
+                                }
+                                ?>
 
                                 <?
                             }
@@ -434,79 +489,79 @@ if ($_REQUEST["rt"]=="rt") {
                         case 'buttons':
                             ?>
                             <?
-                            if ($showAddBtn) {
-                                ?>
-                                <div class="cell medium-6">
-                                    <a class="button skirt__bag" id="<?= $itemIds['ADD_BASKET_LINK'] ?>"
-                                       href="javascript:void(0);">Добавить в Корзину  </a>
-                                </div>
-                                <div class="cell medium-6"><a class="button skirt__heart x-add2basket-delay" id="x-add2basket-delay" href="javascript:void(0)"
-                                        <? if (in_array($arResult["ID"],$arBasketItems )) echo 'in_wishlist '; ?> >Добавить в Избранное</a>
-                                </div>
-                                <script type="text/javascript">
-                                    function add2wish(p_id, pp_id, p, name, dpu, th){
-                                        $.ajax({
-                                            type: "POST",
-                                            url: "/local/ajax/wishlist.php",
-                                            data: "p_id=" + p_id + "&pp_id=" + pp_id + "&p=" + p + "&name=" + name + "&dpu=" + dpu,
-                                            success: function(html){
-                                                $(th).addClass('in_wishlist');
-                                                $('#wishcount').html(html);
-                                            }
-                                        });
-                                    };
-
-                                    $(document).find('.skirt__heart').on('click', function() {
-                                        // действия, которые будут выполнены при наступлении события...
-                                        add2wish(
-                                            $(document).find('.x-add2basket-delay').attr('offer_id'),
-                                            "<?=$IDpriceforDiffered?>",
-                                            "<?=intval($priceforDiffered)?>",
-                                            "<?=$arResult["NAME"]?>",
-                                            "<?=$arResult["DETAIL_PAGE_URL"]?>",
-                                            $(this)
-                                        );
+                        if ($showAddBtn) {
+                            ?>
+                            <div class="cell medium-6">
+                                <a class="button skirt__bag" id="<?= $itemIds['ADD_BASKET_LINK'] ?>"
+                                   href="javascript:void(0);">Добавить в Корзину  </a>
+                            </div>
+                            <div class="cell medium-6"><a class="button skirt__heart x-add2basket-delay" id="x-add2basket-delay" href="javascript:void(0)"
+                                    <? if (in_array($arResult["ID"],$arBasketItems )) echo 'in_wishlist '; ?> >Добавить в Избранное</a>
+                            </div>
+                            <script type="text/javascript">
+                                function add2wish(p_id, pp_id, p, name, dpu, th){
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/local/ajax/wishlist.php",
+                                        data: "p_id=" + p_id + "&pp_id=" + pp_id + "&p=" + p + "&name=" + name + "&dpu=" + dpu,
+                                        success: function(html){
+                                            $(th).addClass('in_wishlist');
+                                            $('#wishcount').html(html);
+                                        }
                                     });
-                                </script>
-                                <?
-                            }
+                                };
 
-                            if ($showBuyBtn) {
-                                ?>
-                                <div class="product-item-detail-info-container">
-                                    <a class="btn <?= $buyButtonClassName ?> product-item-detail-buy-button"
-                                       id="<?= $itemIds['BUY_LINK'] ?>"
-                                       href="javascript:void(0);">
-                                        <span><?= $arParams['MESS_BTN_BUY'] ?></span>
-                                    </a>
-                                </div>
-                                <?
-                            }
-                            ?>
-
-                            <?
-                            if ($showSubscribe) {
-                                ?>
-                                <div class="product-item-detail-info-container">
-                                    <?
-                                    $APPLICATION->IncludeComponent(
-                                        'bitrix:catalog.product.subscribe',
-                                        '',
-                                        array(
-                                            'PRODUCT_ID' => $arResult['ID'],
-                                            'BUTTON_ID' => $itemIds['SUBSCRIBE_LINK'],
-                                            'BUTTON_CLASS' => 'btn btn-default product-item-detail-buy-button',
-                                            'DEFAULT_DISPLAY' => !$actualItem['CAN_BUY'],
-                                            'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
-                                        ),
-                                        $component,
-                                        array('HIDE_ICONS' => 'Y')
+                                $(document).find('.skirt__heart').on('click', function() {
+                                    // действия, которые будут выполнены при наступлении события...
+                                    add2wish(
+                                        $(document).find('.x-add2basket-delay').attr('offer_id'),
+                                        "<?=$IDpriceforDiffered?>",
+                                        "<?=intval($priceforDiffered)?>",
+                                        "<?=$arResult["NAME"]?>",
+                                        "<?=$arResult["DETAIL_PAGE_URL"]?>",
+                                        $(this)
                                     );
-                                    ?>
-                                </div>
+                                });
+                            </script>
+                        <?
+                        }
+
+                        if ($showBuyBtn) {
+                        ?>
+                            <div class="product-item-detail-info-container">
+                                <a class="btn <?= $buyButtonClassName ?> product-item-detail-buy-button"
+                                   id="<?= $itemIds['BUY_LINK'] ?>"
+                                   href="javascript:void(0);">
+                                    <span><?= $arParams['MESS_BTN_BUY'] ?></span>
+                                </a>
+                            </div>
+                        <?
+                        }
+                        ?>
+
+                        <?
+                        if ($showSubscribe) {
+                        ?>
+                            <div class="product-item-detail-info-container">
                                 <?
-                            }
-                            ?>
+                                $APPLICATION->IncludeComponent(
+                                    'bitrix:catalog.product.subscribe',
+                                    '',
+                                    array(
+                                        'PRODUCT_ID' => $arResult['ID'],
+                                        'BUTTON_ID' => $itemIds['SUBSCRIBE_LINK'],
+                                        'BUTTON_CLASS' => 'btn btn-default product-item-detail-buy-button',
+                                        'DEFAULT_DISPLAY' => !$actualItem['CAN_BUY'],
+                                        'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
+                                    ),
+                                    $component,
+                                    array('HIDE_ICONS' => 'Y')
+                                );
+                                ?>
+                            </div>
+                        <?
+                        }
+                        ?>
                             <div class="product-item-detail-info-container">
                                 <a class="btn btn-link product-item-detail-buy-button"
                                    id="<?= $itemIds['NOT_AVAILABLE_MESS'] ?>"
@@ -544,7 +599,7 @@ if ($_REQUEST["rt"]=="rt") {
                             </div>
                         </div>
                     </li>
-                <?
+                    <?
                     $classActive = ' ';
                 }?>
                 <?if ($arResult["PROPERTIES"]["SOSTAV"]["VALUE"]) {?>
@@ -556,9 +611,9 @@ if ($_REQUEST["rt"]=="rt") {
                                 {
                                     if ($property['DISPLAY_VALUE']) {
                                         ?>
-                                            <div>
-                                                <?=$property['NAME']?> : <?=$property['DISPLAY_VALUE']?>
-                                            </div>
+                                        <div>
+                                            <?=$property['NAME']?> : <?=$property['DISPLAY_VALUE']?>
+                                        </div>
                                         <?
                                     }
                                 }
@@ -566,24 +621,23 @@ if ($_REQUEST["rt"]=="rt") {
                             </div>
                         </div>
                     </li>
-                <?
+                    <?
                     $classActive = ' ';
                 }?>
                 <?$DELIVERY_PAYMENT_RETURN = \Ceteralabs\UserVars::GetVar('DELIVERY_PAYMENT_RETURN');
                 if (isset($DELIVERY_PAYMENT_RETURN["VALUE"]{1})) {?>
-                <li class="accordion-item <?=$classActive?>" data-accordion-item=""><a class="accordion-title" href="#">доставка, оплата и возврат</a>
-                    <div class="accordion-content" data-tab-content="">
-                        <div><?=$DELIVERY_PAYMENT_RETURN["VALUE"]?></div>
-                    </div>
-                </li>
-                <?
+                    <li class="accordion-item <?=$classActive?>" data-accordion-item=""><a class="accordion-title" href="#">доставка, оплата и возврат</a>
+                        <div class="accordion-content" data-tab-content="">
+                            <div><?=$DELIVERY_PAYMENT_RETURN["VALUE"]?></div>
+                        </div>
+                    </li>
+                    <?
                     $classActive = ' ';
                 }?>
             </ul>
 
 
             <div class="text-size-xsmall text-right">
-                </a>
                 Поделиться
                 <a class="fa fa-facebook share btn-facebook"></a>
                 <a class="fa fa-twitter share btn-twitter"></a>
@@ -2230,13 +2284,18 @@ if ($arParams['DISPLAY_COMPARE'])
     </script>
 
 
-
-    <?if ($_GET["size_cloth"]) {?>
-        <script>
-            $( document ).ready(function() {
-                $('div[data-size="<?=$_GET["size_cloth"]?>"]').trigger('click');
-            });
-        </script>
-    <?}?>
+<?if ($_GET["size_cloth"]) {?>
+    <script>
+        $( document ).ready(function() {
+            $('div[data-size="<?=$_GET["size_cloth"]?>"]').trigger('click');
+        });
+    </script>
+<?} elseif ($offer)  {?>
+    <script>
+        $( document ).ready(function() {
+            $('div[data-size="<?=$offervalue?>"]').trigger('click');
+        });
+    </script>
+<?}?>
 <?
 unset($actualItem, $itemIds, $jsParams);

@@ -238,7 +238,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 && !$("#bx-soa-delivery").hasClass("bx-step-completed")&& !$("#bx-soa-paysystem").hasClass("bx-step-completed")
 				&& !$("#bx-soa-properties").hasClass("bx-step-completed")) {
 
-                location.reload();
+
+                    $("#bx-soa-basket .bx-soa-section-title-container").trigger("click");
+
+
+
             }
 		},
 

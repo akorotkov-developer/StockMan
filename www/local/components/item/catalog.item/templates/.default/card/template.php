@@ -117,7 +117,7 @@ if (intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"])) {
 			switch ($blockName)
 			{
 				case 'price': ?>
-					<div class="text-size-large margin-bottom-4" data-entity="price-block">
+					<div class="text-size-large margin-bottom-4 oureplacethis" data-entity="price-block">
 						<?
 						if ($arParams['SHOW_OLD_PRICE'] === 'Y')
 						{
