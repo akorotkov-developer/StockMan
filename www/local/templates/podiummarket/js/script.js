@@ -220,6 +220,4 @@ $( document ).ready(function() {
         $(this).height(mh);
     });
     /*------------------------------*/
-
-    console.log($(document).width());
 });

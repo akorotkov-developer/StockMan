@@ -257,7 +257,7 @@ if (intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"])) {
                     ?>
                     <div class="skirt__slide" data-entity="image" data-id="<?=$arResult["DETAIL_PICTURE"]['ID']?>">
                         <a class="skirt__inner" data-open="exampleModal1">
-                            <img src="<?=$arResult["DETAIL_PICTURE"]['SRC']?>" alt="<?=$alt?>" title="<?=$title?>" <?=($key == 0 ? ' itemprop="image"' : '')?>>
+                            <img src="<?=ResizeImage($arResult["DETAIL_PICTURE"]["ID"], 500, 700)?>" alt="<?=$alt?>" title="<?=$title?>" <?=($key == 0 ? ' itemprop="image"' : '')?>>
                         </a>
                     </div>
                     <?
@@ -266,7 +266,7 @@ if (intval($actualItem["PRICES"][StockMan\Config::CATALOG_PRICE_B]["VALUE"])) {
                         ?>
                         <div class="skirt__slide" data-entity="image" data-id="<?=$photo['ID']?>">
                             <a class="skirt__inner" data-open="exampleModal1">
-                                <img src="<?=$photo['SRC']?>" alt="<?=$alt?>" title="<?=$title?>" <?=($key == 0 ? ' itemprop="image"' : '')?>>
+                                <img src="<?=ResizeImage($photo["ID"], 500, 700)?>" alt="<?=$alt?>" title="<?=$title?>" <?=($key == 0 ? ' itemprop="image"' : '')?>>
                             </a>
                         </div>
                         <?
