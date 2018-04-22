@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-    $(document).find(".x-mask-phone").mask("+7(999) 999-9999");
 
     /*При клике на размер менять артикул и старую цену*/
     $('.product-item-scu-item-text-block').on('click', function() {
@@ -193,9 +192,21 @@ $( document ).ready(function() {
             $('.slick-list.draggable').animate({ "height": $('.skirt__info').outerHeight() - 30 }, 500 );
         });
         setTimeout(function(){
-            $('.slick-list.draggable').outerHeight($('.skirt__info').outerHeight() + 50);
+            if ($(document).width() > 1270) {
+                if ($(".skirt__info").outerHeight() > $('.slick-list.draggable').outerHeight()) {
+                    $('.slick-list.draggable').outerHeight($('.skirt__info').outerHeight() + 50);
+                }
+            }
         }, 100);
     }
+
+    $( window ).resize(function() {
+        if ($(document).width() > 1270) {
+            if ($(".skirt__info").outerHeight() > $('.slick-list.draggable').outerHeight()) {
+                $('.slick-list.draggable').outerHeight($('.skirt__info').outerHeight() + 50);
+            }
+        }
+    });
 
     /*Максимальная высота для блоков*/
     var mh = 0;
@@ -209,4 +220,6 @@ $( document ).ready(function() {
         $(this).height(mh);
     });
     /*------------------------------*/
+
+    console.log($(document).width());
 });
