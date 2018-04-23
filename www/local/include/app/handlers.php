@@ -184,13 +184,13 @@ class StockManHandlers
 
                 self::$handlerDisallow = true; //отключаем
                 $el = new CIBlockElement;
-                $el->Update($idProduct, array_merge($arLoadProductArrayCode, $arLoadProduct));
+                $el->Update($idProduct, array_merge($arLoadProductArrayCode, $arLoadProduct), false, true);
 
                 updateElementIndexStockMan($idProduct);
             } elseif ($flagS) {
                 self::$handlerDisallow = true; //отключаем
                 $el = new CIBlockElement;
-                $el->Update($idProduct, $arLoadProduct);
+                $el->Update($idProduct, $arLoadProduct, false, true);
 
                 updateElementIndexStockMan($idProduct);
             }
@@ -288,9 +288,9 @@ class StockManHandlers
                 }
 
                 $el = new CIBlockElement;
-                $el->Update($arFields["ID"], $arLoadProductArray);
+                $el->Update($arFields["ID"], $arLoadProductArray, false, true);
 
-                \Bitrix\Iblock\PropertyIndex\Manager::updateElementIndex(ImportStokMan::$IBLOCK_ID, $arFields["ID"]);
+                updateElementIndexStockMan($arFields["ID"]);
             }
         }
     }
@@ -322,7 +322,7 @@ class StockManHandlers
                     CIBlockElement::SetPropertyValues($idProduct, ImportStokMan::$IBLOCK_ID, false, StockMan\Config::PROP_WAS_NOVINKA);
 
                     $el = new CIBlockElement;
-                    $el->Update($idProduct, $arLoadProduct);
+                    $el->Update($idProduct, $arLoadProduct, false, true);
                     unset($el);
 
                     updateElementIndexStockMan($idProduct);
@@ -333,6 +333,7 @@ class StockManHandlers
         $pos = strpos($arFields, 'data_offers.xml');
         if ($pos !== false) {
             $arIdNoPrice = array();
+            $arIdNoPriceProd = array();
             $arFilter = Array(
                 "IBLOCK_ID" => StockMan\Config::CATALOG_OFFERS,
                 "ACTIVE"=>"Y",
@@ -340,11 +341,28 @@ class StockManHandlers
                 "PROPERTY_CML2_LINK.ACTIVE" => "Y",
                 "CATALOG_PRICE_".StockMan\Config::CATALOG_PRICE_ID => false,
             );
-            $res = CIBlockElement::GetList(Array("SORT"=>"ASC", "PROPERTY_PRIORITY"=>"ASC"), $arFilter, false, false, array("ID"));
+            $res = CIBlockElement::GetList(Array("SORT"=>"ASC", "PROPERTY_PRIORITY"=>"ASC"), $arFilter, false, false, array("ID","IBLOCK_ID","PROPERTY_CML2_LINK"));
             while($ar_fields = $res->GetNext()) {
+                $idProd = $ar_fields["PROPERTY_CML2_LINK_VALUE"];
+                $i = 0;
+                $arFilterPr = Array(
+                    "IBLOCK_ID" => StockMan\Config::CATALOG_OFFERS,
+                    "ACTIVE"=>"Y",
+                    "CATALOG_AVAILABLE" => "Y",
+                    "PROPERTY_CML2_LINK.ID" => $idProd,
+                    "!ID" => $ar_fields["ID"]
+                );
+                $resPr = CIBlockElement::GetList(Array("SORT"=>"ASC"), $arFilterPr, false, false, array("ID","IBLOCK_ID"));
+                while($ar_fieldsPr = $resPr->GetNext()) {
+                    $i++;
+                }
+                if ($i == 0) {
+                    $arIdNoPriceProd[] = $idProd;
+                }
                 $arIdNoPrice[] = $ar_fields["ID"];
             }
             unset($res,$ar_fields);
+
             if (count($arIdNoPrice) > 0) {
                 $arLoadProductArrayActive = array(
                     "ACTIVE" => "N"
@@ -358,6 +376,20 @@ class StockManHandlers
                 unset($arLoadProductArrayActive);
             }
             unset($arIdNoPrice);
+            if (count($arIdNoPriceProd) > 0) {
+                $arLoadProductArrayActive = array(
+                    "ACTIVE" => "N"
+                );
+                foreach ($arIdNoPriceProd as $idProduct) {
+                    $el = new CIBlockElement;
+                    $el->Update($idProduct, $arLoadProductArrayActive, false, true);
+                    unset($el);
+                    updateElementIndexStockMan($idProduct);
+                }
+                unset($arLoadProductArrayActive);
+            }
+            unset($arIdNoPriceProd);
+
             // деактивируем - недоступные или без картинок
             $arIdDeActive = array();
             $arFilter = Array(
@@ -390,7 +422,7 @@ class StockManHandlers
                 );
                 foreach ($arIdDeActive as $idProduct) {
                     $el = new CIBlockElement;
-                    $el->Update($idProduct, $arLoadProductArrayActive);
+                    $el->Update($idProduct, $arLoadProductArrayActive, false, true);
                     unset($el);
                     updateElementIndexStockMan($idProduct);
                 }
@@ -429,7 +461,7 @@ class StockManHandlers
                 );
                 foreach ($arIdActive as $idProduct) {
                     $el = new CIBlockElement;
-                    $el->Update($idProduct, $arLoadProductArrayActive);
+                    $el->Update($idProduct, $arLoadProductArrayActive, false, true);
                     unset($el);
                     updateElementIndexStockMan($idProduct);
                 }
@@ -548,7 +580,7 @@ class StockManHandlers
                 "CATALOG_PRICE_".StockMan\Config::CATALOG_PRICE_B_ID => false,
                 "!PROPERTY_".StockMan\Catalog\Config::PROP_DISCOUNT => false,
             );
-            $res = CIBlockElement::GetList(Array("SORT"=>"ASC", "PROPERTY_PRIORITY"=>"ASC"), $arFilter, false, false, array("ID"));
+            $res = CIBlockElement::GetList(Array("ID"=>"ASC"), $arFilter, false, false, array("ID"));
             while($ar_fields = $res->GetNext()) {
                 $arIdNoDiscount[] = $ar_fields["ID"];
             }

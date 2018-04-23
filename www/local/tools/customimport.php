@@ -12,18 +12,25 @@ define('LANGUAGE_ID', 'ru');
 define("NO_AGENT_CHECK", true);
 define('PUBLIC_AJAX_MODE', true);
 
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
+error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('memory_limit', '1024M');
-ini_set('post_max_size', '500M');
-ini_set('upload_max_filesize', '400M');
-ini_set('max_execution_time', '6000');
+ini_set('post_max_size', '512M');
+ini_set('upload_max_filesize', '512M');
+ini_set('max_file_uploads', '512');
 ini_set('max_input_time', '6000');
+ini_set('allow_url_fopen', 'On');
+ini_set('error_reporting', E_ALL);
+ini_set('soap.wsdl_cache_enabled', '0');
+
+ini_set("user_agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+ini_set("max_execution_time", 0);
 
 @set_time_limit(0);
 @ignore_user_abort(true);
 
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/local/tools/CImportStokMan.php");
 
 unlink($_SERVER["DOCUMENT_ROOT"].'/local/tools/cookie.txt');
 $exit_code = 0;
@@ -70,43 +77,43 @@ try{
         }
     }
 
-    ImportStokMan::processing();
+    ImportStokMan::processingFile();
 
-    $file = 'data_import.xml';
-    $fileOffers = 'data_import.xml';
+    /* $file = 'data_import.xml';
+     $fileOffers = 'data_import.xml';
 
-    $urlFile = $_SERVER["DOCUMENT_ROOT"] . '/upload/1c_catalog/' . $file;
-    $urlFileOffers = $_SERVER["DOCUMENT_ROOT"] . '/upload/1c_catalog/' . $fileOffers;
+     $urlFile = $_SERVER["DOCUMENT_ROOT"] . '/upload/1c_catalog/' . $file;
+     $urlFileOffers = $_SERVER["DOCUMENT_ROOT"] . '/upload/1c_catalog/' . $fileOffers;
 
-    if ((file_exists($urlFile))and(file_exists($urlFileOffers))) {
-        $start_time = microtime(true);
-        $result = importCron($file);
-        $end_time = microtime(true);
+     if ((file_exists($urlFile))and(file_exists($urlFileOffers))) {
+         $start_time = microtime(true);
+         $result = importCron($file);
+         $end_time = microtime(true);
 
-        if ($result) {
-            unlink($urlFile);
-            writeLogImport("Ок - " . round(($end_time-$start_time),5));
+         if ($result) {
+             unlink($urlFile);
+             writeLogImport("Ок - " . round(($end_time-$start_time),5));
 
-            $start_time = microtime(true);
-            $result = importCron($fileOffers);
-            $end_time = microtime(true);
+             $start_time = microtime(true);
+             $result = importCron($fileOffers);
+             $end_time = microtime(true);
 
-            if ($result) {
-                unlink($urlFileOffers);
-                writeLogImport("Ок Offers - " . round(($end_time-$start_time),5));
-            } else {
-                $exit_code = 4;
-                writeLogImport("failure");
-            }
-        } else {
-            $exit_code = 3;
-            writeLogImport("failure");
-        }
-    }
-    else {
-        $exit_code = 2;
-        writeLogImport("Файлы не созданы");
-    }
+             if ($result) {
+                 unlink($urlFileOffers);
+                 writeLogImport("Ок Offers - " . round(($end_time-$start_time),5));
+             } else {
+                 $exit_code = 4;
+                 writeLogImport("failure");
+             }
+         } else {
+             $exit_code = 3;
+             writeLogImport("failure");
+         }
+     }
+     else {
+         $exit_code = 2;
+         writeLogImport("Файлы не созданы");
+     }*/
 } catch (Exception $e){
     $exit_code = 1;
     writeLogImport("Ошибка -- ".$e->getMessage());

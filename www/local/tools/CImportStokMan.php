@@ -21,6 +21,7 @@ class ImportStokMan {
 
     public static $FILE_IMPORT_N = 'data_import.xml';
     public static $FILE_IMPORT = '/upload/1c_catalog/data_import.xml';
+    public static $FILE_IMPORT_RAZMER = '/upload/1c_catalog/data_import_razmer.xml';
     public static $FILE_OFFERS_N = 'data_offers.xml';
     public static $FILE_OFFERS = '/upload/1c_catalog/data_offers.xml';
 
@@ -68,8 +69,149 @@ class ImportStokMan {
         self::processingFileImport();
     }
     public static function processingFile() {
+        libxml_use_internal_errors(true);
         $urlFile = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME;
+        //$urlFile = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME_OFFERS;
         $xml = simplexml_load_file($urlFile);
+        //$xml = simplexml_load_string(file_get_contents($urlFile), 'SimpleXMLElement', LIBXML_PARSEHUGE);
+        if (!$xml) {
+            /*$curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'http://new2.podium-market.com/upload/import0_1.xml');
+            curl_setopt ($curl , CURLOPT_RETURNTRANSFER,1 );
+            curl_setopt($curl,CURLOPT_USERAGENT,"Mozilla/4.0");
+            curl_setopt($curl,CURLOPT_HEADER,0);
+
+            $data = curl_exec($curl);
+            curl_close($curl);
+
+            $xml = simplexml_load_string($data) or die("Ошибка загрузки URL");
+
+            $str = (string)$xml->Классификатор->Ид;
+            echo "<pre>";
+            print_r($str);
+            echo "</pre>";
+            die();*/
+            echo 'файл не получен\n';
+            foreach(libxml_get_errors() as $error) {
+                echo "\t", $error->message;
+            }
+        } else {
+            $str = (string)$xml->Классификатор->Ид;
+            echo "<pre>";
+            print_r($str);
+            echo "</pre>";
+            libxml_clear_errors();
+        }
+
+        /*$xml = simplexml_load_file($urlFile);
+        //$ret = $xml->asXML();
+        $f_hdl = fopen($_SERVER["DOCUMENT_ROOT"] . '/local/logs/data_import_razmer1.xml', 'w');
+        fwrite($f_hdl, (string)$xml->Классификатор->Ид);
+        fclose($f_hdl);
+        var_dump((string)$xml->Классификатор->Ид);*/
+        if (PHP_SAPI == 'cli') {
+            /*$curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'http://new2.podium-market.com/local/tools/1.php');
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+
+            curl_setopt($curl,CURLOPT_USERAGENT,"Mozilla/4.0");
+            curl_setopt($curl,CURLOPT_HEADER,0);
+
+            $data1 = curl_exec($curl);
+            //$data1 = iconv( "cp1251","UTF-8", $data1);
+            curl_close($curl);
+
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'http://new2.podium-market.com/' . self::$FILE_NAME);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl,CURLOPT_HEADER,0);
+
+            /*$new = file($urlFile);
+            $file = fopen($_SERVER["DOCUMENT_ROOT"] . self::$FILE_IMPORT_RAZMER, 'w+');
+
+            foreach($new as $v)
+                if($v != "\r\n")
+                    fwrite($file, $v);
+
+            fclose($file);*/
+
+            //$data = curl_exec($curl);
+            // curl_close($curl);
+            //$isWinCharset = mb_check_encoding($data, "windows-1251");
+            // if ($isWinCharset) {
+            //$data = html_entity_decode($data, ENT_NOQUOTES, 'UTF-8'); //iconv("windows-1251", "UTF-8", $data);
+            //$data = mb_convert_encoding($data, "windows-1251", 'UTF-8');
+            // }
+            /*$urlFile = $_SERVER["DOCUMENT_ROOT"] . ImportStokMan::$FILE_NAME;
+
+            $handle = fopen($urlFile, "rb");
+            if (FALSE === $handle) {
+                exit("Не удалось открыть поток по url адресу");
+            }
+
+            $contents = '';
+
+            while (!feof($handle)) {
+                $contents .= str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', html_entity_decode(fread($handle, 8192), ENT_NOQUOTES, 'UTF-8'));
+            }
+            fclose($handle);
+            $xml = simplexml_load_string((string)$contents);
+            var_dump((string)$xml->Классификатор->Ид);*/
+            /**$xml = simplexml_load_string("<document><title>Forty What?</title><from>Joe</from><to>Jane</to><body>I know that's the answer -- but what's the question?</body></document>");
+            var_dump($xml);*/
+            //
+            //$f_hdl = fopen($_SERVER["DOCUMENT_ROOT"] . '/local/logs/data_import_razmer1.xml', 'w');
+            //fwrite($f_hdl, (string)$xml->Классификатор);
+            //fclose($f_hdl);
+
+            unset($data);
+            /*$f_hdl = fopen($_SERVER["DOCUMENT_ROOT"] . '/local/logs/data_import_razmer2.xml', 'w');
+            fwrite($f_hdl, $xml);
+            fclose($f_hdl);*/
+            /*$f_hdl = fopen($_SERVER["DOCUMENT_ROOT"] . '/local/logs/data_import_razmer3.xml', 'w');
+            fwrite($f_hdl, new SimpleXMLElement($data));
+            fclose($f_hdl);
+            $f_hdl = fopen($_SERVER["DOCUMENT_ROOT"] . '/local/logs/data_import_razmer4.xml', 'w');
+            fwrite($f_hdl, new SimpleXMLElement(simplexml_load_string($data)));
+            fclose($f_hdl);*/
+
+
+            //$data1 = $data;
+            //$xml = simplexml_load_string($data);
+            // $xml = html_entity_decode($xml, ENT_NOQUOTES, 'UTF-8');
+            // $xml = html_entity_decode($xml, ENT_NOQUOTES, 'UTF-8');
+            //$xml = new SimpleXMLElement($data);
+            /*echo "<pre>";
+            print_r("----");
+            echo "</pre>";
+            echo "<pre>";
+            print_r($xml);
+            echo "</pre>";*/
+            //$ret = $xml;
+
+
+            /*$f_hdl = fopen($_SERVER["DOCUMENT_ROOT"] . '/local/logs/data_import_razmer3.xml', 'w');
+            fwrite($f_hdl, new SimpleXMLElement($xml));
+            fclose($f_hdl);
+            $f_hdl = fopen($_SERVER["DOCUMENT_ROOT"] . '/local/logs/data_import_razmer1.xml', 'w');
+            fwrite($f_hdl, $ret);
+            fclose($f_hdl);
+
+            $f_hdl = fopen($_SERVER["DOCUMENT_ROOT"] . '/local/logs/data_import_razmer2.xml', 'w');
+            fwrite($f_hdl, new SimpleXMLElement($data1));
+            fclose($f_hdl);*/
+        } else
+        {
+            $xml = simplexml_load_file($urlFile);
+            /*$ret = $xml->asXML();
+            $f_hdl = fopen($_SERVER["DOCUMENT_ROOT"] . '/local/logs/data_import_razmer1.xml', 'w');
+            fwrite($f_hdl, $ret);
+            fclose($f_hdl);*/
+        }
+
+
         $arProductsXMLOffers = array();
 
         $propertyValueToRemove = array();
@@ -87,16 +229,17 @@ class ImportStokMan {
                 }
             }
         }
+
         foreach ($propertyValueToRemove as $code) {
             unset($code[0]);
         }
         unset($propertyValueToRemove);
 
-        $strXML = $xml->asXML();
+        /*$strXML = $xml->asXML();
         unset($xml);
         $xml = new SimpleXMLElement($strXML);
-        unset($strXML);
-
+        unset($strXML);*/
+        //$xml = new SimpleXMLElement($xml);
         $arPropertys = array();
         foreach ($xml->Классификатор->Свойства->Свойство as $obPropety) {
             $idProp = (string)$obPropety->Ид;
@@ -127,9 +270,9 @@ class ImportStokMan {
                 unset($code[0]);
             }
         }
-        $strXML = $xml->asXML();
-        unset($xml);
-        $xml = new SimpleXMLElement($strXML);
+        /*$strXML = $xml->asXML();
+        unset($xml);*/
+        //$xml = new SimpleXMLElement($xml);
         unset($strXML);
         foreach($xml->Каталог->Товары->Товар as $obProduct) {
             $strRazmerOffers = '';
@@ -181,15 +324,49 @@ class ImportStokMan {
                 self::$arOffersRusRazmerReplace[$offer] = self::$arOffersRusRazmer[$offer];
             }
         }
-
         foreach($xml->Классификатор->Свойства->Свойство as $obPropety) {
-            if ((string)$obPropety->Ид == self::$XML_ID_RAZMER) {
+            if ((string)$obPropety->Ид == (string)self::$XML_ID_RAZMER) {
+                //$strRazmer = dom_import_simplexml($obPropety);
+                /* $urlFileDataRazmer = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_IMPORT_RAZMER;
+                 $strXMLRazmer = html_entity_decode($obPropety, ENT_NOQUOTES, 'UTF-8');
+
+                 $f_hdl = fopen($urlFileDataRazmer, 'w');
+                 fwrite($f_hdl, $strXMLRazmer);
+                 fclose($f_hdl);
+                 unset($strXMLRazmer);*/
+
+                //$dom = new domDocument;
+                //$dom->loadXML($obPropety);
+
+                //$dom = new DOMDocument;
+                //$dom = $obPropety->asXML();
+
+                //$strR = simplexml_load_string($obPropety);
+                //$simple_shop = simplexml_import_dom($obPropety);
+
+                // $ar = $obPropety->asXML();
+                //$ar2 = 3;//dom_import_simplexml($obPropety->asXML());
                 self::$strRazmer = $obPropety;
+                //self::$strRazmer = simplexml_load_string($obPropety->asXML());
             }
             elseif ((string)$obPropety->Ид == self::$XML_ID_RUS_RAZMER) {
                 self::$strRusRazmer = $obPropety;
             }
         }
+
+        echo "<pre>";
+        //print_r( self::$strRazmer);
+        echo "</pre>";
+        /*$urlFileDataRazmer = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_IMPORT_RAZMER;
+        $strXMLRazmer = html_entity_decode($ar, ENT_NOQUOTES, 'UTF-8');
+
+        $f_hdl = fopen($urlFileDataRazmer, 'w');
+        fwrite($f_hdl, $strXMLRazmer);
+        fclose($f_hdl);*/
+        unset($strXMLRazmer);
+        //$err = new SimpleXMLElement(self::$strRazmer);
+        //$strRazmer = dom_import_simplexml($obPropety);
+
         unset($urlFile,$xml,$arProductsXMLOffers,$arImportProducts,$arPropertys);
     }
 
@@ -229,12 +406,16 @@ class ImportStokMan {
         $urlFileOffers = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_NAME_OFFERS;
         $urlFileDataOffers = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_OFFERS;
         $xml = simplexml_load_file($urlFileOffers);
-        $strXML = $xml->asXML();
+        /**$strXML = $xml->asXML();
         unset($xml);
         $xml = new SimpleXMLElement($strXML);
-        unset($strXML);
+        unset($strXML);*/
+        //$strRazmer = new SimpleXMLElement($strRazmer);
+        //$strRusRazmer = new SimpleXMLElement($strRusRazmer);
+        //$urlStrRazmer = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_IMPORT_RAZMER;
+        //$xmlStrRazmer = simplexml_load_file($urlStrRazmer);
 
-        $strAllRazmer = $strRazmer->asXML() . $strRusRazmer->asXML();
+        $strAllRazmer = $strRazmer;//->asXML() . $strRusRazmer->asXML();
         $xml->Классификатор->Свойства = $strAllRazmer;
 
         $arStores = array();
@@ -383,10 +564,10 @@ class ImportStokMan {
         }
 
         $arValueRemove = array();
-        $strXML = $xml->asXML();
+        /*$strXML = $xml->asXML();
         unset($xml);
         $xml = new SimpleXMLElement($strXML);
-        unset($strXML);
+        unset($strXML);*/
         $propertyValueToRemove = array();
         $propertyValueToRemoveAllRazmer = array();
         foreach ($xml->Классификатор->Свойства->Свойство as $obPropety) {
@@ -446,6 +627,8 @@ class ImportStokMan {
         }
 
         $strXML = $xml->asXML();
+        //$strXML = simplexml_load_string($xml);
+        //$strXML = $xml;
         unset($xml, $elementsToRemove, $propertyValueToRemove, $propertyValueToRemoveAllRazmer);
         $urlFileDataOffers = $_SERVER["DOCUMENT_ROOT"] . self::$FILE_IMPORT;
 
