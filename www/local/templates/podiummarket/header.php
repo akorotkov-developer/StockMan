@@ -23,6 +23,7 @@ Loader::includeModule("sale");
             ) . '</style>', true, AssetLocation::BEFORE_CSS);
         Asset::getInstance()->addJs(StockMan\Config::STOCKMAN_TEMPLATE_PATH . "/js/lib.js");
         Asset::getInstance()->addJs(StockMan\Config::STOCKMAN_TEMPLATE_PATH . "/js/script.js");
+        Asset::getInstance()->addJs(StockMan\Config::STOCKMAN_TEMPLATE_PATH . "/js/device.js");
         ?>
         <?
         $APPLICATION->SetAdditionalCss(StockMan\Config::STOCKMAN_TEMPLATE_PATH . "/template_styles.css");

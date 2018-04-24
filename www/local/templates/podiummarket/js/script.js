@@ -220,4 +220,9 @@ $( document ).ready(function() {
         $(this).height(mh);
     });
     /*------------------------------*/
+
+    if (device.iphone() == true) {
+        $(".reveal_my").remove();
+    }
+
 });
