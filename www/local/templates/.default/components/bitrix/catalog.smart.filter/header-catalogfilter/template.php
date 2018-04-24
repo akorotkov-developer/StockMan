@@ -12,7 +12,7 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
-$arSearchable = ['TSVET', 'BRAND'];
+$arSearchable = ['TSVET', 'MARKA'];
 
 $arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
 
