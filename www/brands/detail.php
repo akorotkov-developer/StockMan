@@ -9,9 +9,11 @@ $APPLICATION->SetTitle("Бренды");
         Array(
             "BLOCK_ID" => StockMan\Config::HB_ID_BRANDS,
             "ROW_ID" => $_REQUEST['ROW_ID'],
-            "LIST_URL" => "/brands/"
+            "LIST_URL" => "/brands/",
+            "DETAIL_URL" => "/brands/#ID#/",
         )
-    );?>
+    );
+    ?>
     <?/*
 <div class="content">
     <div class="grid-x grid-padding-x margin-bottom-12">

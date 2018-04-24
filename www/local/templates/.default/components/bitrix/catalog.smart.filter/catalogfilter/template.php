@@ -15,7 +15,11 @@ $this->setFrameMode(true);
 $arSearchable = ['TSVET', 'MARKA'];
 
 $arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT];
-
+$posbrands = strpos($APPLICATION->GetCurPage(), '/brands/');
+if ($posbrands !== false) {
+    $arSearchable = ['TSVET'];
+    $arExcluded = ['DISCOUNT', StockMan\Catalog\Config::PROP_DISCOUNT, 'MARKA' ];
+}
 $templateData = array(
 	'TEMPLATE_THEME' => $this->GetFolder().'/themes/'.$arParams['TEMPLATE_THEME'].'/colors.css',
 	'TEMPLATE_CLASS' => 'bx-'.$arParams['TEMPLATE_THEME']
