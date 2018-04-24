@@ -139,9 +139,9 @@ $sFS = array(
         "DETAIL_PROPERTY_CODE" => array(
               "SOSTAV",
               "OSNOVNAYA_STRANA_PROISKHOZHDENIYA",
-              "OSNOVNOY_KOD",
+              //"OSNOVNOY_KOD",
               "SEZON_SVOYSTVO",
-               StockMan\Catalog\Config::STIL,
+               //StockMan\Catalog\Config::STIL,
                 //StockMan\Config::PROP_STYLIST_COMMENTS,
         ),
         "DETAIL_META_KEYWORDS" => "-",
