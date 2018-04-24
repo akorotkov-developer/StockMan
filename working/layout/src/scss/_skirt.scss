@@ -173,16 +173,16 @@
   @media (max-width: 1840px)
   {
     .slick-prev {
-left: rem-calc(50);
-    }
-    .slick-next {
-      right:rem-calc(1050);
+      left: rem-calc(50);
     }
   }
-  @media (max-width: 1620px) {
+  @media screen and (min-width: 1270px) and (max-width: 1840px) {
     .slick-next {
-      right:rem-calc(1150);
+      right: auto;
+      left: 21%;
     }
+  }
+  @media (max-width: 1840px) {
     .slick-current + .slick-slide img {
       filter: blur(3px);
     }

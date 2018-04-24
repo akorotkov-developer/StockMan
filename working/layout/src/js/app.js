@@ -2175,7 +2175,7 @@ $(window).on('load', function() {
         $('.pants').append('<div><img src="' + imgUrl[index] + '" alt="" /></div>');
 
       });
-      $('.pants').on('init', function(event, slick) {
+      $('.pants').on('init setPosition', function(event, slick) {
         $('.pants .slick-dots li').each(function(index) {
 
 
