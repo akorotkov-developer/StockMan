@@ -157,13 +157,13 @@ if (!empty($arResult['ITEMS']))
                             <div class="dress">
                                 <div class="dress__img" data-equalizer-watch>
                                     <a href="<? echo $arItem['DETAIL_PAGE_URL']; ?>">
-                                        <img src="<?=$arItem['PREVIEW_PICTURE']['SRC'];?>">
+                                        <img src="<?=ResizeImage($arItem['PREVIEW_PICTURE']['ID'], 288, 432);?>">
                                         <?if ($arItem['SECOND_PICT'])
                                         {?>
                                             <img src="<? echo(
                                             !empty($arItem['PREVIEW_PICTURE_SECOND'])
-                                                ? $arItem['PREVIEW_PICTURE_SECOND']['SRC']
-                                                : $arItem['PREVIEW_PICTURE']['SRC']
+                                                ? ResizeImage($arItem['PREVIEW_PICTURE_SECOND']['ID'], 288, 432)
+                                                : ResizeImage($arItem['PREVIEW_PICTURE']['ID'], 288, 432)
                                             ); ?>">
                                         <?}?>
                                     </a>

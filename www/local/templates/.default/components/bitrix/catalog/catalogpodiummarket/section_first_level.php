@@ -219,6 +219,25 @@ $arFilterNovinkiAll = array_merge($arFilterSection, $arFilterNovinki);
     ),
     false
 );?>
+
+    <div class="podium text-center"># PODIUMMARKET</div>
+    <?$APPLICATION->IncludeComponent(
+        "zaiv:instagramgallerylite",
+        "instagramm",
+        Array(
+            "ADD_JQUERY" => "Y",
+            "ADD_PLUGIN" => "Y",
+            "CACHE_TIME" => "43200",
+            "CACHE_TYPE" => "A",
+            "MEDIA_COUNT" => "20",
+            "NOINDEX_LINKS" => "N",
+            "NOINDEX_WIDGET" => "N",
+            "PLUGIN_TYPE" => "FANCYBOX3",
+            "SHOW_TYPE" => "WEBSITE",
+            "USERNAME" => "podiummarket"
+        )
+    );?>
+
 <?
 require_once($_SERVER['DOCUMENT_ROOT'] . StockMan\Config::STOCKMAN_TEMPLATE_PATH . '/include_areas/instagram_block.php');
 ?>

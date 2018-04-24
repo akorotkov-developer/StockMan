@@ -1,0 +1,46 @@
+.zaiv-instagram-gallery-error{
+	color:#f00;
+	font-size:14px;
+}
+.zaiv-instagram-gallery-container{
+	clear:both;
+	width: 100%;
+	box-shadow: none;
+	display: block;
+	overflow: hidden;
+	font-family: arial, tahoma!important;
+}
+.zaiv-instagram-gallery-media{}
+.zaiv-instagram-gallery-media a{
+	display:block;
+	float:left;
+	width: calc(12.5% - 4px);
+	background: silver;
+	overflow: hidden;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	margin: 2px;
+}
+.zaiv-instagram-gallery-media a:before {
+	content: "";
+	padding-top: 100%;
+	float: left;
+}
+
+/*****************************************************************************/
+@media screen and (max-width: 991px) {
+	.zaiv-instagram-gallery-media a{width: calc(16.66666666666667% - 4px)!important;}
+}
+@media screen and (max-width: 768px) {
+	.zaiv-instagram-gallery-media a{width: calc(20% - 4px)!important;}
+}
+@media screen and (max-width: 500px) {
+	.zaiv-instagram-gallery-media a{width: calc(25% - 4px)!important;}
+}
+@media screen and (max-width: 500px) {
+	.zaiv-instagram-gallery-media a{width: calc(25% - 4px)!important;}
+}
+@media screen and (max-width: 350px) {
+	.zaiv-instagram-gallery-media a{width: calc(33.33333333333333% - 4px)!important;}
+}
