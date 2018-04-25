@@ -62,7 +62,6 @@ else
 {
 	$basketAction = (isset($arParams['DETAIL_ADD_TO_BASKET_ACTION']) ? $arParams['DETAIL_ADD_TO_BASKET_ACTION'] : array());
 }
-
 $ElementID = $APPLICATION->IncludeComponent(
 	"bitrix:catalog.element",
 	"podiummarket_element",

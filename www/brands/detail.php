@@ -4,6 +4,13 @@ $APPLICATION->SetTitle("Бренды");
 ?>
 <?if ($_REQUEST['ROW_ID']){
     ?>
+    <?$APPLICATION->IncludeComponent("bitrix:breadcrumb","",
+        Array(
+            "START_FROM" => "0",
+            "PATH" => "",
+            "SITE_ID" => StockMan\Config::SITE_ID
+        )
+    );?>
     <?$APPLICATION->IncludeComponent(
         "bitrix:highloadblock.view",
         "",

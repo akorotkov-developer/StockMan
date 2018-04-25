@@ -49,7 +49,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
                     <a href="<? echo $arSection["SECTION_PAGE_URL"]; ?>"
                        class='cloth__link <?= $activeItem ?> <?if ($arSection["DEPTH_LEVEL"] > 2) {?>cloth__link_inside<?}?> '><? echo $arSection["NAME"]; ?><?
                         if ($arParams["COUNT_ELEMENTS"]) {
-                            ?> <span class='cloth__num'>(<? echo $GLOBALS["arSectionIdBrandsCount"][$arSection["ID"]]; ?>)</span><?
+                            ?> <span class='cloth__num'><? echo $GLOBALS["arSectionIdBrandsCount"][$arSection["ID"]]; ?></span><?
                         }
                         ?>
                     </a><?

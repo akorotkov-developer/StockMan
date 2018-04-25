@@ -387,7 +387,7 @@ if ($isFilter || $isSidebar): ?>
                     "SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
                     "SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
                     "SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
-                    "DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
+                    "DETAIL_URL" => /*$arResult["FOLDER"].*/"/".$arResult["URL_TEMPLATES"]["element"],
                     "USE_MAIN_ELEMENT_SECTION" => $arParams["USE_MAIN_ELEMENT_SECTION"],
                     'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
                     'CURRENCY_ID' => $arParams['CURRENCY_ID'],
