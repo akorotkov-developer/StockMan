@@ -190,6 +190,7 @@ $( document ).ready(function() {
         $("a.accordion-title[role='tab']").on('click', function () {
             //$('.slick-list.draggable').outerHeight($('.skirt__info').outerHeight() - 30);
             $('.slick-list.draggable').animate({ "height": $('.skirt__info').outerHeight() - 30 }, 500 );
+            console.log("razmer");
         });
         setTimeout(function(){
             if ($(document).width() > 1270) {
@@ -224,5 +225,4 @@ $( document ).ready(function() {
     if (device.iphone() == true) {
         $(".reveal_my").remove();
     }
-
 });

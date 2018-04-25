@@ -6,12 +6,12 @@ $(window).on('load', function() {
 
     var currentHeightProduct = $(this).closest('.cell').height();
 
-    $(this).closest('.cell').height(currentHeightProduct);
+    //$(this).closest('.cell').height(currentHeightProduct);
     $(this).addClass('js-hover');
 
   }).mouseleave(function() {
 
-    $(this).closest('.cell').attr('style', '');
+    //$(this).closest('.cell').attr('style', '');
     $(this).removeClass('js-hover');
   });
 
@@ -2337,7 +2337,12 @@ $(window).on('load', function() {
         var className = $toggler.data('toggler-hover-dd');
         if (e.type == 'mouseenter' && !$toggler.hasClass(className)) {
           $toggler.addClass(className);
-          $linkThis.addClass('menu-base__link_active');
+
+            $(".menu-base__link").each(function() {
+                $(this).removeClass('menu-base__link_active');
+            });
+
+            $linkThis.addClass('menu-base__link_active');
 
         }
         if (e.type == 'mouseleave' && $toggler.hasClass(className)) {
@@ -2352,7 +2357,6 @@ $(window).on('load', function() {
     $('[data-toggler-hover-dd]').on('mouseenter', function() {
       var link = $(this).prop('id');
       $linkThis = $('[data-toggle-hover-dd=' + link + ']');
-
 
       clearTimeout(toggleLeaveTimer);
     }).on('mouseleave', function() {

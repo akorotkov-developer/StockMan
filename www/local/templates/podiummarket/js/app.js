@@ -1,5 +1,22 @@
 ;
 $(document).foundation();
+//begin of fix .dress height when hover on it
+$(window).on('load', function() {
+  $('.dress').mouseenter(function() {
+
+    var currentHeightProduct = $(this).closest('.cell').height();
+
+    //$(this).closest('.cell').height(currentHeightProduct);
+    $(this).addClass('js-hover');
+
+  }).mouseleave(function() {
+
+    //$(this).closest('.cell').attr('style', '');
+    $(this).removeClass('js-hover');
+  });
+
+});
+//end of fix .dress height when hover on it
 //begin of yandex api
 (function(global) {
   function setupAsync(e) {
@@ -2034,36 +2051,27 @@ $(document).foundation();
       $(this).closest('.sort').removeClass('js-open');
       $(this).closest('form').submit();
     });
-    $(document).on('click', '.js-select-all', function() {
-      var $checkBoxes = $(this).closest('.sort').find('input.check__input');
-        $checkBoxes.prop('checked', !$checkBoxes.prop('checked')).trigger('change');
+    $('.js-select-all').click(function() {
+      var $checkBoxes = $(this).closest('.sort').find('input');
+      $checkBoxes.prop('checked', !$checkBoxes.prop('checked'));
     });
 
     /**
-    * Поиск вариантов значений в фильтре
-    */
-    $(document).on('input', '.js-filter-values-search', function() {
+     * Поиск вариантов значений в фильтре
+     */
+    $('.js-filter-values-search').on('input', function() {
+      var $this = $(this),
+        $filterValues = $this.siblings('.js-filter-values'),
+        val = $this.val().toLowerCase();
+
+      $filterValues.each(function() {
         var $this = $(this),
-            $filterValues = $this.siblings('.js-filter-values'),
-            val = $this.val().toLowerCase();
+          filterVal = $this.attr('data-value').toLowerCase();
 
-        var $checkBoxes = $filterValues.find('input');
-        $checkBoxes.prop('checked', false).trigger('change');
-
-        $filterValues.each(function() {
-            var $this = $(this),
-                filterVal = $this.attr('data-value').toLowerCase();
-
-            if (val == '' || filterVal.indexOf(val) == 0) {
-                $this.removeClass('hidden');
-                $this.find('input').addClass('check__input');
-            }
-            else
-            {
-              $this.find('input').removeClass('check__input');
-              $this.addClass('hidden');
-            }
-        });
+        if (val == '' || filterVal.indexOf(val) == 0)
+          $this.removeClass('hidden');
+        else $this.addClass('hidden');
+      });
     });
 
     $(document).mouseup(function(e) {
@@ -2159,115 +2167,111 @@ $(document).foundation();
     });
     //begin of .skirt__slider
 
+    if ($('.skirt__slider').length) {
+      var imgUrl = [];
+      $('.skirt__inner').each(function(index) {
+        imgUrl.push($(this).find('img').prop('src'));
 
-    var imgUrl = [];
-    $('.skirt__inner').each(function(index) {
-      imgUrl.push($(this).find('img').prop('src'));
-
-      $('.pants').append('<div><img src="' + imgUrl[index] + '" alt="" /></div>');
-
-    });
-    $('.pants').on('init', function(event, slick) {
-      $('.pants .slick-dots li').each(function(index) {
-
-
-         $(this).find('button').attr('style', 'background-image:url(' + imgUrl[index] + ');');
+        $('.pants').append('<div><img src="' + imgUrl[index] + '" alt="" /></div>');
 
       });
-      var heightDots = $('.pants .slick-dots').height();
-      $('.pants .slick-next').css('top', heightDots + 100);
-    });
-    $(".pants").slick({
-      infinite: true,
-      dots: true,
-      arrows: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 5000,
-      autoplayHoverPause: true,
-      fade: true,
-      swipeToSlide: false,
-      prevArrow: '<i class="slick-prev "> </i>',
-      nextArrow: '<i class="slick-next "> </i>',
-      responsive: [{
-        breakpoint: 1200,
-        settings: {
+      $('.pants').on('init setPosition', function(event, slick) {
+        $('.pants .slick-dots li').each(function(index) {
+
+
+          $(this).find('button').attr('style', 'background-image:url(' + imgUrl[index] + ');');
+
+        });
+        var heightDots = $('.pants .slick-dots').height();
+        $('.pants .slick-next').css('top', heightDots + 100);
+      });
+      $(".pants").slick({
+        infinite: true,
+        dots: true,
+        arrows: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        autoplayHoverPause: true,
+        fade: true,
+        swipeToSlide: false,
+        prevArrow: '<i class="slick-prev "> </i>',
+        nextArrow: '<i class="slick-next "> </i>',
+        responsive: [{
+          breakpoint: 1200,
+          settings: {
+
+          }
+        }, {
+          breakpoint: 800,
+          settings: {
+
+          }
+        }, {
+          breakpoint: 480,
+          settings: {
+
+          }
+        }]
+      });
+
+      var slidesInnerHtml = $('.skirt__slider').html();
+      var numSlides = $('.skirt__slide').length;
+      if (numSlides != 1) {
+
+
+        var numIllusionSlides = 10;
+        var multiplyNum = numIllusionSlides / numSlides;
+        if (multiplyNum > 1) {
+          for (var i = 0; i < Math.ceil(multiplyNum); i++) {
+            $(slidesInnerHtml).appendTo('.skirt__slider');
+          }
 
         }
-      }, {
-        breakpoint: 800,
-        settings: {
+      } else {
+        $(".skirt__slider").addClass('js-one');
+        $('.skirt__next,.skirt__prev').hide();
+      }
 
-        }
-      }, {
-        breakpoint: 480,
-        settings: {
+      $(".skirt__slider").slick({
+        infinite: true,
+        dots: false,
+        arrows: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        autoplayHoverPause: true,
+        fade: false,
+        swipeToSlide: true,
+        prevArrow: '<i class="slick-prev "> </i>',
+        nextArrow: '<i class="slick-next "> </i>',
+        responsive: [{
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 4,
+          }
+        }, {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 2,
+          }
+        }, {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+          }
+        }]
+      });
+      $('.skirt__prev').click(function() {
+        $('.skirt__slider').slick('slickPrev');
+      });
+      $('.skirt__next').click(function() {
+        $('.skirt__slider').slick('slickNext');
+      });
 
-        }
-      }]
-    });
-
-    if ($('.skirt__slider').length) {
-        var slidesInnerHtml = $('.skirt__slider').html();
-        var numSlides = $('.skirt__slide').length;
-        if (numSlides != 1) {
-
-
-            var numIllusionSlides = 80;
-            var multiplyNum = numIllusionSlides / numSlides;
-            if (multiplyNum > 1) {
-                for (var i = 0; i < Math.ceil(multiplyNum); i++) {
-                    $(slidesInnerHtml).appendTo('.skirt__slider');
-                }
-
-            }
-        }
-        else {
-            $(".skirt__slider").addClass('js-one');
-            $('.skirt__next,.skirt__prev').hide();
-        }
-    }
-
-    $(".skirt__slider").slick({
-      infinite: true,
-      dots: false,
-      arrows: true,
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 7000,
-      autoplayHoverPause: true,
-      fade: false,
-      swipeToSlide: true,
-      prevArrow: '<i class="slick-prev "> </i>',
-      nextArrow: '<i class="slick-next "> </i>',
-      responsive: [{
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 4,
-        }
-      }, {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 2,
-        }
-      }, {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        }
-      }]
-    });
-    $('.skirt__prev').click(function() {
-      $('.skirt__slider').slick('slickPrev');
-    });
-    $('.skirt__next').click(function() {
-      $('.skirt__slider').slick('slickNext');
-    });
-
-    if ($('.slirt__slider').length) {
-        $('.slirt__slider').slick('slickGoTo', numIllusionSlides / 2);
+      $('.slirt__slider').slick('slickGoTo', numIllusionSlides / 2);
     }
     //end of .skirt__slider
     $(".x-carousel-services").slick({
@@ -2333,14 +2337,12 @@ $(document).foundation();
         var className = $toggler.data('toggler-hover-dd');
         if (e.type == 'mouseenter' && !$toggler.hasClass(className)) {
           $toggler.addClass(className);
-          $linkThis.addClass('menu-base__link_active');
 
-          var elems = $(".menu-base__link");
-          var elemsTotal = elems.length;
-          for(var i=0; i<elemsTotal; ++i) {
-            $(elems[i]).removeClass('menu-base__link_active')
-          }
-          $(this).addClass('menu-base__link_active');
+            $(".menu-base__link").each(function() {
+                $(this).removeClass('menu-base__link_active');
+            });
+
+            $linkThis.addClass('menu-base__link_active');
 
         }
         if (e.type == 'mouseleave' && $toggler.hasClass(className)) {
@@ -2356,6 +2358,10 @@ $(document).foundation();
       var link = $(this).prop('id');
       $linkThis = $('[data-toggle-hover-dd=' + link + ']');
 
+        $(".menu-base__link").each(function () {
+            $(this).removeClass('menu-base__link_active');
+        });
+        console.log("Y");
 
       clearTimeout(toggleLeaveTimer);
     }).on('mouseleave', function() {
