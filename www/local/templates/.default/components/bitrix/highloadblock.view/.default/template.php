@@ -14,8 +14,8 @@ $APPLICATION->SetTitle($name);
 $count = intval(count($arResult["arIdProducts"]));
 
 $url = str_replace(
-    array('#ID#', '#BLOCK_ID#'),
-    array($arResult["row"]["ID"], intval($arParams['BLOCK_ID'])),
+    array('#ID#', '#BLOCK_ID#',"#UF_CODE#"),
+    array($arResult["row"]["ID"], intval($arParams['BLOCK_ID']), $arResult["row"]["UF_CODE"]),
     $arParams['DETAIL_URL']
 );
 $url = htmlspecialcharsbx($url);

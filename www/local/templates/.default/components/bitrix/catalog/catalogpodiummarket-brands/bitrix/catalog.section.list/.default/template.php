@@ -22,13 +22,11 @@ if (0 < $arResult["SECTIONS_COUNT"])
 
     foreach ($arResult['SECTIONS'] as &$arSection)
     {
-
         $activeItem = "";
         if (($arSection["ELEMENT_CNT"] > 0)and(in_array($arSection["ID"],$GLOBALS["arSectionIdBrands"]))) {
 
             $arSection["SECTION_PAGE_URL"] = str_replace("//","/",$arParams["CUR_PAGE_BRAND"] . $arSection["SECTION_PAGE_URL"]);
             if ($APPLICATION->GetCurPage() == $arSection["SECTION_PAGE_URL"]) {
-
                 $activeItem = "cloth__link_more";
             }
             if ($intCurrentDepth < $arSection['RELATIVE_DEPTH_LEVEL']) {
@@ -49,7 +47,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
             ?>
                 <li class='cloth__item'>
                     <a href="<? echo $arSection["SECTION_PAGE_URL"]; ?>"
-                       class='cloth__link <?= $activeItem ?>'><? echo $arSection["NAME"]; ?><?
+                       class='cloth__link <?= $activeItem ?> <?if ($arSection["DEPTH_LEVEL"] > 2) {?>cloth__link_inside<?}?> '><? echo $arSection["NAME"]; ?><?
                         if ($arParams["COUNT_ELEMENTS"]) {
                             ?> <span class='cloth__num'>(<? echo $GLOBALS["arSectionIdBrandsCount"][$arSection["ID"]]; ?>)</span><?
                         }

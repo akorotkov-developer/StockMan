@@ -45,6 +45,7 @@ if((file_exists($urlFile))and(file_exists($urlFileOffers))) {
             <?
             if (!empty($_REQUEST['load_xml'])) {
                 ini_set('max_execution_time', 0);
+                mail('v.mokin@ceteralabs.com','Выгрузка началась','');
                 ImportStokMan::processing();
 
                 CAdminMessage::ShowMessage(["MESSAGE" => "Файлы выгрузки обработаны, производится выгрузка товаров!", "TYPE" => "OK"]);

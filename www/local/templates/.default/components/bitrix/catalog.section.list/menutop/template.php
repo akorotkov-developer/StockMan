@@ -264,7 +264,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
                                             "AR_FILTER" => $depthlevelfirst['ID'],
                                             "COMPONENT_TEMPLATE" => ".default",
                                             "BLOCK_ID" => StockMan\Config::HB_ID_BRANDS,
-                                            "DETAIL_URL" => "/brands/#ID#/",
+                                            "DETAIL_URL" => "/brands/#UF_CODE#/",
                                             "ROWS_PER_PAGE" =>2000,
                                             "CACHE_TYPE" => "A",
                                             "CACHE_TIME" => "3600",

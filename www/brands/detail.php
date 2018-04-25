@@ -2,15 +2,17 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Бренды");
 ?>
-<?if ($_REQUEST['ROW_ID']>0){?>
+<?if ($_REQUEST['ROW_ID']){
+    ?>
     <?$APPLICATION->IncludeComponent(
         "bitrix:highloadblock.view",
         "",
         Array(
             "BLOCK_ID" => StockMan\Config::HB_ID_BRANDS,
             "ROW_ID" => $_REQUEST['ROW_ID'],
+            "ROW_KEY" => "UF_CODE",
             "LIST_URL" => "/brands/",
-            "DETAIL_URL" => "/brands/#ID#/",
+            "DETAIL_URL" => "/brands/#UF_CODE#/",
         )
     );
     ?>

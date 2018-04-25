@@ -27,6 +27,7 @@ while($ar_fields = $res->GetNext()) {
 foreach ($arResult['rows'] as $row){
     if (in_array($row['UF_XML_ID'], $arProp)) {
         $rowTemp["ID"] = $row["ID"];
+        $rowTemp["UF_CODE"] = $row["UF_CODE"];
         $rowTemp["name"] = ToUpper(trim($row["UF_NAME"]));
         $rowTemp["sort"] = intval($row["UF_SORT"]);
 

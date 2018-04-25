@@ -8,7 +8,7 @@ $APPLICATION->SetTitle("Бренды");
     Array(
         "COMPONENT_TEMPLATE" => ".default",
         "BLOCK_ID" => StockMan\Config::HB_ID_BRANDS,
-        "DETAIL_URL" => "#ID#/",
+        "DETAIL_URL" => "/brands/#UF_CODE#/",
         "ROWS_PER_PAGE" =>1000,
         "CACHE_TYPE" => "A",
         "CACHE_TIME" => "3600",

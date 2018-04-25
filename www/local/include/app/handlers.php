@@ -1,6 +1,54 @@
 <?
 require_once($_SERVER['DOCUMENT_ROOT'] . "/local/tools/CImportStokMan.php");
 
+$eventManager = \Bitrix\Main\EventManager::getInstance();
+$eventManager->addEventHandler('', 'MARKAOnBeforeUpdate', 'MARKAOnBeforeUpdate');
+
+/**
+ *
+ * @param \Bitrix\Main\Entity\Event $event
+ * @return \Bitrix\Main\Entity\EventResult
+ */
+function MARKAOnBeforeUpdate(\Bitrix\Main\Entity\Event $event) {
+    $id = $event->getParameter("id");
+    //id обновляемого элемента
+    $id = $id["ID"];
+
+    $entity = $event->getEntity();
+    // получаем массив полей хайлоад блока
+    $arFields = $event->getParameter("fields");
+
+    $result = new \Bitrix\Main\Entity\EventResult();
+
+    //модификация данных
+    $arFields['UF_CODE'] = CUtil::translit($arFields['UF_NAME'], "ru", ImportStokMan::$translateParams);
+    $result->modifyFields($arFields);
+
+    return $result;
+}
+
+$eventManager = \Bitrix\Main\EventManager::getInstance();
+$eventManager->addEventHandler('', 'MARKAOnBeforeAdd', 'MARKAOnBeforeAdd');
+
+/**
+ *
+ * @param \Bitrix\Main\Entity\Event $event
+ * @return \Bitrix\Main\Entity\EventResult
+ */
+function MARKAOnBeforeAdd(\Bitrix\Main\Entity\Event $event) {
+    $entity = $event->getEntity();
+    // получаем массив полей хайлоад блока
+    $arFields = $event->getParameter("fields");
+
+    $result = new \Bitrix\Main\Entity\EventResult();
+
+    //модификация данных
+    $arFields['UF_CODE'] = CUtil::translit($arFields['UF_NAME'], "ru", ImportStokMan::$translateParams);
+    $result->modifyFields($arFields);
+
+    return $result;
+}
+
 AddEventHandler("main", "OnAfterUserRegister", Array("UserRegister", "OnAfterUserRegisterHandler"));
 class UserRegister
 {

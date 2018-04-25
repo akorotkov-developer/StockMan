@@ -23,8 +23,14 @@ foreach ($arResult['rows'] as $key => $val) {
     </div>
     <div class="grid-x grid-padding-x large-up-4 margin-bottom-20 medium-up-2"><?
     foreach ($val as $brand) {
+        $url = str_replace(
+            array('#ID#', '#BLOCK_ID#',"#UF_CODE#"),
+            array($brand["ID"], intval($arParams['BLOCK_ID']), $brand["UF_CODE"]),
+            $arParams['DETAIL_URL']
+        );
+        $url = htmlspecialcharsbx($url);
         ?><div class="cell margin-bottom-3">
-            <a class="brand brand_none" href="/brands/<?=$brand["ID"]?>/"><?=$brand["name"]?></a>
+            <a class="brand brand_none" href="<?=$url?>"><?=$brand["name"]?></a>
         </div><?
     }
     ?></div><?
