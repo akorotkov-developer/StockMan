@@ -50,7 +50,7 @@ if (!function_exists('getMainMenuSectionNovinka')) {
  * $arProductIdOffers - массив [#ID_Товар#] = #ID_торговоеПредложение#
  */
 if (!function_exists('getDetailInfoProduct')) {
-    function getDetailInfoProduct($arProductsId, $arProductIdOffers)
+    function getDetailInfoProduct($arProductsId, $arProductIdOffers = NULL)
     {
         $arProducts = array();
         if (count($arProductsId) > 0 ){
@@ -70,7 +70,13 @@ if (!function_exists('getDetailInfoProduct')) {
                 $resP = CIBlockElement::GetProperty(StockMan\Config::CATALOG_ID, $ar_fields["ID"], "sort", "asc", array("CODE" => ImportStokMan::$CODE_PROPERTYY_TSVET));
                 if ($ob = $resP->GetNext())
                 {
-                    $arProp = CIBlockFormatProperties::GetDisplayValue($ar_fields, $ob);
+                    if (!isset($ar_fields)) {
+                        $ar_fields = array();
+                    }
+                    if (!isset($ob)) {
+                        $ar_fields = array();
+                    }
+                    $arProp = CIBlockFormatProperties::GetDisplayValue($ar_fields, $ob, '');
                     $arProductsTemp['prop']['name'] = $arProp['NAME'];
                     $arProductsTemp['prop']['val'] = $arProp['DISPLAY_VALUE'];
                 }
@@ -178,7 +184,7 @@ if (!function_exists('getTsvetProduct')) {
                 "ID" => $id,
                 "IBLOCK_ID" => StockMan\Config::CATALOG_ID
             );
-            $arProp = CIBlockFormatProperties::GetDisplayValue($ar_fields, $ob);
+            $arProp = CIBlockFormatProperties::GetDisplayValue($ar_fields, $ob, null);
             if (isset($arProp["DISPLAY_VALUE"]{1})) {
                 $return = htmlspecialcharsbx($arProp["DISPLAY_VALUE"]);
             }

@@ -13,4 +13,6 @@ require(__DIR__ . "/../include/vendor/autoload.php");
  */
 StockMan\Application::init();
 \Bitrix\Main\Loader::includeModule('ceteralabs.uservars');
+
+
 ?>

